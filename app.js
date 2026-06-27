@@ -61,7 +61,7 @@
       b.className = 'btn-index';
       b.href = '#slide-select';
       b.innerHTML = '<span aria-hidden="true">↩</span> Índice';
-      b.addEventListener('click', (e) => { jumpTo(getTocIndex()); });
+      b.addEventListener('click', (e) => { e.preventDefault(); jumpTo(getTocIndex()); });
       return b;
     };
 

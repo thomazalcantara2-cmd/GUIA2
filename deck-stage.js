@@ -569,6 +569,10 @@
       this._syncPrintPageRule();
       window.addEventListener('keydown', this._onKey);
       window.addEventListener('resize', this._onResize);
+      // Mobile browsers often resize the address bar in/out without firing
+      // window 'resize' (nothing on the page actually scrolls, since :host
+      // is fixed) — visualViewport reliably reports that height change.
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', this._onResize);
       window.addEventListener('mousemove', this._onMouseMove, { passive: true });
       window.addEventListener('message', this._onMessage);
       window.addEventListener('click', this._onDocClick, true);
@@ -728,6 +732,7 @@
     disconnectedCallback() {
       window.removeEventListener('keydown', this._onKey);
       window.removeEventListener('resize', this._onResize);
+      if (window.visualViewport) window.visualViewport.removeEventListener('resize', this._onResize);
       window.removeEventListener('mousemove', this._onMouseMove);
       window.removeEventListener('message', this._onMessage);
       window.removeEventListener('click', this._onDocClick, true);
@@ -1138,8 +1143,11 @@
       // the [rw, innerWidth] stage region. Tapzones just inset from rw.
       if (this._overlay) this._overlay.style.marginLeft = (rw / 2) + 'px';
       if (this._tapzones) this._tapzones.style.left = rw + 'px';
-      const vw = window.innerWidth - rw;
-      const vh = window.innerHeight;
+      // visualViewport tracks the actual visible area on mobile (excludes
+      // the address bar / keyboard); innerWidth/Height can lag behind it.
+      const vv = window.visualViewport;
+      const vw = (vv ? vv.width : window.innerWidth) - rw;
+      const vh = vv ? vv.height : window.innerHeight;
       const s = Math.min(vw / this.designWidth, vh / this.designHeight);
       this._canvas.style.transform = `scale(${s})`;
     }
@@ -1202,13 +1210,33 @@
       this._rail.inert = hard || !this._railVisible;
     }
 
+    _tapTarget(x, y) {
+      // The tap zones are full-screen and sit above the slide, so a tap on
+      // a real control (link, button, copy/jump action) in the left or
+      // right third would otherwise be swallowed as a back/forward swipe.
+      // Re-check what's actually underneath and forward the tap there.
+      const stack = document.elementsFromPoint(x, y);
+      for (const el of stack) {
+        if (!el || !el.closest) continue;
+        if (el.closest('.tapzones')) continue;
+        const hit = el.closest('a, button, input, select, textarea, label, [data-jump], [data-copy], [data-copy-id], [data-wpp], [data-action], [data-select-flat]');
+        if (hit) return hit;
+        if (el === this) break;
+      }
+      return null;
+    }
+
     _onTapBack(e) {
+      const hit = this._tapTarget(e.clientX, e.clientY);
       e.preventDefault();
+      if (hit) { hit.click(); return; }
       this._advance(-1, 'tap');
     }
 
     _onTapForward(e) {
+      const hit = this._tapTarget(e.clientX, e.clientY);
       e.preventDefault();
+      if (hit) { hit.click(); return; }
       this._advance(1, 'tap');
     }
 

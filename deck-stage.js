@@ -90,6 +90,16 @@
       align-items: center;
       justify-content: center;
     }
+    /* Touch devices: page fills the full width (see _fit); if that makes
+       it taller than the viewport, scroll vertically instead of cropping
+       or shrinking further to also fit the height. */
+    .stage.stage-scroll {
+      align-items: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
 
     .canvas {
       position: relative;
@@ -1148,8 +1158,20 @@
       const vv = window.visualViewport;
       const vw = (vv ? vv.width : window.innerWidth) - rw;
       const vh = vv ? vv.height : window.innerHeight;
-      const s = Math.min(vw / this.designWidth, vh / this.designHeight);
+      // Touch devices always fill the full width; if that makes the page
+      // taller than the viewport (e.g. landscape), the stage scrolls
+      // instead of shrinking further or cropping. Desktop keeps the
+      // original contain-fit: whole page visible, centred, no scrollbar.
+      const isTouch = this._isTouch();
+      const s = isTouch
+        ? vw / this.designWidth
+        : Math.min(vw / this.designWidth, vh / this.designHeight);
       this._canvas.style.transform = `scale(${s})`;
+      if (stage) stage.classList.toggle('stage-scroll', isTouch);
+    }
+
+    _isTouch() {
+      return !!(window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches);
     }
 
     _onResize() { this._fit(); }

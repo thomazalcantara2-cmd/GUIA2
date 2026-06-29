@@ -108,6 +108,13 @@
       background: #fff;
       will-change: transform;
     }
+    /* In stage-scroll mode the canvas is flex-start aligned (anchored to
+       the top), but its layout box stays full-size (transform doesn't
+       shrink that) — pivoting from the box's own centre would float the
+       visually-scaled page in the middle of that reserved space, leaving
+       a black gap above it. Pivot from the top instead so the rendered
+       page actually touches the top of the screen. */
+    .stage-scroll .canvas { transform-origin: top center; }
 
     /* Slides live in light DOM (via <slot>) so authored CSS still applies.
        We absolutely position each slotted child to stack them. */

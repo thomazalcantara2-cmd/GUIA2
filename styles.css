@@ -111,6 +111,21 @@
   color: white;
 }
 
+/* ─── Bigger tap targets on touch devices ───────────────────────────── */
+@media (hover: none), (pointer: coarse) {
+  .btn-index {
+    font-size: 14px;
+    padding: 10px 18px;
+    gap: 8px;
+  }
+  .btn-index span { font-size: 16px; }
+
+  .flat-pick-btn { padding: 44px 16px !important; }
+  .flat-pick-btn span:first-child { font-size: 68px !important; }
+  .flat-pick-btn span:nth-child(2) { font-size: 50px !important; }
+  .flat-pick-btn span:last-child { font-size: 16px !important; }
+}
+
 .ftr {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 var(--pad-x) 22px;

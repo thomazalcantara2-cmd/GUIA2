@@ -111,14 +111,18 @@
   color: white;
 }
 
-/* ─── Bigger tap targets on touch devices ───────────────────────────── */
+/* ─── Bigger tap targets on touch devices ─────────────────────────────
+   These sizes live in the page's own design-pixel space, which gets
+   scaled down (~0.45–0.55x) to fit the phone width — so a modest bump
+   here still renders tiny on screen. Sized up enough that, after that
+   scale-down, the tappable area is still comfortably ≥44 screen px. */
 @media (hover: none), (pointer: coarse) {
   .btn-index {
-    font-size: 14px;
-    padding: 10px 18px;
-    gap: 8px;
+    font-size: 18px;
+    padding: 34px 32px;
+    gap: 10px;
   }
-  .btn-index span { font-size: 16px; }
+  .btn-index span { font-size: 20px; }
 
   .flat-pick-btn { padding: 44px 16px !important; }
   .flat-pick-btn span:first-child { font-size: 68px !important; }

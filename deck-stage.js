@@ -99,6 +99,11 @@
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
+      /* The page is usually shorter than the phone viewport once scaled
+         to fill the width (its aspect ratio is squarer than the screen),
+         leaving space below it. Match the page background instead of
+         showing :host's black backdrop there. */
+      background: #FBF6EC;
     }
 
     .canvas {

@@ -80,33 +80,54 @@
     }
   });
 
-  // ── 2c. Mobile: move the back-navigation pill into a fixed bottom dock ──
-  // On touch the page is scaled to fit, so a header pill renders tiny and
-  // often sits inside the swipe tap-zones; a single fixed pill anchored to
-  // the screen's own bottom (in the empty space left by the page-fit) is
-  // bigger, consistent, and always reachable. Desktop keeps the per-page
-  // header pill (see styles.css for the matching touch-only show/hide).
+  // ── 2c. Mobile: bottom nav dock — prev / back-to-index / next ──────────
+  // Side tap-zones (swipe-like navigation) are disabled (deck-stage.js):
+  // they kept intercepting real buttons/links sitting in the side thirds
+  // (index grid, header pills). Touch navigation is explicit buttons
+  // instead, anchored to the screen's own bottom (in the empty space the
+  // page-fit leaves there). Desktop is untouched — arrow keys / the
+  // per-page header pill still work there (see styles.css for the
+  // touch-only show/hide).
   if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
-    const dock = document.createElement('a');
-    dock.className = 'btn-index-dock';
-    dock.href = '#';
-    document.body.appendChild(dock);
+    const navDock = document.createElement('div');
+    navDock.className = 'nav-dock';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'nav-arrow';
+    prevBtn.setAttribute('aria-label', 'Página anterior');
+    prevBtn.innerHTML = '<span aria-hidden="true">‹</span>';
+    prevBtn.addEventListener('click', () => { if (deck && deck.prev) deck.prev(); });
+
+    const indexBtn = document.createElement('a');
+    indexBtn.className = 'btn-index-dock';
+    indexBtn.href = '#';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'nav-arrow';
+    nextBtn.setAttribute('aria-label', 'Próxima página');
+    nextBtn.innerHTML = '<span aria-hidden="true">›</span>';
+    nextBtn.addEventListener('click', () => { if (deck && deck.next) deck.next(); });
+
+    navDock.append(prevBtn, indexBtn, nextBtn);
+    document.body.appendChild(navDock);
 
     const syncDock = (sec) => {
       if (!sec) return;
       const label = sec.getAttribute('data-label') || '';
       const id = sec.id || '';
       if (sec.classList.contains('page-cover') || id === 'slide-select') {
-        dock.style.display = 'none';
+        indexBtn.style.visibility = 'hidden';
         return;
       }
-      dock.style.display = '';
+      indexBtn.style.visibility = '';
       if (/[ÍI]ndice/i.test(label)) {
-        dock.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
-        dock.onclick = (e) => { e.preventDefault(); jumpTo(1); };
+        indexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
+        indexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
       } else {
-        dock.innerHTML = '<span aria-hidden="true">↩</span> Índice';
-        dock.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
+        indexBtn.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+        indexBtn.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
       }
     };
 

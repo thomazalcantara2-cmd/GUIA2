@@ -127,17 +127,40 @@
   .flat-pick-btn span:last-child { font-size: 16px !important; }
 }
 
-.btn-index-dock { display: none; }
+.nav-dock { display: none; }
 @media (hover: none), (pointer: coarse) {
-  .btn-index-dock {
-    display: inline-flex;
+  .nav-dock {
+    display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     position: fixed;
     left: 50%;
     bottom: max(16px, env(safe-area-inset-bottom));
     transform: translateX(-50%);
     z-index: 2147483000;
+  }
+
+  .nav-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: var(--c-ink);
+    color: var(--c-cream);
+    font-size: 22px;
+    line-height: 1;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-arrow:active { transform: scale(0.92); }
+
+  .btn-index-dock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: var(--c-ink);
     color: var(--c-cream);
     text-decoration: none;
@@ -146,9 +169,10 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 14px 26px;
+    padding: 14px 22px;
     border-radius: 999px;
     box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    white-space: nowrap;
   }
   .btn-index-dock span { font-size: 16px; }
 }

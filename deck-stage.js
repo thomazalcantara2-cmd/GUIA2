@@ -143,22 +143,15 @@
     }
 
     /* Tap zones for mobile — back/forward thirds like Stories.
-       Transparent, no visible UI, don't block the overlay. */
-    .tapzones {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      z-index: 2147482000;
-      pointer-events: none;
-    }
+       Transparent, no visible UI, don't block the overlay.
+       Disabled: side taps kept intercepting real buttons/links living in
+       those thirds (e.g. the index grid, header pills). Navigation on
+       touch is handled by explicit prev/next buttons instead (app.js). */
+    .tapzones { display: none; }
     .tapzone {
       flex: 1;
       pointer-events: auto;
       -webkit-tap-highlight-color: transparent;
-    }
-    /* Only activate tap zones on coarse pointers (touch devices). */
-    @media (hover: hover) and (pointer: fine) {
-      .tapzones { display: none; }
     }
 
     .overlay {

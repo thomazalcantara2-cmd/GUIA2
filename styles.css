@@ -71,12 +71,8 @@
   font-weight: 700;
   color: var(--c-ink);
 }
-.hdr-logo-mark {
-  width: 22px; height: 22px;
-  border-radius: 7px;
-  background: linear-gradient(135deg, var(--c-sun) 0%, var(--c-coral) 100%);
-  display: grid; place-items: center;
-  color: var(--c-cream); font-size: 12px;
+.hdr-logo-img {
+  height: 30px; width: auto; display: block;
 }
 .hdr-pg { letter-spacing: 0.2em; font-weight: 600; }
 

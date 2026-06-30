@@ -138,6 +138,8 @@
 @media (hover: none), (pointer: coarse) {
   .page { font-size: 16px !important; }
   .hdr { font-size: 12.5px !important; }
+  .section-num { font-size: 112px !important; }
+  .section-title { font-size: 50px !important; }
   .ftr { font-size: 12px !important; }
   .eyebrow { font-size: 12.5px !important; }
   .h-sub { font-size: 16px !important; }
@@ -277,6 +279,52 @@
     white-space: nowrap;
   }
   .btn-index-dock span { font-size: 16px; }
+}
+
+.top-dock { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .hdr-logo { display: none !important; }
+  .hdr .lang-flags, .lang-float { display: none !important; }
+
+  .top-dock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: max(14px, env(safe-area-inset-top));
+    left: 16px; right: 16px;
+    z-index: 2147483000;
+  }
+  .top-dock-logo {
+    height: 58px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,.22));
+  }
+  .top-dock-right { display: flex; align-items: center; gap: 10px; }
+  .top-dock-flags .lang-flags { gap: 8px; }
+  .top-dock-flags .lang-flag {
+    width: 36px; height: 26px; border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  }
+  .top-dock-index {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--c-ink);
+    color: var(--c-cream);
+    text-decoration: none;
+    font-family: var(--f-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.3);
+    white-space: nowrap;
+  }
+  .top-dock-index span { font-size: 14px; }
 }
 
 .ftr {

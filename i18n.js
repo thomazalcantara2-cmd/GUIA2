@@ -416,9 +416,19 @@
     });
   }
 
+  function buildTopDockFlags() {
+    // Populates the mobile top-dock's flag slot (app.js) — a single
+    // persistent group living outside the page canvas, vs. one group
+    // per page inserted by buildBar().
+    const slot = document.querySelector('.top-dock-flags');
+    if (!slot || slot.querySelector('.lang-flags')) return;
+    slot.appendChild(makeGroup());
+  }
+
   function init() {
     collect();
     buildBar();
+    buildTopDockFlags();
     let saved = 'pt';
     try { saved = localStorage.getItem('guia-lang') || 'pt'; } catch (e) {}
     apply(saved);

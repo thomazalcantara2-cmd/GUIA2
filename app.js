@@ -137,6 +137,60 @@
     }
   }
 
+  // ── 2d. Mobile: top dock — bigger logo / language / back-to-index ──────
+  // The in-page header (logo, flags) is scaled down with the rest of the
+  // page canvas and reads too small on phones. This overlay (real screen
+  // px, untouched by deck-stage's fit-to-width transform) puts an
+  // enlarged logo, the language flags, and a direct way back to the
+  // index at the very top of the screen — mirroring the bottom nav dock.
+  if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+    const topDock = document.createElement('div');
+    topDock.className = 'top-dock';
+
+    const logo = document.createElement('img');
+    logo.className = 'top-dock-logo';
+    logo.src = 'logo-dimare.png';
+    logo.alt = 'Di Maré Porto Residence';
+
+    const right = document.createElement('div');
+    right.className = 'top-dock-right';
+
+    const flagsSlot = document.createElement('div');
+    flagsSlot.className = 'top-dock-flags';
+
+    const topIndexBtn = document.createElement('a');
+    topIndexBtn.className = 'top-dock-index';
+    topIndexBtn.href = '#';
+    topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+
+    right.append(flagsSlot, topIndexBtn);
+    topDock.append(logo, right);
+    document.body.appendChild(topDock);
+
+    const syncTopDock = (sec) => {
+      if (!sec) return;
+      const label = sec.getAttribute('data-label') || '';
+      const id = sec.id || '';
+      if (sec.classList.contains('page-cover') || id === 'slide-select') {
+        topDock.style.visibility = 'hidden';
+        return;
+      }
+      topDock.style.visibility = '';
+      if (/[ÍI]ndice/i.test(label)) {
+        topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
+        topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
+      } else {
+        topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+        topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
+      }
+    };
+
+    syncTopDock(document.querySelector('section.page[data-deck-active]'));
+    if (deck) {
+      deck.addEventListener('slidechange', (e) => syncTopDock(e.detail && e.detail.slide));
+    }
+  }
+
   // ── 3. Copy buttons ──────────────────────────────────────────────────
   document.querySelectorAll('[data-copy], [data-copy-id]').forEach((btn) => {
     btn.addEventListener('click', async (e) => {

@@ -99,10 +99,6 @@
     prevBtn.innerHTML = '<span aria-hidden="true">‹</span>';
     prevBtn.addEventListener('click', () => { if (deck && deck.prev) deck.prev(); });
 
-    const indexBtn = document.createElement('a');
-    indexBtn.className = 'btn-index-dock';
-    indexBtn.href = '#';
-
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'nav-arrow';
@@ -110,30 +106,33 @@
     nextBtn.innerHTML = '<span aria-hidden="true">›</span>';
     nextBtn.addEventListener('click', () => { if (deck && deck.next) deck.next(); });
 
-    navDock.append(prevBtn, indexBtn, nextBtn);
+    navDock.append(prevBtn, nextBtn);
     document.body.appendChild(navDock);
+  }
 
-    const syncDock = (sec) => {
+  // ── 2c-2. Mobile: full-bleed cover photo ────────────────────────────────
+  // The cover slide's photo lives inside the scaled page canvas, so on a
+  // phone (canvas fit to width, centred, shorter than the viewport) it
+  // shows letterboxed with cream gaps above/below. This overlay — real
+  // screen px, outside the canvas — paints the same image edge-to-edge
+  // across the whole screen while the cover slide is active, with a
+  // tap-anywhere "Acessar o Guia" affordance.
+  if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+    const coverBleed = document.createElement('a');
+    coverBleed.className = 'cover-fullbleed';
+    coverBleed.href = '#slide-select';
+    coverBleed.setAttribute('aria-label', 'Acessar o Guia');
+    coverBleed.addEventListener('click', (e) => { e.preventDefault(); jumpTo(1); });
+    document.body.appendChild(coverBleed);
+
+    const syncCoverBleed = (sec) => {
       if (!sec) return;
-      const label = sec.getAttribute('data-label') || '';
-      const id = sec.id || '';
-      if (sec.classList.contains('page-cover') || id === 'slide-select') {
-        indexBtn.style.visibility = 'hidden';
-        return;
-      }
-      indexBtn.style.visibility = '';
-      if (/[ÍI]ndice/i.test(label)) {
-        indexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
-        indexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
-      } else {
-        indexBtn.innerHTML = '<span aria-hidden="true">↩</span> Índice';
-        indexBtn.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
-      }
+      coverBleed.style.display = sec.classList.contains('page-cover') ? 'block' : 'none';
     };
 
-    syncDock(document.querySelector('section.page[data-deck-active]'));
+    syncCoverBleed(document.querySelector('section.page[data-deck-active]'));
     if (deck) {
-      deck.addEventListener('slidechange', (e) => syncDock(e.detail && e.detail.slide));
+      deck.addEventListener('slidechange', (e) => syncCoverBleed(e.detail && e.detail.slide));
     }
   }
 

@@ -1170,16 +1170,20 @@
       const vv = window.visualViewport;
       const vw = (vv ? vv.width : window.innerWidth) - rw;
       const vh = vv ? vv.height : window.innerHeight;
-      // Touch devices always fill the full width; if that makes the page
-      // taller than the viewport (e.g. landscape), the stage scrolls
-      // instead of shrinking further or cropping. Desktop keeps the
-      // original contain-fit: whole page visible, centred, no scrollbar.
+      // Touch devices always fill the full width. Most phones are more
+      // elongated than the page, so the result is usually shorter than
+      // the viewport — centre it for a balanced top/bottom gap. Only
+      // when it ends up *taller* (e.g. landscape) does the stage switch
+      // to anchor-top + scroll, so nothing gets cropped. Desktop keeps
+      // the original contain-fit: whole page visible, centred, no
+      // scrollbar.
       const isTouch = this._isTouch();
       const s = isTouch
         ? vw / this.designWidth
         : Math.min(vw / this.designWidth, vh / this.designHeight);
+      const overflowsHeight = isTouch && (this.designHeight * s) > vh;
       this._canvas.style.transform = `scale(${s})`;
-      if (stage) stage.classList.toggle('stage-scroll', isTouch);
+      if (stage) stage.classList.toggle('stage-scroll', overflowsHeight);
     }
 
     _isTouch() {

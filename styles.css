@@ -127,6 +127,112 @@
   .flat-pick-btn span:last-child { font-size: 16px !important; }
 }
 
+/* ─── Larger reading text on mobile ────────────────────────────────────
+   The page canvas (794×1123 design px) is the same markup at every
+   breakpoint — only its overall transform scale changes (see deck-stage
+   _fit). Touch screens already get a "fill full width" scale, but the
+   authored body-text sizes were tuned for a desktop-distance 794px page,
+   so on a phone they still read small after scaling and leave a lot of
+   unused canvas height on sparser pages. Bump body/label copy ~15% here
+   (both class-defined sizes and the many inline font-size:Npx values used
+   throughout guia-3-flats.html) so the guide reads comfortably and fills
+   more of each page on a phone. Decorative oversized numerals/emoji
+   (>18px) and the already screen-px-tuned nav dock / flat-pick buttons
+   are left untouched. */
+@media (hover: none), (pointer: coarse) {
+  .page { font-size: 16px !important; }
+  .hdr { font-size: 12.5px !important; }
+  .ftr { font-size: 12px !important; }
+  .eyebrow { font-size: 12.5px !important; }
+  .h-sub { font-size: 16px !important; }
+  p.lead { font-size: 18.5px !important; }
+  .chip { font-size: 12.5px !important; }
+  .bullet-list li { font-size: 16px !important; }
+  .bullet-list .dot { font-size: 12.5px !important; }
+  .stamp { font-size: 15px !important; }
+  .copy-btn { font-size: 12.5px !important; }
+  .callout { font-size: 14.5px !important; }
+  .apt-floor { font-size: 12.5px !important; }
+  .apt-lbl { font-size: 17px !important; }
+  .apt-key { font-size: 11px !important; }
+  .apt-val { font-size: 15px !important; }
+  .apt-val.mono { font-size: 15px !important; }
+  .copy-btn-sm { font-size: 11px !important; }
+  .apt-mini { font-size: 15px !important; }
+  .switch-row { font-size: 15px !important; }
+  .switch-tag { font-size: 15px !important; }
+  .step-flow-item { font-size: 14.5px !important; }
+  .step-flow-n { font-size: 12.5px !important; }
+  .dine-name { font-size: 15.5px !important; }
+  .dine-since { font-size: 10.5px !important; }
+  .dine-desc { font-size: 14px !important; }
+  .dine-row .dine-name { font-size: 18.5px !important; }
+  .dine-row .dine-desc { font-size: 15px !important; }
+  .toc-name { font-size: 16px !important; }
+  .toc-pg { font-size: 12.5px !important; }
+  .toc-btn-num { font-size: 11px !important; }
+  .toc-btn-lbl { font-size: 16px !important; }
+  .stat-lbl { font-size: 12.5px !important; }
+  .amenity { font-size: 15px !important; }
+  .flat-col-head { font-size: 19.5px !important; }
+  .flat-items li { font-size: 12.5px !important; }
+  .flat-items li span { font-size: 15px !important; }
+  .time-tag { font-size: 12px !important; }
+  .time-val { font-size: 16.5px !important; }
+  .numbered-list { font-size: 15px !important; }
+  .numbered-list li::before { font-size: 12.5px !important; }
+  .apt-label { font-size: 18.5px !important; }
+  .apt-k { font-size: 11px !important; }
+  .apt-v { font-size: 16px !important; }
+  .apt-v.mono { font-size: 16px !important; }
+  .copy-mini { font-size: 11px !important; }
+  .comod-list li { font-size: 14px !important; }
+  .step-n { font-size: 19.5px !important; }
+  .step-name { font-size: 15.5px !important; }
+  .step-d { font-size: 14px !important; }
+  .door-step-num { font-size: 15px !important; }
+  .door-step-text { font-size: 14.5px !important; }
+  .guide-badge { font-size: 17px !important; }
+  .veg-name { font-size: 19.5px !important; }
+  .veg-desc { font-size: 15px !important; }
+  .rule-mark { font-size: 18.5px !important; }
+  .rule-title { font-size: 16px !important; }
+  .rule-desc { font-size: 14.5px !important; }
+  .wifi-label { font-size: 11px !important; }
+  .wifi-value.mono { font-size: 20.5px !important; }
+  .pw-row { font-size: 15.5px !important; }
+  .guide-name { font-size: 15.5px !important; }
+  .guide-desc { font-size: 14px !important; }
+  .emerg-name { font-size: 14px !important; }
+  .contact-row { font-size: 15.5px !important; }
+  .contact-meta { font-size: 14.5px !important; }
+  .map-airport, .map-house { font-size: 12.5px !important; }
+  .map-distance { font-size: 12.5px !important; }
+  .trans-name { font-size: 16px !important; }
+  .trans-detail { font-size: 14px !important; }
+  .region-tag { font-size: 18.5px !important; }
+  .eat-name { font-size: 17px !important; }
+  .eat-rating { font-size: 15px !important; }
+  .eat-desc { font-size: 14.5px !important; }
+  .eat-meta { font-size: 12.5px !important; }
+  .eat-tag { font-size: 11px !important; }
+  .do-desc { font-size: 15px !important; }
+  .do-tag { font-size: 12px !important; }
+  .checkout-item { font-size: 16px !important; }
+  .thanks-msg { font-size: 18.5px !important; }
+  .thanks-rating { font-size: 16px !important; }
+  .thanks-wpp { font-size: 16px !important; }
+  .thanks-handle { font-size: 14px !important; }
+
+  [style*="font-size:11.5px"] { font-size: 13px !important; }
+  [style*="font-size:12px"] { font-size: 14px !important; }
+  [style*="font-size:12.5px"] { font-size: 14.5px !important; }
+  [style*="font-size:13px"] { font-size: 15px !important; }
+  [style*="font-size:13.5px"] { font-size: 15.5px !important; }
+  [style*="font-size:15px"] { font-size: 17px !important; }
+  [style*="font-size:16px"] { font-size: 18.5px !important; }
+}
+
 .nav-dock { display: none; }
 @media (hover: none), (pointer: coarse) {
   .nav-dock {

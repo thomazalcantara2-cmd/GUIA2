@@ -90,20 +90,22 @@
       align-items: center;
       justify-content: center;
     }
-    /* Touch devices: page fills the full width (see _fit); if that makes
-       it taller than the viewport, scroll vertically instead of cropping
-       or shrinking further to also fit the height. */
+    /* Touch devices: page fills the full width (see _fit), usually leaving
+       space above/below it since most phones are more elongated than the
+       page. Match the page background there instead of the host's black
+       backdrop, so it reads as a natural extension of the page. */
+    .stage.stage-touch {
+      background: #FBF6EC;
+    }
+    /* ...and if the fill makes it taller than the viewport (e.g. landscape),
+       scroll vertically instead of cropping or shrinking further to also
+       fit the height. */
     .stage.stage-scroll {
       align-items: flex-start;
       justify-content: center;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      /* The page is usually shorter than the phone viewport once scaled
-         to fill the width (its aspect ratio is squarer than the screen),
-         leaving space below it. Match the page background instead of
-         showing :host's black backdrop there. */
-      background: #FBF6EC;
     }
 
     .canvas {
@@ -1158,6 +1160,15 @@
         if (this._tapzones) this._tapzones.style.left = '0';
         return;
       }
+      const vv = window.visualViewport;
+      // A pinch-zoom gesture shrinks visualViewport's reported size without
+      // any real layout change. Re-fitting in response would compound our
+      // own scale with the browser's zoom and leave the page visibly
+      // distorted even after the user zooms back out. So while zoomed
+      // (scale meaningfully away from 1), skip re-fitting entirely — the
+      // browser's native zoom already magnifies whatever we last laid out,
+      // and zooming back to 1 fires another resize that re-fits correctly.
+      if (vv && Math.abs(vv.scale - 1) > 0.01) return;
       const rw = this._railWidth();
       if (stage) stage.style.left = rw + 'px';
       // Overlay is centred on the viewport via left:50% + translate(-50%);
@@ -1167,7 +1178,6 @@
       if (this._tapzones) this._tapzones.style.left = rw + 'px';
       // visualViewport tracks the actual visible area on mobile (excludes
       // the address bar / keyboard); innerWidth/Height can lag behind it.
-      const vv = window.visualViewport;
       const vw = (vv ? vv.width : window.innerWidth) - rw;
       const vh = vv ? vv.height : window.innerHeight;
       // Touch devices always fill the full width. Most phones are more
@@ -1183,7 +1193,10 @@
         : Math.min(vw / this.designWidth, vh / this.designHeight);
       const overflowsHeight = isTouch && (this.designHeight * s) > vh;
       this._canvas.style.transform = `scale(${s})`;
-      if (stage) stage.classList.toggle('stage-scroll', overflowsHeight);
+      if (stage) {
+        stage.classList.toggle('stage-touch', isTouch);
+        stage.classList.toggle('stage-scroll', overflowsHeight);
+      }
     }
 
     _isTouch() {

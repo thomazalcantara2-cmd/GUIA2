@@ -112,22 +112,45 @@
 }
 
 /* ─── Bigger tap targets on touch devices ─────────────────────────────
-   These sizes live in the page's own design-pixel space, which gets
-   scaled down (~0.45–0.55x) to fit the phone width — so a modest bump
-   here still renders tiny on screen. Sized up enough that, after that
-   scale-down, the tappable area is still comfortably ≥44 screen px. */
+   Buttons inside the page get scaled down (~0.45–0.55x) along with
+   everything else to fit the phone width, so on-page size bumps alone
+   render tiny on screen. The back-navigation pill is moved out of the
+   page entirely (see .btn-index-dock, app.js) and sized in real screen
+   pixels instead; the flat-pick buttons stay in place but sized up
+   generously to still land comfortably ≥44 screen px after scaling. */
 @media (hover: none), (pointer: coarse) {
-  .btn-index {
-    font-size: 18px;
-    padding: 34px 32px;
-    gap: 10px;
-  }
-  .btn-index span { font-size: 20px; }
+  .btn-index, .btn-index-float { display: none; }
 
   .flat-pick-btn { padding: 44px 16px !important; }
   .flat-pick-btn span:first-child { font-size: 68px !important; }
   .flat-pick-btn span:nth-child(2) { font-size: 50px !important; }
   .flat-pick-btn span:last-child { font-size: 16px !important; }
+}
+
+.btn-index-dock { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .btn-index-dock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    left: 50%;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 2147483000;
+    background: var(--c-ink);
+    color: var(--c-cream);
+    text-decoration: none;
+    font-family: var(--f-head);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 26px;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  .btn-index-dock span { font-size: 16px; }
 }
 
 .ftr {

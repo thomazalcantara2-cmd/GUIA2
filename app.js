@@ -80,6 +80,42 @@
     }
   });
 
+  // ── 2c. Mobile: move the back-navigation pill into a fixed bottom dock ──
+  // On touch the page is scaled to fit, so a header pill renders tiny and
+  // often sits inside the swipe tap-zones; a single fixed pill anchored to
+  // the screen's own bottom (in the empty space left by the page-fit) is
+  // bigger, consistent, and always reachable. Desktop keeps the per-page
+  // header pill (see styles.css for the matching touch-only show/hide).
+  if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+    const dock = document.createElement('a');
+    dock.className = 'btn-index-dock';
+    dock.href = '#';
+    document.body.appendChild(dock);
+
+    const syncDock = (sec) => {
+      if (!sec) return;
+      const label = sec.getAttribute('data-label') || '';
+      const id = sec.id || '';
+      if (sec.classList.contains('page-cover') || id === 'slide-select') {
+        dock.style.display = 'none';
+        return;
+      }
+      dock.style.display = '';
+      if (/[ÍI]ndice/i.test(label)) {
+        dock.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
+        dock.onclick = (e) => { e.preventDefault(); jumpTo(1); };
+      } else {
+        dock.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+        dock.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
+      }
+    };
+
+    syncDock(document.querySelector('section.page[data-deck-active]'));
+    if (deck) {
+      deck.addEventListener('slidechange', (e) => syncDock(e.detail && e.detail.slide));
+    }
+  }
+
   // ── 3. Copy buttons ──────────────────────────────────────────────────
   document.querySelectorAll('[data-copy], [data-copy-id]').forEach((btn) => {
     btn.addEventListener('click', async (e) => {

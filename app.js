@@ -23,6 +23,23 @@
     }
   }
 
+  // ── 1b. Slim down the deck's built-in bottom overlay to prev/next only ─
+  // deck-stage.js ships a generic hover-controls bar (prev, page count,
+  // divider, Reset) inside its shadow DOM. For this guide only the arrows
+  // are needed, so hide the rest here rather than editing the shared
+  // component.
+  if (deck && deck.shadowRoot) {
+    const overlay = deck.shadowRoot.querySelector('.overlay');
+    if (overlay) {
+      const count = overlay.querySelector('.count');
+      const divider = overlay.querySelector('.divider');
+      const reset = overlay.querySelector('.btn.reset');
+      if (count) count.style.display = 'none';
+      if (divider) divider.style.display = 'none';
+      if (reset) reset.style.display = 'none';
+    }
+  }
+
   document.querySelectorAll('[data-jump]').forEach((el) => {
     el.addEventListener('click', (e) => {
       // Do NOT preventDefault — preserves the href as a real anchor link

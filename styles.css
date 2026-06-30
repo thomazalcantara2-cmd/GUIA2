@@ -414,56 +414,6 @@ p.lead {
   background: linear-gradient(180deg, #2E89A8 0%, #5BBFE0 60%, #5BBFE0 100%);
   color: white;
 }
-/* Soft beach watermark behind the gradient (used on flat-specific covers) */
-.cover-watermark {
-  position: absolute;
-  inset: 0;
-  background: url("porto-de-galinhas.webp") center/cover no-repeat;
-  opacity: 0.22;
-  z-index: 0;
-}
-.page-cover:has(.cover-watermark) {
-  background:
-    linear-gradient(180deg, rgba(46,137,168,.82) 0%, rgba(91,191,224,.7) 55%, rgba(91,191,224,.88) 100%),
-    #2E89A8;
-}
-.page-cover:has(.cover-watermark) .cover-bg { opacity: 0.7; }
-.cover-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 80% 100%, rgba(244,196,48,.4) 0%, transparent 50%),
-    radial-gradient(ellipse at 0% 0%, rgba(46,125,63,.3) 0%, transparent 50%);
-}
-.cover-deco { position: absolute; inset: 0; }
-.cover-leaf {
-  position: absolute;
-  width: 220px; height: 220px;
-  opacity: 0.6;
-}
-.cover-leaf-1 { top: -40px; right: -40px; transform: rotate(45deg); }
-.cover-leaf-2 { bottom: 100px; left: -60px; transform: rotate(-30deg); }
-.cover-leaf-3 { top: 280px; right: -80px; transform: rotate(120deg) scale(.7); opacity:.4; }
-.cover-sun {
-  position: absolute;
-  top: 80px; right: 120px;
-  width: 90px; height: 90px;
-  opacity: 0.55;
-}
-.cover-inner {
-  position: relative;
-  z-index: 1;
-  display: flex; flex-direction: column;
-  height: 100%;
-  padding: 40px 56px 56px;
-}
-.cover-top {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  font-family: var(--f-head);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.cover-top .hdr-logo { color: white; }
 /* Full-bleed cover photo as page background */
 .cover-photo-bg {
   position: absolute; inset: 0;
@@ -474,67 +424,19 @@ p.lead {
   width: 100%; height: 100%;
   object-fit: cover;
 }
-.cover-scrim {
-  position: absolute; inset: 0;
-  z-index: 0;
-  background: linear-gradient(180deg,
-    rgba(16,52,66,.55) 0%,
-    rgba(16,52,66,.20) 32%,
-    rgba(16,52,66,.30) 58%,
-    rgba(16,52,66,.78) 100%);
+/* Invisible hit-target over the "Acessar o Guia" pill baked into the cover
+   artwork (capa-guia.png) — jumps to the flat-selection slide. Position is
+   estimated from the source mockup's pill bounding box (~88%–95% of height,
+   ~15%–85% of width) with a little extra margin for an easier tap target. */
+.cover-cta {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 86%;
+  bottom: 3%;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
 }
-.cover-title-block { margin-top: auto; }
-.cover-eyebrow { margin-bottom: 6px; }
-.cover-title {
-  font-family: var(--f-display);
-  font-weight: 500;
-  font-size: 56px;
-  line-height: 1.0;
-  letter-spacing: -0.02em;
-  margin: 0 0 28px;
-  color: white;
-}
-.cover-title-name {
-  color: var(--c-sun);
-  font-style: italic;
-  font-weight: 600;
-}
-.cover-title-loc { font-size: 0.7em; font-weight: 400; }
-.cover-sub {
-  font-family: var(--f-head);
-  font-size: 16px;
-  font-weight: 500;
-  color: rgba(255,255,255,.92);
-  margin: -16px 0 24px;
-}
-.cover-flat-badge {
-  display: inline-block;
-  vertical-align: middle;
-  font-family: var(--f-head);
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  color: var(--c-ink);
-  background: var(--c-sun);
-  padding: 4px 14px;
-  border-radius: 999px;
-  margin-left: 10px;
-  transform: translateY(-8px);
-  box-shadow: 0 6px 18px -4px rgba(244,196,48,.5);
-}
-.cover-logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 22px;
-}
-.cover-logo {
-  width: 210px;
-  height: auto;
-  filter: brightness(0) invert(1)
-    drop-shadow(0 4px 18px rgba(0,0,0,.28));
-}
-.cover-logo-wrap .cover-flat-badge { transform: none; margin-left: 0; }
 
 /* ─── Welcome grid (03) ────────────────────────────────────────────── */
 .welcome-grid {
@@ -713,39 +615,6 @@ p.lead {
 }
 .dine-row .dine-name { font-size: 16px; margin-bottom: 4px; }
 .dine-row .dine-desc { font-size: 13px; }
-.cover-subtitle {
-  font-size: 16px;
-  line-height: 1.4;
-  color: rgba(255,255,255,.92);
-  margin: 0 0 26px;
-  max-width: 420px;
-}
-.cover-meta {
-  display: flex; align-items: center; gap: 16px;
-  padding-top: 20px;
-  border-top: 1.5px solid rgba(255,255,255,.3);
-}
-.cover-meta-cell { flex: 1; }
-.cover-meta-label {
-  font-family: var(--f-head);
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.65);
-  margin-bottom: 4px;
-}
-.cover-meta-val {
-  font-family: var(--f-head);
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-}
-.cover-meta-divider {
-  width: 1px; height: 32px;
-  background: rgba(255,255,255,.3);
-}
-
 /* ─── 02 SUMÁRIO (TOC) ─────────────────────────────────────────────── */
 .toc {
   display: grid; grid-template-columns: 1fr 1fr;

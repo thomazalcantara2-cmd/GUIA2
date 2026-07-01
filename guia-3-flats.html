@@ -88,6 +88,7 @@
 <script src="deco.js"></script>
 <link id="gfont-Abril-Fatface" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface:wght@300;400;500;600;700&amp;display=swap">
 <link id="gfont-Comfortaa" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap">
+<link id="gfont-recepcao" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500;1,8..60,600&family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 </head>
 <body>
 
@@ -311,57 +312,51 @@
 </section>
 
 <!-- ═══════════════════════════════════════ 04 RECEPÇÃO & ACESSO ══════ -->
-<section id="slide-3" data-document-role="page" class="page page-scrollable" data-label="04 Recepção & Acesso">
+<section id="slide-3" data-document-role="page" class="page page-scrollable rc-page" data-label="04 Recepção & Acesso">
   <header class="hdr">
     <div class="hdr-logo"><img class="hdr-logo-img" src="logo-dimare.png" alt="Di Maré Porto Residence"></div>
     <div class="hdr-pg">07 / 26</div>
   </header>
   <div class="page-pad">
-    <div class="section-header">
-      <div class="section-num">02</div>
-      <div class="section-title">Recepção &amp;<br/>Acesso.</div>
+    <div class="rc-hero">
+      <div class="rc-hero-num">02</div>
+      <div class="rc-hero-title">Recepção<br/>&amp; Acesso.</div>
     </div>
 
-    <div class="card card-tinted-leaf" style="display:flex; gap:14px; align-items:flex-start; margin-bottom:16px">
-      <div class="icon-circle" style="background:var(--c-leaf); color:white" data-deco="home"></div>
-      <div style="flex:1">
-        <div class="h-sub" style="margin-bottom:4px">1 · Acesso com porteiro</div>
-        <p style="margin:0; font-size:15px; line-height:1.6">
-          Seu acesso será feito com o auxílio do porteiro na recepção das
-          <strong>9h à 0h</strong> e das <strong>1h às 3h</strong>. Caso o porteiro não esteja
-          presente, siga as instruções de acesso sem porteiro abaixo.
-        </p>
-      </div>
-      <img src="foto-recepcao.jpg" alt="Recepção do Di Maré Porto Residence" style="width:180px; height:180px; object-fit:cover; border-radius:14px; display:block; flex-shrink:0" />
-    </div>
-
-    <div class="card card-tinted-sky" style="padding:22px">
-      <div class="h-sub" style="margin-bottom:6px; color:var(--c-sky-deep)">2 · Acesso sem porteiro</div>
-      <div style="display:flex; gap:18px; align-items:flex-start; margin:10px 0 14px">
-        <div style="display:flex; gap:18px; align-items:center; flex:1">
-          <div class="icon-circle icon-circle-lg" style="background:var(--c-sky-deep); color:white" data-deco="key"></div>
-          <div>
-            <div class="eyebrow" style="color:var(--c-sky-deep)">SENHA DA RECEPÇÃO</div>
-            <div class="lock-code"><span>2 7 6 9 1</span></div>
-            <button class="copy-btn" data-copy="27691" style="margin-top:6px">Copiar código</button>
-          </div>
+    <div class="rc-body">
+      <div class="rc-card">
+        <img class="rc-card-photo" src="foto-recepcao.jpg" alt="Recepção do Di Maré Porto Residence" />
+        <div>
+          <div class="rc-eyebrow">01 · ACESSO COM PORTEIRO</div>
+          <p>
+            Seu acesso será feito com o auxílio do porteiro na recepção das
+            <strong>9h à 0h</strong> e <strong>1h às 3h</strong>. Caso o porteiro não esteja
+            presente, siga as instruções de acesso sem porteiro abaixo.
+          </p>
         </div>
-        <img src="foto-interfone-senha.png" alt="Painel do interfone com o botão SENHA em destaque" style="width:150px; height:190px; object-fit:cover; border-radius:14px; display:block; flex-shrink:0; box-shadow:0 4px 14px rgba(0,0,0,.15)" />
       </div>
-      <ol class="numbered-list">
-        <li>No display do porteiro eletrônico, com a mão já na maçaneta, pressione a tecla <strong>"SENHA"</strong>.</li>
-        <li>Digite o código <strong>27691</strong>.</li>
-        <li>Um sinal luminoso <strong>verde</strong> acenderá.</li>
-        <li>Assim que a luz verde acender, <strong>puxe imediatamente</strong> a maçaneta para abrir.</li>
-      </ol>
-    </div>
 
-    <div class="card card-tinted-coral" style="margin-top:14px; display:flex; gap:12px; align-items:center">
-      <div class="icon-circle" style="background:var(--c-coral); color:white" data-deco="alert"></div>
-      <p style="margin:0; font-size:15px; line-height:1.55">
-        O sistema de segurança fecha automaticamente em poucos segundos — a abertura deve ser rápida
-        após o sinal verde. Este mesmo procedimento também pode ser usado pela <strong>Praça 5</strong>.
-      </p>
+      <div class="rc-section2-head">
+        <div class="rc-eyebrow" style="margin-bottom:0">02 · ACESSO SEM PORTEIRO</div>
+        <img class="rc-keypad-photo" src="foto-interfone-senha.png" alt="Painel do interfone com o botão SENHA em destaque" />
+      </div>
+      <ol class="rc-steps">
+        <li><span class="rc-step-num">1</span><span>No display do porteiro eletrônico, com a mão já na maçaneta, pressione a tecla <strong>&ldquo;SENHA&rdquo;</strong>.</span></li>
+        <li><span class="rc-step-num">2</span><span>Digite o código <strong class="rc-accent">27691</strong>. <button class="rc-copy-inline" data-copy="27691">Copiar</button></span></li>
+        <li><span class="rc-step-num">3</span><span>Um sinal luminoso <strong class="rc-green">verde</strong> acenderá.</span></li>
+        <li><span class="rc-step-num">4</span><span>Assim que a luz verde acender, <strong>puxe imediatamente</strong> a maçaneta para abrir.</span></li>
+      </ol>
+
+      <div class="rc-alert">
+        <div class="rc-alert-icon">!</div>
+        <div>
+          <div class="rc-alert-title">O sistema de segurança fecha</div>
+          <p class="rc-alert-body">
+            Fecha automaticamente em poucos segundos — a abertura deve ser rápida após o sinal
+            verde. Válido também para a <strong>Praça 5</strong>.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
   <footer class="ftr">

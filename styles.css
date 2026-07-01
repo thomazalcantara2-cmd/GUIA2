@@ -1995,19 +1995,6 @@ p.lead {
   section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 18px !important; }
   section[id^="slide-toc"] .grow { display: none; }
   section[id^="slide-toc"] .toc-quote { display: none; }
-  /* On mobile the WhatsApp button lives in the real-screen bottom-dock overlay */
-  .ftr { display: none !important; }
-  .bottom-dock {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    padding: 10px 20px calc(12px + env(safe-area-inset-bottom));
-    background: var(--c-cream);
-    z-index: 200;
-  }
   .rc-hero-num { font-size: 320px; }
   .rc-hero-title { font-size: 70px !important; }
   .rc-eyebrow { font-size: 25px !important; }

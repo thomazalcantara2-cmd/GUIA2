@@ -326,20 +326,25 @@
 .top-dock-index span { font-size: 14px; }
 
 .ftr {
-  display: flex; align-items: center; justify-content: flex-end;
-  padding: 0 var(--pad-x) 22px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 10px var(--pad-x) 18px;
   font-family: var(--f-head);
   font-size: 10.5px;
   letter-spacing: 0.1em;
   color: var(--c-ink-soft);
   text-transform: uppercase;
+  position: sticky;
+  bottom: 0;
+  background: var(--c-cream);
+  z-index: 2;
 }
 .ftr-wpp {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 8px;
   background: var(--c-leaf);
   color: white;
-  padding: 7px 12px;
+  padding: 11px 22px;
   border-radius: 999px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0.02em;
@@ -1991,7 +1996,7 @@ p.lead {
      "Escolher Flat" / menu button at the real screen level) and zero the
      eyebrow's inline margin-top (dock-clearance on page-pad handles that). */
   section[id^="slide-toc"] .hdr { display: none !important; }
-  section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 0 !important; }
+  section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 18px !important; }
   section[id^="slide-toc"] .grow { display: none; }
   section[id^="slide-toc"] .toc-quote { display: none; }
   .rc-hero-num { font-size: 320px; }

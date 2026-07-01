@@ -317,21 +317,7 @@
     });
   });
 
-  // ── 4. WhatsApp links — derive wa.me URL from the phone text in the element ─
-  document.querySelectorAll('[data-wpp]').forEach((el) => {
-    el.setAttribute('href', '#');
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Try to extract a phone from the same element
-      const m = el.innerText.match(/[\d\s\-\(\)]{8,}/);
-      if (!m) return;
-      const num = m[0].replace(/\D/g, '');
-      if (num.length >= 10) {
-        const wa = `https://wa.me/55${num}`;
-        window.open(wa, '_blank');
-      }
-    });
-  });
+  // ── 4. WhatsApp links — phone hardcoded directly in href on each .ftr-wpp ─
 
   // ── 5. Map button placeholder ────────────────────────────────────────
   document.querySelectorAll('[data-action="map"]').forEach((btn) => {

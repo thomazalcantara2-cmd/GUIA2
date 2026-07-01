@@ -1177,26 +1177,26 @@ p.lead {
 }
 
 /* ─── Door emergency steps ────────────────────────────────────── */
-.door-steps { display:flex; flex-direction:column; gap:8px; }
+.door-steps { display:flex; flex-direction:column; gap:10px; }
 .door-step {
-  display:flex; align-items:center; gap:12px;
+  display:flex; align-items:center; gap:14px;
   background:white;
   border:1px solid var(--c-line);
   border-radius:14px;
-  padding:10px 14px;
+  padding:12px 16px;
 }
 .door-step-num {
-  width:28px; height:28px; border-radius:50%;
+  width:34px; height:34px; border-radius:50%;
   background:var(--c-coral); color:white;
   display:grid; place-items:center;
-  font-family:var(--f-head); font-weight:700; font-size:13px;
+  font-family:var(--f-head); font-weight:700; font-size:15px;
   flex-shrink:0;
 }
 .door-step-text {
-  flex:1; font-size:12.5px; line-height:1.45; color:var(--c-ink);
+  flex:1; font-size:14px; line-height:1.5; color:var(--c-ink);
 }
 .door-step-img {
-  height:88px; width:auto; max-width:120px;
+  height:110px; width:auto; max-width:140px;
   border-radius:10px; object-fit:cover; flex-shrink:0;
 }
 .guide-badge {

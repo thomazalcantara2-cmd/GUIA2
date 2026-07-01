@@ -54,11 +54,32 @@
   let selectedFlat = localStorage.getItem('dimare-flat') || '201';
   function getTocIndex() { return FLAT_TOCS[selectedFlat] || 2; }
 
+  // The other two flats' TOC/info/wifi pages stay in the deck (so direct
+  // links and the PDF export still work) but are marked data-deck-skip so
+  // prev/next/arrow-key/tap navigation steps straight over them — browsing
+  // after picking a flat only shows that flat's own pages in sequence.
+  const FLAT_TOC_IDS = { '201': 'slide-toc-201', '202': 'slide-toc-202', '301': 'slide-toc-301' };
+  const FLAT_INFO_IDS = { '201': 'slide-5', '202': 'slide-6', '301': 'slide-7' };
+  const FLAT_WIFI_IDS = { '201': 'slide-wifi-201', '202': 'slide-wifi-202', '301': 'slide-wifi-301' };
+  function applyFlatSkip() {
+    Object.keys(FLAT_TOC_IDS).forEach((f) => {
+      const isSelected = f === selectedFlat;
+      [FLAT_TOC_IDS[f], FLAT_INFO_IDS[f], FLAT_WIFI_IDS[f]].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (isSelected) el.removeAttribute('data-deck-skip');
+        else el.setAttribute('data-deck-skip', '');
+      });
+    });
+  }
+  applyFlatSkip();
+
   // Flat selection buttons (flat-pick-btn on slide-select)
   document.querySelectorAll('[data-select-flat]').forEach((btn) => {
     btn.addEventListener('click', () => {
       selectedFlat = btn.getAttribute('data-select-flat');
       localStorage.setItem('dimare-flat', selectedFlat);
+      applyFlatSkip();
       jumpTo(FLAT_TOCS[selectedFlat]);
     });
   });

@@ -55,12 +55,11 @@
   // prev/next/arrow-key/tap navigation steps straight over them — browsing
   // after picking a flat only shows that flat's own pages in sequence.
   const FLAT_TOC_IDS = { '201': 'slide-toc-201', '202': 'slide-toc-202', '301': 'slide-toc-301' };
-  const FLAT_INFO_IDS = { '201': 'slide-5', '202': 'slide-6', '301': 'slide-7' };
   const FLAT_WIFI_IDS = { '201': 'slide-wifi-201', '202': 'slide-wifi-202', '301': 'slide-wifi-301' };
   function applyFlatSkip() {
     Object.keys(FLAT_TOC_IDS).forEach((f) => {
       const isSelected = f === selectedFlat;
-      [FLAT_TOC_IDS[f], FLAT_INFO_IDS[f], FLAT_WIFI_IDS[f]].forEach((id) => {
+      [FLAT_TOC_IDS[f], FLAT_WIFI_IDS[f]].forEach((id) => {
         const el = document.getElementById(id);
         if (!el) return;
         if (isSelected) el.removeAttribute('data-deck-skip');

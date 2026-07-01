@@ -51,11 +51,17 @@
 /* Opt-in per page (add .page-scrollable): the canvas stays a fixed
    794×1123 "A4" box — same scaling math everywhere — but a page that
    needs more room (extra photos, longer text) can grow past that height
-   and scroll internally instead of clipping. */
+   and scroll internally instead of clipping.
+   Deliberately NOT setting -webkit-overflow-scrolling:touch: on iOS
+   Safari that legacy property is the known trigger for fixed-position
+   siblings elsewhere on the page (our top-dock/nav-dock) visually
+   "unsticking" and scrolling away during momentum scroll of this nested
+   region, only snapping back once the scroll settles. Modern iOS already
+   gives plain overflow:auto its own momentum scrolling without it. */
 .page-scrollable {
   overflow-y: auto;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 .page-scrollable::-webkit-scrollbar { width: 6px; }
 .page-scrollable::-webkit-scrollbar-track { background: transparent; }
@@ -279,9 +285,8 @@
   left: 16px; right: 16px;
   z-index: 2147483000;
   /* Forces its own compositor layer so it stays visually pinned during
-     momentum-scroll of the page-scrollable content elsewhere on screen,
-     instead of any transient WebKit "unstick" flicker on fixed elements
-     while a nested -webkit-overflow-scrolling:touch area is in motion. */
+     momentum-scroll of the page-scrollable content elsewhere on screen
+     (see the .page-scrollable rule for the main fix to that). */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   will-change: transform;

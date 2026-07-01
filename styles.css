@@ -72,9 +72,9 @@
   color: var(--c-ink);
 }
 .hdr-logo-img {
-  height: 30px; width: auto; display: block;
+  height: 40px; width: auto; display: block;
 }
-.hdr-pg { letter-spacing: 0.2em; font-weight: 600; }
+.hdr-pg { display: none; }
 
 .hdr-right { display: flex; align-items: center; gap: 14px; }
 .btn-index {

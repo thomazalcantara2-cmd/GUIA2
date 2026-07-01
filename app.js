@@ -98,7 +98,7 @@
       const b = document.createElement('a');
       b.className = 'btn-index';
       b.href = '#slide-select';
-      b.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+      b.innerHTML = '<span aria-hidden="true">↩</span> Retornar ao menu';
       b.addEventListener('click', (e) => { e.preventDefault(); jumpTo(getTocIndex()); });
       return b;
     };
@@ -198,7 +198,7 @@
     const topIndexBtn = document.createElement('a');
     topIndexBtn.className = 'top-dock-index';
     topIndexBtn.href = '#';
-    topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+    topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Retornar ao menu';
 
     right.append(flagsSlot, topIndexBtn);
     topDock.append(logo, right);
@@ -217,7 +217,7 @@
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
       } else {
-        topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Índice';
+        topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Retornar ao menu';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
       }
     };

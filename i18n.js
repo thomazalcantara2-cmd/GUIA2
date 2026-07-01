@@ -340,8 +340,8 @@
       const isActive = b.dataset.lang === lang;
       b.classList.toggle('active', isActive);
       b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      // The Brazil flag only shows once a translation is active (to return).
-      if (b.dataset.lang === 'pt') b.style.display = (lang === 'pt') ? 'none' : 'block';
+      // Hide the flag of the currently active language; show all others.
+      b.style.display = isActive ? 'none' : '';
     });
     try { localStorage.setItem('guia-lang', lang); } catch (e) {}
   }

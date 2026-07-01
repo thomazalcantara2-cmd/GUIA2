@@ -63,6 +63,11 @@
   overflow-x: hidden;
   overscroll-behavior: contain;
 }
+/* Allow the flex column to grow beyond the fixed page height so the
+   footer actually appears after the content instead of being covered by it. */
+.page-scrollable .page-pad {
+  flex: 1 0 auto;
+}
 .page-scrollable::-webkit-scrollbar { width: 6px; }
 .page-scrollable::-webkit-scrollbar-track { background: transparent; }
 .page-scrollable::-webkit-scrollbar-thumb { background: rgba(31,45,61,.18); border-radius: 999px; }

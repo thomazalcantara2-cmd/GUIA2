@@ -808,8 +808,10 @@ p.lead {
 .toc-btn-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 12px;
   margin-top: 8px;
+  flex: 1;
 }
 .toc-btn {
   display: flex;
@@ -1990,6 +1992,8 @@ p.lead {
      eyebrow's inline margin-top (dock-clearance on page-pad handles that). */
   section[id^="slide-toc"] .hdr { display: none !important; }
   section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 0 !important; }
+  section[id^="slide-toc"] .grow { display: none; }
+  section[id^="slide-toc"] .toc-quote { display: none; }
   .rc-hero-num { font-size: 320px; }
   .rc-hero-title { font-size: 70px !important; }
   .rc-eyebrow { font-size: 25px !important; }

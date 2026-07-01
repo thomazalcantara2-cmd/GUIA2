@@ -120,16 +120,19 @@
   color: white;
 }
 
+/* ─── In-canvas header controls, replaced by the top-dock overlay ─────
+   The top-dock (real screen px, see app.js/below) now provides the logo,
+   language flags, and back-to-menu button at every breakpoint, so the
+   in-canvas versions (tuned for the design canvas, tiny once scaled) are
+   always hidden rather than just on touch. */
+.btn-index, .btn-index-float { display: none; }
+
 /* ─── Bigger tap targets on touch devices ─────────────────────────────
    Buttons inside the page get scaled down (~0.45–0.55x) along with
    everything else to fit the phone width, so on-page size bumps alone
-   render tiny on screen. The back-navigation pill is moved out of the
-   page entirely (see .btn-index-dock, app.js) and sized in real screen
-   pixels instead; the flat-pick buttons stay in place but sized up
-   generously to still land comfortably ≥44 screen px after scaling. */
+   render tiny on screen. The flat-pick buttons stay in place but sized
+   up generously to still land comfortably ≥44 screen px after scaling. */
 @media (hover: none), (pointer: coarse) {
-  .btn-index, .btn-index-float { display: none; }
-
   .flat-pick-btn { padding: 44px 16px !important; }
   .flat-pick-btn span:first-child { font-size: 68px !important; }
   .flat-pick-btn span:nth-child(2) { font-size: 50px !important; }
@@ -257,82 +260,82 @@
   }
 }
 
-.nav-dock { display: none; }
-@media (hover: none), (pointer: coarse) {
-  .nav-dock {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: fixed;
-    left: 50%;
-    bottom: max(16px, env(safe-area-inset-bottom));
-    transform: translateX(-50%);
-    z-index: 2147483000;
-  }
+/* ─── Header/nav chrome — logo, flags, back-to-menu, prev/next arrows ──
+   Real screen px, positioned outside the scaled canvas (see app.js), so
+   it reads at a consistent size everywhere. Used at every breakpoint —
+   on touch it's pinned to the real viewport edges (the canvas already
+   fills the viewport width there); on desktop app.js dynamically aligns
+   it to the visible (letterboxed) canvas edges instead. The arrow pair
+   replaces deck-stage's own built-in bottom overlay controls. */
+.hdr-logo { display: none !important; }
+.hdr .lang-flags, .lang-float { display: none !important; }
 
-  .nav-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border: none;
-    border-radius: 50%;
-    background: var(--c-ink);
-    color: var(--c-cream);
-    font-size: 22px;
-    line-height: 1;
-    box-shadow: 0 8px 24px rgba(0,0,0,.35);
-    -webkit-tap-highlight-color: transparent;
-  }
-  .nav-arrow:active { transform: scale(0.92); }
+.top-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: 16px; right: 16px;
+  z-index: 2147483000;
 }
-
-.top-dock { display: none; }
-@media (hover: none), (pointer: coarse) {
-  .hdr-logo { display: none !important; }
-  .hdr .lang-flags, .lang-float { display: none !important; }
-
-  .top-dock {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: max(14px, env(safe-area-inset-top));
-    left: 16px; right: 16px;
-    z-index: 2147483000;
-  }
-  .top-dock-logo {
-    height: 58px;
-    width: auto;
-    display: block;
-    filter: drop-shadow(0 6px 14px rgba(0,0,0,.22));
-  }
-  .top-dock-right { display: flex; align-items: center; gap: 10px; }
-  .top-dock-flags .lang-flags { gap: 8px; }
-  .top-dock-flags .lang-flag {
-    width: 36px; height: 26px; border-radius: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.25);
-  }
-  .top-dock-index {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--c-ink);
-    color: var(--c-cream);
-    text-decoration: none;
-    font-family: var(--f-head);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 10px 14px;
-    border-radius: 999px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.3);
-    white-space: nowrap;
-  }
-  .top-dock-index span { font-size: 14px; }
+.top-dock-logo {
+  height: 58px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.22));
 }
+.top-dock-right { display: flex; align-items: center; gap: 10px; }
+.top-dock-flags .lang-flags { gap: 8px; }
+.top-dock-flags .lang-flag {
+  width: 36px; height: 26px; border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+}
+.top-dock-index {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--c-ink);
+  color: var(--c-cream);
+  text-decoration: none;
+  font-family: var(--f-head);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.3);
+  white-space: nowrap;
+}
+.top-dock-index span { font-size: 14px; }
+
+.nav-dock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  top: calc(max(14px, env(safe-area-inset-top)) + 66px);
+  right: 16px;
+  z-index: 2147483000;
+}
+.nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--c-ink);
+  color: var(--c-cream);
+  font-size: 22px;
+  line-height: 1;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+.nav-arrow:active { transform: scale(0.92); }
 
 .ftr {
   display: flex; align-items: center; justify-content: flex-end;

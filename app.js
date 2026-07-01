@@ -23,22 +23,18 @@
     }
   }
 
-  // ── 1b. Slim down the deck's built-in bottom overlay to prev/next only ─
+  // ── 1b. Hide the deck's built-in bottom overlay ─────────────────────────
   // deck-stage.js ships a generic hover-controls bar (prev, page count,
-  // divider, Reset) inside its shadow DOM. For this guide only the arrows
-  // are needed, so hide the rest here rather than editing the shared
-  // component.
+  // divider, Reset) inside its shadow DOM. The top-dock's own prev/next
+  // arrows (below) now cover navigation at every breakpoint, so the whole
+  // built-in bar is redundant — hide it here rather than editing the
+  // shared component.
   if (deck && deck.shadowRoot) {
     const overlay = deck.shadowRoot.querySelector('.overlay');
-    if (overlay) {
-      const count = overlay.querySelector('.count');
-      const divider = overlay.querySelector('.divider');
-      const reset = overlay.querySelector('.btn.reset');
-      if (count) count.style.display = 'none';
-      if (divider) divider.style.display = 'none';
-      if (reset) reset.style.display = 'none';
-    }
+    if (overlay) overlay.style.display = 'none';
   }
+
+  const isTouch = !!(window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches);
 
   document.querySelectorAll('[data-jump]').forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -118,16 +114,15 @@
     }
   });
 
-  // ── 2c. Mobile: bottom nav dock — prev / back-to-index / next ──────────
+  // ── 2c. Nav dock — prev / next arrows, top-right below the top-dock ────
   // Side tap-zones (swipe-like navigation) are disabled (deck-stage.js):
   // they kept intercepting real buttons/links sitting in the side thirds
-  // (index grid, header pills). Touch navigation is explicit buttons
-  // instead, anchored to the screen's own bottom (in the empty space the
-  // page-fit leaves there). Desktop is untouched — arrow keys / the
-  // per-page header pill still work there (see styles.css for the
-  // touch-only show/hide).
-  if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
-    const navDock = document.createElement('div');
+  // (index grid, header pills). Real screen px, same overlay pattern as
+  // the top-dock — shown at every breakpoint (see "2e" below for the
+  // desktop alignment step).
+  let navDock = null;
+  {
+    navDock = document.createElement('div');
     navDock.className = 'nav-dock';
 
     const prevBtn = document.createElement('button');
@@ -155,7 +150,7 @@
   // screen px, outside the canvas — paints the same image edge-to-edge
   // across the whole screen while the cover slide is active, with a
   // tap-anywhere "Acessar o Guia" affordance.
-  if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+  if (isTouch) {
     const coverBleed = document.createElement('a');
     coverBleed.className = 'cover-fullbleed';
     coverBleed.href = '#slide-select';
@@ -174,14 +169,16 @@
     }
   }
 
-  // ── 2d. Mobile: top dock — bigger logo / language / back-to-index ──────
+  // ── 2d. Top dock — bigger logo / language / back-to-menu ────────────────
   // The in-page header (logo, flags) is scaled down with the rest of the
-  // page canvas and reads too small on phones. This overlay (real screen
-  // px, untouched by deck-stage's fit-to-width transform) puts an
-  // enlarged logo, the language flags, and a direct way back to the
-  // index at the very top of the screen — mirroring the bottom nav dock.
-  if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) {
-    const topDock = document.createElement('div');
+  // page canvas and reads too small once the canvas is shrunk to fit, so
+  // this overlay (real screen px, untouched by deck-stage's transform)
+  // carries an enlarged logo, the language flags, and a direct way back
+  // to the menu instead. Shown at every breakpoint, together with the
+  // nav-dock's arrows.
+  let topDock = null;
+  {
+    topDock = document.createElement('div');
     topDock.className = 'top-dock';
 
     const logo = document.createElement('img');
@@ -204,15 +201,17 @@
     topDock.append(logo, right);
     document.body.appendChild(topDock);
 
-    const syncTopDock = (sec) => {
+    const syncDocks = (sec) => {
       if (!sec) return;
       const label = sec.getAttribute('data-label') || '';
       const id = sec.id || '';
       if (sec.classList.contains('page-cover') || id === 'slide-select') {
         topDock.style.visibility = 'hidden';
+        if (navDock) navDock.style.visibility = 'hidden';
         return;
       }
       topDock.style.visibility = '';
+      if (navDock) navDock.style.visibility = '';
       if (/[ÍI]ndice/i.test(label)) {
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
@@ -222,10 +221,43 @@
       }
     };
 
-    syncTopDock(document.querySelector('section.page[data-deck-active]'));
+    syncDocks(document.querySelector('section.page[data-deck-active]'));
     if (deck) {
-      deck.addEventListener('slidechange', (e) => syncTopDock(e.detail && e.detail.slide));
+      deck.addEventListener('slidechange', (e) => syncDocks(e.detail && e.detail.slide));
     }
+  }
+
+  // ── 2e. Desktop: align the dock overlays to the visible canvas ─────────
+  // On touch the canvas fills the viewport width, so the dock's CSS
+  // (left/right: 16px) already hugs the real page edges. On desktop the
+  // canvas is scaled to fit both dimensions and centred with letterboxing
+  // on the sides, so the dock is instead measured against the canvas's
+  // own rendered box (read from deck-stage's shadow DOM) rather than the
+  // full — much wider — browser window.
+  if (!isTouch && deck && deck.shadowRoot && topDock) {
+    const canvasEl = deck.shadowRoot.querySelector('.canvas');
+    const alignDocksToCanvas = () => {
+      if (!canvasEl) return;
+      const rect = canvasEl.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const inset = 16;
+      const leftPx = rect.left + inset;
+      const rightPx = (window.innerWidth - rect.right) + inset;
+      const topPx = rect.top + 14;
+      topDock.style.left = leftPx + 'px';
+      topDock.style.right = rightPx + 'px';
+      topDock.style.top = topPx + 'px';
+      if (navDock) {
+        navDock.style.right = rightPx + 'px';
+        navDock.style.top = (topPx + 66) + 'px';
+      }
+    };
+    alignDocksToCanvas();
+    window.addEventListener('resize', alignDocksToCanvas);
+    // The canvas re-fits asynchronously (fonts/images loading, etc.) —
+    // a couple of delayed re-checks catch layout settling after load.
+    setTimeout(alignDocksToCanvas, 250);
+    setTimeout(alignDocksToCanvas, 1000);
   }
 
   // ── 3. Copy buttons ──────────────────────────────────────────────────

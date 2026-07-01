@@ -281,8 +281,11 @@
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  top: max(14px, env(safe-area-inset-top));
-  left: 16px; right: 16px;
+  top: 0;
+  left: 0; right: 0;
+  padding: max(14px, env(safe-area-inset-top)) 16px 14px;
+  background: var(--c-cream);
+  box-shadow: 0 6px 18px rgba(31,45,61,.08);
   z-index: 2147483000;
   /* Forces its own compositor layer so it stays visually pinned during
      momentum-scroll of the page-scrollable content elsewhere on screen
@@ -327,7 +330,9 @@
   align-items: center;
   gap: 10px;
   position: fixed;
-  top: calc(max(14px, env(safe-area-inset-top)) + 66px);
+  /* Fallback until app.js measures the real (now solid-background)
+     top-dock height and overrides this inline. */
+  top: calc(max(14px, env(safe-area-inset-top)) + 86px);
   right: 16px;
   z-index: 2147483000;
   -webkit-transform: translateZ(0);

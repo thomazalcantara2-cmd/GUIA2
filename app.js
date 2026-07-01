@@ -232,7 +232,7 @@
 
   // ── 2e. Desktop: align the dock overlays to the visible canvas ─────────
   // On touch the canvas fills the viewport width, so the dock's CSS
-  // (left/right: 16px) already hugs the real page edges. On desktop the
+  // (left/right: 0) already hugs the real page edges. On desktop the
   // canvas is scaled to fit both dimensions and centred with letterboxing
   // on the sides, so the dock is instead measured against the canvas's
   // own rendered box (read from deck-stage's shadow DOM) rather than the
@@ -244,16 +244,10 @@
       const rect = canvasEl.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
       const inset = 16;
-      const leftPx = rect.left + inset;
-      const rightPx = (window.innerWidth - rect.right) + inset;
-      const topPx = rect.top + 14;
-      topDock.style.left = leftPx + 'px';
-      topDock.style.right = rightPx + 'px';
-      topDock.style.top = topPx + 'px';
-      if (navDock) {
-        navDock.style.right = rightPx + 'px';
-        navDock.style.top = (topPx + 66) + 'px';
-      }
+      topDock.style.left = (rect.left + inset) + 'px';
+      topDock.style.right = (window.innerWidth - rect.right + inset) + 'px';
+      topDock.style.top = rect.top + 'px';
+      if (navDock) navDock.style.right = (window.innerWidth - rect.right + inset) + 'px';
     };
     alignDocksToCanvas();
     window.addEventListener('resize', alignDocksToCanvas);
@@ -261,6 +255,21 @@
     // a couple of delayed re-checks catch layout settling after load.
     setTimeout(alignDocksToCanvas, 250);
     setTimeout(alignDocksToCanvas, 1000);
+  }
+
+  // ── 2e-2. Position the arrows right under the (now solid) header bar ───
+  // Measured off the top-dock's real rendered height rather than a fixed
+  // guess, since its background/padding can change independently of this.
+  if (topDock && navDock) {
+    const positionNavDock = () => {
+      const rect = topDock.getBoundingClientRect();
+      if (!rect.height) return;
+      navDock.style.top = (rect.bottom + 8) + 'px';
+    };
+    positionNavDock();
+    window.addEventListener('resize', positionNavDock);
+    setTimeout(positionNavDock, 250);
+    setTimeout(positionNavDock, 1000);
   }
 
   // ── 2f. Mobile: drop the page to the bottom of the screen ──────────────

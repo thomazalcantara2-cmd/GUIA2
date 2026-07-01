@@ -114,35 +114,6 @@
     }
   });
 
-  // ── 2c. Nav dock — prev / next arrows, top-right below the top-dock ────
-  // Side tap-zones (swipe-like navigation) are disabled (deck-stage.js):
-  // they kept intercepting real buttons/links sitting in the side thirds
-  // (index grid, header pills). Real screen px, same overlay pattern as
-  // the top-dock — shown at every breakpoint (see "2e" below for the
-  // desktop alignment step).
-  let navDock = null;
-  {
-    navDock = document.createElement('div');
-    navDock.className = 'nav-dock';
-
-    const prevBtn = document.createElement('button');
-    prevBtn.type = 'button';
-    prevBtn.className = 'nav-arrow';
-    prevBtn.setAttribute('aria-label', 'Página anterior');
-    prevBtn.innerHTML = '<span aria-hidden="true">‹</span>';
-    prevBtn.addEventListener('click', () => { if (deck && deck.prev) deck.prev(); });
-
-    const nextBtn = document.createElement('button');
-    nextBtn.type = 'button';
-    nextBtn.className = 'nav-arrow';
-    nextBtn.setAttribute('aria-label', 'Próxima página');
-    nextBtn.innerHTML = '<span aria-hidden="true">›</span>';
-    nextBtn.addEventListener('click', () => { if (deck && deck.next) deck.next(); });
-
-    navDock.append(prevBtn, nextBtn);
-    document.body.appendChild(navDock);
-  }
-
   // ── 2c-2. Mobile: full-bleed cover photo ────────────────────────────────
   // The cover slide's photo lives inside the scaled page canvas, so on a
   // phone (canvas fit to width, centred, shorter than the viewport) it
@@ -174,8 +145,7 @@
   // page canvas and reads too small once the canvas is shrunk to fit, so
   // this overlay (real screen px, untouched by deck-stage's transform)
   // carries an enlarged logo, the language flags, and a direct way back
-  // to the menu instead. Shown at every breakpoint, together with the
-  // nav-dock's arrows.
+  // to the menu instead. Shown at every breakpoint.
   let topDock = null;
   {
     topDock = document.createElement('div');
@@ -207,14 +177,9 @@
       const id = sec.id || '';
       if (sec.classList.contains('page-cover') || id === 'slide-select') {
         topDock.style.visibility = 'hidden';
-        if (navDock) navDock.style.visibility = 'hidden';
         return;
       }
       topDock.style.visibility = '';
-      // The "Recepção & Acesso" hero photo runs edge-to-edge behind the
-      // dock, and the prev/next arrows would sit right on top of its
-      // title — drop just the arrows there, keep the logo/menu button.
-      if (navDock) navDock.style.visibility = sec.classList.contains('rc-page') ? 'hidden' : '';
       if (/[ÍI]ndice/i.test(label)) {
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
@@ -247,7 +212,6 @@
       topDock.style.left = (rect.left + inset) + 'px';
       topDock.style.right = (window.innerWidth - rect.right + inset) + 'px';
       topDock.style.top = rect.top + 'px';
-      if (navDock) navDock.style.right = (window.innerWidth - rect.right + inset) + 'px';
     };
     alignDocksToCanvas();
     window.addEventListener('resize', alignDocksToCanvas);
@@ -255,21 +219,6 @@
     // a couple of delayed re-checks catch layout settling after load.
     setTimeout(alignDocksToCanvas, 250);
     setTimeout(alignDocksToCanvas, 1000);
-  }
-
-  // ── 2e-2. Position the arrows right under the (now solid) header bar ───
-  // Measured off the top-dock's real rendered height rather than a fixed
-  // guess, since its background/padding can change independently of this.
-  if (topDock && navDock) {
-    const positionNavDock = () => {
-      const rect = topDock.getBoundingClientRect();
-      if (!rect.height) return;
-      navDock.style.top = (rect.bottom + 8) + 'px';
-    };
-    positionNavDock();
-    window.addEventListener('resize', positionNavDock);
-    setTimeout(positionNavDock, 250);
-    setTimeout(positionNavDock, 1000);
   }
 
   // ── 2f. Mobile: drop the page to the bottom of the screen ──────────────

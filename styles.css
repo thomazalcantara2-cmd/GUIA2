@@ -1826,17 +1826,19 @@ p.lead {
   font-family: var(--rc-sans);
   color: var(--rc-ink);
 }
+.rc-page .hdr { display: none; }
 .rc-page .page-pad { padding: 0; display: block; }
 
 .rc-hero {
   position: relative;
   height: 300px;
+  margin-top: 60px;
   overflow: hidden;
   display: flex;
   align-items: center;
-  background-image: linear-gradient(180deg, rgba(20,32,50,.35) 0%, rgba(20,32,50,.78) 100%), url('foto-recepcao.jpg');
+  background-image: linear-gradient(180deg, rgba(20,32,50,.35) 0%, rgba(20,32,50,.78) 100%), url('porto-galinhas-jangada.png');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 40%;
 }
 .rc-hero-num {
   position: absolute;
@@ -1875,45 +1877,31 @@ p.lead {
   display: block;
 }
 .rc-eyebrow {
-  font: 700 15px var(--rc-sans);
+  font: 700 20px var(--rc-sans);
   letter-spacing: 0.05em;
   color: var(--rc-coral);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .rc-card p {
-  font: 500 17px/1.6 var(--rc-sans);
+  font: 500 23px/1.55 var(--rc-sans);
   color: var(--rc-ink);
   margin: 0;
 }
 
-.rc-section2-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 6px;
-}
-.rc-keypad-photo {
-  width: 84px;
-  height: 108px;
-  flex: none;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 4px 14px rgba(0,0,0,.15);
-}
+.rc-section2-head { margin-bottom: 10px; }
 
 .rc-steps { list-style: none; margin: 0; padding: 0; }
 .rc-steps li {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  padding: 16px 0;
+  gap: 18px;
+  padding: 18px 0;
   border-bottom: 1px solid rgba(35,50,74,.12);
 }
 .rc-steps li:last-child { border-bottom: 0; }
 .rc-step-num {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   flex: none;
   border-radius: 999px;
   background: var(--rc-ink);
@@ -1921,12 +1909,12 @@ p.lead {
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 700 15px var(--rc-sans);
+  font: 700 18px var(--rc-sans);
 }
 .rc-steps span:last-child {
-  font: 500 16.5px/1.55 var(--rc-sans);
+  font: 500 23px/1.5 var(--rc-sans);
   color: var(--rc-ink);
-  padding-top: 5px;
+  padding-top: 6px;
 }
 .rc-accent { color: var(--rc-coral); }
 .rc-green { color: var(--rc-green); }
@@ -1945,10 +1933,10 @@ p.lead {
   cursor: pointer;
   background: rgba(35,50,74,.08);
   color: var(--rc-ink);
-  font: 700 12px var(--rc-sans);
+  font: 700 14px var(--rc-sans);
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
   margin-left: 4px;
   vertical-align: middle;
@@ -1967,24 +1955,29 @@ p.lead {
   font: 700 18px var(--rc-sans);
 }
 .rc-alert-title {
-  font: 700 17px var(--rc-sans);
+  font: 700 22px var(--rc-sans);
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .rc-alert-body {
-  font: 500 15px/1.6 var(--rc-sans);
+  font: 500 20px/1.55 var(--rc-sans);
   color: #c9d3de;
   margin: 0;
 }
 .rc-alert-body strong { color: #fff; }
 
 @media (hover: none), (pointer: coarse) {
-  .rc-hero { height: 340px; }
+  /* The canvas is now top-anchored on this scrollable page (see app.js),
+     so it starts flush with the real screen top — enough margin here
+     keeps the hero from rendering underneath the fixed top-dock (logo/
+     flags/menu button), which only has an opaque background where its
+     own child pills sit. */
+  .rc-hero { height: 300px; margin-top: 190px; }
   .rc-hero-num { font-size: 320px; }
   .rc-hero-title { font-size: 70px !important; }
-  .rc-eyebrow { font-size: 16.5px !important; }
-  .rc-card p { font-size: 19px !important; }
-  .rc-steps span:last-child { font-size: 18.5px !important; }
-  .rc-alert-title { font-size: 19px !important; }
-  .rc-alert-body { font-size: 17px !important; }
+  .rc-eyebrow { font-size: 25px !important; }
+  .rc-card p { font-size: 27px !important; }
+  .rc-steps span:last-child { font-size: 27px !important; }
+  .rc-alert-title { font-size: 26px !important; }
+  .rc-alert-body { font-size: 24px !important; }
 }

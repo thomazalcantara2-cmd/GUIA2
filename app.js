@@ -211,7 +211,10 @@
         return;
       }
       topDock.style.visibility = '';
-      if (navDock) navDock.style.visibility = '';
+      // The "Recepção & Acesso" hero photo runs edge-to-edge behind the
+      // dock, and the prev/next arrows would sit right on top of its
+      // title — drop just the arrows there, keep the logo/menu button.
+      if (navDock) navDock.style.visibility = sec.classList.contains('rc-page') ? 'hidden' : '';
       if (/[ÍI]ndice/i.test(label)) {
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
@@ -277,14 +280,22 @@
     const applyStageAnchor = () => {
       if (!stageEl) return;
       const scrolling = stageEl.classList.contains('stage-scroll');
-      stageEl.style.alignItems = scrolling ? '' : 'flex-end';
+      // A page that scrolls internally (.page-scrollable, e.g. "Recepção
+      // & Acesso") reads better anchored to the top too — its own content
+      // starts right under the top-dock instead of behind extra bottom
+      // slack the reader would never otherwise see without scrolling up.
+      const active = document.querySelector('section.page[data-deck-active]');
+      const anchorTop = scrolling || (active && active.classList.contains('page-scrollable'));
+      stageEl.style.alignItems = anchorTop ? (scrolling ? '' : 'flex-start') : 'flex-end';
       // The canvas's layout box is its full unscaled (794×1123) size —
       // align-items positions that box, then `transform: scale()` shrinks
-      // it from transform-origin. Anchoring bottom without also pivoting
-      // the scale from the bottom leaves the shrunk page floating in the
-      // wrong place (still centred on the oversized box), so both need
-      // to move together.
-      if (canvasElForAnchor) canvasElForAnchor.style.transformOrigin = scrolling ? '' : 'bottom center';
+      // it from transform-origin. Anchoring an edge without also pivoting
+      // the scale from that same edge leaves the shrunk page floating in
+      // the wrong place (still centred on the oversized box), so both
+      // need to move together.
+      if (canvasElForAnchor) {
+        canvasElForAnchor.style.transformOrigin = scrolling ? '' : (anchorTop ? 'top center' : 'bottom center');
+      }
     };
     applyStageAnchor();
     window.addEventListener('resize', applyStageAnchor);

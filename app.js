@@ -277,15 +277,26 @@
   if (isTouch && deck && deck.shadowRoot) {
     const stageEl = deck.shadowRoot.querySelector('.stage');
     const canvasElForAnchor = deck.shadowRoot.querySelector('.canvas');
+    const baseDesignHeight = parseFloat(deck.getAttribute('height')) || 1123;
+
+    const getCanvasScale = () => {
+      if (!canvasElForAnchor) return 1;
+      const m = getComputedStyle(canvasElForAnchor).transform;
+      if (!m || m === 'none') return 1;
+      const match = m.match(/matrix\(([^,]+),/);
+      return match ? parseFloat(match[1]) || 1 : 1;
+    };
+
     const applyStageAnchor = () => {
       if (!stageEl) return;
       const scrolling = stageEl.classList.contains('stage-scroll');
       // A page that scrolls internally (.page-scrollable, e.g. "Recepção
       // & Acesso") reads better anchored to the top too — its own content
       // starts right under the top-dock instead of behind extra bottom
-      // slack the reader would never otherwise see without scrolling up.
+      // slack the reader would only ever see by scrolling up.
       const active = document.querySelector('section.page[data-deck-active]');
-      const anchorTop = scrolling || (active && active.classList.contains('page-scrollable'));
+      const isScrollablePage = !!(active && active.classList.contains('page-scrollable'));
+      const anchorTop = scrolling || isScrollablePage;
       stageEl.style.alignItems = anchorTop ? (scrolling ? '' : 'flex-start') : 'flex-end';
       // The canvas's layout box is its full unscaled (794×1123) size —
       // align-items positions that box, then `transform: scale()` shrinks
@@ -295,6 +306,20 @@
       // need to move together.
       if (canvasElForAnchor) {
         canvasElForAnchor.style.transformOrigin = scrolling ? '' : (anchorTop ? 'top center' : 'bottom center');
+      }
+      // A scrollable page's canvas is also stretched (in un-scaled design
+      // px) so its scaled height exactly matches the viewport — otherwise
+      // the fixed 794×1123 aspect leaves a bare gap below a short device
+      // frame, wasted space the reader can't scroll into since it isn't
+      // part of the page's own content.
+      if (canvasElForAnchor && !scrolling) {
+        if (isScrollablePage) {
+          const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+          const scale = getCanvasScale();
+          canvasElForAnchor.style.height = (vh / scale) + 'px';
+        } else {
+          canvasElForAnchor.style.height = baseDesignHeight + 'px';
+        }
       }
     };
     applyStageAnchor();

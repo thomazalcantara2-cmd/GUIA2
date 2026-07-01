@@ -1976,12 +1976,20 @@ p.lead {
 .rc-alert-body strong { color: #fff; }
 
 @media (hover: none), (pointer: coarse) {
-  /* The canvas is now top-anchored on this scrollable page (see app.js),
-     so it starts flush with the real screen top — enough margin here
-     keeps the hero from rendering underneath the fixed top-dock (logo/
-     flags/menu button), which has a solid background across its full
-     width so nothing needs to peek out from behind it. */
-  .rc-hero { height: 300px; margin-top: 100px; }
+  /* The canvas is top-anchored (see app.js), so it starts flush with the
+     real screen top. --dock-clearance (set dynamically in app.js as
+     topDock.height / canvasScale) is the design-px equivalent of the
+     fixed top-dock height, keeping content below it. */
+  .rc-hero { height: 300px; margin-top: var(--dock-clearance, 100px); }
+  /* Non-rc pages (TOC, wifi, etc.) push their page-pad content below the
+     dock with the same variable. Excluded: #slide-select (uses its own
+     centred flex layout) and .page-cover (no top-dock shown there). */
+  .page:not(.rc-page):not(#slide-select):not(.page-cover) .page-pad { padding-top: var(--dock-clearance, 175px); }
+  /* TOC pages: hide the in-canvas header (the top-dock already shows the
+     "Escolher Flat" / menu button at the real screen level) and zero the
+     eyebrow's inline margin-top (dock-clearance on page-pad handles that). */
+  section[id^="slide-toc"] .hdr { display: none !important; }
+  section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 0 !important; }
   .rc-hero-num { font-size: 320px; }
   .rc-hero-title { font-size: 70px !important; }
   .rc-eyebrow { font-size: 25px !important; }

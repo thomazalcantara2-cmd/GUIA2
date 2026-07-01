@@ -248,22 +248,26 @@
     const applyStageAnchor = () => {
       if (!stageEl) return;
       const scrolling = stageEl.classList.contains('stage-scroll');
-      // A page that scrolls internally (.page-scrollable, e.g. "Recepção
-      // & Acesso") reads better anchored to the top too — its own content
-      // starts right under the top-dock instead of behind extra bottom
-      // slack the reader would only ever see by scrolling up.
       const active = document.querySelector('section.page[data-deck-active]');
       const isScrollablePage = !!(active && active.classList.contains('page-scrollable'));
-      const anchorTop = scrolling || isScrollablePage;
-      stageEl.style.alignItems = anchorTop ? (scrolling ? '' : 'flex-start') : 'flex-end';
+      // Always top-anchor so the canvas starts flush with the screen top
+      // (right behind the top-dock) instead of floating at the bottom with
+      // a large cream gap between the header and the page content.
+      stageEl.style.alignItems = scrolling ? '' : 'flex-start';
       // The canvas's layout box is its full unscaled (794×1123) size —
       // align-items positions that box, then `transform: scale()` shrinks
-      // it from transform-origin. Anchoring an edge without also pivoting
-      // the scale from that same edge leaves the shrunk page floating in
-      // the wrong place (still centred on the oversized box), so both
-      // need to move together.
+      // it from transform-origin. Both must pivot from the same edge.
       if (canvasElForAnchor) {
-        canvasElForAnchor.style.transformOrigin = scrolling ? '' : (anchorTop ? 'top center' : 'bottom center');
+        canvasElForAnchor.style.transformOrigin = scrolling ? '' : 'top center';
+      }
+      // Expose the top-dock height (screen px → design px) as a CSS var so
+      // page content can push itself below the fixed dock. Recomputed on
+      // every call because resize/orientation changes alter both the dock
+      // height (safe-area-inset-top) and the canvas scale.
+      const scale = getCanvasScale();
+      if (topDock && scale > 0) {
+        const dockH = topDock.getBoundingClientRect().height;
+        document.documentElement.style.setProperty('--dock-clearance', Math.ceil(dockH / scale) + 'px');
       }
       // A scrollable page's canvas is also stretched (in un-scaled design
       // px) so its scaled height exactly matches the viewport — otherwise
@@ -273,7 +277,6 @@
       if (canvasElForAnchor && !scrolling) {
         if (isScrollablePage) {
           const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-          const scale = getCanvasScale();
           canvasElForAnchor.style.height = (vh / scale) + 'px';
         } else {
           canvasElForAnchor.style.height = baseDesignHeight + 'px';

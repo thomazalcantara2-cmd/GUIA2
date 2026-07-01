@@ -260,6 +260,39 @@
     setTimeout(alignDocksToCanvas, 1000);
   }
 
+  // ── 2f. Mobile: drop the page to the bottom of the screen ──────────────
+  // Touch fits the canvas to the viewport's width only, so on most phones
+  // (taller/narrower than the fixed A4-ish canvas) it doesn't reach the
+  // full viewport height — deck-stage centres it, leaving an empty cream
+  // strip both above and below. The strip above is already covered by
+  // the top-dock; bottom-anchoring the canvas instead of centring it
+  // moves that same empty space entirely above the page (further hidden
+  // behind/around the top-dock) so the page itself runs flush to the
+  // bottom edge, with no bare strip below it. Skipped once the page is
+  // tall enough to need its own scroll (deck-stage's "stage-scroll"),
+  // since that mode anchors to the top by design.
+  if (isTouch && deck && deck.shadowRoot) {
+    const stageEl = deck.shadowRoot.querySelector('.stage');
+    const canvasElForAnchor = deck.shadowRoot.querySelector('.canvas');
+    const applyStageAnchor = () => {
+      if (!stageEl) return;
+      const scrolling = stageEl.classList.contains('stage-scroll');
+      stageEl.style.alignItems = scrolling ? '' : 'flex-end';
+      // The canvas's layout box is its full unscaled (794×1123) size —
+      // align-items positions that box, then `transform: scale()` shrinks
+      // it from transform-origin. Anchoring bottom without also pivoting
+      // the scale from the bottom leaves the shrunk page floating in the
+      // wrong place (still centred on the oversized box), so both need
+      // to move together.
+      if (canvasElForAnchor) canvasElForAnchor.style.transformOrigin = scrolling ? '' : 'bottom center';
+    };
+    applyStageAnchor();
+    window.addEventListener('resize', applyStageAnchor);
+    if (deck) deck.addEventListener('slidechange', applyStageAnchor);
+    setTimeout(applyStageAnchor, 250);
+    setTimeout(applyStageAnchor, 1000);
+  }
+
   // ── 3. Copy buttons ──────────────────────────────────────────────────
   document.querySelectorAll('[data-copy], [data-copy-id]').forEach((btn) => {
     btn.addEventListener('click', async (e) => {

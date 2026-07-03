@@ -2025,89 +2025,41 @@ p.lead {
 }
 .rc-alert-body strong { color: #fff; }
 
-/* ── Recepção & Acesso — numeral + white card + alert style ───────────── */
-#slide-3.rc-page {
-  background: linear-gradient(180deg, #f7f2e6 0%, #f2ede2 45%, #e4ecec 100%);
+/* ── Recepção & Acesso — hero banner + plain numbered sections ─────────── */
+.rcp-hero-content { position: relative; padding: 0 var(--pad-x); }
+.rcp-eyebrow {
+  font: 700 18px var(--rc-sans);
+  letter-spacing: 3px;
+  color: #e9e2d0;
+  margin-bottom: 16px;
 }
-.ra2-body { padding: 30px var(--pad-x) 40px; }
-
-.ra2-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 26px;
-}
-.ra2-num {
-  font: 700 68px/0.8 var(--rc-serif);
-  color: transparent;
-  -webkit-text-stroke: 2px var(--rc-coral);
-  flex: none;
-}
-.ra2-title {
-  font: 600 38px/1.1 var(--rc-serif);
-  color: var(--rc-ink);
-  padding-top: 6px;
+.rcp-hero-title {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 62px;
+  line-height: 1.12;
+  font-family: var(--rc-serif);
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,.3);
 }
 
-.ra2-card {
-  display: flex;
-  gap: 16px;
-  background: #fff;
-  border-radius: 20px;
-  padding: 18px;
-  box-shadow: 0 8px 26px rgba(35,50,74,.10);
-  margin-bottom: 34px;
+.rcp-section { padding-top: 46px; }
+.rcp-section--last { padding-bottom: 10px; }
+.rcp-section-label {
+  font: 700 19px var(--rc-sans);
+  letter-spacing: 2px;
+  color: #1e3d3d;
+  text-transform: uppercase;
+  margin-bottom: 18px;
 }
-.ra2-card-photo {
-  width: 132px;
-  height: 132px;
-  flex: none;
-  object-fit: cover;
-  border-radius: 14px;
-}
-.ra2-card-label {
-  font: 700 13px var(--rc-sans);
-  letter-spacing: 0.3px;
-  color: var(--rc-ink);
-  margin-bottom: 8px;
-}
-.ra2-card-body { font: 500 13.5px/1.55 var(--rc-sans); color: #3d4a5c; margin: 0; }
-.ra2-card-body strong { color: var(--rc-ink); }
+.rcp-section-body { font: 500 23px/1.65 var(--rc-sans); color: #3d3f36; margin: 0; }
+.rcp-section-body strong { color: #26281f; }
 
-.ra2-section-label {
-  font: 700 15px var(--rc-sans);
-  color: var(--rc-ink);
-  margin-bottom: 6px;
-}
-.ra2-steps { list-style: none; padding: 0; margin: 0; }
-.ra2-step { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(35,50,74,.12); }
-.ra2-step:last-child { border-bottom: 1px solid rgba(35,50,74,.12); }
-.ra2-step-num {
-  width: 34px; height: 34px; flex: none; border-radius: 50%;
-  background: #f2ede0;
-  color: var(--rc-ink);
-  display: flex; align-items: center; justify-content: center;
-  font: 700 15px var(--rc-sans);
-}
-.ra2-step-text { font: 500 14px/1.55 var(--rc-sans); color: var(--rc-ink); }
-.ra2-step-text strong { color: var(--rc-ink); }
-
-.ra2-alert {
-  margin-top: 30px;
-  background: #f6ddd2;
-  border-radius: 18px;
-  padding: 20px;
-  display: flex;
-  gap: 12px;
-}
-.ra2-alert-icon {
-  width: 32px; height: 32px; flex: none; border-radius: 50%;
-  background: var(--rc-coral);
-  display: flex; align-items: center; justify-content: center;
-}
-.ra2-alert-title { font: 700 14.5px var(--rc-sans); color: #8a3a24; margin-bottom: 6px; }
-.ra2-alert-body { font: 500 13px/1.55 var(--rc-sans); color: #7a4531; margin: 0; }
-.ra2-alert-body strong { color: #8a3a24; }
+.rcp-row { display: flex; align-items: center; gap: 24px; padding: 26px 0; border-top: 1px solid rgba(38,40,31,.15); }
+.rcp-section:last-child .rcp-row:last-child { border-bottom: 1px solid rgba(38,40,31,.15); }
+.rcp-icon { flex: none; width: 32px; height: 32px; }
+.rcp-row-text { font: 500 22px/1.55 var(--rc-sans); color: #3d3f36; }
+.rcp-row-text strong { color: #26281f; }
 
 @media (hover: none), (pointer: coarse) {
   /* The canvas is top-anchored (see app.js), so it starts flush with the
@@ -2134,19 +2086,10 @@ p.lead {
   .rc-alert-title { font-size: 26px !important; }
   .rc-alert-body { font-size: 24px !important; }
   .rc-highlight-text { font-size: 28px !important; }
-  /* Recepção & Acesso has no .rc-hero to carry the dock-clearance push,
-     so its body needs its own top margin below the fixed top-dock. */
-  .ra2-body { margin-top: var(--dock-clearance, 100px); }
-  .ra2-num { font-size: 100px !important; }
-  .ra2-title { font-size: 52px !important; }
-  .ra2-card-photo { width: 190px !important; height: 190px !important; }
-  .ra2-card-label { font-size: 20px !important; }
-  .ra2-card-body { font-size: 21px !important; line-height: 1.6 !important; }
-  .ra2-section-label { font-size: 24px !important; }
-  .ra2-step-num { width: 48px !important; height: 48px !important; font-size: 21px !important; }
-  .ra2-step-text { font-size: 21px !important; }
-  .ra2-alert-icon { width: 44px !important; height: 44px !important; }
-  .ra2-alert-icon svg { width: 24px !important; height: 24px !important; }
-  .ra2-alert-title { font-size: 22px !important; }
-  .ra2-alert-body { font-size: 20px !important; }
+  .rcp-eyebrow { font-size: 22px !important; }
+  .rcp-hero-title { font-size: 72px !important; }
+  .rcp-section-label { font-size: 24px !important; }
+  .rcp-section-body { font-size: 27px !important; }
+  .rcp-row-text { font-size: 26px !important; }
+  .rcp-icon { width: 38px !important; height: 38px !important; }
 }

@@ -315,17 +315,17 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--c-ink);
-  color: var(--c-cream);
+  background: none;
+  color: #1E5F6E;
   text-decoration: none;
   font-family: var(--f-head);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 10px 14px;
-  border-radius: 999px;
-  box-shadow: 0 8px 20px rgba(0,0,0,.3);
+  padding: 10px 2px;
+  border-radius: 0;
+  box-shadow: none;
   white-space: nowrap;
 }
 .top-dock-index span { font-size: 14px; }

@@ -138,7 +138,26 @@
     if (deck) {
       deck.addEventListener('slidechange', (e) => syncCoverBleed(e.detail && e.detail.slide));
     }
+  }
 
+  // Always fill the viewport behind the cover on mobile — the canvas is
+  // shorter than the viewport, leaving bare strips above/below. A white
+  // fixed overlay (pointer-events:none, z-index:0) fills those gaps so
+  // no background colour bleeds through from the page body.
+  if (isTouch) {
+    const coverFill = document.createElement('div');
+    coverFill.className = 'cover-bg-fill';
+    document.body.appendChild(coverFill);
+
+    const syncCoverFill = (sec) => {
+      if (!sec) return;
+      coverFill.style.display = sec.classList.contains('page-cover') ? 'block' : 'none';
+    };
+
+    syncCoverFill(document.querySelector('section.page[data-deck-active]'));
+    if (deck) {
+      deck.addEventListener('slidechange', (e) => syncCoverFill(e.detail && e.detail.slide));
+    }
   }
 
   // ── 2d. Top dock — bigger logo / language / back-to-menu ────────────────

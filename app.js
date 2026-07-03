@@ -120,8 +120,9 @@
   // screen px, outside the canvas — paints the same image edge-to-edge
   // across the whole screen while the cover slide is active, with a
   // tap-anywhere "Acessar o Guia" affordance.
-  // New cover has an explicit CTA button — skip the fullbleed overlay
-  if (isTouch && !document.querySelector('.page-cover .cover-v2-btn')) {
+  // New cover has its own full-bleed layout (photo + white body with the
+  // flat-selection buttons) — skip the legacy fullbleed overlay entirely.
+  if (isTouch && !document.querySelector('.page-cover .cover-v2-bg')) {
     const coverBleed = document.createElement('a');
     coverBleed.className = 'cover-fullbleed';
     coverBleed.href = '#slide-select';

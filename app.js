@@ -140,23 +140,25 @@
     }
   }
 
-  // Always fill the viewport behind the cover on mobile — the canvas is
-  // shorter than the viewport, leaving bare strips above/below. A white
-  // fixed overlay (pointer-events:none, z-index:0) fills those gaps so
-  // no background colour bleeds through from the page body.
-  if (isTouch) {
-    const coverFill = document.createElement('div');
-    coverFill.className = 'cover-bg-fill';
-    document.body.appendChild(coverFill);
+  // The bare strips above/below the canvas on mobile aren't uncovered —
+  // deck-stage's own shadow-DOM .stage element (fixed, full viewport)
+  // paints them with its letterbox colour (cream, #FBF6EC). The cover's
+  // body is white, so that cream shows as a mismatched gap. Since the
+  // letterbox lives inside deck-stage's shadow root, an outer overlay
+  // can never paint over it — flip its background colour directly
+  // instead while the cover slide is active.
+  if (isTouch && deck && deck.shadowRoot) {
+    const stageElForBg = deck.shadowRoot.querySelector('.stage');
+    if (stageElForBg) {
+      const syncCoverFill = (sec) => {
+        if (!sec) return;
+        stageElForBg.style.background = sec.classList.contains('page-cover') ? '#ffffff' : '';
+      };
 
-    const syncCoverFill = (sec) => {
-      if (!sec) return;
-      coverFill.style.display = sec.classList.contains('page-cover') ? 'block' : 'none';
-    };
-
-    syncCoverFill(document.querySelector('section.page[data-deck-active]'));
-    if (deck) {
-      deck.addEventListener('slidechange', (e) => syncCoverFill(e.detail && e.detail.slide));
+      syncCoverFill(document.querySelector('section.page[data-deck-active]'));
+      if (deck) {
+        deck.addEventListener('slidechange', (e) => syncCoverFill(e.detail && e.detail.slide));
+      }
     }
   }
 

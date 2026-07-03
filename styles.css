@@ -271,18 +271,6 @@
   }
 }
 
-/* White fill that extends the cover background to the full viewport on mobile */
-.cover-bg-fill { display: none; }
-@media (hover: none), (pointer: coarse) {
-  .cover-bg-fill {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: #ffffff;
-    pointer-events: none;
-  }
-}
-
 /* ─── Header/nav chrome — logo, flags, back-to-menu, prev/next arrows ──
    Real screen px, positioned outside the scaled canvas (see app.js), so
    it reads at a consistent size everywhere. Used at every breakpoint —

@@ -601,6 +601,7 @@ p.lead {
   padding: 66px var(--pad-x) 32px;
   text-align: center;
   display: flex; flex-direction: column; align-items: center;
+  justify-content: center;
 }
 .cover-v2-title {
   margin: 0 0 10px;
@@ -614,9 +615,9 @@ p.lead {
 }
 .cover-v2-divider { width: 40px; height: 2px; background: #E2DAC8; margin: 0 auto 18px; }
 .cover-v2-text {
-  margin: 0 0 28px;
-  font-size: 14px; line-height: 1.65; color: #4E5162;
-  text-align: left; max-width: 520px; width: 100%;
+  margin: 0 0 36px;
+  font-size: 18px; line-height: 1.85; color: #4E5162;
+  text-align: left; max-width: 560px; width: 100%;
 }
 .cover-v2-btn {
   display: flex; align-items: center; justify-content: center; gap: 9px;

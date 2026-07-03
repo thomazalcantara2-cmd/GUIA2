@@ -639,15 +639,15 @@ p.lead {
   width: 100%; max-width: 520px;
 }
 .cover-v2-flat-btn {
-  flex: 1; border: none; border-radius: 18px;
-  padding: 20px 10px; cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  flex: 1; border: none; border-radius: 14px;
+  padding: 40px 10px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
   color: #fff; font-family: inherit;
   box-shadow: 0 8px 20px -6px rgba(32,36,58,.4);
   -webkit-tap-highlight-color: transparent;
 }
-.cover-v2-flat-icon { font-size: 30px; line-height: 1; }
-.cover-v2-flat-num { font-size: 19px; font-weight: 700; line-height: 1; }
+.cover-v2-flat-icon { font-size: 34px; line-height: 1; }
+.cover-v2-flat-num { font-size: 21px; font-weight: 700; line-height: 1; }
 .cover-v2-footer {
   margin-top: auto; padding-top: 16px;
   font-size: 10px; letter-spacing: 1.4px; color: #A39E8C; text-transform: uppercase;

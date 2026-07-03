@@ -95,7 +95,7 @@
        page. Match the page background there instead of the host's black
        backdrop, so it reads as a natural extension of the page. */
     .stage.stage-touch {
-      background: #FBF6EC;
+      background: #FFFFFF;
     }
     /* ...and if the fill makes it taller than the viewport (e.g. landscape),
        scroll vertically instead of cropping or shrinking further to also

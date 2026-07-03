@@ -205,7 +205,7 @@
       topDock.style.visibility = '';
       if (/[ÍI]ndice/i.test(label)) {
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
-        topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(1); };
+        topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(0); };
       } else {
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Retornar ao menu';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };

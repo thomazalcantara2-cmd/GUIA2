@@ -12,7 +12,7 @@
   --c-leaf-deep:#2E7D3F;
   --c-sun:     #F4C430;    /* amarelo sol */
   --c-coral:   #EE6C4D;    /* coral acento */
-  --c-cream:   #FBF6EC;    /* fundo creme */
+  --c-cream:   #FFFFFF;    /* fundo das páginas (branco) */
   --c-sand:    #F4EBD8;
   --c-ink:     #1F2D3D;    /* texto principal */
   --c-ink-soft:#4A5A6E;    /* texto secundário */
@@ -564,7 +564,7 @@ p.lead {
    ════════════════════════════════════════════════════════════════════ */
 
 /* ─── 01 COVER ─────────────────────────────────────────────────────── */
-.page-cover { background: #EDE7DB; }
+.page-cover { background: #FFFFFF; }
 
 /* ── Cover v2 full-bleed design ─────────────────────────────────────── */
 .cover-v2-bg {

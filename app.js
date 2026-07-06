@@ -203,7 +203,9 @@
         return;
       }
       topDock.style.visibility = '';
-      if (/[ÍI]ndice/i.test(label)) {
+      const isToc = /[ÍI]ndice/i.test(label);
+      topDock.classList.toggle('top-dock--toc', isToc);
+      if (isToc) {
         topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Escolher Flat';
         topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(0); };
       } else {

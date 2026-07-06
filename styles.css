@@ -169,6 +169,7 @@
   .section-title { font-size: 59.5px !important; }
   .ftr { font-size: 14.5px !important; }
   .eyebrow { font-size: 15px !important; }
+  .toc-heading { font-size: 38px !important; }
   .h-sub { font-size: 19.5px !important; }
   p.lead { font-size: 22px !important; }
   .chip { font-size: 15px !important; }
@@ -311,6 +312,9 @@
   width: 36px; height: 26px; border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,.25);
 }
+/* TOC ("Índice") pages: bigger logo + flags, same scale-up ratio (~1.5x) */
+.top-dock--toc .top-dock-logo { height: 87px; }
+.top-dock--toc .top-dock-flags .lang-flag { width: 54px; height: 39px; }
 .top-dock-index {
   display: inline-flex;
   align-items: center;
@@ -354,6 +358,14 @@
   transition: transform .15s, box-shadow .15s;
 }
 .ftr-wpp:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(79,168,95,.3); }
+
+/* ─── TOC ("Você está no Flat XXX") heading ────────────────────────── */
+.toc-heading {
+  font-family: var(--f-head);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--c-ink);
+}
 
 /* ─── Tipografia ──────────────────────────────────────────────────── */
 .eyebrow {
@@ -876,7 +888,7 @@ p.lead {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
-  gap: 12px;
+  gap: 16px;
   margin-top: 8px;
   flex: 1;
 }
@@ -885,11 +897,11 @@ p.lead {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
   background: white;
   border: 1px solid var(--c-line);
-  border-radius: 20px;
-  padding: 22px 8px 18px;
+  border-radius: 22px;
+  padding: 28px 10px 24px;
   text-decoration: none;
   color: var(--c-ink);
   cursor: pointer;
@@ -902,7 +914,7 @@ p.lead {
   box-shadow: 0 8px 20px -6px rgba(31,45,61,.14);
 }
 .toc-btn-icon {
-  font-size: 38px;
+  font-size: 48px;
   line-height: 1;
 }
 .toc-btn-num {
@@ -916,7 +928,7 @@ p.lead {
 }
 .toc-btn-lbl {
   font-family: var(--f-head);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;

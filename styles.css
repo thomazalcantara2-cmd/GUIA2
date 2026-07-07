@@ -642,11 +642,23 @@ p.lead {
 .cover-v2-badge-img { width: 84px; height: auto; }
 /* Bottom: white body fills remaining space, starting at "Olá" */
 .cover-v2-body {
-  flex: 1; background: #fff;
+  flex: 1; position: relative; overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 85%, rgba(79,168,95,.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 15%, rgba(91,191,224,.18) 0%, transparent 55%),
+    linear-gradient(160deg, #001a47 0%, #002d72 55%, #003585 100%);
   padding: 26px var(--pad-x) 24px;
   text-align: center;
   display: flex; flex-direction: column; align-items: center;
 }
+.cover-v2-ring {
+  position: absolute; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.07);
+  pointer-events: none; z-index: 0;
+}
+.cover-v2-ring-1 { width: 380px; height: 380px; top: -140px; right: -130px; }
+.cover-v2-ring-2 { width: 320px; height: 320px; bottom: -120px; left: -110px; border-color: rgba(244,196,48,.1); }
+.cover-v2-body > *:not(.cover-v2-ring) { position: relative; z-index: 1; }
 .page-cover .cover-v2-title {
   margin: 0 0 10px;
   font-family: 'Summer Vibes', 'Alex Brush', 'Playfair Display', 'Fraunces', Georgia, serif;
@@ -662,7 +674,7 @@ p.lead {
 .cover-v2-divider { width: 52px; height: 2px; background: rgba(255,255,255,.55); margin: 0 auto; }
 .cover-v2-text {
   margin: 0 0 30px;
-  font-size: 25px; line-height: 1.6; color: #4E5162;
+  font-size: 25px; line-height: 1.6; color: rgba(255,255,255,.8);
   text-align: left; max-width: 620px; width: 100%;
 }
 .cover-v2-btn {
@@ -679,7 +691,7 @@ p.lead {
 .cover-v2-flat-label {
   margin: auto 0 16px;
   font-size: 24px; font-weight: 700; letter-spacing: 0.3px;
-  color: #20243A;
+  color: #fff;
 }
 .cover-v2-flats {
   display: flex; gap: 14px;
@@ -687,12 +699,12 @@ p.lead {
 }
 .cover-v2-flat-btn {
   position: relative;
-  flex: 1; border: none; border-radius: 12px;
+  flex: 1; border: 1.5px solid rgba(255,255,255,.12); border-radius: 12px;
   height: 240px; padding: 0; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   color: #fff; font-family: inherit;
-  box-shadow: 0 8px 20px -6px rgba(32,36,58,.4);
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,.5);
   -webkit-tap-highlight-color: transparent;
 }
 .cover-v2-flat-photo {
@@ -721,7 +733,7 @@ p.lead {
 }
 .cover-v2-footer {
   margin-top: auto; padding-top: 16px;
-  font-size: 10px; letter-spacing: 1.4px; color: #A39E8C; text-transform: uppercase;
+  font-size: 10px; letter-spacing: 1.4px; color: rgba(255,255,255,.4); text-transform: uppercase;
 }
 
 /* ─── Welcome grid (03) ────────────────────────────────────────────── */

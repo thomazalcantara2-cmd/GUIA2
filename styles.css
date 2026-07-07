@@ -590,81 +590,57 @@ p.lead {
 .cover-v2-bg {
   position: relative;
   width: 100%; min-height: 100%;
-  display: flex; flex-direction: column;
+  background: #001a47;
 }
-/* Top: photo — a soft crossfade slideshow cycles through 3 shots
-   instead of one static image (see .cover-v2-photo-img--N below). The
-   badge/title/subtitle now sit ON the photo (see .cover-v2-hero-content),
-   so the fade stays pure photo through most of the box and only turns
-   into a dark scrim right behind that text — the white body doesn't
-   begin until the "Olá" paragraph, further down. */
-.cover-v2-photo {
-  position: relative; width: 100%; height: 820px; flex-shrink: 0; overflow: hidden;
+/* Single full-bleed backdrop photo sits behind the top of the page (like
+   the reference mockup's fixed .bg): one static image, cover-fit,
+   dissolving into solid navy. A fixed height (rather than inset:0) is
+   used because .cover-v2-bg's height is content-driven — an inset:0
+   child can't stretch to match an auto-growing ancestor, so below this
+   point the .cover-v2-bg background-color above just carries the navy. */
+.cover-v2-backdrop {
+  position: absolute; top: 0; left: 0; right: 0; height: 900px; z-index: 0;
 }
-.cover-v2-photo-img {
+.cover-v2-backdrop-photo {
   position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block;
-  opacity: 0;
-  animation: coverCrossfade 18s infinite;
+  background-image: url('foto-capa-nova.jpg');
+  background-size: cover; background-position: center 30%;
 }
-.cover-v2-photo-img--1 { animation-delay: 0s; }
-.cover-v2-photo-img--2 { animation-delay: 6s; }
-.cover-v2-photo-img--3 { animation-delay: 12s; }
-@keyframes coverCrossfade {
-  0%     { opacity: 1; }
-  30%    { opacity: 1; }
-  36%    { opacity: 0; }
-  94%    { opacity: 0; }
-  100%   { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cover-v2-photo-img { animation: none; opacity: 0; }
-  .cover-v2-photo-img--1 { opacity: 1; }
-}
-.cover-v2-photo-fade {
+.cover-v2-backdrop-gradient {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(0,16,38,.20) 0%,
-    rgba(0,16,38,.06) 14%,
-    rgba(0,26,71,0) 30%,
-    rgba(0,26,71,.12) 46%,
-    rgba(0,26,71,.32) 60%,
-    rgba(0,26,71,.55) 72%,
-    rgba(0,26,71,.76) 82%,
-    rgba(0,26,71,.90) 90%,
-    rgba(0,26,71,.97) 96%,
+    rgba(0,16,38,.15) 0px,
+    rgba(0,26,71,0) 160px,
+    rgba(0,26,71,.14) 380px,
+    rgba(0,26,71,.42) 520px,
+    rgba(0,26,71,.72) 620px,
+    rgba(0,26,71,.92) 700px,
+    #001a47 780px,
     #001a47 100%);
-  z-index: 1;
 }
-/* Logo, overlaid where the photo dissolves into the navy body */
-.cover-v2-hero-content {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+/* Content flows in normal document order on top of the backdrop */
+.cover-v2-content {
+  position: relative; z-index: 1;
   display: flex; flex-direction: column; align-items: center;
-  padding: 0 var(--pad-x) 34px;
+  padding: 52px var(--pad-x) 24px;
+  text-align: center;
+}
+.cover-v2-logo-wrap {
+  display: flex; justify-content: center;
+  margin-top: 600px; margin-bottom: 28px;
 }
 .cover-v2-logo {
   width: 116px; height: auto;
   filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0,0,0,.45));
-}
-/* Bottom: navy body fills remaining space, starting right under the logo */
-.cover-v2-body {
-  flex: 1 0 auto; position: relative; overflow: hidden;
-  background:
-    radial-gradient(ellipse at 20% 85%, rgba(79,168,95,.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 15%, rgba(91,191,224,.18) 0%, transparent 55%),
-    linear-gradient(160deg, #001a47 0%, #002d72 55%, #003585 100%);
-  padding: 30px var(--pad-x) 24px;
-  text-align: center;
-  display: flex; flex-direction: column; align-items: center;
 }
 .cover-v2-ring {
   position: absolute; border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,.07);
   pointer-events: none; z-index: 0;
 }
-.cover-v2-ring-1 { width: 380px; height: 380px; top: -140px; right: -130px; }
+.cover-v2-ring-1 { width: 380px; height: 380px; top: 640px; right: -130px; }
 .cover-v2-ring-2 { width: 320px; height: 320px; bottom: -120px; left: -110px; border-color: rgba(244,196,48,.1); }
-.cover-v2-body > *:not(.cover-v2-ring) { position: relative; z-index: 1; }
+.cover-v2-content > *:not(.cover-v2-ring) { position: relative; z-index: 1; }
 
 .cover-v2-welcome { width: 100%; max-width: 620px; margin-bottom: 30px; }
 .page-cover .cover-v2-intro {

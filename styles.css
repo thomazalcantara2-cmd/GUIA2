@@ -4,6 +4,14 @@
    A4 portrait: 794 × 1123px
    ────────────────────────────────────────────────────────────────────── */
 
+@font-face {
+  font-family: 'Summer Vibes';
+  src: url('summer-vibes.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Paleta — Tropical Vibrante (default) */
   --c-sky:      #5BBFE0;   /* azul céu */
@@ -616,8 +624,8 @@ p.lead {
 }
 .cover-v2-title {
   margin: 0 0 14px;
-  font-family: 'Alex Brush', 'Playfair Display', 'Fraunces', Georgia, serif;
-  font-weight: 400 !important; font-size: 78px; line-height: 1.1; color: #20243A;
+  font-family: 'Summer Vibes', 'Alex Brush', 'Playfair Display', 'Fraunces', Georgia, serif;
+  font-weight: 400 !important; font-size: 84px; line-height: 1.15; color: #20243A;
 }
 .cover-v2-subtitle {
   margin: 0 0 24px;

@@ -643,7 +643,7 @@ p.lead {
 }
 .cover-v2-flat-label {
   margin: auto 0 16px;
-  font-size: 15px; font-weight: 600; letter-spacing: 0.3px;
+  font-size: 24px; font-weight: 700; letter-spacing: 0.3px;
   color: #20243A;
 }
 .cover-v2-flats {
@@ -2124,3 +2124,9 @@ p.lead {
   .rcp-row-text { font-size: 26px !important; }
   .rcp-icon { width: 38px !important; height: 38px !important; }
 }
+
+/* ── Global: bold text across every page ─────────────────────────────
+   Requested site-wide — forces every text element inside a .page to
+   render bold, overriding the many per-component font-weight values
+   (400/500/600) set throughout the stylesheet above. */
+.page, .page * { font-weight: 700 !important; }

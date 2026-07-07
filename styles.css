@@ -599,7 +599,7 @@ p.lead {
    into a dark scrim right behind that text — the white body doesn't
    begin until the "Olá" paragraph, further down. */
 .cover-v2-photo {
-  position: relative; width: 100%; height: 880px; flex-shrink: 0; overflow: hidden;
+  position: relative; width: 100%; height: 700px; flex-shrink: 0; overflow: hidden;
 }
 .cover-v2-photo-img {
   position: absolute; inset: 0;
@@ -623,20 +623,7 @@ p.lead {
 }
 .cover-v2-photo-fade {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg,
-    rgba(6,30,38,.18) 0%,
-    rgba(6,30,38,.05) 14%,
-    rgba(6,20,26,0) 30%,
-    rgba(8,22,26,.08) 42%,
-    rgba(15,28,28,.18) 54%,
-    rgba(35,38,36,.30) 64%,
-    rgba(70,70,64,.42) 73%,
-    rgba(120,118,108,.54) 81%,
-    rgba(170,166,154,.66) 87%,
-    rgba(215,212,202,.80) 92%,
-    rgba(245,244,238,.92) 96%,
-    rgba(255,255,255,.99) 99%,
-    #ffffff 100%);
+  background: linear-gradient(180deg, rgba(10,20,26,0.18) 0.0%, rgba(10,20,26,0.06) 13.5%, rgba(10,20,26,0.00) 30.0%, rgba(10,20,26,0.11) 44.3%, rgba(10,20,26,0.31) 58.7%, rgba(10,20,26,0.42) 73.0%, rgba(48,57,62,0.50) 79.5%, rgba(133,138,141,0.67) 86.0%, rgba(217,218,219,0.84) 92.5%, rgba(255,255,255,0.92) 99.0%, rgba(255,255,255,0.96) 99.5%, rgba(255,255,255,1.00) 100.0%, #ffffff 100.0%);
   z-index: 1;
 }
 /* Badge + title + subtitle, overlaid on the photo's lower scrim */

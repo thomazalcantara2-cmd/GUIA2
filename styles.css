@@ -607,7 +607,7 @@ p.lead {
    child can't stretch to match an auto-growing ancestor, so below this
    point the .cover-v2-bg background-color above just carries the navy. */
 .cover-v2-backdrop {
-  position: absolute; top: 0; left: 0; right: 0; height: 900px; z-index: 0;
+  position: absolute; top: 0; left: 0; right: 0; height: 750px; z-index: 0;
 }
 .cover-v2-backdrop-photo {
   position: absolute; inset: 0;
@@ -618,12 +618,12 @@ p.lead {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
     rgba(0,16,38,.15) 0px,
-    rgba(0,26,71,0) 160px,
-    rgba(0,26,71,.14) 380px,
-    rgba(0,26,71,.42) 520px,
-    rgba(0,26,71,.72) 620px,
-    rgba(0,26,71,.92) 700px,
-    #001a47 780px,
+    rgba(0,26,71,0) 140px,
+    rgba(0,26,71,.18) 300px,
+    rgba(0,26,71,.48) 420px,
+    rgba(0,26,71,.75) 520px,
+    rgba(0,26,71,.92) 600px,
+    #001a47 680px,
     #001a47 100%);
 }
 /* Content flows in normal document order on top of the backdrop */
@@ -635,10 +635,10 @@ p.lead {
 }
 .cover-v2-logo-wrap {
   display: flex; justify-content: center;
-  margin-top: 600px; margin-bottom: 28px;
+  margin-top: 400px; margin-bottom: 18px;
 }
 .cover-v2-logo {
-  width: 116px; height: auto;
+  width: 180px; height: auto;
   filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0,0,0,.45));
 }
 .cover-v2-ring {

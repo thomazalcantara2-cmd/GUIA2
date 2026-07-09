@@ -325,7 +325,7 @@
 .top-dock--toc .top-dock-logo { height: 87px; }
 .top-dock--toc .top-dock-flags .lang-flag { width: 54px; height: 39px; }
 .top-dock--toc {
-  background: #002d72;
+  background: transparent;
   box-shadow: none;
 }
 .top-dock--toc .top-dock-logo {
@@ -612,8 +612,8 @@ p.lead {
 }
 .cover-v2-backdrop-photo {
   position: absolute; inset: 0;
-  background-image: url('foto-capa-nova.jpg');
-  background-size: cover; background-position: center 30%;
+  background-image: url('foto-capa-snorkel.jpg');
+  background-size: cover; background-position: center top;
 }
 .cover-v2-backdrop-gradient {
   position: absolute; inset: 0;
@@ -681,9 +681,9 @@ p.lead {
 }
 .cover-v2-shell-label {
   display: flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 0.28em; text-transform: uppercase;
-  color: rgba(255,255,255,.5);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,.75);
   white-space: nowrap;
 }
 

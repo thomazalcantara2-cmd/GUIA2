@@ -95,7 +95,7 @@
        page. Match the page background there instead of the host's black
        backdrop, so it reads as a natural extension of the page. */
     .stage.stage-touch {
-      background: #001a47;
+      background: #056ABC;
     }
     /* ...and if the fill makes it taller than the viewport (e.g. landscape),
        scroll vertically instead of cropping or shrinking further to also
@@ -112,7 +112,7 @@
       position: relative;
       transform-origin: center center;
       flex-shrink: 0;
-      background: #001a47;
+      background: #056ABC;
       will-change: transform;
     }
     /* In stage-scroll mode the canvas is flex-start aligned (anchored to

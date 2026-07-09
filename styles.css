@@ -49,7 +49,7 @@
      #001a47 through the top so the fixed dock reads as continuous, then
      deepening blue with soft green/sky glows. */
   background:
-    url('marine-watermark.png') 0 0 / 470px auto repeat,
+    url('marine-watermark.png') 0 0 / 794px auto repeat,
     radial-gradient(ellipse at 20% 85%, rgba(79,168,95,.18) 0%, transparent 55%),
     radial-gradient(ellipse at 80% 40%, rgba(91,191,224,.15) 0%, transparent 55%),
     linear-gradient(180deg, #001a47 0%, #001a47 18%, #002d72 62%, #003585 100%);

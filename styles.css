@@ -45,13 +45,14 @@
 .page {
   width: var(--page-w);
   height: var(--page-h);
-  /* Cobalt paper backdrop shared by every page: flat #056ABC so the fixed
-     dock reads as continuous, a faint grain texture, and a few subtle
-     tone-on-tone marine elements as a discreet watermark. */
+  /* Indigo "fundo-mar" backdrop shared by every page (from the design
+     handoff): a single sea-paper image — grain texture plus a few subtle
+     tone-on-tone marine elements — over a matching #2C43B2 fill. The image
+     is ~A4 ratio so it maps to one page; the fill carries any overflow
+     below the fold seamlessly. */
   background:
-    url('marine-watermark.png') 0 0 / 794px auto repeat,
-    url('grain.png') 0 0 / 240px 240px repeat,
-    #056ABC;
+    url('fundo-mar.png') top center / 100% auto no-repeat,
+    #2C43B2;
   color: var(--c-ink);
   font-family: var(--f-body);
   font-size: 14px;
@@ -592,13 +593,13 @@ p.lead {
    ════════════════════════════════════════════════════════════════════ */
 
 /* ─── 01 COVER ─────────────────────────────────────────────────────── */
-.page-cover { background: #056ABC; }
+.page-cover { background: #2C43B2; }
 
 /* ── Cover v2 full-bleed design ─────────────────────────────────────── */
 .cover-v2-bg {
   position: relative;
   width: 100%; min-height: 100%;
-  background: #056ABC;
+  background: #2C43B2;
 }
 /* Single full-bleed backdrop photo sits behind the top of the page (like
    the reference mockup's fixed .bg): one static image, cover-fit,
@@ -617,14 +618,14 @@ p.lead {
 .cover-v2-backdrop-gradient {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(3,40,80,.15) 0px,
-    rgba(5,106,188,0) 140px,
-    rgba(5,106,188,.18) 300px,
-    rgba(5,106,188,.48) 420px,
-    rgba(5,106,188,.75) 520px,
-    rgba(5,106,188,.92) 600px,
-    #056ABC 680px,
-    #056ABC 100%);
+    rgba(20,30,90,.15) 0px,
+    rgba(44,67,178,0) 140px,
+    rgba(44,67,178,.18) 300px,
+    rgba(44,67,178,.48) 420px,
+    rgba(44,67,178,.75) 520px,
+    rgba(44,67,178,.92) 600px,
+    #2C43B2 680px,
+    #2C43B2 100%);
 }
 /* Content flows in normal document order on top of the backdrop */
 .cover-v2-content {

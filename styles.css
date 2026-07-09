@@ -45,7 +45,13 @@
 .page {
   width: var(--page-w);
   height: var(--page-h);
-  background: var(--c-cream);
+  /* Navy backdrop shared by every page (same as the cover/index): flat
+     #001a47 through the top so the fixed dock reads as continuous, then
+     deepening blue with soft green/sky glows. */
+  background:
+    radial-gradient(ellipse at 20% 85%, rgba(79,168,95,.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 40%, rgba(91,191,224,.15) 0%, transparent 55%),
+    linear-gradient(180deg, #001a47 0%, #001a47 18%, #002d72 62%, #003585 100%);
   color: var(--c-ink);
   font-family: var(--f-body);
   font-size: 14px;
@@ -298,8 +304,10 @@
   top: 0;
   left: 0; right: 0;
   padding: max(14px, env(safe-area-inset-top)) 16px 14px;
-  background: var(--c-cream);
-  box-shadow: 0 6px 18px rgba(31,45,61,.08);
+  /* "Vazado": every page is navy now, so the dock stays transparent and
+     reads as part of the page background rather than a bar. */
+  background: transparent;
+  box-shadow: none;
   z-index: 2147483000;
   /* Forces its own compositor layer so it stays visually pinned during
      momentum-scroll of the page-scrollable content elsewhere on screen
@@ -312,7 +320,7 @@
   height: 58px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,.22));
+  filter: brightness(0) invert(1) drop-shadow(0 6px 14px rgba(0,0,0,.35));
 }
 .top-dock-right { display: flex; align-items: center; gap: 10px; }
 .top-dock-flags .lang-flags { gap: 8px; }
@@ -320,24 +328,15 @@
   width: 36px; height: 26px; border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,.25);
 }
-/* TOC ("Índice") pages: bigger logo + flags, same scale-up ratio (~1.5x),
-   and the dock adopts the pages' petroleum-teal theme instead of cream */
+/* TOC ("Índice") pages: bigger logo + flags, same scale-up ratio (~1.5x) */
 .top-dock--toc .top-dock-logo { height: 87px; }
 .top-dock--toc .top-dock-flags .lang-flag { width: 54px; height: 39px; }
-.top-dock--toc {
-  background: transparent;
-  box-shadow: none;
-}
-.top-dock--toc .top-dock-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 6px 14px rgba(0,0,0,.35));
-}
-.top-dock--toc .top-dock-index { color: #fff; }
 .top-dock-index {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   background: none;
-  color: #1E5F6E;
+  color: #fff;
   text-decoration: none;
   font-family: var(--f-head);
   font-size: 12px;
@@ -593,7 +592,7 @@ p.lead {
    ════════════════════════════════════════════════════════════════════ */
 
 /* ─── 01 COVER ─────────────────────────────────────────────────────── */
-.page-cover { background: #FFFFFF; }
+.page-cover { background: #001a47; }
 
 /* ── Cover v2 full-bleed design ─────────────────────────────────────── */
 .cover-v2-bg {
@@ -1012,15 +1011,7 @@ p.lead {
    header reads as continuous background rather than a bar. Each button
    is a white line-drawn scallop shell (concha.svg, stroke-only/"vazada")
    sitting behind the centred label; emojis are dropped here. */
-section[id^="slide-toc"] {
-  /* Same palette/details as the flatselector mockup: navy gradient plus
-     the soft green/sky glows. Top 18% held flat at #001a47 so the fixed
-     dock (same color, no shadow) still reads as continuous background. */
-  background:
-    radial-gradient(ellipse at 20% 85%, rgba(79,168,95,.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 40%, rgba(91,191,224,.15) 0%, transparent 55%),
-    linear-gradient(180deg, #001a47 0%, #001a47 18%, #002d72 62%, #003585 100%);
-}
+/* (page background now inherited from the base .page navy) */
 section[id^="slide-toc"] .toc-heading { color: #fff; }
 section[id^="slide-toc"] .hdr { color: rgba(255,255,255,.65); }
 section[id^="slide-toc"] .btn-index {
@@ -2110,7 +2101,7 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
   align-items: flex-start;
   gap: 18px;
   padding: 18px 0;
-  border-bottom: 1px solid rgba(35,50,74,.12);
+  border-bottom: 1px solid rgba(255,255,255,.18);
 }
 .rc-steps li:last-child { border-bottom: 0; }
 .rc-step-num {
@@ -2118,8 +2109,8 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
   height: 40px;
   flex: none;
   border-radius: 999px;
-  background: var(--rc-ink);
-  color: #fff;
+  background: #fff;
+  color: var(--rc-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2127,16 +2118,23 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
 }
 .rc-steps span:last-child {
   font: 500 23px/1.5 var(--rc-sans);
-  color: var(--rc-ink);
+  color: rgba(255,255,255,.9);
   padding-top: 6px;
 }
 .rc-accent { color: var(--rc-coral); }
 .rc-green { color: var(--rc-green); }
 
+/* Dark-navy page background: text that sits directly on the page (not
+   inside a light card) renders light; hardcoded dark SVG icon strokes
+   are repainted white via CSS (which wins over presentation attrs). */
+.rc-page p.lead { color: rgba(255,255,255,.85); }
+.rcp-icon [stroke] { stroke: rgba(255,255,255,.85); }
+
 .rc-alert {
   display: flex;
   gap: 16px;
-  background: var(--rc-ink);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.16);
   border-radius: 20px;
   padding: 24px 22px;
   margin: 34px 0 30px;
@@ -2145,8 +2143,8 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
   appearance: none;
   border: none;
   cursor: pointer;
-  background: rgba(35,50,74,.08);
-  color: var(--rc-ink);
+  background: rgba(255,255,255,.16);
+  color: #fff;
   font: 700 14px var(--rc-sans);
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -2155,7 +2153,7 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
   margin-left: 4px;
   vertical-align: middle;
 }
-.rc-copy-inline:hover { background: rgba(35,50,74,.16); }
+.rc-copy-inline:hover { background: rgba(255,255,255,.28); }
 .rc-alert-icon {
   width: 38px;
   height: 38px;
@@ -2203,18 +2201,18 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
 .rcp-section-label {
   font: 700 19px var(--rc-sans);
   letter-spacing: 2px;
-  color: #1e3d3d;
+  color: #E3B65C;
   text-transform: uppercase;
   margin-bottom: 18px;
 }
-.rcp-section-body { font: 500 23px/1.65 var(--rc-sans); color: #3d3f36; margin: 0; }
-.rcp-section-body strong { color: #26281f; }
+.rcp-section-body { font: 500 23px/1.65 var(--rc-sans); color: rgba(255,255,255,.85); margin: 0; }
+.rcp-section-body strong { color: #fff; }
 
-.rcp-row { display: flex; align-items: center; gap: 24px; padding: 26px 0; border-top: 1px solid rgba(38,40,31,.15); }
-.rcp-section:last-child .rcp-row:last-child { border-bottom: 1px solid rgba(38,40,31,.15); }
+.rcp-row { display: flex; align-items: center; gap: 24px; padding: 26px 0; border-top: 1px solid rgba(255,255,255,.18); }
+.rcp-section:last-child .rcp-row:last-child { border-bottom: 1px solid rgba(255,255,255,.18); }
 .rcp-icon { flex: none; width: 32px; height: 32px; }
-.rcp-row-text { font: 500 22px/1.55 var(--rc-sans); color: #3d3f36; }
-.rcp-row-text strong { color: #26281f; }
+.rcp-row-text { font: 500 22px/1.55 var(--rc-sans); color: rgba(255,255,255,.85); }
+.rcp-row-text strong { color: #fff; }
 
 @media (hover: none), (pointer: coarse) {
   /* The canvas is top-anchored (see app.js), so it starts flush with the

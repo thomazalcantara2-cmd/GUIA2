@@ -2052,13 +2052,15 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
 
 .rc-hero {
   position: relative;
-  height: 300px;
+  /* Content pages restyled to the design mockup: the header photo is
+     removed — the eyebrow + serif title sit directly on the fundo-mar
+     background, under a thin divider. */
+  background: none !important;
+  height: auto;
+  min-height: 0;
   margin-top: 24px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center 40%;
+  overflow: visible;
+  display: block;
 }
 .rc-hero-num {
   position: absolute;
@@ -2212,21 +2214,27 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
 .rc-alert-body strong { color: #fff; }
 
 /* ── Recepção & Acesso — hero banner + plain numbered sections ─────────── */
-.rcp-hero-content { position: relative; padding: 0 var(--pad-x); }
+.rcp-hero-content {
+  position: relative;
+  /* Inset by pad-x via margin (not padding) so the divider aligns with the
+     section/row dividers below. */
+  margin: 0 var(--pad-x);
+  padding: 8px 0 30px;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
 .rcp-eyebrow {
   font: 700 18px var(--rc-sans);
   letter-spacing: 3px;
-  color: #e9e2d0;
+  color: #DDE4FF;
   margin-bottom: 16px;
 }
 .rcp-hero-title {
   font-style: italic;
-  font-weight: 500;
+  font-weight: 500 !important;
   font-size: 62px;
-  line-height: 1.12;
-  font-family: var(--rc-serif);
+  line-height: 1.1;
+  font-family: 'Cormorant Garamond', var(--rc-serif);
   color: #fff;
-  text-shadow: 0 2px 14px rgba(0,0,0,.3);
 }
 
 .rcp-section { padding-top: 46px; }
@@ -2252,7 +2260,7 @@ section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
      real screen top. --dock-clearance (set dynamically in app.js as
      topDock.height / canvasScale) is the design-px equivalent of the
      fixed top-dock height, keeping content below it. */
-  .rc-hero { height: 300px; margin-top: var(--dock-clearance, 100px); }
+  .rc-hero { height: auto; margin-top: var(--dock-clearance, 100px); }
   /* Non-rc pages (TOC, wifi, etc.) push their page-pad content below the
      dock with the same variable. Excluded: #slide-select (uses its own
      centred flex layout) and .page-cover (no top-dock shown there). */

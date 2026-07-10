@@ -264,6 +264,9 @@
   .thanks-rating { font-size: 19.5px !important; }
   .thanks-wpp { font-size: 19.5px !important; }
   .thanks-handle { font-size: 17px !important; }
+  section[id^="slide-toc"] .toc-heading { font-size: 30px !important; }
+  section[id^="slide-toc"] .toc-section-title { font-size: 26px !important; }
+  section[id^="slide-toc"] .toc-hdr-flat { font-size: 24px !important; }
 
   [style*="font-size:11.5px"] { font-size: 15.5px !important; }
   [style*="font-size:12px"] { font-size: 17px !important; }
@@ -1008,94 +1011,185 @@ p.lead {
   line-height: 1.3;
 }
 
-/* ── Índice em azul-marinho + conchas de traço por trás do texto ────
-   Scoped to the three TOC pages (slide-toc-201/202/301). One flat navy
-   shared by the page AND the fixed top dock (see .top-dock--toc), so the
-   header reads as continuous background rather than a bar. Each button
-   is a white line-drawn scallop shell (concha.svg, stroke-only/"vazada")
-   sitting behind the centred label; emojis are dropped here. */
-/* (page background now inherited from the base .page navy) */
-/* Greeting: elegant Marcellus serif per the design. Marcellus ships a
-   single 400 weight, so override the global .page * bold or the browser
-   synthesises a heavy faux-bold. */
-section[id^="slide-toc"] .toc-heading {
-  font-family: 'Marcellus', serif;
-  font-weight: 400 !important;
-  color: #EAF2FF;
+/* ── Índice · Stitch Refinement design ─────────────────────────────
+   Scoped to slide-toc-201/202/301. Two-section layout:
+   1. Hero (centered logo + greeting)
+   2. "Como ter energia no flat?" (single energy card, left-aligned)
+   3. "Demais informações" (3-col grid, 13 items)
+   Footer: glass pill WhatsApp button */
+
+/* Header: flat number as title */
+section[id^="slide-toc"] .hdr {
+  color: #fff;
 }
-section[id^="slide-toc"] .toc-sub {
-  color: #8FA9D4;
-  font-size: 15px;
-  font-weight: 400 !important;
-  letter-spacing: 0.04em;
-  margin-top: -6px;
+section[id^="slide-toc"] .toc-hdr-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-section[id^="slide-toc"] .toc-wave {
-  display: block;
-  opacity: 0.5;
-  margin: 14px auto 30px;
+section[id^="slide-toc"] .toc-hdr-back {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  opacity: .85;
+  transition: opacity .15s;
 }
-/* Centered hero: logo above the greeting, everything centred (new design) */
-section[id^="slide-toc"] .page-pad { text-align: center; }
+section[id^="slide-toc"] .toc-hdr-back:hover { opacity: 1; }
+section[id^="slide-toc"] .toc-hdr-flat {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600 !important;
+  color: #fff;
+  line-height: 1;
+}
+
+/* Page-pad: left-aligned for sections */
+section[id^="slide-toc"] .page-pad { text-align: left; padding-bottom: 40px; }
+
+/* Hero block: centered */
+section[id^="slide-toc"] .toc-hero {
+  text-align: center;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  margin-bottom: 28px;
+}
 section[id^="slide-toc"] .toc-logo-wrap {
-  display: flex; justify-content: center; margin-bottom: 20px;
+  display: flex; justify-content: center; margin-bottom: 16px;
 }
 section[id^="slide-toc"] .toc-logo {
-  height: 96px; width: auto;
+  height: 80px; width: auto;
   filter: brightness(0) invert(1) drop-shadow(0 4px 16px rgba(0,10,40,.4));
 }
-section[id^="slide-toc"] .hdr { color: rgba(255,255,255,.65); }
-section[id^="slide-toc"] .btn-index {
-  background: rgba(255,255,255,.14);
+
+/* Greeting */
+section[id^="slide-toc"] .toc-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600 !important;
   color: #fff;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,.22);
+  line-height: 1.3;
+  margin-bottom: 8px;
 }
-/* Bento grid: each cell is an emoji inside a soft sand circular badge,
-   with the section name below (new index design). */
-section[id^="slide-toc"] .toc-btn-grid { gap: 40px 16px; margin-top: 8px; }
+.toc-flat-name { color: #7BE495; }
+section[id^="slide-toc"] .toc-sub {
+  color: rgba(255,255,255,.72);
+  font-size: 14px;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em;
+}
+
+/* Section containers */
+section[id^="slide-toc"] .toc-section { margin-bottom: 28px; }
+section[id^="slide-toc"] .toc-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600 !important;
+  color: #fff;
+  margin: 0 0 18px 0;
+  line-height: 1.2;
+}
+
+/* Energy row: single card, left-aligned */
+section[id^="slide-toc"] .toc-energy-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Main info grid: 3 columns */
+section[id^="slide-toc"] .toc-btn-grid {
+  gap: 28px 12px;
+  margin-top: 0;
+}
+
+/* Button: icon-above-label, no card */
 section[id^="slide-toc"] .toc-btn {
   background: none;
   border: none;
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: none;
   padding: 0;
   min-height: 0;
-  gap: 12px;
+  gap: 10px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
+/* Icon circle: 56px glassmorphic */
 section[id^="slide-toc"] .toc-btn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 88px; height: 88px;
+  width: 56px; height: 56px;
   border-radius: 50%;
-  background: rgba(245,245,220,.22);
-  font-size: 42px; line-height: 1;
+  background: rgba(255,255,255,.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.3);
+  font-size: 26px; line-height: 1;
   transition: background .15s, transform .12s;
 }
 section[id^="slide-toc"] .toc-btn:hover .toc-btn-icon {
-  background: rgba(245,245,220,.5);
+  background: rgba(245,245,220,.42);
 }
 section[id^="slide-toc"] .toc-btn:hover {
   background: none;
   transform: translateY(-2px);
   box-shadow: none;
 }
+
+/* Label */
 section[id^="slide-toc"] .toc-btn-lbl {
   color: #fff;
-  font-size: 13px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
   font-weight: 600 !important;
-  line-height: 1.35;
-  letter-spacing: 0.03em;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
   text-transform: none;
-  max-width: 130px;
-  text-shadow: 0 2px 10px rgba(0,10,40,.6);
+  max-width: 90px;
 }
 @media (hover: none), (pointer: coarse) {
-  section[id^="slide-toc"] .toc-btn-lbl { font-size: 15px !important; }
+  section[id^="slide-toc"] .toc-btn-lbl { font-size: 13px !important; max-width: 110px !important; }
 }
+
+/* Footer button: full-width glass pill */
+section[id^="slide-toc"] .toc-ftr-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600 !important;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0,10,40,.2);
+  transition: background .15s, transform .12s;
+}
+section[id^="slide-toc"] .toc-ftr-btn:hover {
+  background: rgba(255,255,255,.28);
+  transform: translateY(-1px);
+}
+
+/* Wave: not used in new design */
+section[id^="slide-toc"] .toc-wave { display: none; }
 section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
+
+/* Footer: stretch to full width */
+section[id^="slide-toc"] .ftr {
+  padding: 12px var(--pad-x) 28px;
+  display: block;
+}
 
 /* ─── 03 HOST ──────────────────────────────────────────────────────── */
 .host-grid {

@@ -47,12 +47,12 @@
   height: var(--page-h);
   /* Indigo "fundo-mar" backdrop shared by every page (from the design
      handoff): a single sea-paper image — grain texture plus a few subtle
-     tone-on-tone marine elements — over a matching #2C43B2 fill. The image
+     tone-on-tone marine elements — over a matching #0047AB fill. The image
      is ~A4 ratio so it maps to one page; the fill carries any overflow
      below the fold seamlessly. */
   background:
     url('fundo-mar.png') top center / 100% auto no-repeat,
-    #2C43B2;
+    #0047AB;
   color: var(--c-ink);
   font-family: var(--f-body);
   font-size: 14px;
@@ -595,13 +595,13 @@ p.lead {
    ════════════════════════════════════════════════════════════════════ */
 
 /* ─── 01 COVER ─────────────────────────────────────────────────────── */
-.page-cover { background: #2C43B2; }
+.page-cover { background: #0047AB; }
 
 /* ── Cover v2 full-bleed design ─────────────────────────────────────── */
 .cover-v2-bg {
   position: relative;
   width: 100%; min-height: 100%;
-  background: #2C43B2;
+  background: #0047AB;
 }
 /* Single full-bleed backdrop photo sits behind the top of the page (like
    the reference mockup's fixed .bg): one static image, cover-fit,
@@ -620,14 +620,14 @@ p.lead {
 .cover-v2-backdrop-gradient {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(20,30,90,.15) 0px,
-    rgba(44,67,178,0) 140px,
-    rgba(44,67,178,.18) 300px,
-    rgba(44,67,178,.48) 420px,
-    rgba(44,67,178,.75) 520px,
-    rgba(44,67,178,.92) 600px,
-    #2C43B2 680px,
-    #2C43B2 100%);
+    rgba(0,44,110,.15) 0px,
+    rgba(0,71,171,0) 140px,
+    rgba(0,71,171,.18) 300px,
+    rgba(0,71,171,.48) 420px,
+    rgba(0,71,171,.75) 520px,
+    rgba(0,71,171,.92) 600px,
+    #0047AB 680px,
+    #0047AB 100%);
 }
 /* Content flows in normal document order on top of the backdrop */
 .cover-v2-content {

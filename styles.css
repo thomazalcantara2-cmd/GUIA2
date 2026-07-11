@@ -1030,7 +1030,11 @@ section[id^="slide-toc"].page {
    botão de contato glass pill full-width dentro do main */
 
 /* Header */
-section[id^="slide-toc"] .hdr { color: #fff; background: transparent; }
+section[id^="slide-toc"] .hdr {
+  color: #fff;
+  background: transparent;
+  position: relative;
+}
 section[id^="slide-toc"] .toc-hdr-left {
   display: flex;
   align-items: center;
@@ -1042,7 +1046,7 @@ section[id^="slide-toc"] .toc-hdr-back {
   display: flex;
   align-items: center;
 }
-section[id^="slide-toc"] .toc-hdr-back .material-symbols-outlined { font-size: 24px; }
+section[id^="slide-toc"] .toc-back-svg { width: 24px; height: 24px; display: block; }
 section[id^="slide-toc"] .toc-hdr-flat {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
@@ -1050,6 +1054,8 @@ section[id^="slide-toc"] .toc-hdr-flat {
   font-weight: 600 !important;
   color: #fff;
   margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
 }
 section[id^="slide-toc"] .toc-hdr-right {
   display: flex;
@@ -1064,7 +1070,42 @@ section[id^="slide-toc"] .toc-contact-lbl {
   font-weight: 600 !important;
   letter-spacing: 0.05em;
   color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  text-transform: none;
 }
+/* Bandeiras de idioma (i18n.js injeta .lang-flags no .hdr-right):
+   visíveis aqui, ao contrário das demais páginas (regra global esconde). */
+section[id^="slide-toc"] .hdr .lang-flags {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  /* Centradas no header, como na referência (esquerda: seta+flat,
+     centro: bandeiras, direita: Contact). Ancoradas por baixo porque o
+     padding-top do .hdr empurra a linha de conteúdo para o fim da caixa. */
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%);
+}
+section[id^="slide-toc"] .hdr .lang-flag {
+  display: block;
+  width: 32px;
+  height: 21px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+}
+section[id^="slide-toc"] .hdr .lang-flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* O header interno assume a navegação/idioma no índice: dock desativado. */
+.top-dock--toc { display: none !important; }
 
 /* page-pad: px-margin-mobile=20px, pb-24=96px */
 section[id^="slide-toc"] .page-pad {
@@ -1250,7 +1291,7 @@ section[id^="slide-toc"] .toc-btn-lbl {
     font-size: 30px !important;
     gap: 22px !important;
   }
-  section[id^="slide-toc"] .toc-ftr-btn .material-symbols-outlined { font-size: 37px !important; }
+  section[id^="slide-toc"] .toc-chat-svg { width: 37px !important; height: 37px !important; }
 }
 
 /* Bloco de contato: mt-16=64px mb-8=32px flex-col items-center */
@@ -1287,7 +1328,7 @@ section[id^="slide-toc"] .toc-ftr-btn {
 }
 section[id^="slide-toc"] .toc-ftr-btn:hover { transform: scale(1.02); }
 section[id^="slide-toc"] .toc-ftr-btn:active { transform: scale(0.98); }
-section[id^="slide-toc"] .toc-ftr-btn .material-symbols-outlined { font-size: 20px; }
+section[id^="slide-toc"] .toc-chat-svg { width: 20px; height: 20px; flex: 0 0 auto; }
 
 /* Elementos legados não usados no design novo */
 section[id^="slide-toc"] .toc-wave { display: none; }
@@ -2473,11 +2514,22 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   /* Non-rc pages (TOC, wifi, etc.) push their page-pad content below the
      dock with the same variable. Excluded: #slide-select (uses its own
      centred flex layout) and .page-cover (no top-dock shown there). */
-  .page:not(.rc-page):not(#slide-select):not(.page-cover) .page-pad { padding-top: var(--dock-clearance, 175px); }
-  /* TOC pages: hide the in-canvas header (the top-dock already shows the
-     "Escolher Flat" / menu button at the real screen level) and zero the
-     eyebrow's inline margin-top (dock-clearance on page-pad handles that). */
-  section[id^="slide-toc"] .hdr { display: none !important; }
+  .page:not(.rc-page):not(#slide-select):not(.page-cover):not([id^="slide-toc"]) .page-pad { padding-top: var(--dock-clearance, 175px); }
+  /* TOC pages: the top-dock is hidden there (the in-canvas header carries
+     back / flags / contact, like the reference design), so no dock
+     clearance — just the header sized up ~1.85x to survive canvas scale,
+     with padding-top clearing the phone status bar. */
+  section[id^="slide-toc"] .hdr {
+    padding: 100px 36px 0 !important;
+  }
+  section[id^="slide-toc"] .toc-hdr-left { gap: 30px !important; }
+  section[id^="slide-toc"] .toc-back-svg { width: 44px !important; height: 44px !important; }
+  section[id^="slide-toc"] .toc-hdr-flat { font-size: 44px !important; line-height: 1 !important; white-space: nowrap; }
+  section[id^="slide-toc"] .toc-hdr-right { gap: 22px !important; margin-right: 0 !important; }
+  section[id^="slide-toc"] .hdr .lang-flags { gap: 22px !important; bottom: 3px !important; }
+  section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 38px !important; border-radius: 5px !important; }
+  section[id^="slide-toc"] .toc-contact-lbl { font-size: 24px !important; line-height: 1 !important; }
+  section[id^="slide-toc"] .page-pad { padding-top: 0 !important; }
   section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 18px !important; }
   section[id^="slide-toc"] .grow { display: none; }
   section[id^="slide-toc"] .toc-quote { display: none; }

@@ -1009,26 +1009,15 @@ p.lead {
    linear-gradient(rgba(0,71,171,0) 0%, rgb(0,71,171) 50%, rgb(0,71,171) 100%)
    sobre a foto, centralizada. */
 section[id^="slide-toc"].page {
-  /* A foto (588x393) entra inteira na largura da página (100% auto →
-     ~531px de altura em 794px de largura). O degradê (paradas em px)
-     começa a tingir bem antes do fim da foto e cresce em passos suaves
-     até fechar sólido em #0047AB exatamente na borda inferior dela,
-     tornando a troca imagem → fundo azul um fade sutil. */
-  background-image:
-    linear-gradient(
-      rgba(0,71,171,0)     0px,
-      rgba(0,71,171,0)   280px,
-      rgba(0,71,171,.12) 360px,
-      rgba(0,71,171,.28) 420px,
-      rgba(0,71,171,.5)  465px,
-      rgba(0,71,171,.72) 500px,
-      rgba(0,71,171,.9)  520px,
-      #0047AB            531px
-    ),
-    url('foto-capa-praia.jpg');
-  background-size: auto, 100% auto;
-  background-position: center top, center top;
-  background-repeat: no-repeat, no-repeat;
+  /* Fundo pré-processado (fundo-indice-blur.jpg, gerado a partir de
+     foto-capa-praia.jpg): desfoque gaussiano estilo soft-focus e fusão
+     smoothstep para #0047AB embutida na própria imagem (794x1123),
+     então a troca imagem → azul é um degradê contínuo sem emenda.
+     Abaixo da imagem o background-color idêntico continua a página. */
+  background-image: url('fundo-indice-blur.jpg');
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
   background-color: #0047AB;
 }
 

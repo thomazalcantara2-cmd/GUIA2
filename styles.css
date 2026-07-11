@@ -1045,6 +1045,7 @@ section[id^="slide-toc"] .toc-hdr-back {
   text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 16px;
 }
 section[id^="slide-toc"] .toc-back-svg { width: 24px; height: 24px; display: block; }
 section[id^="slide-toc"] .toc-hdr-flat {
@@ -1079,13 +1080,6 @@ section[id^="slide-toc"] .hdr .lang-flags {
   display: flex !important;
   align-items: center;
   gap: 12px;
-  /* Centradas no header, como na referência (esquerda: seta+flat,
-     centro: bandeiras, direita: Contact). Ancoradas por baixo porque o
-     padding-top do .hdr empurra a linha de conteúdo para o fim da caixa. */
-  position: absolute;
-  left: 50%;
-  bottom: 5px;
-  transform: translateX(-50%);
 }
 section[id^="slide-toc"] .hdr .lang-flag {
   display: block;
@@ -2522,11 +2516,11 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   section[id^="slide-toc"] .hdr {
     padding: 100px 36px 0 !important;
   }
-  section[id^="slide-toc"] .toc-hdr-left { gap: 30px !important; }
+  section[id^="slide-toc"] .toc-hdr-back { gap: 30px !important; }
   section[id^="slide-toc"] .toc-back-svg { width: 44px !important; height: 44px !important; }
   section[id^="slide-toc"] .toc-hdr-flat { font-size: 44px !important; line-height: 1 !important; white-space: nowrap; }
   section[id^="slide-toc"] .toc-hdr-right { gap: 22px !important; margin-right: 0 !important; }
-  section[id^="slide-toc"] .hdr .lang-flags { gap: 22px !important; bottom: 3px !important; }
+  section[id^="slide-toc"] .hdr .lang-flags { gap: 22px !important; }
   section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 38px !important; border-radius: 5px !important; }
   section[id^="slide-toc"] .toc-contact-lbl { font-size: 24px !important; line-height: 1 !important; }
   section[id^="slide-toc"] .page-pad { padding-top: 0 !important; }

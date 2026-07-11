@@ -1096,14 +1096,14 @@ section[id^="slide-toc"] .page-pad {
 }
 
 /* Hero: flex-col items-center text-center pb-8=32px.
-   padding-top empurra a saudação para baixo da foto (que termina a
-   ~900px do topo da página; header em fluxo ocupa ~80px), sobre o azul. */
+   A saudação fica SOBRE a foto (que vai até ~900px, com o degradê
+   começando na altura dos botões, ~720px); text-shadow garante leitura. */
 section[id^="slide-toc"] .toc-stitch-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 820px;
+  padding-top: 500px;
   padding-bottom: 32px;
 }
 /* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px
@@ -1236,7 +1236,9 @@ section[id^="slide-toc"] .toc-btn-lbl {
   section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 38px !important; border-radius: 8px !important; }
   section[id^="slide-toc"] .toc-hdr-return { font-size: 22px !important; }
   section[id^="slide-toc"] .toc-stitch-hero {
-    padding-top: 760px !important;
+    /* header ~140px + 440px: saudação sobre a foto; os botões chegam
+       junto com o início do degradê (~720px). */
+    padding-top: 440px !important;
     padding-bottom: 60px !important;
   }
   section[id^="slide-toc"] .toc-heading {

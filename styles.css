@@ -1011,203 +1011,242 @@ p.lead {
   line-height: 1.3;
 }
 
-/* ── Índice · background fotográfico com gradiente Stitch ──────────
-   Override the global fundo-mar.png for the three TOC pages.
-   Photo fades to solid #0047AB at ~65% height, matching the stitch design. */
+/* ── Índice · background fotográfico com gradiente Stitch (exato) ──
+   linear-gradient(rgba(0,71,171,0) 0%, rgb(0,71,171) 50%, rgb(0,71,171) 100%)
+   sobre a foto, centralizada. */
 section[id^="slide-toc"].page {
   background-image:
-    linear-gradient(
-      rgba(0,71,171,0)   0%,
-      rgba(0,71,171,0)   18%,
-      rgba(0,71,171,0.6) 45%,
-      #0047AB            65%
-    ),
+    linear-gradient(rgba(0,71,171,0) 0%, rgb(0,71,171) 50%, rgb(0,71,171) 100%),
     url('foto-capa-mergulho.jpg');
   background-size: cover, cover;
-  background-position: center top, center top;
+  background-position: center center, center center;
   background-repeat: no-repeat, no-repeat;
   background-color: #0047AB;
 }
 
-/* ── Índice · Stitch Refinement design ─────────────────────────────
-   Scoped to slide-toc-201/202/301. Two-section layout:
-   1. Hero (centered logo + greeting)
-   2. "Como ter energia no flat?" (single energy card, left-aligned)
-   3. "Demais informações" (3-col grid, 13 items)
-   Footer: glass pill WhatsApp button */
+/* ── Índice · Stitch Refinement (tradução exata do Tailwind) ──────
+   Scoped to slide-toc-201/202/301:
+   header (arrow_back + Flat NNN | flags + Contact)
+   hero centrado (logo branca h-24, saudação, subtítulo)
+   "Como ter energia no flat?" (1 botão, alinhado à esquerda)
+   "Demais informações" (grid 3 colunas, gap-y-10 gap-x-4)
+   botão de contato glass pill full-width dentro do main */
 
-/* Header: flat number as title */
-section[id^="slide-toc"] .hdr {
-  color: #fff;
-}
+/* Header */
+section[id^="slide-toc"] .hdr { color: #fff; background: transparent; }
 section[id^="slide-toc"] .toc-hdr-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 section[id^="slide-toc"] .toc-hdr-back {
   color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
-  opacity: .85;
-  transition: opacity .15s;
 }
-section[id^="slide-toc"] .toc-hdr-back:hover { opacity: 1; }
+section[id^="slide-toc"] .toc-hdr-back .material-symbols-outlined { font-size: 24px; }
 section[id^="slide-toc"] .toc-hdr-flat {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 24px;
+  line-height: 32px;
   font-weight: 600 !important;
   color: #fff;
-  line-height: 1;
+  margin: 0;
+}
+section[id^="slide-toc"] .toc-hdr-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 16px;
+}
+section[id^="slide-toc"] .toc-contact-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.8);
 }
 
-/* Page-pad: left-aligned for sections */
-section[id^="slide-toc"] .page-pad { text-align: left; padding-bottom: 40px; }
+/* page-pad: px-margin-mobile=20px, pb-24=96px */
+section[id^="slide-toc"] .page-pad {
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 96px;
+  color: #fff;
+}
 
-/* Hero block: centered */
-section[id^="slide-toc"] .toc-hero {
+/* Hero: flex-col items-center text-center pb-8=32px */
+section[id^="slide-toc"] .toc-stitch-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding-bottom: 28px;
-  border-bottom: 1px solid rgba(255,255,255,.18);
-  margin-bottom: 28px;
+  padding-bottom: 32px;
 }
 section[id^="slide-toc"] .toc-logo-wrap {
-  display: flex; justify-content: center; margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 section[id^="slide-toc"] .toc-logo {
-  height: 80px; width: auto;
-  filter: brightness(0) invert(1) drop-shadow(0 4px 16px rgba(0,10,40,.4));
+  height: 96px;
+  width: auto;
+  filter: brightness(0) invert(1);
 }
 
-/* Greeting */
+/* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px */
 section[id^="slide-toc"] .toc-heading {
   font-family: 'Playfair Display', serif;
-  font-size: 26px;
+  font-size: 28px;
+  line-height: 36px;
   font-weight: 600 !important;
   color: #fff;
-  line-height: 1.3;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
 }
-.toc-flat-name { color: #7BE495; }
+.toc-flat-name { color: #90ee90 !important; }
+
+/* Subtítulo: body-md = Montserrat 16/24/400, white/80 */
 section[id^="slide-toc"] .toc-sub {
-  color: rgba(255,255,255,.72);
-  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 400 !important;
-  letter-spacing: 0.03em;
+  letter-spacing: normal;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
 }
 
-/* Section containers */
-section[id^="slide-toc"] .toc-section { margin-bottom: 28px; }
+/* Seção energia: mb-12=48px */
+section[id^="slide-toc"] .toc-energy-section { margin-bottom: 48px; }
+
+/* Títulos de seção: headline-md = Playfair 24/32/600, mb-6=24px */
 section[id^="slide-toc"] .toc-section-title {
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
+  font-size: 24px;
+  line-height: 32px;
   font-weight: 600 !important;
   color: #fff;
-  margin: 0 0 18px 0;
-  line-height: 1.2;
+  margin: 0 0 24px 0;
 }
 
-/* Energy row: single card, left-aligned */
+/* Linha de energia: flex justify-start */
 section[id^="slide-toc"] .toc-energy-row {
   display: flex;
   justify-content: flex-start;
 }
 
-/* Main info grid: 3 columns */
+/* Grid: grid-cols-3 gap-y-10(40px) gap-x-4(16px) text-center */
 section[id^="slide-toc"] .toc-btn-grid {
-  gap: 28px 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 16px;
+  text-align: center;
   margin-top: 0;
 }
 
-/* Button: icon-above-label, no card */
+/* Botão: flex-col items-center, sem card */
 section[id^="slide-toc"] .toc-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   background: none;
   border: none;
   border-radius: 0;
   box-shadow: none;
   padding: 0;
   min-height: 0;
-  gap: 10px;
+  gap: 0;
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-/* Icon circle: 56px glassmorphic */
+/* Círculo do ícone: w-14 h-14 (56px) rounded-full bg-white/20
+   backdrop-blur-md border-white/30 text-[28px] mb-3=12px */
 section[id^="slide-toc"] .toc-btn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.2);
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,.3);
-  font-size: 26px; line-height: 1;
-  transition: background .15s, transform .12s;
+  border: 1px solid rgba(255,255,255,0.3);
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 12px;
+  transition: background 0.15s;
+  flex-shrink: 0;
 }
-section[id^="slide-toc"] .toc-btn:hover .toc-btn-icon {
-  background: rgba(245,245,220,.42);
-}
+/* hover: group-hover:bg-shoreline-sand */
+section[id^="slide-toc"] .toc-btn:hover .toc-btn-icon { background: #F5F5DC; }
 section[id^="slide-toc"] .toc-btn:hover {
   background: none;
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: none;
 }
 
-/* Label */
+/* Rótulo: label-sm = Montserrat 12/16/600 tracking 0.05em */
 section[id^="slide-toc"] .toc-btn-lbl {
-  color: #fff;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 16px;
   font-weight: 600 !important;
-  line-height: 1.3;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  color: #fff;
   text-transform: none;
-  max-width: 90px;
+  max-width: none;
 }
 @media (hover: none), (pointer: coarse) {
   section[id^="slide-toc"] .toc-btn-lbl { font-size: 13px !important; max-width: 110px !important; }
 }
 
-/* Footer button: full-width glass pill */
+/* Bloco de contato: mt-16=64px mb-8=32px flex-col items-center */
+section[id^="slide-toc"] .toc-contact-wrap {
+  margin-top: 64px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Botão de contato: w-full py-4=16px bg-white/20 rounded-full
+   gap-3=12px shadow-lg backdrop-blur-md border-white/30 */
 section[id^="slide-toc"] .toc-ftr-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  padding: 14px 24px;
-  background: rgba(255,255,255,.18);
+  padding: 16px 0;
+  background: rgba(255,255,255,0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,.3);
-  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 9999px;
   color: #fff;
-  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
   font-weight: 600 !important;
+  text-decoration: none;
   box-sizing: border-box;
-  box-shadow: 0 4px 20px rgba(0,10,40,.2);
-  transition: background .15s, transform .12s;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  transition: transform 0.15s;
 }
-section[id^="slide-toc"] .toc-ftr-btn:hover {
-  background: rgba(255,255,255,.28);
-  transform: translateY(-1px);
-}
+section[id^="slide-toc"] .toc-ftr-btn:hover { transform: scale(1.02); }
+section[id^="slide-toc"] .toc-ftr-btn:active { transform: scale(0.98); }
+section[id^="slide-toc"] .toc-ftr-btn .material-symbols-outlined { font-size: 20px; }
 
-/* Wave: not used in new design */
+/* Elementos legados não usados no design novo */
 section[id^="slide-toc"] .toc-wave { display: none; }
 section[id^="slide-toc"] .toc-btn-num { color: #E3B65C; }
-
-/* Footer: stretch to full width */
-section[id^="slide-toc"] .ftr {
-  padding: 12px var(--pad-x) 28px;
-  display: block;
-}
+section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* ─── 03 HOST ──────────────────────────────────────────────────────── */
 .host-grid {

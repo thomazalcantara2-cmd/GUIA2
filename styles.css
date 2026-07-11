@@ -1017,9 +1017,10 @@ section[id^="slide-toc"].page {
   background-image:
     linear-gradient(
       rgba(0,71,171,0)    0px,
-      rgba(0,71,171,0)  250px,
-      rgba(0,71,171,.55) 380px,
-      #0047AB           445px
+      rgba(0,71,171,0)  280px,
+      rgba(0,71,171,.3) 370px,
+      rgba(0,71,171,.7) 420px,
+      #0047AB           447px
     ),
     url('foto-capa-peixes.jpg');
   background-size: auto, 100% auto;
@@ -1039,18 +1040,22 @@ section[id^="slide-toc"].page {
 /* page-pad: px-margin-mobile=20px, pb-24=96px */
 section[id^="slide-toc"] .page-pad {
   text-align: left;
+  padding-top: 0;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 96px;
   color: #fff;
 }
 
-/* Hero: flex-col items-center text-center pb-8=32px */
+/* Hero: flex-col items-center text-center pb-8=32px.
+   padding-top empurra a saudação para baixo da foto (que termina a
+   ~447px do topo da página), sobre o azul sólido. */
 section[id^="slide-toc"] .toc-stitch-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding-top: 465px;
   padding-bottom: 32px;
 }
 /* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px
@@ -1175,6 +1180,9 @@ section[id^="slide-toc"] .toc-btn-lbl {
     padding-bottom: 150px !important;
   }
   section[id^="slide-toc"] .toc-stitch-hero {
+    /* O page-pad já desce o conteúdo com --dock-clearance no touch;
+       desconta para a saudação começar logo abaixo da foto (~465px). */
+    padding-top: calc(465px - var(--dock-clearance, 175px)) !important;
     padding-bottom: 60px !important;
   }
   section[id^="slide-toc"] .toc-heading {

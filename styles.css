@@ -1011,13 +1011,17 @@ p.lead {
 section[id^="slide-toc"].page {
   /* Fundo pré-processado (fundo-indice-blur.jpg, gerado a partir de
      foto-capa-praia.jpg): desfoque gaussiano estilo soft-focus e fusão
-     smoothstep para #0047AB embutida na própria imagem (794x1123),
-     então a troca imagem → azul é um degradê contínuo sem emenda.
-     Abaixo da imagem o background-color idêntico continua a página. */
+     smoothstep para #0047AB embutida na própria imagem (794x900 — a
+     foto ocupa todo o topo até ~metade da tela do celular), então a
+     troca imagem → azul é um degradê contínuo sem emenda. Abaixo da
+     imagem o background-color idêntico continua a página. */
   background-image: url('fundo-indice-blur.jpg');
   background-size: 100% auto;
   background-position: center top;
   background-repeat: no-repeat;
+  /* Ancora a foto ao conteúdo (não à moldura do scroll): ela fica no
+     topo da página e rola junto, em vez de ficar presa na tela. */
+  background-attachment: local;
   background-color: #0047AB;
 }
 
@@ -1028,6 +1032,58 @@ section[id^="slide-toc"].page {
    "Como ter energia no flat?" (1 botão, alinhado à esquerda)
    "Demais informações" (grid 3 colunas, gap-y-10 gap-x-4)
    botão de contato glass pill full-width dentro do main */
+
+/* Cabeçalho rolável do índice: logo à esquerda, bandeiras + Retornar à
+   direita. Substitui o top-dock fixo (o usuário não quer header
+   congelado no índice) — ele rola junto com o conteúdo da página. */
+.top-dock--toc { display: none !important; }
+section[id^="slide-toc"] .hdr { color: #fff; }
+section[id^="slide-toc"] .toc-hdr-logo {
+  height: 58px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1) drop-shadow(0 6px 14px rgba(0,0,0,.35));
+}
+section[id^="slide-toc"] .toc-hdr-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+section[id^="slide-toc"] .hdr .lang-flags {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+section[id^="slide-toc"] .hdr .lang-flag {
+  display: block;
+  width: 36px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+}
+section[id^="slide-toc"] .hdr .lang-flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+section[id^="slide-toc"] .toc-hdr-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--f-head);
+  font-size: 12px;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
 /* page-pad: px-margin-mobile=20px, pb-24=96px */
 section[id^="slide-toc"] .page-pad {
@@ -1041,13 +1097,13 @@ section[id^="slide-toc"] .page-pad {
 
 /* Hero: flex-col items-center text-center pb-8=32px.
    padding-top empurra a saudação para baixo da foto (que termina a
-   ~531px do topo da página), sobre o azul sólido. */
+   ~900px do topo da página; header em fluxo ocupa ~80px), sobre o azul. */
 section[id^="slide-toc"] .toc-stitch-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 548px;
+  padding-top: 820px;
   padding-bottom: 32px;
 }
 /* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px
@@ -1171,10 +1227,16 @@ section[id^="slide-toc"] .toc-btn-lbl {
     padding-right: 36px !important;
     padding-bottom: 150px !important;
   }
+  /* Header rolável dimensionado ~1.85x para o touch (canvas ~0.54x);
+     header ~140px + hero 760px = saudação logo abaixo da foto (900px). */
+  section[id^="slide-toc"] .hdr { padding: 40px 36px 0 !important; }
+  section[id^="slide-toc"] .toc-hdr-logo { height: 100px !important; }
+  section[id^="slide-toc"] .toc-hdr-right { gap: 24px !important; }
+  section[id^="slide-toc"] .hdr .lang-flags { gap: 14px !important; }
+  section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 38px !important; border-radius: 8px !important; }
+  section[id^="slide-toc"] .toc-hdr-return { font-size: 22px !important; }
   section[id^="slide-toc"] .toc-stitch-hero {
-    /* O page-pad já desce o conteúdo com --dock-clearance no touch;
-       desconta para a saudação começar logo abaixo da foto (~548px). */
-    padding-top: calc(548px - var(--dock-clearance, 175px)) !important;
+    padding-top: 760px !important;
     padding-bottom: 60px !important;
   }
   section[id^="slide-toc"] .toc-heading {
@@ -2433,7 +2495,8 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   /* Non-rc pages (TOC, wifi, etc.) push their page-pad content below the
      dock with the same variable. Excluded: #slide-select (uses its own
      centred flex layout) and .page-cover (no top-dock shown there). */
-  .page:not(.rc-page):not(#slide-select):not(.page-cover) .page-pad { padding-top: var(--dock-clearance, 175px); }
+  /* TOC excluído: lá o dock fixo é ocultado (header próprio em fluxo). */
+  .page:not(.rc-page):not(#slide-select):not(.page-cover):not([id^="slide-toc"]) .page-pad { padding-top: var(--dock-clearance, 175px); }
   section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 18px !important; }
   section[id^="slide-toc"] .grow { display: none; }
   section[id^="slide-toc"] .toc-quote { display: none; }

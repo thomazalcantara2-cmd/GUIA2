@@ -329,10 +329,7 @@
   width: 36px; height: 26px; border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,.25);
 }
-/* TOC ("Índice") pages: bigger logo + flags, same scale-up ratio (~1.5x) */
-/* The index shows a big centred logo in its hero, so drop the dock logo
-   there to avoid two logos (dock keeps the flags + "Escolher Flat"). */
-.top-dock--toc .top-dock-logo { display: none; }
+/* TOC ("Índice") pages: bigger flags, same scale-up ratio (~1.5x) */
 .top-dock--toc .top-dock-flags .lang-flag { width: 54px; height: 39px; }
 .top-dock-index {
   display: inline-flex;
@@ -1014,7 +1011,7 @@ p.lead {
 section[id^="slide-toc"].page {
   background-image:
     linear-gradient(rgba(0,71,171,0) 0%, rgb(0,71,171) 50%, rgb(0,71,171) 100%),
-    url('foto-capa-mergulho.jpg');
+    url('foto-capa-peixes.jpg');
   background-size: cover, cover;
   background-position: center center, center center;
   background-repeat: no-repeat, no-repeat;
@@ -1028,78 +1025,6 @@ section[id^="slide-toc"].page {
    "Como ter energia no flat?" (1 botão, alinhado à esquerda)
    "Demais informações" (grid 3 colunas, gap-y-10 gap-x-4)
    botão de contato glass pill full-width dentro do main */
-
-/* Header */
-section[id^="slide-toc"] .hdr {
-  color: #fff;
-  background: transparent;
-  position: relative;
-}
-section[id^="slide-toc"] .toc-hdr-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-section[id^="slide-toc"] .toc-hdr-back {
-  color: #fff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-section[id^="slide-toc"] .toc-back-svg { width: 24px; height: 24px; display: block; }
-section[id^="slide-toc"] .toc-hdr-flat {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600 !important;
-  color: #fff;
-  margin: 0;
-  text-transform: none;
-  letter-spacing: normal;
-}
-section[id^="slide-toc"] .toc-hdr-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-right: 16px;
-}
-section[id^="slide-toc"] .toc-contact-lbl {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600 !important;
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.8);
-  text-decoration: none;
-  text-transform: none;
-}
-/* Bandeiras de idioma (i18n.js injeta .lang-flags no .hdr-right):
-   visíveis aqui, ao contrário das demais páginas (regra global esconde). */
-section[id^="slide-toc"] .hdr .lang-flags {
-  display: flex !important;
-  align-items: center;
-  gap: 12px;
-}
-section[id^="slide-toc"] .hdr .lang-flag {
-  display: block;
-  width: 32px;
-  height: 21px;
-  padding: 0;
-  border: none;
-  background: none;
-  border-radius: 3px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,.3);
-}
-section[id^="slide-toc"] .hdr .lang-flag svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-/* O header interno assume a navegação/idioma no índice: dock desativado. */
-.top-dock--toc { display: none !important; }
 
 /* page-pad: px-margin-mobile=20px, pb-24=96px */
 section[id^="slide-toc"] .page-pad {
@@ -1118,17 +1043,6 @@ section[id^="slide-toc"] .toc-stitch-hero {
   text-align: center;
   padding-bottom: 32px;
 }
-section[id^="slide-toc"] .toc-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-section[id^="slide-toc"] .toc-logo {
-  height: 96px;
-  width: auto;
-  filter: brightness(0) invert(1);
-}
-
 /* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px */
 section[id^="slide-toc"] .toc-heading {
   font-family: 'Playfair Display', serif;
@@ -1247,11 +1161,8 @@ section[id^="slide-toc"] .toc-btn-lbl {
     padding-bottom: 150px !important;
   }
   section[id^="slide-toc"] .toc-stitch-hero {
-    padding-top: 48px !important;
     padding-bottom: 60px !important;
   }
-  section[id^="slide-toc"] .toc-logo { height: 140px !important; }
-  section[id^="slide-toc"] .toc-logo-wrap { margin-bottom: 44px !important; }
   section[id^="slide-toc"] .toc-heading {
     font-size: 62px !important;
     line-height: 1.25 !important;
@@ -2508,22 +2419,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   /* Non-rc pages (TOC, wifi, etc.) push their page-pad content below the
      dock with the same variable. Excluded: #slide-select (uses its own
      centred flex layout) and .page-cover (no top-dock shown there). */
-  .page:not(.rc-page):not(#slide-select):not(.page-cover):not([id^="slide-toc"]) .page-pad { padding-top: var(--dock-clearance, 175px); }
-  /* TOC pages: the top-dock is hidden there (the in-canvas header carries
-     back / flags / contact, like the reference design), so no dock
-     clearance — just the header sized up ~1.85x to survive canvas scale,
-     with padding-top clearing the phone status bar. */
-  section[id^="slide-toc"] .hdr {
-    padding: 100px 36px 0 !important;
-  }
-  section[id^="slide-toc"] .toc-hdr-back { gap: 30px !important; }
-  section[id^="slide-toc"] .toc-back-svg { width: 44px !important; height: 44px !important; }
-  section[id^="slide-toc"] .toc-hdr-flat { font-size: 44px !important; line-height: 1 !important; white-space: nowrap; }
-  section[id^="slide-toc"] .toc-hdr-right { gap: 22px !important; margin-right: 0 !important; }
-  section[id^="slide-toc"] .hdr .lang-flags { gap: 22px !important; }
-  section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 38px !important; border-radius: 5px !important; }
-  section[id^="slide-toc"] .toc-contact-lbl { font-size: 24px !important; line-height: 1 !important; }
-  section[id^="slide-toc"] .page-pad { padding-top: 0 !important; }
+  .page:not(.rc-page):not(#slide-select):not(.page-cover) .page-pad { padding-top: var(--dock-clearance, 175px); }
   section[id^="slide-toc"] .page-pad .eyebrow { margin-top: 18px !important; }
   section[id^="slide-toc"] .grow { display: none; }
   section[id^="slide-toc"] .toc-quote { display: none; }

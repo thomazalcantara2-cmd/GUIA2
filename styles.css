@@ -1037,51 +1037,63 @@ section[id^="slide-toc"].page {
    direita. Substitui o top-dock fixo (o usuário não quer header
    congelado no índice) — ele rola junto com o conteúdo da página. */
 .top-dock--toc { display: none !important; }
+/* Cabeçalho (modelo Stitch): [seta + Flat NNN]  ·  [bandeiras]  ·  [Contact]
+   .hdr já é flex space-between → os três grupos se espalham. Rola com a
+   página (não congelado). */
 section[id^="slide-toc"] .hdr { color: #fff; }
-section[id^="slide-toc"] .toc-hdr-logo {
-  height: 58px;
-  width: auto;
-  display: block;
-  filter: brightness(0) invert(1) drop-shadow(0 6px 14px rgba(0,0,0,.35));
-}
-section[id^="slide-toc"] .toc-hdr-right {
+section[id^="slide-toc"] .toc-hdr-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
+section[id^="slide-toc"] .toc-hdr-back {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+section[id^="slide-toc"] .toc-back-svg { width: 24px; height: 24px; display: block; }
+section[id^="slide-toc"] .toc-hdr-flat {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600 !important;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+/* Bandeiras centrais (i18n injeta .lang-flags em .hdr-right) */
 section[id^="slide-toc"] .hdr .lang-flags {
   display: flex !important;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 section[id^="slide-toc"] .hdr .lang-flag {
   display: block;
-  width: 36px;
-  height: 26px;
+  width: 32px;
+  height: 20px;
   padding: 0;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.2);
   background: none;
-  border-radius: 6px;
+  border-radius: 3px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
 }
 section[id^="slide-toc"] .hdr .lang-flag svg {
   display: block;
   width: 100%;
   height: 100%;
 }
-section[id^="slide-toc"] .toc-hdr-return {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+section[id^="slide-toc"] .toc-hdr-contact {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
   color: #fff;
   text-decoration: none;
-  font-family: var(--f-head);
-  font-size: 12px;
-  font-weight: 600 !important;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -1103,8 +1115,19 @@ section[id^="slide-toc"] .toc-stitch-hero {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 500px;
+  padding-top: 420px;
   padding-bottom: 32px;
+}
+/* Logo centralizada (modelo Stitch): h-24=96px, branca via filter, mb-6=24px */
+section[id^="slide-toc"] .toc-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+section[id^="slide-toc"] .toc-logo {
+  height: 96px;
+  width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0,10,40,.45));
 }
 /* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px
    text-shadow para ler sobre a área clara da foto sem escurecê-la
@@ -1235,18 +1258,21 @@ section[id^="slide-toc"] .toc-btn-lbl {
     padding-right: 36px !important;
     padding-bottom: 150px !important;
   }
-  /* Header rolável dimensionado ~1.85x para o touch (canvas ~0.54x);
-     header ~140px + hero 760px = saudação logo abaixo da foto (900px). */
+  /* Header rolável dimensionado ~1.85x para o touch (canvas ~0.54x). */
   section[id^="slide-toc"] .hdr { padding: 40px 36px 0 !important; }
-  section[id^="slide-toc"] .toc-hdr-logo { height: 100px !important; }
-  section[id^="slide-toc"] .toc-hdr-right { gap: 24px !important; }
-  section[id^="slide-toc"] .hdr .lang-flags { gap: 14px !important; }
-  section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 38px !important; border-radius: 8px !important; }
-  section[id^="slide-toc"] .toc-hdr-return { font-size: 22px !important; }
+  section[id^="slide-toc"] .toc-hdr-left { gap: 30px !important; }
+  section[id^="slide-toc"] .toc-back-svg { width: 44px !important; height: 44px !important; }
+  section[id^="slide-toc"] .toc-hdr-flat { font-size: 44px !important; line-height: 1 !important; white-space: nowrap; }
+  section[id^="slide-toc"] .hdr .lang-flags { gap: 20px !important; }
+  section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 36px !important; border-radius: 5px !important; }
+  section[id^="slide-toc"] .toc-hdr-contact { font-size: 24px !important; }
+  /* Logo central da hero ~1.85x */
+  section[id^="slide-toc"] .toc-logo { height: 170px !important; }
+  section[id^="slide-toc"] .toc-logo-wrap { margin-bottom: 40px !important; }
   section[id^="slide-toc"] .toc-stitch-hero {
-    /* header ~140px + 440px: saudação sobre a foto; os botões chegam
-       junto com o início do degradê (~720px). */
-    padding-top: 440px !important;
+    /* header ~140px + 300px: logo + saudação sobre a foto; os botões
+       chegam junto com o início do degradê (~720px). */
+    padding-top: 300px !important;
     padding-bottom: 60px !important;
   }
   section[id^="slide-toc"] .toc-heading {

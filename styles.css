@@ -607,7 +607,7 @@ p.lead {
   background: url('fundo-mar.png') center top / 100% auto no-repeat, #0047AB;
 }
 #slide-0 .cv3-bg-under {
-  position: absolute; top: 560px; left: 0; right: 0; height: 470px;
+  position: absolute; top: 545px; left: 0; right: 0; height: 470px;
   background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
   /* Aparece suave sobre a textura no topo do próprio bloco e some no azul
      na base (foto tem ~447px de altura a 794 de largura). */

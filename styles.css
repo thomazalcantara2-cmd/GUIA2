@@ -1115,7 +1115,7 @@ section[id^="slide-toc"] .toc-stitch-hero {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 420px;
+  padding-top: 560px;
   padding-bottom: 32px;
 }
 /* Logo centralizada (modelo Stitch): h-24=96px, branca via filter, mb-6=24px */
@@ -1270,9 +1270,9 @@ section[id^="slide-toc"] .toc-btn-lbl {
   section[id^="slide-toc"] .toc-logo { height: 170px !important; }
   section[id^="slide-toc"] .toc-logo-wrap { margin-bottom: 40px !important; }
   section[id^="slide-toc"] .toc-stitch-hero {
-    /* header ~140px + 300px: logo + saudação sobre a foto; os botões
-       chegam junto com o início do degradê (~720px). */
-    padding-top: 300px !important;
+    /* header ~140px + 460px: logo mais ao centro da foto, saudação logo
+       abaixo; os botões entram já na área do degradê. */
+    padding-top: 460px !important;
     padding-bottom: 60px !important;
   }
   section[id^="slide-toc"] .toc-heading {

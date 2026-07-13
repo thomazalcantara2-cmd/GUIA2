@@ -599,27 +599,30 @@ p.lead {
    hero centrado, 3 cards glassmorphic e rodapé. Escopo em #slide-0.    */
 #slide-0 .cv3 { position: relative; width: 100%; min-height: 100%; background: #0047AB; }
 
-/* Fundo dividido */
+/* Fundo dividido: textura marinha (fundo-mar.png) EM CIMA, foto do recife
+   (foto-capa-recife.jpg) EM BAIXO, atrás dos cards. */
 #slide-0 .cv3-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #0047AB; }
 #slide-0 .cv3-bg-top {
-  position: absolute; top: 0; left: 0; right: 0; height: 620px;
-  background: url('foto-capa-jangadas.jpg') center top / cover;
+  position: absolute; top: 0; left: 0; right: 0; height: 1120px;
+  background: url('fundo-mar.png') center top / 100% auto no-repeat, #0047AB;
 }
 #slide-0 .cv3-bg-under {
-  position: absolute; top: 360px; left: 0; right: 0; height: 1500px;
-  background: url('foto-capa-peixes.jpg') center / cover;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 220px, #000 1050px, transparent 1500px);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 220px, #000 1050px, transparent 1500px);
+  position: absolute; top: 560px; left: 0; right: 0; height: 470px;
+  background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
+  /* Aparece suave sobre a textura no topo do próprio bloco e some no azul
+     na base (foto tem ~447px de altura a 794 de largura). */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 380px, transparent 460px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 380px, transparent 460px);
 }
 #slide-0 .cv3-bg-tint {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(0,71,171,.28) 0px,
-    rgba(0,71,171,0)   200px,
-    rgba(0,71,171,.10) 520px,
-    rgba(0,71,171,.42) 900px,
-    rgba(0,71,171,.66) 1400px,
-    rgba(0,71,171,.82) 1900px);
+    rgba(0,71,171,.30) 0px,
+    rgba(0,71,171,.10) 220px,
+    rgba(0,71,171,0)   520px,
+    rgba(0,71,171,0)   900px,
+    rgba(0,71,171,.5)  1120px,
+    rgba(0,71,171,.78) 1600px);
 }
 
 /* Hero */
@@ -668,12 +671,14 @@ p.lead {
 #slide-0 .cv3-select-title {
   font-family: 'Playfair Display', serif;
   font-size: 32px; line-height: 1.25; font-weight: 600 !important;
-  color: #fff; margin: 0 0 12px; text-shadow: 0 2px 12px rgba(0,25,70,.55);
+  color: #fff; margin: 0 0 12px;
+  text-shadow: 0 2px 10px rgba(0,20,55,.85), 0 1px 22px rgba(0,20,55,.6);
 }
 #slide-0 .cv3-select-sub {
   font-family: 'Montserrat', sans-serif; font-style: italic;
   font-size: 16px; font-weight: 400 !important;
-  color: rgba(255,255,255,0.9); margin: 0; text-shadow: 0 2px 10px rgba(0,25,70,.5);
+  color: #fff; margin: 0;
+  text-shadow: 0 2px 8px rgba(0,20,55,.85), 0 1px 16px rgba(0,20,55,.6);
 }
 
 /* Grid de cards */

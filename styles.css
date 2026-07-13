@@ -1009,20 +1009,20 @@ p.lead {
    linear-gradient(rgba(0,71,171,0) 0%, rgb(0,71,171) 50%, rgb(0,71,171) 100%)
    sobre a foto, centralizada. */
 section[id^="slide-toc"].page {
-  /* Fundo pré-processado (fundo-indice-blur.jpg, gerado a partir de
-     foto-capa-praia.jpg): desfoque gaussiano estilo soft-focus e fusão
-     smoothstep para #0047AB embutida na própria imagem (794x900 — a
-     foto ocupa todo o topo até ~metade da tela do celular), então a
-     troca imagem → azul é um degradê contínuo sem emenda. Abaixo da
-     imagem o background-color idêntico continua a página. */
-  background-image: url('fundo-indice-blur.jpg');
-  background-size: 100% auto;
-  background-position: center top;
-  background-repeat: no-repeat;
-  /* Ancora a foto ao conteúdo (não à moldura do scroll): ela fica no
-     topo da página e rola junto, em vez de ficar presa na tela. */
-  background-attachment: local;
-  background-color: #0047AB;
+  /* Dois planos:
+     1) fundo-indice-blur.png — foto da praia desfocada com fade de
+        TRANSPARÊNCIA (alpha) para baixo, então ela se dissolve revelando
+        a textura por baixo em vez de virar azul chapado;
+     2) fundo-mar.png — a mesma textura marinha (concha/estrela/tartaruga)
+        das demais páginas, ladrilhada verticalmente para cobrir toda a
+        altura da página do índice (que é bem mais alta que uma tela).
+     #0047AB só como base de segurança. */
+  background:
+    url('fundo-indice-blur.png') top center / 100% auto no-repeat,
+    url('fundo-mar.png') top center / 100% auto repeat-y,
+    #0047AB;
+  /* Ancora os planos ao conteúdo (rolam junto, não presos à tela). */
+  background-attachment: local, local;
 }
 
 /* ── Índice · Stitch Refinement (tradução exata do Tailwind) ──────

@@ -656,14 +656,14 @@ p.lead {
   color: rgba(255,255,255,0.92); margin: 0 auto; max-width: 560px;
   text-shadow: 0 2px 10px rgba(0,25,70,.5);
 }
-#slide-0 .cv3-scroll {
-  margin-top: 40px; color: #fff; opacity: .85;
-  animation: cv3-bounce 1.8s ease-in-out infinite;
-}
-#slide-0 .cv3-scroll svg { width: 30px; height: 30px; display: block; }
-@keyframes cv3-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+#slide-0 .cv3-lead + .cv3-lead { margin-top: 18px; }
+/* Frase-convite que leva à seleção de flats (no lugar da antiga setinha) */
+#slide-0 .cv3-invite-q {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px; line-height: 1.4; font-weight: 600 !important;
+  color: #fff; margin: 28px auto 0; max-width: 520px;
+  text-shadow: 0 2px 12px rgba(0,25,70,.6);
 }
 
 /* Seleção */

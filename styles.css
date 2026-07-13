@@ -607,12 +607,13 @@ p.lead {
   background: url('fundo-mar.png') center top / 100% auto no-repeat, #0047AB;
 }
 #slide-0 .cv3-bg-under {
-  position: absolute; top: 545px; left: 0; right: 0; height: 470px;
-  background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
-  /* Aparece suave sobre a textura no topo do próprio bloco e some no azul
-     na base (foto tem ~447px de altura a 794 de largura). */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 380px, transparent 460px);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 380px, transparent 460px);
+  position: absolute; top: 545px; left: 0; right: 0; height: 1200px;
+  /* cover (não 100% auto) para a cena submarina preencher toda a parte de
+     baixo da capa, sem sobrar azul chapado; center top mantém a linha
+     d'água por cima e o recife descendo até a base. */
+  background: url('foto-capa-recife.jpg') center top / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 90%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 90%, transparent 100%);
 }
 #slide-0 .cv3-bg-tint {
   position: absolute; inset: 0;
@@ -620,9 +621,9 @@ p.lead {
     rgba(0,71,171,.30) 0px,
     rgba(0,71,171,.10) 220px,
     rgba(0,71,171,0)   520px,
-    rgba(0,71,171,0)   900px,
-    rgba(0,71,171,.5)  1120px,
-    rgba(0,71,171,.78) 1600px);
+    rgba(0,71,171,0)   1150px,
+    rgba(0,71,171,.45) 1600px,
+    rgba(0,71,171,.72) 1900px);
 }
 
 /* Hero */
@@ -666,7 +667,7 @@ p.lead {
 }
 
 /* Seleção */
-#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px 96px; }
+#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px 720px; }
 #slide-0 .cv3-select-head { text-align: center; margin-bottom: 44px; }
 #slide-0 .cv3-select-title {
   font-family: 'Playfair Display', serif;

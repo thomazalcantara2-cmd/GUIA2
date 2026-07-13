@@ -602,28 +602,27 @@ p.lead {
 /* Fundo dividido: textura marinha (fundo-mar.png) EM CIMA, foto do recife
    (foto-capa-recife.jpg) EM BAIXO, atrás dos cards. */
 #slide-0 .cv3-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #0047AB; }
+/* Textura marinha cobre TODA a página (ladrilhada), então onde não há a
+   foto o fundo é a textura — nunca azul chapado. */
 #slide-0 .cv3-bg-top {
-  position: absolute; top: 0; left: 0; right: 0; height: 1120px;
-  background: url('fundo-mar.png') center top / 100% auto no-repeat, #0047AB;
+  position: absolute; inset: 0;
+  background: url('fundo-mar.png') top center / 100% auto repeat-y, #0047AB;
 }
 #slide-0 .cv3-bg-under {
-  position: absolute; top: 545px; left: 0; right: 0; height: 1200px;
-  /* cover (não 100% auto) para a cena submarina preencher toda a parte de
-     baixo da capa, sem sobrar azul chapado; center top mantém a linha
-     d'água por cima e o recife descendo até a base. */
-  background: url('foto-capa-recife.jpg') center top / cover no-repeat;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 90%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 90%, transparent 100%);
+  position: absolute; top: 700px; left: 0; right: 0; height: 470px;
+  /* Tamanho natural (100% auto) — sem ampliar; só posicionada mais baixa. */
+  background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 360px, transparent 460px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 360px, transparent 460px);
 }
 #slide-0 .cv3-bg-tint {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(0,71,171,.30) 0px,
-    rgba(0,71,171,.10) 220px,
-    rgba(0,71,171,0)   520px,
+    rgba(0,71,171,.22) 0px,
+    rgba(0,71,171,.06) 260px,
+    rgba(0,71,171,0)   680px,
     rgba(0,71,171,0)   1150px,
-    rgba(0,71,171,.45) 1600px,
-    rgba(0,71,171,.72) 1900px);
+    rgba(0,71,171,.22) 1500px);
 }
 
 /* Hero */

@@ -594,6 +594,192 @@ p.lead {
 /* ─── 01 COVER ─────────────────────────────────────────────────────── */
 .page-cover { background: #0047AB; }
 
+/* ══ Capa v3 · modelo Stitch (hero + bento de flats + rodapé) ═════════
+   Fundo dividido (superfície do mar em cima → submerso → azul profundo),
+   hero centrado, 3 cards glassmorphic e rodapé. Escopo em #slide-0.    */
+#slide-0 .cv3 { position: relative; width: 100%; min-height: 100%; background: #0047AB; }
+
+/* Fundo dividido */
+#slide-0 .cv3-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #0047AB; }
+#slide-0 .cv3-bg-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 620px;
+  background: url('foto-capa-jangadas.jpg') center top / cover;
+}
+#slide-0 .cv3-bg-under {
+  position: absolute; top: 360px; left: 0; right: 0; height: 1500px;
+  background: url('foto-capa-peixes.jpg') center / cover;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 220px, #000 1050px, transparent 1500px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 220px, #000 1050px, transparent 1500px);
+}
+#slide-0 .cv3-bg-tint {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(0,71,171,.28) 0px,
+    rgba(0,71,171,0)   200px,
+    rgba(0,71,171,.10) 520px,
+    rgba(0,71,171,.42) 900px,
+    rgba(0,71,171,.66) 1400px,
+    rgba(0,71,171,.82) 1900px);
+}
+
+/* Hero */
+#slide-0 .cv3-hero {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 96px 56px 40px;
+}
+#slide-0 .cv3-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 600 !important;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #fff; margin-bottom: 24px;
+  text-shadow: 0 2px 8px rgba(0,25,70,.5);
+}
+#slide-0 .cv3-logo-wrap { display: flex; justify-content: center; margin-bottom: 24px; }
+#slide-0 .cv3-logo {
+  height: 150px; width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0,10,40,.45));
+}
+#slide-0 .cv3-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px; line-height: 1.1; font-weight: 700 !important;
+  letter-spacing: -0.02em; color: #fff; margin: 0 0 20px;
+  max-width: 620px; text-shadow: 0 3px 16px rgba(0,25,70,.55);
+}
+#slide-0 .cv3-lead {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px; line-height: 1.55; font-weight: 400 !important;
+  color: rgba(255,255,255,0.92); margin: 0 auto; max-width: 560px;
+  text-shadow: 0 2px 10px rgba(0,25,70,.5);
+}
+#slide-0 .cv3-scroll {
+  margin-top: 40px; color: #fff; opacity: .85;
+  animation: cv3-bounce 1.8s ease-in-out infinite;
+}
+#slide-0 .cv3-scroll svg { width: 30px; height: 30px; display: block; }
+@keyframes cv3-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* Seleção */
+#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px 0; }
+#slide-0 .cv3-select-head { text-align: center; margin-bottom: 44px; }
+#slide-0 .cv3-select-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; line-height: 1.25; font-weight: 600 !important;
+  color: #fff; margin: 0 0 12px; text-shadow: 0 2px 12px rgba(0,25,70,.55);
+}
+#slide-0 .cv3-select-sub {
+  font-family: 'Montserrat', sans-serif; font-style: italic;
+  font-size: 16px; font-weight: 400 !important;
+  color: rgba(255,255,255,0.9); margin: 0; text-shadow: 0 2px 10px rgba(0,25,70,.5);
+}
+
+/* Grid de cards */
+#slide-0 .cv3-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+#slide-0 .cv3-card {
+  display: flex; flex-direction: column; text-align: left;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 18px 40px -12px rgba(0,10,40,.5);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  cursor: pointer; padding: 0;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#slide-0 .cv3-card:hover { transform: translateY(-4px); box-shadow: 0 26px 54px -12px rgba(0,10,40,.6); }
+#slide-0 .cv3-card--premium { border-color: rgba(255,255,255,0.32); box-shadow: 0 18px 40px -12px rgba(0,10,40,.5), 0 0 0 2px rgba(255,255,255,0.10); }
+
+#slide-0 .cv3-card-photo {
+  position: relative; height: 190px;
+  background-size: cover; background-position: center;
+  overflow: hidden;
+}
+#slide-0 .cv3-card-photo-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.7), transparent 62%);
+}
+#slide-0 .cv3-card-cap { position: absolute; left: 20px; bottom: 16px; z-index: 1; }
+#slide-0 .cv3-card-floor {
+  display: block; font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 600 !important; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.85);
+  text-shadow: 0 2px 6px rgba(0,0,0,.5);
+}
+#slide-0 .cv3-card-name {
+  display: block; font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 600 !important; color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+#slide-0 .cv3-card-badge {
+  position: absolute; top: 16px; right: 16px; z-index: 1;
+  background: rgba(255,255,255,0.22); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.35); border-radius: 9999px;
+  padding: 5px 14px; font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 600 !important; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #fff;
+}
+#slide-0 .cv3-card-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+#slide-0 .cv3-card-row { display: flex; align-items: center; gap: 12px; }
+#slide-0 .cv3-card-icon {
+  flex: 0 0 auto; width: 40px; height: 40px; border-radius: 9999px;
+  background: rgba(255,255,255,0.20);
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+#slide-0 .cv3-card-desc {
+  font-family: 'Montserrat', sans-serif; font-size: 16px; line-height: 1.4;
+  font-weight: 400 !important; color: rgba(255,255,255,0.92); margin: 0;
+}
+#slide-0 .cv3-card-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.20);
+  font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 600 !important; color: #fff;
+}
+#slide-0 .cv3-card-arrow { font-size: 20px; transition: transform .18s ease; }
+#slide-0 .cv3-card:hover .cv3-card-arrow { transform: translateX(4px); }
+
+/* Rodapé */
+#slide-0 .cv3-footer {
+  position: relative; z-index: 1; margin-top: 72px;
+  padding: 48px 44px 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
+  background: rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+#slide-0 .cv3-footer-brand {
+  font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700 !important;
+  color: #fff; letter-spacing: -0.01em;
+}
+#slide-0 .cv3-footer-copy {
+  font-family: 'Montserrat', sans-serif; font-size: 15px; line-height: 1.5;
+  font-weight: 400 !important; color: rgba(255,255,255,0.82); margin: 0; max-width: 480px;
+}
+#slide-0 .cv3-footer-links { display: flex; gap: 28px; }
+#slide-0 .cv3-footer-links a {
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600 !important;
+  letter-spacing: 0.04em; color: rgba(255,255,255,0.9); text-decoration: none;
+  transition: opacity .15s;
+}
+#slide-0 .cv3-footer-links a:hover { opacity: .7; }
+#slide-0 .cv3-footer-bar { width: 48px; height: 4px; border-radius: 9999px; background: rgba(255,255,255,0.3); margin-top: 6px; }
+
+/* Botão flutuante WhatsApp */
+#slide-0 .cv3-fab {
+  position: absolute; right: 28px; bottom: 28px; z-index: 5;
+  width: 60px; height: 60px; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.30);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px -6px rgba(0,10,40,.5); color: #fff;
+  transition: transform .15s ease;
+}
+#slide-0 .cv3-fab:active { transform: scale(.9); }
+#slide-0 .cv3-fab svg { width: 26px; height: 26px; }
+
 /* ── Cover v2 full-bleed design ─────────────────────────────────────── */
 .cover-v2-bg {
   position: relative;

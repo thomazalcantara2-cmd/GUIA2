@@ -1115,18 +1115,20 @@ section[id^="slide-toc"] .toc-stitch-hero {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 560px;
+  padding-top: 80px;
   padding-bottom: 32px;
 }
-/* Logo centralizada (modelo Stitch): h-24=96px, branca via filter, mb-6=24px */
+/* Logo centralizada e GRANDE: ocupa o espaço entre o cabeçalho e a
+   saudação (branca via filter). */
 section[id^="slide-toc"] .toc-logo-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 section[id^="slide-toc"] .toc-logo {
-  height: 96px;
+  height: 260px;
   width: auto;
+  max-width: 100%;
   filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0,10,40,.45));
 }
 /* Saudação: headline-lg-mobile = Playfair 28/36/600, mb-2=8px
@@ -1266,13 +1268,13 @@ section[id^="slide-toc"] .toc-btn-lbl {
   section[id^="slide-toc"] .hdr .lang-flags { gap: 20px !important; }
   section[id^="slide-toc"] .hdr .lang-flag { width: 58px !important; height: 36px !important; border-radius: 5px !important; }
   section[id^="slide-toc"] .toc-hdr-contact { font-size: 24px !important; }
-  /* Logo central da hero ~1.85x */
-  section[id^="slide-toc"] .toc-logo { height: 170px !important; }
-  section[id^="slide-toc"] .toc-logo-wrap { margin-bottom: 40px !important; }
+  /* Logo grande: preenche o espaço entre o cabeçalho e a saudação. */
+  section[id^="slide-toc"] .toc-logo { height: 440px !important; }
+  section[id^="slide-toc"] .toc-logo-wrap { margin-bottom: 44px !important; }
   section[id^="slide-toc"] .toc-stitch-hero {
-    /* header ~140px + 460px: logo mais ao centro da foto, saudação logo
-       abaixo; os botões entram já na área do degradê. */
-    padding-top: 460px !important;
+    /* Logo logo abaixo do cabeçalho (padding-top pequeno) e grande, então
+       ocupa o topo da foto; saudação vem em seguida. */
+    padding-top: 70px !important;
     padding-bottom: 60px !important;
   }
   section[id^="slide-toc"] .toc-heading {

@@ -666,7 +666,7 @@ p.lead {
 }
 
 /* Seleção */
-#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px 0; }
+#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px 96px; }
 #slide-0 .cv3-select-head { text-align: center; margin-bottom: 44px; }
 #slide-0 .cv3-select-title {
   font-family: 'Playfair Display', serif;

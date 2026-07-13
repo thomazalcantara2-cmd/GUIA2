@@ -609,11 +609,12 @@ p.lead {
   background: url('fundo-mar.png') top center / 100% auto repeat-y, #0047AB;
 }
 #slide-0 .cv3-bg-under {
-  position: absolute; top: 700px; left: 0; right: 0; height: 470px;
-  /* Tamanho natural (100% auto) — sem ampliar; só posicionada mais baixa. */
+  /* Foto APÓS os cards (grid termina ~995px): entra logo abaixo, em
+     tamanho natural (sem ampliar), fundindo com a textura nas bordas. */
+  position: absolute; top: 1000px; left: 0; right: 0; height: 470px;
   background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 360px, transparent 460px);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 360px, transparent 460px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
 }
 #slide-0 .cv3-bg-tint {
   position: absolute; inset: 0;

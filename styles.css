@@ -703,10 +703,16 @@ p.lead {
   position: relative; height: 190px;
   background-size: cover; background-position: center;
   overflow: hidden;
+  /* Isola o contexto de empilhamento: no iOS Safari as fotos animadas
+     (opacity) ganham camada de GPU e, sem isso, compõem por cima do
+     nome estático. Com isolate + promoção do nome, o nome fica fixo
+     por cima em todas as fotos. */
+  isolation: isolate;
 }
 #slide-0 .cv3-card-photo-grad {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to top, rgba(0,0,0,.5), rgba(0,0,0,.28) 45%, rgba(0,0,0,.4));
+  transform: translateZ(0);
 }
 /* Nome do flat: grande e centralizado no card. O halo escuro atrás
    garante que o nome fique legível em qualquer foto (inclusive as claras). */
@@ -716,6 +722,9 @@ p.lead {
   text-align: center; gap: 4px;
   background: radial-gradient(ellipse 78% 52% at 50% 50%,
     rgba(0,0,0,.6) 0%, rgba(0,0,0,.32) 55%, rgba(0,0,0,0) 100%);
+  /* Promove o nome para a própria camada, acima das fotos animadas (iOS) */
+  transform: translateZ(0);
+  will-change: transform;
 }
 #slide-0 .cv3-card-floor {
   display: block; font-family: 'Montserrat', sans-serif;

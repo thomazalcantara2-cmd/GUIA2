@@ -705,23 +705,51 @@ p.lead {
   overflow: hidden;
 }
 #slide-0 .cv3-card-photo-grad {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.7), transparent 62%);
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15) 45%, rgba(0,0,0,.3));
 }
-#slide-0 .cv3-card-cap { position: absolute; left: 20px; bottom: 16px; z-index: 1; }
+/* Nome do flat: grande e centralizado no card */
+#slide-0 .cv3-card-cap {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 4px;
+}
 #slide-0 .cv3-card-floor {
   display: block; font-family: 'Montserrat', sans-serif;
-  font-size: 11px; font-weight: 600 !important; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.85);
-  text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  font-size: 12px; font-weight: 600 !important; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 8px rgba(0,0,0,.7);
 }
 #slide-0 .cv3-card-name {
   display: block; font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 600 !important; color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+  font-size: 40px; line-height: 1; font-weight: 700 !important; color: #fff;
+  letter-spacing: 0.01em; text-transform: uppercase;
+  text-shadow: 0 3px 14px rgba(0,0,0,.75), 0 1px 3px rgba(0,0,0,.6);
+}
+
+/* Slideshow do Flat 201: 4 fotos em crossfade (CSS puro, 4s cada) */
+#slide-0 .cv3-slide {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; animation: cv3-fade 16s infinite;
+}
+#slide-0 .cv3-slide:nth-child(1){ animation-delay: 0s; }
+#slide-0 .cv3-slide:nth-child(2){ animation-delay: 4s; }
+#slide-0 .cv3-slide:nth-child(3){ animation-delay: 8s; }
+#slide-0 .cv3-slide:nth-child(4){ animation-delay: 12s; }
+@keyframes cv3-fade {
+  0%   { opacity: 0; }
+  3%   { opacity: 1; }
+  25%  { opacity: 1; }
+  28%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #slide-0 .cv3-slide { animation: none; }
+  #slide-0 .cv3-slide:nth-child(1){ opacity: 1; }
 }
 #slide-0 .cv3-card-badge {
-  position: absolute; top: 16px; right: 16px; z-index: 1;
+  position: absolute; top: 16px; right: 16px; z-index: 3;
   background: rgba(255,255,255,0.22); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.35); border-radius: 9999px;
   padding: 5px 14px; font-family: 'Montserrat', sans-serif;

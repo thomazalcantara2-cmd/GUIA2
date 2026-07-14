@@ -706,13 +706,16 @@ p.lead {
 }
 #slide-0 .cv3-card-photo-grad {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15) 45%, rgba(0,0,0,.3));
+  background: linear-gradient(to top, rgba(0,0,0,.5), rgba(0,0,0,.28) 45%, rgba(0,0,0,.4));
 }
-/* Nome do flat: grande e centralizado no card */
+/* Nome do flat: grande e centralizado no card. O halo escuro atrás
+   garante que o nome fique legível em qualquer foto (inclusive as claras). */
 #slide-0 .cv3-card-cap {
   position: absolute; inset: 0; z-index: 2;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: 4px;
+  background: radial-gradient(ellipse 78% 52% at 50% 50%,
+    rgba(0,0,0,.6) 0%, rgba(0,0,0,.32) 55%, rgba(0,0,0,0) 100%);
 }
 #slide-0 .cv3-card-floor {
   display: block; font-family: 'Montserrat', sans-serif;

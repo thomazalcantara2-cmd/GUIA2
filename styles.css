@@ -1430,7 +1430,12 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* Touch: ~1.85x para compensar a escala do canvas (794px → largura da tela) */
 @media (hover: none), (pointer: coarse) {
-  section[id^="slide-toc"] .page-pad { padding-left: 40px !important; padding-right: 40px !important; padding-bottom: 200px !important; padding-top: 0 !important; }
+  section[id^="slide-toc"] .page-pad {
+    padding-left: 40px !important; padding-right: 40px !important; padding-top: 0 !important;
+    /* Reduzido de 200px: sobrava uma faixa de azul liso abaixo do botão
+       de contato sem nenhum conteúdo. */
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+  }
   /* env() só é diferente de 0 em contexto fullscreen/standalone; numa
      aba normal do Safari volta ao padding original (36px), sem inflar
      a altura do conteúdo. */

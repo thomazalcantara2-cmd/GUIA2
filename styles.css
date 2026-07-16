@@ -630,12 +630,11 @@ p.lead {
 #slide-0 .cv3-hero {
   position: relative; z-index: 1;
   display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 96px 56px 40px;
-}
-/* Com viewport-fit=cover o canvas passa a começar atrás da barra de
-   status; compensa o topo no touch para o conteúdo não colar no relógio. */
-@media (hover: none), (pointer: coarse) {
-  #slide-0 .cv3-hero { padding-top: 190px; }
+  /* env() só é diferente de 0 em contexto fullscreen/standalone com
+     viewport-fit=cover; em aba normal do Safari fica 0 e não altera a
+     altura do conteúdo (evita empurrar a página para baixo do fold e
+     disparar rolagem/"bounce" desnecessários). */
+  padding: calc(96px + env(safe-area-inset-top, 0px)) 56px 40px;
 }
 #slide-0 .cv3-eyebrow {
   font-family: 'Montserrat', sans-serif;
@@ -672,7 +671,13 @@ p.lead {
 }
 
 /* Seleção */
-#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px 720px; }
+/* padding-bottom modesto: a página deve caber numa tela só, sem exigir
+   rolagem (não há mais conteúdo real abaixo do grid de cards — a foto
+   do recife é só um resquício decorativo de fundo). Um padding grande
+   aqui forçava rolagem em iOS, e o recálculo de altura do canvas
+   durante o show/hide da barra de endereço (ver app.js applyStageAnchor)
+   fazia a página "quicar" para cima e para baixo. */
+#slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px calc(56px + env(safe-area-inset-bottom, 0px)); }
 #slide-0 .cv3-select-head { text-align: center; margin-bottom: 44px; }
 #slide-0 .cv3-select-title {
   font-family: 'Playfair Display', serif;
@@ -1426,9 +1431,10 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 /* Touch: ~1.85x para compensar a escala do canvas (794px → largura da tela) */
 @media (hover: none), (pointer: coarse) {
   section[id^="slide-toc"] .page-pad { padding-left: 40px !important; padding-right: 40px !important; padding-bottom: 200px !important; padding-top: 0 !important; }
-  /* Com viewport-fit=cover a imagem preenche o topo (atrás da barra de
-     status). O padding-top afasta o "Retornar" do relógio/bateria. */
-  section[id^="slide-toc"] .hdr { padding: 120px 40px 0 !important; }
+  /* env() só é diferente de 0 em contexto fullscreen/standalone; numa
+     aba normal do Safari volta ao padding original (36px), sem inflar
+     a altura do conteúdo. */
+  section[id^="slide-toc"] .hdr { padding: calc(36px + env(safe-area-inset-top, 0px)) 40px 0 !important; }
   section[id^="slide-toc"] .toc-hdr-back { font-size: 24px !important; gap: 18px !important; }
   section[id^="slide-toc"] .toc-back-svg { width: 37px !important; height: 37px !important; }
   section[id^="slide-toc"] .hdr .lang-flags { gap: 18px !important; }

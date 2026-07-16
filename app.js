@@ -194,10 +194,23 @@
     topDock.append(logo, right);
     document.body.appendChild(topDock);
 
+    // On iOS Safari the strip behind the status bar/address bar (outside
+    // our own page) is tinted by the browser using this meta tag, not by
+    // anything we can paint. Index pages open on a bright turquoise photo
+    // (fundo-indice-blur.png), so that strip otherwise reads as a
+    // mismatched navy band; every other page sits on the navy ocean-deep
+    // background already, which is the tag's default. Swapping the tag
+    // per page gives the illusion the photo runs all the way to the top.
+    const themeColorMeta = document.getElementById('meta-theme-color');
+    const setThemeColor = (isToc) => {
+      if (themeColorMeta) themeColorMeta.setAttribute('content', isToc ? '#02DCFF' : '#0047AB');
+    };
+
     const syncDocks = (sec) => {
       if (!sec) return;
       const label = sec.getAttribute('data-label') || '';
       const id = sec.id || '';
+      setThemeColor(/[ÍI]ndice/i.test(label));
       if (sec.classList.contains('page-cover') || id === 'slide-select') {
         topDock.style.visibility = 'hidden';
         return;

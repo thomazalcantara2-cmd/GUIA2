@@ -632,6 +632,11 @@ p.lead {
   display: flex; flex-direction: column; align-items: center; text-align: center;
   padding: 96px 56px 40px;
 }
+/* Com viewport-fit=cover o canvas passa a começar atrás da barra de
+   status; compensa o topo no touch para o conteúdo não colar no relógio. */
+@media (hover: none), (pointer: coarse) {
+  #slide-0 .cv3-hero { padding-top: 190px; }
+}
 #slide-0 .cv3-eyebrow {
   font-family: 'Montserrat', sans-serif;
   font-size: 13px; font-weight: 600 !important;
@@ -1421,7 +1426,9 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 /* Touch: ~1.85x para compensar a escala do canvas (794px → largura da tela) */
 @media (hover: none), (pointer: coarse) {
   section[id^="slide-toc"] .page-pad { padding-left: 40px !important; padding-right: 40px !important; padding-bottom: 200px !important; padding-top: 0 !important; }
-  section[id^="slide-toc"] .hdr { padding: 36px 40px 0 !important; }
+  /* Com viewport-fit=cover a imagem preenche o topo (atrás da barra de
+     status). O padding-top afasta o "Retornar" do relógio/bateria. */
+  section[id^="slide-toc"] .hdr { padding: 120px 40px 0 !important; }
   section[id^="slide-toc"] .toc-hdr-back { font-size: 24px !important; gap: 18px !important; }
   section[id^="slide-toc"] .toc-back-svg { width: 37px !important; height: 37px !important; }
   section[id^="slide-toc"] .hdr .lang-flags { gap: 18px !important; }

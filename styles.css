@@ -1265,7 +1265,9 @@ section[id^="slide-toc"].page {
    Base nos valores do mockup (escala de 430px); o bloco touch no fim
    multiplica ~1.85x para compensar a redução do canvas de 794px. */
 
-/* Header */
+/* Header: usa apenas o cabeçalho da própria página (.hdr). O top-dock
+   fixo do app.js fica oculto nas páginas de índice. */
+.top-dock--toc { display: none !important; }
 section[id^="slide-toc"] .hdr { color: #fff; }
 section[id^="slide-toc"] .toc-hdr-back {
   display: flex; align-items: center; gap: 10px;

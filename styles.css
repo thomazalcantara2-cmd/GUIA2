@@ -1346,6 +1346,16 @@ section[id^="slide-toc"] .tocm-label {
 }
 section[id^="slide-toc"] .tocm-label::after { content: ""; flex: 1; height: 1px; background: rgba(245,245,220,.25); }
 
+/* "Demais informações": bloco fixo e sempre visível (sem accordion),
+   com texto introdutório curto antes do grid consolidado de itens. */
+section[id^="slide-toc"] .tocm-more { margin-top: 8px; }
+section[id^="slide-toc"] .tocm-intro {
+  margin: 0 0 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13.5px; line-height: 1.5; font-weight: 400 !important;
+  color: rgba(255,255,255,.82);
+}
+
 /* Card destaque de energia */
 section[id^="slide-toc"] .tocm-energy {
   display: flex; align-items: center; gap: 16px; padding: 18px 20px;
@@ -1452,6 +1462,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   section[id^="slide-toc"] .tocm-wave { margin-top: 63px !important; gap: 26px !important; }
   section[id^="slide-toc"] .tocm-wave svg { width: 56px !important; height: 26px !important; }
   section[id^="slide-toc"] .tocm-label { margin: 55px 0 26px !important; font-size: 20px !important; gap: 18px !important; }
+  section[id^="slide-toc"] .tocm-intro { font-size: 25px !important; margin-bottom: 37px !important; }
   section[id^="slide-toc"] .tocm-energy { gap: 30px !important; padding: 33px 37px !important; border-radius: 37px !important; }
   section[id^="slide-toc"] .tocm-energy-ic { width: 96px !important; height: 96px !important; border-radius: 30px !important; font-size: 48px !important; }
   section[id^="slide-toc"] .tocm-energy-tx b { font-size: 35px !important; }

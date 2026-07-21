@@ -1248,239 +1248,204 @@ p.lead {
   line-height: 1.3;
 }
 
-/* ── Índice · background fotográfico com gradiente Stitch (exato) ──
-   linear-gradient(rgba(0,71,171,0) 0%, rgb(0,71,171) 50%, rgb(0,71,171) 100%)
-   sobre a foto, centralizada. */
+/* ══ Índice · "Guia Boas-Vindas" (handoff Claude Design) ══════════════
+   Substitui inteiramente a Variação A (vidro azul) por este design:
+   foto de capa com badge + saudação + título, folha creme com seções
+   "Sua estadia" (destaque de energia + grid) e "Ao redor", rodapé com
+   citação + contato.
+
+   Escala: o mockup original foi desenhado num frame de iPhone de
+   402px de largura (ios-frame.jsx). O canvas deste site é 794px,
+   reduzido a ~0.54x em telas de toque — então todo valor abaixo é o
+   valor original do mockup × ~1.85 (≈ 794/430), para que, depois da
+   redução do canvas no celular, o resultado bata com o tamanho real
+   pretendido no design. Por já nascer em "escala de canvas", não
+   precisa de um bloco @media (hover:none) separado como as versões
+   anteriores tinham. */
+
 section[id^="slide-toc"].page {
-  /* Dois planos:
-     1) fundo-indice-blur.png — foto da praia desfocada com fade de
-        TRANSPARÊNCIA (alpha) para baixo, então ela se dissolve revelando
-        a textura por baixo em vez de virar azul chapado;
-     2) fundo-mar.png — a mesma textura marinha (concha/estrela/tartaruga)
-        das demais páginas, ladrilhada verticalmente para cobrir toda a
-        altura da página do índice (que é bem mais alta que uma tela).
-     #0047AB só como base de segurança. */
-  background:
-    url('fundo-indice-blur.png') top center / 100% auto no-repeat,
-    url('fundo-mar.png') top center / 100% auto repeat-y,
-    #0047AB;
-  /* Ancora os planos ao conteúdo (rolam junto, não presos à tela). */
-  background-attachment: local, local;
+  background: #f7f1e6;
 }
+section[id^="slide-toc"] .page-pad { padding: 0; color: #153434; }
 
-/* ── Índice · Variação A: vidro azul moderno ──────────────────────
-   Header minimal (← Retornar | bandeiras), hero com logo + kicker +
-   saudação + divisor de onda, card destaque de energia, tiles bento
-   de vidro em 2 colunas por seção, contato verde WhatsApp.
-   Base nos valores do mockup (escala de 430px); o bloco touch no fim
-   multiplica ~1.85x para compensar a redução do canvas de 794px. */
-
-/* Header: usa apenas o cabeçalho da própria página (.hdr). O top-dock
-   fixo do app.js fica oculto nas páginas de índice. */
-.top-dock--toc { display: none !important; }
-section[id^="slide-toc"] .hdr { color: #fff; }
+/* Header/topo flutuante (voltar + idiomas), por cima da foto */
+section[id^="slide-toc"] .hdr {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 4;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: calc(52px + env(safe-area-inset-top, 0px)) 41px 0;
+  color: #fff;
+}
 section[id^="slide-toc"] .toc-hdr-back {
-  display: flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 74px; height: 74px; border-radius: 9999px;
+  background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   color: #fff; text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px; font-weight: 600 !important;
-  letter-spacing: .08em; text-transform: uppercase; opacity: .92;
 }
-section[id^="slide-toc"] .toc-back-svg { width: 20px; height: 20px; display: block; }
+section[id^="slide-toc"] .toc-hdr-back span { display: none; }
+section[id^="slide-toc"] .toc-back-svg { width: 33px; height: 33px; display: block; }
 section[id^="slide-toc"] .toc-hdr-right { display: flex; align-items: center; }
-section[id^="slide-toc"] .hdr .lang-flags { display: flex !important; align-items: center; gap: 10px; }
+section[id^="slide-toc"] .hdr .lang-flags { display: flex !important; align-items: center; gap: 15px; }
 section[id^="slide-toc"] .hdr .lang-flag {
-  display: block; width: 30px; height: 20px; padding: 0;
-  border: 1px solid rgba(255,255,255,.25); background: none;
-  border-radius: 4px; overflow: hidden; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,10,40,.4);
+  display: block; width: 58px; height: 37px; padding: 0;
+  border: 1px solid rgba(255,255,255,0.3); background: none;
+  border-radius: 9px; overflow: hidden; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.28);
 }
 section[id^="slide-toc"] .hdr .lang-flag svg { display: block; width: 100%; height: 100%; }
 
-/* page-pad */
-section[id^="slide-toc"] .page-pad {
-  text-align: left;
-  padding-top: 0; padding-left: 22px; padding-right: 22px; padding-bottom: 120px;
-  color: #fff;
+/* ── Foto de capa ──────────────────────────────────────────────── */
+section[id^="slide-toc"] .gbv-hero {
+  position: relative; overflow: hidden; min-height: 555px;
+  padding: 122px 41px 78px; box-sizing: border-box;
+}
+section[id^="slide-toc"] .gbv-hero-photo {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+}
+section[id^="slide-toc"] .gbv-hero-shade {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(9,45,49,0.72) 0%, rgba(11,70,74,0.58) 30%,
+    rgba(20,110,115,0.4) 60%, rgba(247,241,230,0.55) 92%, rgba(247,241,230,0.98) 100%);
+}
+section[id^="slide-toc"] .gbv-blob {
+  position: absolute; border-radius: 50%; z-index: 1;
+  animation: gbv-float-a 10s ease-in-out infinite;
+}
+section[id^="slide-toc"] .gbv-blob-a {
+  top: -93px; right: -111px; width: 407px; height: 407px;
+  background: radial-gradient(circle, rgba(255,255,255,0.28), transparent 70%);
+}
+section[id^="slide-toc"] .gbv-blob-b {
+  bottom: -130px; left: -102px; width: 481px; height: 481px;
+  background: radial-gradient(circle, rgba(212,175,120,0.26), transparent 70%);
+  animation-name: gbv-float-b; animation-duration: 12s;
+}
+@keyframes gbv-float-a { 0%,100%{transform:translate(0,0)} 50%{transform:translate(22px,-30px)} }
+@keyframes gbv-float-b { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-19px,22px)} }
+@media (prefers-reduced-motion: reduce) { section[id^="slide-toc"] .gbv-blob { animation: none; } }
+
+section[id^="slide-toc"] .gbv-hero-content { position: relative; z-index: 2; text-shadow: 0 2px 18px rgba(6,35,38,0.4); }
+section[id^="slide-toc"] .gbv-badge {
+  display: inline-flex; align-items: center; gap: 11px;
+  background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 11px 22px 11px 17px; border-radius: 9999px; margin-bottom: 37px;
+  white-space: nowrap;
+}
+section[id^="slide-toc"] .gbv-badge svg { width: 24px; height: 24px; flex: 0 0 auto; }
+section[id^="slide-toc"] .gbv-badge span {
+  font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
+  letter-spacing: 0.06em; color: #fff; text-transform: uppercase; white-space: nowrap;
+}
+section[id^="slide-toc"] .gbv-greeting {
+  font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 600 !important;
+  letter-spacing: 0.02em; color: rgba(255,255,255,0.82); margin-bottom: 9px;
+}
+section[id^="slide-toc"] .gbv-flat-title {
+  font-family: 'Newsreader', serif; font-weight: 500 !important;
+  font-size: 61px; line-height: 1.15; margin: 0 0 9px; color: #fff;
 }
 
-/* Hero */
-section[id^="slide-toc"] .tocm-hero { text-align: center; padding: 34px 0 10px; }
-section[id^="slide-toc"] .tocm-logo {
-  height: 108px; width: auto;
-  filter: brightness(0) invert(1) drop-shadow(0 8px 22px rgba(0,15,50,.45));
+/* ── Folha creme ───────────────────────────────────────────────── */
+section[id^="slide-toc"] .gbv-sheet {
+  position: relative; z-index: 3; margin-top: -48px;
+  background: #f7f1e6; border-radius: 52px 52px 0 0;
+  padding: 48px 37px 22px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
-section[id^="slide-toc"] .tocm-kicker {
-  margin-top: 26px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px; font-weight: 700 !important;
-  letter-spacing: .34em; text-transform: uppercase;
-  color: #F5F5DC; text-shadow: 0 2px 8px rgba(0,20,60,.6);
+section[id^="slide-toc"] .gbv-section-head { margin-bottom: 26px; }
+section[id^="slide-toc"] .gbv-section-label {
+  font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 11px;
+  color: #12838c;
 }
-section[id^="slide-toc"] .tocm-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 40px; line-height: 1.12; font-weight: 700 !important;
-  margin: 10px 0 0; color: #fff;
-  text-shadow: 0 3px 18px rgba(0,20,60,.55);
-}
-section[id^="slide-toc"] .tocm-title em { font-style: normal; color: #9CE8B9; }
-section[id^="slide-toc"] .tocm-sub {
-  margin: 10px 0 0;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13.5px; font-weight: 400 !important;
-  color: rgba(255,255,255,.85); letter-spacing: .02em;
-  text-shadow: 0 2px 8px rgba(0,20,60,.5);
-}
-section[id^="slide-toc"] .tocm-wave { display: flex; align-items: center; gap: 14px; margin: 34px 0 0; }
-section[id^="slide-toc"] .tocm-wave .ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4)); }
-section[id^="slide-toc"] .tocm-wave .ln:last-child { background: linear-gradient(90deg, rgba(255,255,255,.4), transparent); }
-section[id^="slide-toc"] .tocm-wave svg { width: 30px; height: 14px; opacity: .85; flex: 0 0 auto; }
-
-/* Rótulos de seção */
-section[id^="slide-toc"] .tocm-label {
-  margin: 30px 0 14px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px; font-weight: 700 !important;
-  letter-spacing: .26em; text-transform: uppercase; color: #F5F5DC;
-  display: flex; align-items: center; gap: 10px;
-}
-section[id^="slide-toc"] .tocm-label::after { content: ""; flex: 1; height: 1px; background: rgba(245,245,220,.25); }
-
-/* "Demais informações": bloco fixo e sempre visível (sem accordion),
-   com texto introdutório curto antes do grid consolidado de itens. */
-section[id^="slide-toc"] .tocm-more { margin-top: 8px; }
-section[id^="slide-toc"] .tocm-intro {
-  margin: 0 0 20px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13.5px; line-height: 1.5; font-weight: 400 !important;
-  color: rgba(255,255,255,.82);
+section[id^="slide-toc"] .gbv-section-label--coral { color: #d9784f; }
+section[id^="slide-toc"] .gbv-section-intro {
+  font-family: 'Manrope', sans-serif; font-size: 27px; line-height: 1.4;
+  font-weight: 500 !important; color: rgba(21,52,52,0.7);
 }
 
-/* Card destaque de energia */
-section[id^="slide-toc"] .tocm-energy {
-  display: flex; align-items: center; gap: 16px; padding: 18px 20px;
-  background: linear-gradient(120deg, rgba(255,255,255,.20), rgba(255,255,255,.08));
-  border: 1px solid rgba(255,255,255,.28); border-radius: 20px;
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 16px 34px -14px rgba(0,15,50,.55);
-  color: #fff; text-decoration: none; cursor: pointer;
-}
-section[id^="slide-toc"] .tocm-energy-ic {
-  flex: 0 0 auto; width: 52px; height: 52px; border-radius: 16px;
-  display: flex; align-items: center; justify-content: center; font-size: 26px;
-  background: linear-gradient(135deg, #FFD76A, #EE6C4D);
-  box-shadow: 0 8px 18px -6px rgba(238,108,77,.65);
-}
-section[id^="slide-toc"] .tocm-energy-tx b {
-  display: block; font-family: 'Playfair Display', serif;
-  font-size: 19px; font-weight: 600 !important; letter-spacing: .01em;
-}
-section[id^="slide-toc"] .tocm-energy-tx span {
-  display: block; margin-top: 3px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12.5px; font-weight: 400 !important; color: rgba(255,255,255,.8);
-}
-section[id^="slide-toc"] .tocm-energy-arrow { margin-left: auto; font-size: 20px; opacity: .85; }
+section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 8px; }
 
-/* Grade bento 2 colunas */
-section[id^="slide-toc"] .tocm-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-section[id^="slide-toc"] .tocm-tile {
-  position: relative; padding: 18px 16px 16px; border-radius: 20px;
-  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 14px 30px -14px rgba(0,15,50,.5);
-  display: flex; flex-direction: column; gap: 10px; min-height: 104px;
-  text-align: left; color: #fff; text-decoration: none; cursor: pointer;
-  transition: background .15s;
+/* Card de destaque (energia) */
+section[id^="slide-toc"] .gbv-card--hi {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #0f7a82, #2b9aa8);
+  border-radius: 44px; padding: 37px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 26px 52px rgba(10,80,86,0.24);
+  text-decoration: none; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-section[id^="slide-toc"] .tocm-tile:hover { background: rgba(255,255,255,.22); }
-section[id^="slide-toc"] .tocm-tile .em { font-size: 26px; line-height: 1; }
-section[id^="slide-toc"] .tocm-tile b {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px; font-weight: 600 !important; line-height: 1.3; letter-spacing: .01em;
-}
-section[id^="slide-toc"] .tocm-go {
-  position: absolute; right: 14px; top: 14px;
-  width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3);
-  display: flex; align-items: center; justify-content: center; font-size: 13px;
-}
-section[id^="slide-toc"] .tocm-tile--wide { grid-column: 1 / -1; flex-direction: row; align-items: center; min-height: 0; padding: 16px; gap: 14px; }
-section[id^="slide-toc"] .tocm-tile--wide b { font-size: 14.5px; }
-section[id^="slide-toc"] .tocm-tile--wide .em {
-  width: 46px; height: 46px; border-radius: 14px;
-  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+section[id^="slide-toc"] .gbv-card--hi:hover { transform: translateY(-6px); box-shadow: 0 33px 63px rgba(10,80,86,0.3); }
+section[id^="slide-toc"] .gbv-card--hi:active { transform: translateY(0) scale(.985); }
+section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center; gap: 26px; }
+section[id^="slide-toc"] .gbv-card--hi-ic {
+  width: 89px; height: 89px; border-radius: 28px; flex-shrink: 0;
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
   display: flex; align-items: center; justify-content: center;
-  font-size: 23px; flex: 0 0 auto;
 }
-section[id^="slide-toc"] .tocm-tile--wide .tocm-go { position: static; margin-left: auto; flex: 0 0 auto; }
+section[id^="slide-toc"] .gbv-card--hi-ic svg { width: 44px; height: 44px; }
+section[id^="slide-toc"] .gbv-card--hi b {
+  display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
+  font-size: 30px; color: #fff; margin-bottom: 4px;
+}
+section[id^="slide-toc"] .gbv-card--hi span {
+  font-family: 'Manrope', sans-serif; font-weight: 500 !important;
+  font-size: 23px; color: rgba(255,255,255,0.8);
+}
+section[id^="slide-toc"] .gbv-card--hi-arrow { width: 33px; height: 33px; flex: 0 0 auto; }
 
-/* Contato */
-section[id^="slide-toc"] .tocm-contact { margin-top: 34px; }
-section[id^="slide-toc"] .tocm-contact-btn {
-  display: flex; align-items: center; justify-content: center; gap: 12px;
-  padding: 17px 0; border-radius: 9999px; text-decoration: none; color: #fff;
-  font-family: 'Montserrat', sans-serif; font-weight: 700 !important; font-size: 15px;
-  background: linear-gradient(120deg, #2fae66, #1f9d55);
-  box-shadow: 0 16px 34px -12px rgba(31,157,85,.65);
-  border: 1px solid rgba(255,255,255,.25);
-  transition: transform .15s;
+/* Cards de vidro claro */
+section[id^="slide-toc"] .gbv-card {
+  position: relative;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 41px; padding: 30px;
+  display: flex; flex-direction: column; gap: 22px;
+  box-shadow: 0 15px 37px rgba(20,60,60,0.06);
+  text-decoration: none; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-section[id^="slide-toc"] .tocm-contact-btn:active { transform: scale(.98); }
-section[id^="slide-toc"] .tocm-contact-btn svg { width: 20px; height: 20px; flex: 0 0 auto; }
-section[id^="slide-toc"] .tocm-contact-note {
-  text-align: center; margin: 12px 0 0;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11.5px; font-weight: 600 !important;
-  letter-spacing: .06em; color: rgba(255,255,255,.65); text-transform: uppercase;
+section[id^="slide-toc"] .gbv-card:hover { transform: translateY(-6px); box-shadow: 0 26px 48px rgba(20,60,60,0.12); }
+section[id^="slide-toc"] .gbv-card:active { transform: translateY(0) scale(.98); }
+section[id^="slide-toc"] .gbv-card-ic {
+  width: 78px; height: 78px; border-radius: 24px;
+  background: linear-gradient(135deg, #12838c, #3aa8b8);
+  display: flex; align-items: center; justify-content: center;
 }
+section[id^="slide-toc"] .gbv-card--coral .gbv-card-ic { background: linear-gradient(135deg, #ef8c68, #f3a98a); }
+section[id^="slide-toc"] .gbv-card-ic svg { width: 37px; height: 37px; }
+section[id^="slide-toc"] .gbv-card b {
+  display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
+  font-size: 27px; color: #153434; margin-bottom: 4px;
+}
+section[id^="slide-toc"] .gbv-card span {
+  font-family: 'Manrope', sans-serif; font-weight: 500 !important;
+  font-size: 22px; color: rgba(21,52,52,0.55);
+}
+section[id^="slide-toc"] .gbv-card-arrow { position: absolute; top: 26px; right: 26px; width: 26px; height: 26px; }
 
-/* Legado */
+/* Rodapé */
+section[id^="slide-toc"] .gbv-footer {
+  margin-top: 52px; padding: 37px 7px 56px;
+  border-top: 1px solid rgba(21,52,52,0.09); text-align: center;
+}
+section[id^="slide-toc"] .gbv-footer-quote {
+  font-family: 'Newsreader', serif; font-style: italic; font-size: 26px;
+  color: rgba(21,52,52,0.6); margin-bottom: 13px;
+}
+section[id^="slide-toc"] .gbv-footer-note {
+  font-family: 'Manrope', sans-serif; font-size: 21px; font-weight: 500 !important;
+  color: rgba(21,52,52,0.45); text-decoration: none; display: inline-flex;
+  align-items: center; gap: 8px;
+}
+section[id^="slide-toc"] .gbv-footer-note svg { width: 24px; height: 24px; flex: 0 0 auto; opacity: .7; }
+section[id^="slide-toc"] .gbv-footer-note:hover { color: rgba(21,52,52,0.65); }
+
 section[id^="slide-toc"] .ftr { display: none !important; }
-
-/* Touch: ~1.85x para compensar a escala do canvas (794px → largura da tela) */
-@media (hover: none), (pointer: coarse) {
-  section[id^="slide-toc"] .page-pad {
-    padding-left: 40px !important; padding-right: 40px !important; padding-top: 0 !important;
-    /* Reduzido de 200px: sobrava uma faixa de azul liso abaixo do botão
-       de contato sem nenhum conteúdo. */
-    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
-  }
-  /* env() só é diferente de 0 em contexto fullscreen/standalone; numa
-     aba normal do Safari volta ao padding original (36px), sem inflar
-     a altura do conteúdo. */
-  section[id^="slide-toc"] .hdr { padding: calc(36px + env(safe-area-inset-top, 0px)) 40px 0 !important; }
-  section[id^="slide-toc"] .toc-hdr-back { font-size: 24px !important; gap: 18px !important; }
-  section[id^="slide-toc"] .toc-back-svg { width: 37px !important; height: 37px !important; }
-  section[id^="slide-toc"] .hdr .lang-flags { gap: 18px !important; }
-  section[id^="slide-toc"] .hdr .lang-flag { width: 56px !important; height: 37px !important; border-radius: 7px !important; }
-  section[id^="slide-toc"] .tocm-hero { padding: 63px 0 18px !important; }
-  section[id^="slide-toc"] .tocm-logo { height: 200px !important; }
-  section[id^="slide-toc"] .tocm-kicker { margin-top: 48px !important; font-size: 20px !important; }
-  section[id^="slide-toc"] .tocm-title { font-size: 74px !important; }
-  section[id^="slide-toc"] .tocm-sub { font-size: 25px !important; margin-top: 18px !important; }
-  section[id^="slide-toc"] .tocm-wave { margin-top: 63px !important; gap: 26px !important; }
-  section[id^="slide-toc"] .tocm-wave svg { width: 56px !important; height: 26px !important; }
-  section[id^="slide-toc"] .tocm-label { margin: 55px 0 26px !important; font-size: 20px !important; gap: 18px !important; }
-  section[id^="slide-toc"] .tocm-intro { font-size: 25px !important; margin-bottom: 37px !important; }
-  section[id^="slide-toc"] .tocm-energy { gap: 30px !important; padding: 33px 37px !important; border-radius: 37px !important; }
-  section[id^="slide-toc"] .tocm-energy-ic { width: 96px !important; height: 96px !important; border-radius: 30px !important; font-size: 48px !important; }
-  section[id^="slide-toc"] .tocm-energy-tx b { font-size: 35px !important; }
-  section[id^="slide-toc"] .tocm-energy-tx span { font-size: 23px !important; margin-top: 6px !important; }
-  section[id^="slide-toc"] .tocm-energy-arrow { font-size: 37px !important; }
-  section[id^="slide-toc"] .tocm-bento { gap: 26px !important; }
-  section[id^="slide-toc"] .tocm-tile { padding: 33px 30px 30px !important; border-radius: 37px !important; gap: 18px !important; min-height: 192px !important; }
-  section[id^="slide-toc"] .tocm-tile .em { font-size: 48px !important; }
-  section[id^="slide-toc"] .tocm-tile b { font-size: 26px !important; }
-  section[id^="slide-toc"] .tocm-go { right: 26px !important; top: 26px !important; width: 48px !important; height: 48px !important; font-size: 24px !important; }
-  section[id^="slide-toc"] .tocm-tile--wide { padding: 30px !important; gap: 26px !important; min-height: 0 !important; }
-  section[id^="slide-toc"] .tocm-tile--wide b { font-size: 27px !important; }
-  section[id^="slide-toc"] .tocm-tile--wide .em { width: 85px !important; height: 85px !important; border-radius: 26px !important; font-size: 43px !important; }
-  section[id^="slide-toc"] .tocm-contact { margin-top: 63px !important; }
-  section[id^="slide-toc"] .tocm-contact-btn { padding: 31px 0 !important; font-size: 28px !important; gap: 22px !important; }
-  section[id^="slide-toc"] .tocm-contact-btn svg { width: 37px !important; height: 37px !important; }
-  section[id^="slide-toc"] .tocm-contact-note { font-size: 21px !important; margin-top: 22px !important; }
-}
 
 /* ─── 03 HOST ──────────────────────────────────────────────────────── */
 .host-grid {

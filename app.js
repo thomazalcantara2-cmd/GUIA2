@@ -368,4 +368,11 @@
       setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // ── 6. Índice: saudação por horário (Bom dia / Boa tarde / Boa noite) ──
+  const h = new Date().getHours();
+  const greeting = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  document.querySelectorAll('[data-greeting]').forEach((el) => {
+    el.textContent = `${greeting}, seja bem-vindo(a)`;
+  });
 })();

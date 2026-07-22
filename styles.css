@@ -1459,6 +1459,11 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* ── Cabeçalho em degradê teal ─────────────────────────────────── */
 .gbi-hdr {
+  /* A .hdr global (topo do arquivo) define display:flex; sem este
+     reset, os filhos (.gbi-hdr-top, eyebrow, título) viravam itens de
+     uma única linha flex em vez de empilhar, e o título estourava
+     para fora da tela. */
+  display: block;
   position: relative; z-index: 1;
   background: linear-gradient(135deg, #0a5a61 0%, #12838c 60%, #3aa8b8 100%);
   padding: calc(37px + env(safe-area-inset-top, 0px)) 37px 41px;

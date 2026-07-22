@@ -1472,11 +1472,11 @@ section[id^="slide-toc"] .ftr { display: none !important; }
     url('foto-indice-hero.jpg');
   background-size: cover, cover;
   background-position: center, center 35%;
-  padding: calc(37px + env(safe-area-inset-top, 0px)) 37px 41px;
+  padding: calc(56px + env(safe-area-inset-top, 0px)) 37px 63px;
 }
 .gbi-hdr-top {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 19px; margin-bottom: 30px;
+  gap: 19px; margin-bottom: 41px;
 }
 .gbi-brand {
   display: block; height: 44px; width: auto;
@@ -1502,7 +1502,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   letter-spacing: 0.04em; color: #fff; white-space: nowrap;
 }
 .gbi-page-title {
-  font-family: 'Newsreader', serif; font-style: italic; font-weight: 500 !important;
+  font-family: 'Marcellus', serif; font-style: normal; font-weight: 400 !important;
   line-height: 1.12; margin: 0; color: #fff;
   text-shadow: 0 4px 20px rgba(6,35,38,0.5);
 }

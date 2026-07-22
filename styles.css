@@ -1789,6 +1789,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   text-decoration: none; transition: transform .15s;
 }
 .gbi-contact-btn svg { width: 30px; height: 30px; flex-shrink: 0; }
+.gbi-contact-btn--waze { background: linear-gradient(135deg, #ef8c68, #f3a98a); box-shadow: 0 19px 41px rgba(217,120,79,0.32); }
 .gbi-contact-btn:hover { transform: translateY(-3px); }
 .gbi-contact-btn:active { transform: translateY(0) scale(0.97); }
 

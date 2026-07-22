@@ -1465,14 +1465,18 @@ section[id^="slide-toc"] .ftr { display: none !important; }
      para fora da tela. */
   display: block;
   position: relative; z-index: 1;
-  /* Mesma foto do índice, em marca d'água (degradê azul quase opaco
-     por cima) — dá textura ao cabeçalho sem brigar com o texto branco. */
+  /* Mesma foto do índice, visível desde o topo da página — o degradê
+     azul é só um véu leve para dar contraste ao texto branco, não uma
+     faixa sólida cobrindo a foto. */
   background:
-    linear-gradient(135deg, rgba(0,49,133,.94) 0%, rgba(0,71,171,.9) 60%, rgba(26,95,196,.88) 100%),
+    linear-gradient(135deg, rgba(0,49,133,.55) 0%, rgba(0,71,171,.42) 60%, rgba(26,95,196,.38) 100%),
     url('foto-indice-hero.jpg');
   background-size: cover, cover;
   background-position: center, center 35%;
-  padding: calc(56px + env(safe-area-inset-top, 0px)) 37px 63px;
+  /* O cabeçalho cresce para baixo (mais respiro perto do título), não
+     para cima — o padding superior fica igual ao original para a foto
+     continuar começando exatamente no topo da página. */
+  padding: calc(37px + env(safe-area-inset-top, 0px)) 37px 63px;
 }
 .gbi-hdr-top {
   display: flex; align-items: center; justify-content: space-between;

@@ -1502,8 +1502,8 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   letter-spacing: 0.04em; color: #fff; white-space: nowrap;
 }
 .gbi-page-title {
-  font-family: 'Marcellus', serif; font-style: normal; font-weight: 400 !important;
-  line-height: 1.12; margin: 0; color: #fff;
+  font-family: 'Playfair Display', serif; font-style: normal; font-weight: 700 !important;
+  letter-spacing: -0.02em; line-height: 1.12; margin: 0; color: #fff;
   text-shadow: 0 4px 20px rgba(6,35,38,0.5);
 }
 .gbi-page-title.sz-1 { font-size: 56px; }

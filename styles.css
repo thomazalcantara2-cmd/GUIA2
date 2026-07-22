@@ -1479,8 +1479,8 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   gap: 19px; margin-bottom: 30px;
 }
 .gbi-brand {
-  font-family: 'Newsreader', serif; font-style: italic; font-weight: 500 !important;
-  font-size: 30px; color: #fff; white-space: nowrap;
+  display: block; height: 44px; width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,10,30,.35));
 }
 .gbi-hdr-right { display: flex; align-items: center; gap: 15px; }
 .gbi-hdr .lang-flags { display: flex !important; align-items: center; gap: 15px; }

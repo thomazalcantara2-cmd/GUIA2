@@ -1350,7 +1350,7 @@ section[id^="slide-toc"] .gbv-flat-title {
 /* ── Folha creme ───────────────────────────────────────────────── */
 section[id^="slide-toc"] .gbv-sheet {
   position: relative; z-index: 3; margin-top: -48px;
-  background: #f2e3c4; border-radius: 52px 52px 0 0;
+  background: #ecdcb4; border-radius: 52px 52px 0 0;
   padding: 48px 37px 22px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
 section[id^="slide-toc"] .gbv-section-head { margin-bottom: 26px; }
@@ -1370,7 +1370,7 @@ section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1
 /* Card de destaque (energia) */
 section[id^="slide-toc"] .gbv-card--hi {
   grid-column: span 2;
-  background: linear-gradient(135deg, #00acc1, #26c6da);
+  background: linear-gradient(135deg, #063f49, #0e7d8a);
   border-radius: 44px; padding: 37px;
   display: flex; align-items: center; justify-content: space-between;
   box-shadow: 0 26px 52px rgba(10,80,86,0.24);
@@ -1399,7 +1399,7 @@ section[id^="slide-toc"] .gbv-card--hi-arrow { width: 33px; height: 33px; flex: 
 /* Cards em turquesa vivo */
 section[id^="slide-toc"] .gbv-card {
   position: relative;
-  background: linear-gradient(135deg, #00acc1, #26c6da);
+  background: linear-gradient(135deg, #063f49, #0e7d8a);
   border: 1px solid rgba(255,255,255,0.28);
   border-radius: 41px; padding: 30px;
   display: flex; flex-direction: column; gap: 22px;

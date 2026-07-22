@@ -1472,7 +1472,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
    Escala: mockup em iPhone 402px × ~1.85 (≈794/430) → canvas-space,
    mesma convenção usada no redesign do índice. Escopo: .rc-page. */
 
-.rc-page.page { background: #f7f1e6; }
+.rc-page.page { background: #f6f4ec; }
 .rc-page .page-pad { padding: 0; color: #153434; }
 
 
@@ -1538,7 +1538,13 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 .gbi-page-title.sz-3 { font-size: 48px; }
 
 /* ── Corpo creme com textura marinha sutil ─────────────────────── */
-.gbi-body { position: relative; padding: 41px 37px 56px; }
+/* Cantos arredondados no topo, sobrepondo o cabeçalho — mesmo estilo
+   do "gbv-sheet" usado no índice. */
+.gbi-body {
+  position: relative; z-index: 3; margin-top: -48px;
+  background: #f6f4ec; border-radius: 52px 52px 0 0;
+  padding: 63px 37px 56px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
+}
 .gbi-texture {
   position: absolute; inset: 0; z-index: 0;
   background-image: url('textura-secoes-teal.png');

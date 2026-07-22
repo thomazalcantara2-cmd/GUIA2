@@ -219,7 +219,7 @@
       const label = sec.getAttribute('data-label') || '';
       const isToc = /[ÍI]ndice/i.test(label);
       const isInternal = sec.classList.contains('rc-page');
-      setThemeColor(isToc ? '#00337A' : isInternal ? '#003185' : '#0047AB');
+      setThemeColor(isToc ? '#00337A' : isInternal ? '#0047AB' : '#0047AB');
       topDock.style.visibility = 'hidden';
     };
 

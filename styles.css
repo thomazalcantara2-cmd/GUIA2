@@ -1301,7 +1301,10 @@ section[id^="slide-toc"] .hdr .lang-flag svg { display: block; width: 100%; heig
 /* ── Foto de capa ──────────────────────────────────────────────── */
 section[id^="slide-toc"] .gbv-hero {
   position: relative; overflow: hidden; min-height: 555px;
-  padding: 122px 41px 78px; box-sizing: border-box;
+  /* padding-top maior que antes: a logo saiu do fluxo do texto (fica
+     centralizada na foto via .gbv-hero-logo-wrap), então a saudação
+     precisa de espaço extra no topo para não colidir com ela. */
+  padding: 340px 41px 78px; box-sizing: border-box;
 }
 section[id^="slide-toc"] .gbv-hero-photo {
   position: absolute; inset: 0; z-index: 0;
@@ -1331,10 +1334,15 @@ section[id^="slide-toc"] .gbv-blob-b {
 @media (prefers-reduced-motion: reduce) { section[id^="slide-toc"] .gbv-blob { animation: none; } }
 
 section[id^="slide-toc"] .gbv-hero-content { position: relative; z-index: 2; text-shadow: 0 2px 18px rgba(6,35,38,0.4); }
-/* Logo Di Maré no lugar do antigo selo "Porto de Galinhas · PE" */
+/* Logo Di Maré centralizada no meio da foto (fora do fluxo do texto,
+   que continua embaixo em .gbv-hero-content). */
+section[id^="slide-toc"] .gbv-hero-logo-wrap {
+  position: absolute; top: 235px; left: 50%; transform: translate(-50%, -50%);
+  z-index: 2; pointer-events: none;
+}
 section[id^="slide-toc"] .gbv-logo {
-  display: block; height: 140px; width: auto; margin: 0 0 37px;
-  filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0,10,40,.4));
+  display: block; height: 165px; width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 6px 18px rgba(0,10,40,.45));
 }
 section[id^="slide-toc"] .gbv-greeting {
   font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 600 !important;

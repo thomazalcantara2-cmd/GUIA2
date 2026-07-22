@@ -2735,7 +2735,6 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   font-family: var(--rc-sans);
   color: var(--rc-ink);
 }
-.rc-page .hdr { display: none; }
 .rc-page .page-pad { padding: 0; display: block; }
 
 .rc-hero {

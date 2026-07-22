@@ -82,10 +82,13 @@
   document.querySelectorAll('section.page').forEach((sec) => {
     const label = sec.getAttribute('data-label') || '';
     const id = sec.id || '';
-    // Skip: cover, flat select page, and all 3 TOC pages
+    // Skip: cover, flat select page, all 3 TOC pages, and the internal
+    // content pages (.rc-page) — those carry their own "MENU" button in
+    // their gbi-hdr markup (wired up below), so no injected .btn-index.
     if (
       sec.classList.contains('page-cover') ||
       id === 'slide-select' ||
+      sec.classList.contains('rc-page') ||
       /[ÍI]ndice/i.test(label)
     ) return;
 
@@ -196,35 +199,28 @@
 
     // On iOS Safari the strip behind the status bar/address bar (outside
     // our own page) is tinted by the browser using this meta tag, not by
-    // anything we can paint. Index pages open on a bright turquoise photo
-    // (fundo-indice-blur.png), so that strip otherwise reads as a
-    // mismatched navy band; every other page sits on the navy ocean-deep
-    // background already, which is the tag's default. Swapping the tag
-    // per page gives the illusion the photo runs all the way to the top.
+    // anything we can paint. Each page family opens on a different top
+    // color (índice: bright cyan photo; páginas internas: teal header
+    // gradient; cover/menu: navy), so that strip otherwise reads as a
+    // mismatched band. Swapping the tag per page gives the illusion the
+    // page's own background runs all the way to the top.
     const themeColorMeta = document.getElementById('meta-theme-color');
-    const setThemeColor = (isToc) => {
-      if (themeColorMeta) themeColorMeta.setAttribute('content', isToc ? '#02DCFF' : '#0047AB');
+    const setThemeColor = (color) => {
+      if (themeColorMeta) themeColorMeta.setAttribute('content', color);
     };
 
+    // Every page family now carries its own in-page header (índice pages
+    // and the internal content pages, .rc-page, both got a dedicated
+    // redesign) — the floating top-dock has no page left to show on, so
+    // it's kept only as a helper for language-flag injection/theme-color
+    // and always stays hidden.
     const syncDocks = (sec) => {
       if (!sec) return;
       const label = sec.getAttribute('data-label') || '';
-      const id = sec.id || '';
-      setThemeColor(/[ÍI]ndice/i.test(label));
-      if (sec.classList.contains('page-cover') || id === 'slide-select') {
-        topDock.style.visibility = 'hidden';
-        return;
-      }
-      topDock.style.visibility = '';
       const isToc = /[ÍI]ndice/i.test(label);
-      topDock.classList.toggle('top-dock--toc', isToc);
-      if (isToc) {
-        topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Retornar';
-        topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(0); };
-      } else {
-        topIndexBtn.innerHTML = '<span aria-hidden="true">↩</span> Retornar ao menu';
-        topIndexBtn.onclick = (e) => { e.preventDefault(); jumpTo(getTocIndex()); };
-      }
+      const isInternal = sec.classList.contains('rc-page');
+      setThemeColor(isToc ? '#02DCFF' : isInternal ? '#12838C' : '#0047AB');
+      topDock.style.visibility = 'hidden';
     };
 
     syncDocks(document.querySelector('section.page[data-deck-active]'));
@@ -374,5 +370,17 @@
   const greeting = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
   document.querySelectorAll('[data-greeting]').forEach((el) => {
     el.textContent = `${greeting}, seja bem-vindo(a)`;
+  });
+
+  // ── 7. Páginas internas: botão "MENU" no cabeçalho volta ao índice ─────
+  document.querySelectorAll('.gbi-menu-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => { e.preventDefault(); jumpTo(getTocIndex()); });
+  });
+
+  // ── 8. Cartões de conferência do check-out: marca visual ao concluir ───
+  document.querySelectorAll('.gbi-check-item input[type="checkbox"]').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      cb.closest('.gbi-check-item').classList.toggle('is-checked', cb.checked);
+    });
   });
 })();

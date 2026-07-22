@@ -329,8 +329,6 @@
   width: 36px; height: 26px; border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,.25);
 }
-/* TOC ("Índice") pages: bigger flags, same scale-up ratio (~1.5x) */
-.top-dock--toc .top-dock-flags .lang-flag { width: 54px; height: 39px; }
 .top-dock-index {
   display: inline-flex;
   align-items: center;
@@ -1268,10 +1266,6 @@ section[id^="slide-toc"].page {
 }
 section[id^="slide-toc"] .page-pad { padding: 0; color: #153434; }
 
-/* Sem cabeçalho móvel/flutuante do app.js (top-dock) nas páginas de
-   índice: só o cabeçalho da própria página (voltar + idiomas). */
-.top-dock--toc { display: none !important; }
-
 /* Header/topo flutuante (voltar + idiomas), por cima da foto */
 section[id^="slide-toc"] .hdr {
   position: absolute; top: 0; left: 0; right: 0; z-index: 4;
@@ -1452,6 +1446,333 @@ section[id^="slide-toc"] .gbv-footer-note:hover { color: rgba(21,52,52,0.65); }
 
 section[id^="slide-toc"] .ftr { display: none !important; }
 
+/* ══ Páginas internas · "Guia Hóspede" (handoff Claude Design) ════════
+   Mesmo sistema visual das páginas de índice (Newsreader + Manrope,
+   teal/coral/creme, glass cards): cabeçalho em degradê teal substitui
+   a foto-hero escura; corpo creme com textura marinha sutil.
+   Escala: mockup em iPhone 402px × ~1.85 (≈794/430) → canvas-space,
+   mesma convenção usada no redesign do índice. Escopo: .rc-page. */
+
+.rc-page.page { background: #f7f1e6; }
+.rc-page .page-pad { padding: 0; color: #153434; }
+
+
+/* ── Cabeçalho em degradê teal ─────────────────────────────────── */
+.gbi-hdr {
+  position: relative; z-index: 1;
+  background: linear-gradient(135deg, #0a5a61 0%, #12838c 60%, #3aa8b8 100%);
+  padding: calc(37px + env(safe-area-inset-top, 0px)) 37px 41px;
+}
+.gbi-hdr-top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 19px; margin-bottom: 30px;
+}
+.gbi-brand {
+  font-family: 'Newsreader', serif; font-style: italic; font-weight: 500 !important;
+  font-size: 30px; color: #fff; white-space: nowrap;
+}
+.gbi-hdr-right { display: flex; align-items: center; gap: 15px; }
+.gbi-hdr .lang-flags { display: flex !important; align-items: center; gap: 15px; }
+.gbi-hdr .lang-flag {
+  display: block; width: 48px; height: 48px; padding: 0;
+  border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.18);
+  border-radius: 50%; overflow: hidden; cursor: pointer;
+}
+.gbi-hdr .lang-flag svg { display: block; width: 100%; height: 100%; }
+.gbi-menu-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
+  padding: 11px 19px; border-radius: 9999px; text-decoration: none;
+  white-space: nowrap; cursor: pointer;
+}
+.gbi-menu-btn svg { width: 22px; height: 22px; flex: 0 0 auto; }
+.gbi-menu-btn span {
+  font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 700 !important;
+  letter-spacing: 0.04em; color: #fff; white-space: nowrap;
+}
+.gbi-page-eyebrow {
+  font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 700 !important;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+  margin-bottom: 11px;
+}
+.gbi-page-title {
+  font-family: 'Newsreader', serif; font-style: italic; font-weight: 500 !important;
+  line-height: 1.12; margin: 0; color: #fff;
+}
+.gbi-page-title.sz-1 { font-size: 56px; }
+.gbi-page-title.sz-2 { font-size: 52px; }
+.gbi-page-title.sz-3 { font-size: 48px; }
+
+/* ── Corpo creme com textura marinha sutil ─────────────────────── */
+.gbi-body { position: relative; padding: 41px 37px 56px; }
+.gbi-texture {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('textura-secoes-teal.png');
+  background-size: 629px auto; background-repeat: repeat; opacity: 0.5;
+}
+.gbi-content { position: relative; z-index: 1; }
+
+.gbi-sec-label {
+  font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
+  letter-spacing: 0.08em; text-transform: uppercase; color: #d9784f;
+  margin: 0 0 22px;
+}
+.gbi-sec-label--teal { color: #12838c; }
+.gbi-sec { margin-bottom: 41px; }
+.gbi-sec:last-child { margin-bottom: 0; }
+.gbi-lead {
+  font-family: 'Manrope', sans-serif; font-size: 25px; line-height: 1.5;
+  font-weight: 500 !important; color: rgba(21,52,52,0.7); margin: 0 0 33px;
+  max-width: none;
+}
+
+/* ── Lista de itens (ícone + texto) ────────────────────────────── */
+.gbi-list { display: flex; flex-direction: column; }
+.gbi-list-item {
+  display: flex; gap: 22px; padding: 26px 7px;
+  border-bottom: 1px solid rgba(21,52,52,0.09);
+}
+.gbi-list-item:last-child { border-bottom: none; padding-bottom: 7px; }
+.gbi-list-ic {
+  width: 56px; height: 56px; border-radius: 19px; flex-shrink: 0;
+  background: linear-gradient(135deg, #12838c, #3aa8b8);
+  display: flex; align-items: center; justify-content: center;
+}
+.gbi-list-ic svg { width: 26px; height: 26px; }
+.gbi-list-text {
+  font-family: 'Manrope', sans-serif; font-size: 25px; line-height: 1.4;
+  font-weight: 500 !important; color: #153434; padding-top: 9px;
+}
+.gbi-list-text b { color: #12838c; }
+
+/* ── Cartão Wi-Fi ───────────────────────────────────────────────── */
+.gbi-wifi {
+  background: linear-gradient(135deg, #0f7a82, #2b9aa8);
+  border-radius: 41px; padding: 33px;
+  box-shadow: 0 22px 48px rgba(10,80,86,0.22);
+}
+.gbi-wifi-row { display: flex; align-items: flex-start; gap: 22px; margin-bottom: 26px; }
+.gbi-wifi-ic {
+  width: 70px; height: 70px; border-radius: 22px; flex-shrink: 0;
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.gbi-wifi-ic svg { width: 33px; height: 33px; }
+.gbi-wifi-label {
+  font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 700 !important;
+  letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+  margin-bottom: 6px;
+}
+.gbi-wifi-value {
+  font-family: 'Manrope', sans-serif; font-size: 28px; font-weight: 700 !important; color: #fff;
+}
+.gbi-wifi-divider { height: 1px; background: rgba(255,255,255,0.18); margin-bottom: 26px; }
+.gbi-wifi-bottom { display: flex; align-items: center; justify-content: space-between; gap: 19px; }
+.gbi-copy-btn {
+  background: rgba(21,52,52,0.92); color: #fff;
+  font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
+  letter-spacing: 0.04em; padding: 17px 26px; border-radius: 9999px;
+  border: none; cursor: pointer; flex-shrink: 0; transition: background .15s;
+}
+.gbi-copy-btn:hover { background: #153434; }
+.gbi-copy-btn:active { transform: scale(0.96); }
+.gbi-copy-btn.copied { background: #12838c; }
+
+/* ── Passos numerados (com miniatura) ──────────────────────────── */
+.gbi-steps { display: flex; flex-direction: column; gap: 19px; }
+.gbi-step {
+  display: flex; gap: 22px; align-items: flex-start;
+  background: rgba(255,255,255,0.82); backdrop-filter: blur(26px); -webkit-backdrop-filter: blur(26px);
+  border: 1px solid rgba(255,255,255,0.65); border-radius: 33px; padding: 26px;
+  box-shadow: 0 11px 30px rgba(20,60,60,0.06);
+}
+.gbi-step-num {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  background: #ef8c68; color: #fff;
+  font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 800 !important;
+  display: flex; align-items: center; justify-content: center;
+}
+.gbi-step-text {
+  flex: 1; font-family: 'Manrope', sans-serif; font-size: 23px; line-height: 1.4;
+  font-weight: 500 !important; color: #153434; padding-top: 4px;
+}
+.gbi-step-text b { font-weight: 700 !important; }
+.gbi-step-code {
+  color: #ef8c68; font-weight: 800 !important; display: block;
+  font-size: 33px; letter-spacing: 0.1em; margin-top: 4px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+.gbi-step-thumb {
+  width: 104px; height: 104px; flex-shrink: 0; border-radius: 19px;
+  object-fit: cover; background: #f2ead9;
+}
+
+/* ── Aviso / alerta ─────────────────────────────────────────────── */
+.gbi-alert {
+  display: flex; gap: 19px; align-items: flex-start;
+  background: rgba(217,120,79,0.1); border: 1px solid rgba(217,120,79,0.25);
+  border-radius: 30px; padding: 26px;
+}
+.gbi-alert svg { width: 33px; height: 33px; flex-shrink: 0; margin-top: 2px; }
+.gbi-alert-text {
+  font-family: 'Manrope', sans-serif; font-size: 23px; font-weight: 600 !important;
+  color: #7a3b20; line-height: 1.4;
+}
+.gbi-alert-text b { font-weight: 800 !important; }
+
+/* ── Cartão de texto simples (glass) ────────────────────────────── */
+.gbi-card {
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.6); border-radius: 33px; padding: 26px;
+  box-shadow: 0 15px 37px rgba(20,60,60,0.06);
+  font-family: 'Manrope', sans-serif; font-size: 25px; line-height: 1.5;
+  font-weight: 500 !important; color: rgba(21,52,52,0.75);
+}
+.gbi-card b { color: #153434; font-weight: 700 !important; }
+
+/* ── Mapa ───────────────────────────────────────────────────────── */
+.gbi-map {
+  border-radius: 33px; overflow: hidden; height: 370px;
+  box-shadow: 0 15px 37px rgba(20,60,60,0.1);
+  border: 1px solid rgba(255,255,255,0.6);
+}
+.gbi-map iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* ── Cartões de regra (✓ / ✕) ───────────────────────────────────── */
+.gbi-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.gbi-rule {
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.6); border-radius: 33px; padding: 26px;
+  box-shadow: 0 11px 26px rgba(20,60,60,0.06);
+}
+.gbi-rule-mark {
+  width: 41px; height: 41px; border-radius: 50%; margin-bottom: 15px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800 !important; color: #fff;
+}
+.gbi-rule--no .gbi-rule-mark { background: #d9784f; }
+.gbi-rule--yes .gbi-rule-mark { background: #12838c; }
+.gbi-rule-title {
+  font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 700 !important;
+  color: #153434; margin-bottom: 6px;
+}
+.gbi-rule-desc {
+  font-family: 'Manrope', sans-serif; font-size: 19px; line-height: 1.4;
+  font-weight: 500 !important; color: rgba(21,52,52,0.6);
+}
+
+/* ── Checklist (check-out) ──────────────────────────────────────── */
+.gbi-checklist { display: flex; flex-direction: column; }
+.gbi-check-item {
+  display: flex; align-items: flex-start; gap: 19px; padding: 19px 7px;
+  border-bottom: 1px solid rgba(21,52,52,0.09); cursor: pointer;
+}
+.gbi-check-item:last-child { border-bottom: none; }
+.gbi-check-item input { position: absolute; opacity: 0; width: 41px; height: 41px; cursor: pointer; }
+.gbi-check-box {
+  width: 41px; height: 41px; border-radius: 13px; flex-shrink: 0;
+  border: 2px solid rgba(21,52,52,0.25); background: rgba(255,255,255,0.6);
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  transition: background .15s, border-color .15s;
+}
+.gbi-check-box svg { width: 24px; height: 24px; opacity: 0; transition: opacity .15s; }
+.gbi-check-item input:checked ~ .gbi-check-box { background: #12838c; border-color: #12838c; }
+.gbi-check-item input:checked ~ .gbi-check-box svg { opacity: 1; }
+.gbi-check-text {
+  font-family: 'Manrope', sans-serif; font-size: 24px; line-height: 1.4;
+  font-weight: 600 !important; color: #153434;
+}
+.gbi-check-text span {
+  display: block; font-weight: 500 !important; color: rgba(21,52,52,0.55); font-size: 20px; margin-top: 2px;
+}
+.gbi-check-item.is-checked .gbi-check-text { color: rgba(21,52,52,0.4); text-decoration: line-through; }
+.gbi-check-item.is-checked .gbi-check-text span { text-decoration: none; }
+
+/* ── Atividades / passeios (bento) ──────────────────────────────── */
+.gbi-activities { display: grid; grid-template-columns: 1fr 1fr; gap: 19px; }
+.gbi-act {
+  position: relative; overflow: hidden; border-radius: 33px; min-height: 220px;
+  padding: 26px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
+  background-size: cover; background-position: center;
+  box-shadow: 0 15px 33px rgba(20,60,60,0.14);
+}
+.gbi-act--wide { grid-column: 1 / -1; min-height: 260px; }
+.gbi-act-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,45,49,0.05) 30%, rgba(9,45,49,0.82) 100%); }
+.gbi-act-in { position: relative; z-index: 1; }
+.gbi-act-chip {
+  display: inline-flex; align-self: flex-start; margin-bottom: 11px;
+  background: rgba(217,120,79,0.92); color: #fff;
+  font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 800 !important;
+  letter-spacing: 0.04em; padding: 6px 13px; border-radius: 9999px;
+}
+.gbi-act-name {
+  font-family: 'Manrope', sans-serif; font-size: 26px; font-weight: 700 !important;
+  color: #fff; margin-bottom: 4px;
+}
+.gbi-act-desc {
+  font-family: 'Manrope', sans-serif; font-size: 19px; line-height: 1.4;
+  font-weight: 500 !important; color: rgba(255,255,255,0.88);
+}
+.gbi-act-tag {
+  position: absolute; top: 19px; right: 19px; z-index: 1;
+  background: rgba(255,255,255,0.22); backdrop-filter: blur(6px);
+  color: #fff; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700 !important;
+  padding: 6px 13px; border-radius: 9999px; text-transform: uppercase;
+}
+
+/* ── Restaurantes ───────────────────────────────────────────────── */
+.gbi-dine { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.gbi-dine-card {
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.6); border-radius: 26px; padding: 19px;
+  box-shadow: 0 9px 20px rgba(20,60,60,0.06);
+}
+.gbi-dine-name {
+  font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
+  color: #153434; margin-bottom: 6px; line-height: 1.25;
+}
+.gbi-dine-since {
+  display: inline-block; margin-left: 6px; font-size: 15px; font-weight: 600 !important;
+  color: #12838c; text-transform: none;
+}
+.gbi-dine-desc {
+  font-family: 'Manrope', sans-serif; font-size: 17px; line-height: 1.4;
+  font-weight: 500 !important; color: rgba(21,52,52,0.6);
+}
+
+/* ── Contato (WhatsApp) ─────────────────────────────────────────── */
+.gbi-contact-wrap { display: flex; justify-content: center; margin-top: 52px; }
+.gbi-contact-btn {
+  display: inline-flex; align-items: center; gap: 15px;
+  background: #25d366; color: #fff;
+  font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 700 !important;
+  padding: 22px 37px; border-radius: 9999px;
+  box-shadow: 0 19px 41px rgba(37,211,102,0.32);
+  text-decoration: none; transition: transform .15s;
+}
+.gbi-contact-btn svg { width: 30px; height: 30px; flex-shrink: 0; }
+.gbi-contact-btn:hover { transform: translateY(-3px); }
+.gbi-contact-btn:active { transform: translateY(0) scale(0.97); }
+
+/* ── Página "Obrigado" (encerramento) ───────────────────────────── */
+.gbi-thanks { text-align: center; padding: 15px 0 0; }
+.gbi-thanks-kicker {
+  font-family: 'Newsreader', serif; font-style: italic; font-size: 33px;
+  color: #d9784f; margin-bottom: 19px;
+}
+.gbi-thanks-title {
+  font-family: 'Newsreader', serif; font-style: italic; font-weight: 500 !important;
+  font-size: 52px; line-height: 1.15; color: #153434; margin: 0 0 26px;
+}
+.gbi-thanks-text {
+  font-family: 'Manrope', sans-serif; font-size: 25px; line-height: 1.6;
+  font-weight: 500 !important; color: rgba(21,52,52,0.7); margin: 0 0 33px;
+}
+.gbi-thanks-stars { font-size: 41px; letter-spacing: 9px; color: #d9784f; margin-bottom: 22px; }
+.gbi-thanks-note {
+  font-family: 'Manrope', sans-serif; font-size: 23px; color: rgba(21,52,52,0.7);
+  font-weight: 500 !important; margin: 0;
+}
 /* ─── 03 HOST ──────────────────────────────────────────────────────── */
 .host-grid {
   display: grid; grid-template-columns: 280px 1fr;

@@ -1465,7 +1465,13 @@ section[id^="slide-toc"] .ftr { display: none !important; }
      para fora da tela. */
   display: block;
   position: relative; z-index: 1;
-  background: linear-gradient(135deg, #0a5a61 0%, #12838c 60%, #3aa8b8 100%);
+  /* Mesma foto do índice, em marca d'água (degradê teal quase opaco
+     por cima) — dá textura ao cabeçalho sem brigar com o texto branco. */
+  background:
+    linear-gradient(135deg, rgba(10,90,97,.94) 0%, rgba(18,131,140,.9) 60%, rgba(58,168,184,.88) 100%),
+    url('foto-indice-hero.jpg');
+  background-size: cover, cover;
+  background-position: center, center 35%;
   padding: calc(37px + env(safe-area-inset-top, 0px)) 37px 41px;
 }
 .gbi-hdr-top {
@@ -1495,14 +1501,10 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 700 !important;
   letter-spacing: 0.04em; color: #fff; white-space: nowrap;
 }
-.gbi-page-eyebrow {
-  font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 700 !important;
-  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7);
-  margin-bottom: 11px;
-}
 .gbi-page-title {
   font-family: 'Newsreader', serif; font-style: italic; font-weight: 500 !important;
   line-height: 1.12; margin: 0; color: #fff;
+  text-shadow: 0 4px 20px rgba(6,35,38,0.5);
 }
 .gbi-page-title.sz-1 { font-size: 56px; }
 .gbi-page-title.sz-2 { font-size: 52px; }
@@ -1517,14 +1519,12 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 }
 .gbi-content { position: relative; z-index: 1; }
 
-.gbi-sec-label {
-  font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
-  letter-spacing: 0.08em; text-transform: uppercase; color: #d9784f;
-  margin: 0 0 22px;
-}
-.gbi-sec-label--teal { color: #12838c; }
 .gbi-sec { margin-bottom: 41px; }
 .gbi-sec:last-child { margin-bottom: 0; }
+/* Sem o rótulo "NN — ..." para separar blocos dentro da mesma página
+   (ex.: Estacionamento/Fechadura têm 2 .gbi-sec), um respiro extra no
+   topo do segundo bloco em diante substitui essa marcação visual. */
+.gbi-sec + .gbi-sec { margin-top: 15px; }
 .gbi-lead {
   font-family: 'Manrope', sans-serif; font-size: 25px; line-height: 1.5;
   font-weight: 500 !important; color: rgba(21,52,52,0.7); margin: 0 0 33px;

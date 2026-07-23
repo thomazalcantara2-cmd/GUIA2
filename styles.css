@@ -1451,7 +1451,7 @@ section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center
 section[id^="slide-toc"] .gbv-card--hi-ic {
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 74px; line-height: 1;
+  font-size: 96px; line-height: 1;
 }
 section[id^="slide-toc"] .gbv-card--hi b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
@@ -1479,7 +1479,7 @@ section[id^="slide-toc"] .gbv-card:active { transform: translateY(0) scale(.98);
 section[id^="slide-toc"] .gbv-card-ic {
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 64px; line-height: 1;
+  font-size: 84px; line-height: 1;
 }
 section[id^="slide-toc"] .gbv-card b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;

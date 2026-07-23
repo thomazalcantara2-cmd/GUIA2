@@ -1418,7 +1418,7 @@ section[id^="slide-toc"] .gbv-flat-title {
 /* ── Folha creme ───────────────────────────────────────────────── */
 section[id^="slide-toc"] .gbv-sheet {
   position: relative; z-index: 3; margin-top: -48px;
-  background: #f6f4ec; border-radius: 52px 52px 0 0;
+  background: #f4f5fa; border-radius: 52px 52px 0 0;
   padding: 48px 37px 22px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
 section[id^="slide-toc"] .gbv-section-head { margin-bottom: 26px; }
@@ -1462,7 +1462,12 @@ section[id^="slide-toc"] .gbv-card--hi span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
   font-size: calc(20px * var(--text-scale, 1)); color: #8891a5;
 }
-section[id^="slide-toc"] .gbv-card--hi-arrow { width: 26px; height: 26px; flex: 0 0 auto; }
+section[id^="slide-toc"] .gbv-card--hi-arrow-wrap {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%;
+  background: #eef0f5;
+  display: flex; align-items: center; justify-content: center;
+}
+section[id^="slide-toc"] .gbv-card--hi-arrow { width: 20px; height: 20px; flex: 0 0 auto; }
 
 /* Cards brancos com selo de ícone colorido */
 section[id^="slide-toc"] .gbv-card {

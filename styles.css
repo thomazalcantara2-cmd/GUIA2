@@ -1498,11 +1498,11 @@ section[id^="slide-toc"] .gbv-card-arrow { position: absolute; top: 30px; right:
 
 /* Selos de ícone coloridos (pastel de fundo + emoticon), um tom por
    categoria — mesmas cores/formato usados no card de energia. */
-section[id^="slide-toc"] .gbv-ic--yellow { background: #FEF8E2; color: #C69922; }
-section[id^="slide-toc"] .gbv-ic--green  { background: #ECF9EF; color: #2C8851; }
-section[id^="slide-toc"] .gbv-ic--blue   { background: #EDF3FF; color: #3969AE; }
-section[id^="slide-toc"] .gbv-ic--red    { background: #FFEDEF; color: #A02D42; }
-section[id^="slide-toc"] .gbv-ic--purple { background: #EFF1FE; color: #6A64C4; }
+section[id^="slide-toc"] .gbv-ic--yellow { background: #FEF8E2; color: #CC940D; }
+section[id^="slide-toc"] .gbv-ic--green  { background: #ECF9EF; color: #228F4B; }
+section[id^="slide-toc"] .gbv-ic--blue   { background: #EDF3FF; color: #3676D4; }
+section[id^="slide-toc"] .gbv-ic--red    { background: #FFEDEF; color: #C62C52; }
+section[id^="slide-toc"] .gbv-ic--purple { background: #EFF1FE; color: #5955C6; }
 section[id^="slide-toc"] .gbv-ic--teal   { background: #D6F5F5; color: #0D9488; }
 section[id^="slide-toc"] .gbv-ic--orange { background: #FFE8D6; color: #F97316; }
 section[id^="slide-toc"] .gbv-ic--gray   { background: #E9EAF0; color: #6B7280; }

@@ -352,36 +352,37 @@
 }
 .top-dock-index span { font-size: calc(14px * var(--text-scale, 1)); }
 
-/* ── Controle de tamanho de letra (A-/A+), fixo em toda a navegação ── */
-.text-size-dock {
-  position: fixed;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: max(14px, env(safe-area-inset-bottom));
-  z-index: 2147483000;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  background: rgba(10,30,45,0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 9999px;
-  padding: 4px;
-  box-shadow: 0 10px 26px rgba(0,10,30,.32);
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+/* ── Controle de tamanho de letra (A-/A+), no cabeçalho ao lado das
+   bandeiras de idioma em toda página ─────────────────────────────── */
+.text-size-inline {
+  display: flex; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 9999px; padding: 3px;
 }
 .text-size-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; border-radius: 9999px;
   border: none; background: transparent; color: #fff;
   font-family: 'Manrope', sans-serif; font-weight: 700;
-  cursor: pointer; line-height: 1;
+  cursor: pointer; line-height: 1; border-radius: 9999px;
 }
 .text-size-btn:disabled { opacity: 0.35; cursor: default; }
-.text-size-btn:not(:disabled):active { background: rgba(255,255,255,0.18); }
-.text-size-btn--dec { font-size: 15px; }
-.text-size-btn--inc { font-size: 20px; }
+.text-size-btn:not(:disabled):active { background: rgba(255,255,255,0.22); }
+
+#slide-0 .cover-top .text-size-inline,
+section[id^="slide-toc"] .hdr .text-size-inline {
+  height: 46px; margin-left: 12px;
+}
+#slide-0 .cover-top .text-size-btn,
+section[id^="slide-toc"] .hdr .text-size-btn {
+  width: 36px; height: 38px; font-size: 16px;
+}
+#slide-0 .cover-top .text-size-btn--dec,
+section[id^="slide-toc"] .hdr .text-size-btn--dec { font-size: 15px; }
+
+.gbi-hdr .text-size-inline { height: 48px; margin-left: 10px; }
+.gbi-hdr .text-size-btn { width: 34px; height: 40px; font-size: 15px; }
+.gbi-hdr .text-size-btn--dec { font-size: 14px; }
 
 .ftr {
   display: flex; align-items: center; justify-content: center;

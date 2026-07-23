@@ -1454,6 +1454,7 @@ section[id^="slide-toc"] .gbv-card--hi-ic {
   display: flex; align-items: center; justify-content: center;
 }
 section[id^="slide-toc"] .gbv-card--hi-ic svg { width: 44px; height: 44px; }
+section[id^="slide-toc"] .gbv-card--hi-ic { font-size: 44px; line-height: 1; }
 section[id^="slide-toc"] .gbv-card--hi b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
   font-size: calc(30px * var(--text-scale, 1)); color: #fff; margin-bottom: 4px;
@@ -1484,6 +1485,7 @@ section[id^="slide-toc"] .gbv-card-ic {
 }
 section[id^="slide-toc"] .gbv-card--coral .gbv-card-ic { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); }
 section[id^="slide-toc"] .gbv-card-ic svg { width: 37px; height: 37px; }
+section[id^="slide-toc"] .gbv-card-ic { font-size: 36px; line-height: 1; }
 section[id^="slide-toc"] .gbv-card b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
   font-size: calc(27px * var(--text-scale, 1)); color: #fff; margin-bottom: 4px;

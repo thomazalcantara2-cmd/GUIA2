@@ -1452,8 +1452,8 @@ section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center
 section[id^="slide-toc"] .gbv-card--hi-ic {
   flex-shrink: 0; width: 92px; height: 92px; border-radius: 26px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 58px; line-height: 1;
 }
+section[id^="slide-toc"] .gbv-card--hi-ic svg { width: 46px; height: 46px; }
 section[id^="slide-toc"] .gbv-card--hi b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
   font-size: calc(34px * var(--text-scale, 1)); line-height: 1.25; color: #00357f; margin-bottom: 4px;
@@ -1484,8 +1484,8 @@ section[id^="slide-toc"] .gbv-card:active { transform: translateY(0) scale(.98);
 section[id^="slide-toc"] .gbv-card-ic {
   flex-shrink: 0; width: 81px; height: 81px; border-radius: 24px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 52px; line-height: 1;
 }
+section[id^="slide-toc"] .gbv-card-ic svg { width: 40px; height: 40px; }
 section[id^="slide-toc"] .gbv-card b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
   font-size: calc(31px * var(--text-scale, 1)); line-height: 1.25; color: #00357f; margin-bottom: 4px;
@@ -1498,14 +1498,14 @@ section[id^="slide-toc"] .gbv-card-arrow { position: absolute; top: 30px; right:
 
 /* Selos de ícone coloridos (pastel de fundo + emoticon), um tom por
    categoria — mesmas cores/formato usados no card de energia. */
-section[id^="slide-toc"] .gbv-ic--yellow { background: #FEF3C7; }
-section[id^="slide-toc"] .gbv-ic--green  { background: #D8F5E3; }
-section[id^="slide-toc"] .gbv-ic--blue   { background: #DCEBFF; }
-section[id^="slide-toc"] .gbv-ic--red    { background: #FDE2E2; }
-section[id^="slide-toc"] .gbv-ic--purple { background: #EDE3FB; }
-section[id^="slide-toc"] .gbv-ic--teal   { background: #D6F5F5; }
-section[id^="slide-toc"] .gbv-ic--orange { background: #FFE8D6; }
-section[id^="slide-toc"] .gbv-ic--gray   { background: #E9EAF0; }
+section[id^="slide-toc"] .gbv-ic--yellow { background: #FEF3C7; color: #D69E2E; }
+section[id^="slide-toc"] .gbv-ic--green  { background: #D8F5E3; color: #16A34A; }
+section[id^="slide-toc"] .gbv-ic--blue   { background: #DCEBFF; color: #2563EB; }
+section[id^="slide-toc"] .gbv-ic--red    { background: #FDE2E2; color: #DC2626; }
+section[id^="slide-toc"] .gbv-ic--purple { background: #EDE3FB; color: #7C5CFC; }
+section[id^="slide-toc"] .gbv-ic--teal   { background: #D6F5F5; color: #0D9488; }
+section[id^="slide-toc"] .gbv-ic--orange { background: #FFE8D6; color: #F97316; }
+section[id^="slide-toc"] .gbv-ic--gray   { background: #E9EAF0; color: #6B7280; }
 
 /* Rodapé */
 section[id^="slide-toc"] .gbv-footer {

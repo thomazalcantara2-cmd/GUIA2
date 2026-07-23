@@ -12,6 +12,18 @@
   font-display: swap;
 }
 
+/* O canvas do guia é renderizado em tamanho fixo (794x1123) e depois
+   encolhido com transform: scale() para caber no celular. Nesse cenário,
+   o "text inflation" automático de Android Chrome / Samsung Internet
+   (que aumenta fontes sozinho em colunas de texto estreitas) briga com
+   nossa própria escala e alguns navegadores interpretam isso como o
+   usuário tendo dado zoom na página. Desliga esse ajuste automático. */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 :root {
   /* Controle de tamanho de letra (botões A-/A+), ajustável em tempo real
      pelo usuário e persistido em localStorage — ver text-size.js. */
@@ -365,6 +377,7 @@
   border: none; background: transparent; color: #fff;
   font-family: 'Manrope', sans-serif; font-weight: 700;
   cursor: pointer; line-height: 1; border-radius: 9999px;
+  touch-action: manipulation;
 }
 .text-size-btn:disabled { opacity: 0.35; cursor: default; }
 .text-size-btn:not(:disabled):active { background: rgba(255,255,255,0.22); }

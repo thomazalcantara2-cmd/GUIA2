@@ -1543,6 +1543,11 @@ section[id^="slide-toc"] .ftr { display: none !important; }
     url('foto-indice-hero.jpg');
   background-size: cover, cover;
   background-position: center, center 35%;
+  /* Mesma altura mínima da foto do índice (gbv-hero), para a transição
+     entre as duas telas parecer que só o quadro de baixo trocou, com a
+     foto do topo permanecendo do mesmo tamanho. */
+  min-height: 555px; box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch;
   /* O cabeçalho cresce para baixo (mais respiro perto do título), não
      para cima — o padding superior fica igual ao original para a foto
      continuar começando exatamente no topo da página. */

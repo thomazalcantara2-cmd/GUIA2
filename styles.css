@@ -1583,6 +1583,15 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 }
 .gbi-list-text b { color: #0047ab; }
 
+/* Variante com emoji no lugar do ícone (ex.: Check-in · Confira Tudo) */
+.gbi-list-emoji {
+  width: 48px; flex-shrink: 0; text-align: center;
+  font-size: 34px; line-height: 1;
+}
+.gbi-list-ul { margin: 6px 0 0; padding-left: 26px; }
+.gbi-list-ul li { margin-bottom: 4px; }
+.gbi-list-ul li:last-child { margin-bottom: 0; }
+
 /* ── Cartão Wi-Fi ───────────────────────────────────────────────── */
 .gbi-wifi {
   background: linear-gradient(135deg, #003a8c, #0047ab);

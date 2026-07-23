@@ -1605,11 +1605,6 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   background: #f6f4ec; border-radius: 52px 52px 0 0;
   padding: 63px 37px 56px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
-.gbi-texture {
-  position: absolute; inset: 0; z-index: 0;
-  background-image: url('textura-secoes-teal.png');
-  background-size: 629px auto; background-repeat: repeat; opacity: 0.5;
-}
 .gbi-content { position: relative; z-index: 1; }
 
 .gbi-sec { margin-bottom: 41px; }

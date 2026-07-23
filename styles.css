@@ -383,19 +383,18 @@ html {
 .text-size-btn:not(:disabled):active { background: rgba(255,255,255,0.22); }
 
 #slide-0 .cover-top .text-size-inline,
-section[id^="slide-toc"] .hdr .text-size-inline {
+section[id^="slide-toc"] .hdr .text-size-inline,
+.gbi-hdr .text-size-inline {
   height: 46px; margin-left: 12px;
 }
 #slide-0 .cover-top .text-size-btn,
-section[id^="slide-toc"] .hdr .text-size-btn {
+section[id^="slide-toc"] .hdr .text-size-btn,
+.gbi-hdr .text-size-btn {
   width: 36px; height: 38px; font-size: 16px;
 }
 #slide-0 .cover-top .text-size-btn--dec,
-section[id^="slide-toc"] .hdr .text-size-btn--dec { font-size: 15px; }
-
-.gbi-hdr .text-size-inline { height: 48px; margin-left: 10px; }
-.gbi-hdr .text-size-btn { width: 34px; height: 40px; font-size: 15px; }
-.gbi-hdr .text-size-btn--dec { font-size: 14px; }
+section[id^="slide-toc"] .hdr .text-size-btn--dec,
+.gbi-hdr .text-size-btn--dec { font-size: 15px; }
 
 .ftr {
   display: flex; align-items: center; justify-content: center;
@@ -1532,7 +1531,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
      uma única linha flex em vez de empilhar, e o título estourava
      para fora da tela. */
   display: block;
-  position: relative; z-index: 1;
+  position: relative; z-index: 1; overflow: hidden;
   /* Mesma foto e o mesmo grau de degradê azul usados no topo do
      índice (gbv-hero-shade), para as duas telas lerem como uma só
      identidade visual. */
@@ -1543,43 +1542,50 @@ section[id^="slide-toc"] .ftr { display: none !important; }
     url('foto-indice-hero.jpg');
   background-size: cover, cover;
   background-position: center, center 35%;
-  /* Mesma altura mínima da foto do índice (gbv-hero), para a transição
+  /* Mesma altura mínima e o mesmo padding-top do topo do índice
+     (gbv-hero: min-height 555px, padding-top 340px), para a transição
      entre as duas telas parecer que só o quadro de baixo trocou, com a
-     foto do topo permanecendo do mesmo tamanho. */
+     foto do topo permanecendo do mesmo tamanho — logo e título na
+     mesma posição/tamanho também. */
   min-height: 555px; box-sizing: border-box;
-  display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch;
-  /* O cabeçalho cresce para baixo (mais respiro perto do título), não
-     para cima — o padding superior fica igual ao original para a foto
-     continuar começando exatamente no topo da página. */
-  padding: calc(37px + env(safe-area-inset-top, 0px)) 37px 63px;
+  padding: 340px 37px 78px;
 }
+/* Menu + bandeiras: mesma faixa flutuante, no mesmo lugar/tamanho do
+   índice (section[id^="slide-toc"] .hdr), sobrepondo a foto. */
 .gbi-hdr-top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 4;
   display: flex; align-items: center; justify-content: space-between;
-  gap: 19px; margin-bottom: 33px;
+  padding: calc(52px + env(safe-area-inset-top, 0px)) 41px 0;
 }
-/* Logo centralizada no meio do cabeçalho, fora da linha de botões */
-.gbi-hdr-logo-wrap { display: flex; justify-content: center; margin-bottom: 33px; }
+/* Logo centralizada na foto, mesma posição/tamanho do índice
+   (gbv-hero-logo-wrap / gbv-logo). */
+.gbi-hdr-logo-wrap {
+  position: absolute; top: 235px; left: 50%; transform: translate(-50%, -50%);
+  z-index: 2; pointer-events: none;
+}
 .gbi-brand {
-  display: block; height: 78px; width: auto;
-  filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,10,30,.35));
+  display: block; height: 165px; width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 6px 18px rgba(0,10,40,.45));
 }
-.gbi-hdr-right { display: flex; align-items: center; gap: 15px; }
-.gbi-hdr .lang-flags { display: flex !important; align-items: center; gap: 15px; }
+.gbi-hdr-right { display: flex; align-items: center; gap: 17px; }
+.gbi-hdr .lang-flags { display: flex !important; align-items: center; gap: 17px; }
 .gbi-hdr .lang-flag {
-  display: block; width: 48px; height: 48px; padding: 0;
-  border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.18);
-  border-radius: 50%; overflow: hidden; cursor: pointer;
+  display: block; width: 70px; height: 46px; padding: 0;
+  border: 1px solid rgba(255,255,255,0.3); background: none;
+  border-radius: 11px; overflow: hidden; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.28);
 }
 .gbi-hdr .lang-flag svg { display: block; width: 100%; height: 100%; }
 .gbi-menu-btn {
-  display: inline-flex; align-items: center; gap: 9px;
+  display: inline-flex; align-items: center; gap: 11px;
   background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
-  padding: 11px 19px; border-radius: 9999px; text-decoration: none;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 15px 28px; border-radius: 9999px; text-decoration: none;
   white-space: nowrap; cursor: pointer;
 }
-.gbi-menu-btn svg { width: 22px; height: 22px; flex: 0 0 auto; }
+.gbi-menu-btn svg { width: 19px; height: 19px; flex: 0 0 auto; }
 .gbi-menu-btn span {
-  font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 700 !important;
+  font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 700 !important;
   letter-spacing: 0.04em; color: #fff; white-space: nowrap;
 }
 .gbi-page-title {

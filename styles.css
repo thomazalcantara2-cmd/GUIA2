@@ -1433,73 +1433,74 @@ section[id^="slide-toc"] .gbv-section-intro {
   font-weight: 500 !important; color: rgba(21,52,52,0.7);
 }
 
-section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px; }
+section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 8px; }
 
-/* Card de destaque (energia) — mesmo estilo pastel dos demais, só que
+/* Card de destaque (energia) — mesmo estilo branco dos demais, só que
    ocupando a largura toda e com o ícone ao lado do texto. */
 section[id^="slide-toc"] .gbv-card--hi {
   grid-column: span 2;
-  border-radius: 28px; padding: 26px;
-  display: flex; align-items: center; justify-content: flex-start;
-  box-shadow: 0 8px 22px rgba(20,40,80,0.07);
+  background: #fff;
+  border-radius: 24px; padding: 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 6px 20px rgba(20,40,80,0.09);
   text-decoration: none; cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-section[id^="slide-toc"] .gbv-card--hi:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(20,40,80,0.11); }
+section[id^="slide-toc"] .gbv-card--hi:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(20,40,80,0.13); }
 section[id^="slide-toc"] .gbv-card--hi:active { transform: translateY(0) scale(.985); }
-section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center; gap: 20px; }
+section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center; gap: 16px; }
 section[id^="slide-toc"] .gbv-card--hi-ic {
-  flex-shrink: 0; width: 68px; height: 68px; border-radius: 50%;
-  background: rgba(255,255,255,0.6);
+  flex-shrink: 0; width: 46px; height: 46px; border-radius: 13px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 32px; line-height: 1;
+  font-size: 24px; line-height: 1;
 }
 section[id^="slide-toc"] .gbv-card--hi b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
-  font-size: calc(26px * var(--text-scale, 1)); line-height: 1.25; color: #16213e; margin-bottom: 4px;
+  font-size: calc(24px * var(--text-scale, 1)); color: #16213e; margin-bottom: 3px;
 }
 section[id^="slide-toc"] .gbv-card--hi span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
-  font-size: calc(18px * var(--text-scale, 1)); color: #6b7280;
+  font-size: calc(18px * var(--text-scale, 1)); color: #8891a5;
 }
-section[id^="slide-toc"] .gbv-card--hi-arrow { display: none; }
+section[id^="slide-toc"] .gbv-card--hi-arrow { width: 22px; height: 22px; flex: 0 0 auto; }
 
-/* Cards pastel, um tom sólido de fundo por categoria */
+/* Cards brancos com selo de ícone colorido */
 section[id^="slide-toc"] .gbv-card {
   position: relative;
-  border-radius: 26px; padding: 24px;
-  display: flex; flex-direction: column; gap: 16px;
-  box-shadow: 0 8px 22px rgba(20,40,80,0.07);
+  background: #fff;
+  border-radius: 22px; padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 6px 20px rgba(20,40,80,0.09);
   text-decoration: none; cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-section[id^="slide-toc"] .gbv-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(20,40,80,0.11); }
+section[id^="slide-toc"] .gbv-card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(20,40,80,0.13); }
 section[id^="slide-toc"] .gbv-card:active { transform: translateY(0) scale(.98); }
 section[id^="slide-toc"] .gbv-card-ic {
-  flex-shrink: 0; width: 60px; height: 60px; border-radius: 50%;
-  background: rgba(255,255,255,0.6);
+  flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 28px; line-height: 1;
+  font-size: 21px; line-height: 1;
 }
 section[id^="slide-toc"] .gbv-card b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
-  font-size: calc(23px * var(--text-scale, 1)); line-height: 1.25; color: #16213e; margin-bottom: 4px;
+  font-size: calc(20px * var(--text-scale, 1)); color: #16213e; margin-bottom: 3px;
 }
 section[id^="slide-toc"] .gbv-card span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
-  font-size: calc(17px * var(--text-scale, 1)); color: #6b7280;
+  font-size: calc(16px * var(--text-scale, 1)); color: #8891a5;
 }
-section[id^="slide-toc"] .gbv-card-arrow { display: none; }
+section[id^="slide-toc"] .gbv-card-arrow { position: absolute; top: 20px; right: 18px; width: 20px; height: 20px; }
 
-/* Fundo sólido pastel por categoria, um tom por card (não só o ícone) */
-section[id^="slide-toc"] .gbv-tile--yellow { background: #FFF3B0; }
-section[id^="slide-toc"] .gbv-tile--green  { background: #C9F2DB; }
-section[id^="slide-toc"] .gbv-tile--blue   { background: #CFE4FF; }
-section[id^="slide-toc"] .gbv-tile--red    { background: #FFD9DE; }
-section[id^="slide-toc"] .gbv-tile--purple { background: #E4DBFB; }
-section[id^="slide-toc"] .gbv-tile--teal   { background: #C6F0EE; }
-section[id^="slide-toc"] .gbv-tile--orange { background: #FFE1C2; }
-section[id^="slide-toc"] .gbv-tile--gray   { background: #E5E7EE; }
+/* Selos de ícone coloridos (pastel de fundo + emoticon), um tom por
+   categoria — mesmas cores/formato usados no card de energia. */
+section[id^="slide-toc"] .gbv-ic--yellow { background: #FEF3C7; }
+section[id^="slide-toc"] .gbv-ic--green  { background: #D8F5E3; }
+section[id^="slide-toc"] .gbv-ic--blue   { background: #DCEBFF; }
+section[id^="slide-toc"] .gbv-ic--red    { background: #FDE2E2; }
+section[id^="slide-toc"] .gbv-ic--purple { background: #EDE3FB; }
+section[id^="slide-toc"] .gbv-ic--teal   { background: #D6F5F5; }
+section[id^="slide-toc"] .gbv-ic--orange { background: #FFE8D6; }
+section[id^="slide-toc"] .gbv-ic--gray   { background: #E9EAF0; }
 
 /* Rodapé */
 section[id^="slide-toc"] .gbv-footer {

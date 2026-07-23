@@ -1585,8 +1585,9 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* Variante com emoji no lugar do ícone (ex.: Check-in · Confira Tudo) */
 .gbi-list-emoji {
-  width: 48px; flex-shrink: 0; text-align: center;
-  font-size: 34px; line-height: 1;
+  width: 56px; flex-shrink: 0; align-self: center;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; line-height: 1;
 }
 .gbi-list-ul { margin: 6px 0 0; padding-left: 26px; }
 .gbi-list-ul li { margin-bottom: 4px; }

@@ -1418,7 +1418,7 @@ section[id^="slide-toc"] .gbv-flat-title {
 /* ── Folha creme ───────────────────────────────────────────────── */
 section[id^="slide-toc"] .gbv-sheet {
   position: relative; z-index: 3; margin-top: -48px;
-  background: #f4f5fa; border-radius: 52px 52px 0 0;
+  background: #f9f9fc; border-radius: 52px 52px 0 0;
   padding: 48px 37px 22px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
 section[id^="slide-toc"] .gbv-section-head { margin-bottom: 26px; }
@@ -1456,7 +1456,7 @@ section[id^="slide-toc"] .gbv-card--hi-ic {
 }
 section[id^="slide-toc"] .gbv-card--hi b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
-  font-size: calc(34px * var(--text-scale, 1)); line-height: 1.25; color: #16213e; margin-bottom: 4px;
+  font-size: calc(34px * var(--text-scale, 1)); line-height: 1.25; color: #00357f; margin-bottom: 4px;
 }
 section[id^="slide-toc"] .gbv-card--hi span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
@@ -1488,7 +1488,7 @@ section[id^="slide-toc"] .gbv-card-ic {
 }
 section[id^="slide-toc"] .gbv-card b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
-  font-size: calc(31px * var(--text-scale, 1)); line-height: 1.25; color: #16213e; margin-bottom: 4px;
+  font-size: calc(31px * var(--text-scale, 1)); line-height: 1.25; color: #00357f; margin-bottom: 4px;
 }
 section[id^="slide-toc"] .gbv-card span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
@@ -1533,7 +1533,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
    Escala: mockup em iPhone 402px × ~1.85 (≈794/430) → canvas-space,
    mesma convenção usada no redesign do índice. Escopo: .rc-page. */
 
-.rc-page.page { background: #f4f5fa; }
+.rc-page.page { background: #f9f9fc; }
 .rc-page .page-pad { padding: 0; color: #153434; }
 
 
@@ -1615,7 +1615,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
    do "gbv-sheet" usado no índice. */
 .gbi-body {
   position: relative; z-index: 3; margin-top: -48px;
-  background: #f4f5fa; border-radius: 52px 52px 0 0;
+  background: #f9f9fc; border-radius: 52px 52px 0 0;
   padding: 63px 37px 56px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
 .gbi-content { position: relative; z-index: 1; }

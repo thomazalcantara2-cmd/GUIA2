@@ -1433,63 +1433,63 @@ section[id^="slide-toc"] .gbv-section-intro {
   font-weight: 500 !important; color: rgba(21,52,52,0.7);
 }
 
-section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 8px; }
+section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 8px; }
 
 /* Card de destaque (energia) — mesmo estilo branco dos demais, só que
    ocupando a largura toda e com o ícone ao lado do texto. */
 section[id^="slide-toc"] .gbv-card--hi {
   grid-column: span 2;
   background: #fff;
-  border-radius: 24px; padding: 22px;
+  border-radius: 28px; padding: 28px;
   display: flex; align-items: center; justify-content: space-between;
-  box-shadow: 0 6px 20px rgba(20,40,80,0.09);
+  box-shadow: 0 8px 24px rgba(20,40,80,0.1);
   text-decoration: none; cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-section[id^="slide-toc"] .gbv-card--hi:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(20,40,80,0.13); }
+section[id^="slide-toc"] .gbv-card--hi:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(20,40,80,0.14); }
 section[id^="slide-toc"] .gbv-card--hi:active { transform: translateY(0) scale(.985); }
-section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center; gap: 16px; }
+section[id^="slide-toc"] .gbv-card--hi-left { display: flex; align-items: center; gap: 20px; }
 section[id^="slide-toc"] .gbv-card--hi-ic {
-  flex-shrink: 0; width: 46px; height: 46px; border-radius: 13px;
+  flex-shrink: 0; width: 64px; height: 64px; border-radius: 18px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 24px; line-height: 1;
+  font-size: 34px; line-height: 1;
 }
 section[id^="slide-toc"] .gbv-card--hi b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
-  font-size: calc(24px * var(--text-scale, 1)); color: #16213e; margin-bottom: 3px;
+  font-size: calc(28px * var(--text-scale, 1)); line-height: 1.25; color: #16213e; margin-bottom: 4px;
 }
 section[id^="slide-toc"] .gbv-card--hi span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
-  font-size: calc(18px * var(--text-scale, 1)); color: #8891a5;
+  font-size: calc(20px * var(--text-scale, 1)); color: #8891a5;
 }
-section[id^="slide-toc"] .gbv-card--hi-arrow { width: 22px; height: 22px; flex: 0 0 auto; }
+section[id^="slide-toc"] .gbv-card--hi-arrow { width: 26px; height: 26px; flex: 0 0 auto; }
 
 /* Cards brancos com selo de ícone colorido */
 section[id^="slide-toc"] .gbv-card {
   position: relative;
   background: #fff;
-  border-radius: 22px; padding: 20px;
-  display: flex; flex-direction: column; gap: 12px;
-  box-shadow: 0 6px 20px rgba(20,40,80,0.09);
+  border-radius: 26px; padding: 24px;
+  display: flex; flex-direction: column; gap: 15px;
+  box-shadow: 0 8px 24px rgba(20,40,80,0.1);
   text-decoration: none; cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-section[id^="slide-toc"] .gbv-card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(20,40,80,0.13); }
+section[id^="slide-toc"] .gbv-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(20,40,80,0.14); }
 section[id^="slide-toc"] .gbv-card:active { transform: translateY(0) scale(.98); }
 section[id^="slide-toc"] .gbv-card-ic {
-  flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px;
+  flex-shrink: 0; width: 56px; height: 56px; border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 21px; line-height: 1;
+  font-size: 28px; line-height: 1;
 }
 section[id^="slide-toc"] .gbv-card b {
   display: block; font-family: 'Manrope', sans-serif; font-weight: 700 !important;
-  font-size: calc(20px * var(--text-scale, 1)); color: #16213e; margin-bottom: 3px;
+  font-size: calc(23px * var(--text-scale, 1)); line-height: 1.25; color: #16213e; margin-bottom: 4px;
 }
 section[id^="slide-toc"] .gbv-card span {
   font-family: 'Manrope', sans-serif; font-weight: 500 !important;
-  font-size: calc(16px * var(--text-scale, 1)); color: #8891a5;
+  font-size: calc(18px * var(--text-scale, 1)); color: #8891a5;
 }
-section[id^="slide-toc"] .gbv-card-arrow { position: absolute; top: 20px; right: 18px; width: 20px; height: 20px; }
+section[id^="slide-toc"] .gbv-card-arrow { position: absolute; top: 24px; right: 22px; width: 24px; height: 24px; }
 
 /* Selos de ícone coloridos (pastel de fundo + emoticon), um tom por
    categoria — mesmas cores/formato usados no card de energia. */

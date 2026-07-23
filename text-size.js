@@ -8,8 +8,8 @@
 (() => {
   'use strict';
 
-  const STEPS = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45];
-  const DEFAULT_INDEX = 2; // 1.0
+  const STEPS = [0.9, 1, 1.1, 1.2, 1.3];
+  const DEFAULT_INDEX = 1; // 1.0
   const STORAGE_KEY = 'guia-text-scale-idx';
 
   let idx = DEFAULT_INDEX;

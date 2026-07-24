@@ -1657,7 +1657,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   font-family: 'Manrope', sans-serif; font-size: calc(25px * var(--text-scale, 1)); line-height: 1.4;
   font-weight: 500 !important; color: #000; padding-top: 0;
 }
-.gbi-list-text b { color: #000; }
+.gbi-list-text b { color: #00357f; }
 
 /* Variante com emoji no lugar do ícone (ex.: Check-in · Confira Tudo) */
 .gbi-list-emoji {
@@ -1767,7 +1767,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   font-family: 'Manrope', sans-serif; font-size: calc(25px * var(--text-scale, 1)); line-height: 1.5;
   font-weight: 500 !important; color: #000;
 }
-.gbi-card b { color: #000; font-weight: 700 !important; }
+.gbi-card b { color: #00357f; font-weight: 700 !important; }
 
 /* ── Mapa ───────────────────────────────────────────────────────── */
 .gbi-map {

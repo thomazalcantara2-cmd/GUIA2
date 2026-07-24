@@ -1633,28 +1633,31 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 .gbi-sec + .gbi-sec { margin-top: 15px; }
 .gbi-lead {
   font-family: 'Manrope', sans-serif; font-size: calc(25px * var(--text-scale, 1)); line-height: 1.5;
-  font-weight: 500 !important; color: rgba(21,52,52,0.7); margin: 0 0 33px;
+  font-weight: 500 !important; color: #6b7280; margin: 0 0 33px;
   max-width: none;
 }
 
-/* ── Lista de itens (ícone + texto) ────────────────────────────── */
-.gbi-list { display: flex; flex-direction: column; }
+/* ── Lista de itens (ícone + texto), no mesmo formato de card branco
+   usado nos botões do índice ─────────────────────────────────── */
+.gbi-list { display: flex; flex-direction: column; gap: 15px; }
 .gbi-list-item {
-  display: flex; gap: 22px; padding: 26px 7px;
-  border-bottom: 1px solid rgba(21,52,52,0.09);
+  display: flex; gap: 20px; align-items: center;
+  background: #fff; border-radius: 26px; padding: 22px;
+  box-shadow: 0 6px 18px rgba(20,40,80,0.07);
 }
-.gbi-list-item:last-child { border-bottom: none; padding-bottom: 7px; }
 .gbi-list-ic {
-  width: 56px; height: 56px; border-radius: 19px; flex-shrink: 0;
-  background: linear-gradient(135deg, #0047ab, #1a5fc4);
+  width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
+  background: #EDF3FF; color: #3676D4;
   display: flex; align-items: center; justify-content: center;
 }
 .gbi-list-ic svg { width: 26px; height: 26px; }
+.gbi-list-ic svg [stroke="#fff"] { stroke: currentColor; }
+.gbi-list-ic svg [fill="#fff"] { fill: currentColor; }
 .gbi-list-text {
   font-family: 'Manrope', sans-serif; font-size: calc(25px * var(--text-scale, 1)); line-height: 1.4;
-  font-weight: 500 !important; color: #153434; padding-top: 9px;
+  font-weight: 500 !important; color: #6b7280; padding-top: 0;
 }
-.gbi-list-text b { color: #0047ab; }
+.gbi-list-text b { color: #00357f; }
 
 /* Variante com emoji no lugar do ícone (ex.: Check-in · Confira Tudo) */
 .gbi-list-emoji {
@@ -1757,12 +1760,12 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* ── Cartão de texto simples (glass) ────────────────────────────── */
 .gbi-card {
-  background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.6); border-radius: 33px; padding: 26px;
-  box-shadow: 0 15px 37px rgba(20,60,60,0.06);
+  background: #fff; border-radius: 26px; padding: 26px;
+  box-shadow: 0 6px 18px rgba(20,40,80,0.07);
   font-family: 'Manrope', sans-serif; font-size: calc(25px * var(--text-scale, 1)); line-height: 1.5;
-  font-weight: 500 !important; color: rgba(21,52,52,0.75);
+  font-weight: 500 !important; color: #6b7280;
 }
+.gbi-card b { color: #00357f; }
 .gbi-card b { color: #153434; font-weight: 700 !important; }
 
 /* ── Mapa ───────────────────────────────────────────────────────── */

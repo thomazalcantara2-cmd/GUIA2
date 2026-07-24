@@ -749,8 +749,8 @@ p.lead {
 }
 #slide-0 .cv3-select-sub {
   font-family: 'Montserrat', sans-serif; font-style: italic;
-  font-size: 16px; font-weight: 400 !important;
-  color: #fff; margin: 0;
+  font-size: 24px; font-weight: 400 !important;
+  color: #fff; margin: 26px 0 0; text-align: center;
   text-shadow: 0 2px 8px rgba(0,20,55,.85), 0 1px 16px rgba(0,20,55,.6);
 }
 

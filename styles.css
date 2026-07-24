@@ -655,9 +655,10 @@ p.lead {
   background: url('fundo-mar.png') top center / 100% auto repeat-y, #0047AB;
 }
 #slide-0 .cv3-bg-under {
-  /* Foto APÓS os cards (grid termina ~995px): entra logo abaixo, em
-     tamanho natural (sem ampliar), fundindo com a textura nas bordas. */
-  position: absolute; top: 1000px; left: 0; right: 0; height: 470px;
+  /* Foto APÓS os cards (grid agora empurrado mais para baixo, ver
+     .cv3-grid margin-top): entra logo abaixo, em tamanho natural (sem
+     ampliar), fundindo com a textura nas bordas. */
+  position: absolute; top: 1130px; left: 0; right: 0; height: 470px;
   background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
           mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
@@ -668,8 +669,8 @@ p.lead {
     rgba(0,71,171,.22) 0px,
     rgba(0,71,171,.06) 260px,
     rgba(0,71,171,0)   680px,
-    rgba(0,71,171,0)   1150px,
-    rgba(0,71,171,.22) 1500px);
+    rgba(0,71,171,0)   1280px,
+    rgba(0,71,171,.22) 1630px);
 }
 
 /* Hero */
@@ -741,6 +742,10 @@ p.lead {
    fazia a página "quicar" para cima e para baixo. */
 #slide-0 .cv3-main { position: relative; z-index: 1; padding: 40px 44px calc(56px + env(safe-area-inset-bottom, 0px)); }
 #slide-0 .cv3-select-head { text-align: center; margin-bottom: 44px; }
+/* Empurra os cards para baixo, para caírem sobre a transição entre a
+   textura de fundo e a foto do recife (ver .cv3-bg-under), em vez de
+   ficarem colados perto do topo. */
+#slide-0 .cv3-grid { margin-top: 130px; }
 #slide-0 .cv3-select-title {
   font-family: 'Playfair Display', serif;
   font-size: 32px; line-height: 1.25; font-weight: 600 !important;

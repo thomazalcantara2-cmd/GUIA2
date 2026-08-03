@@ -371,6 +371,9 @@
   document.querySelectorAll('[data-greeting]').forEach((el) => {
     el.textContent = `${greeting}, seja bem-vindo(a)`;
   });
+  document.querySelectorAll('[data-greeting-full]').forEach((el) => {
+    el.textContent = `${greeting}, seja muito bem-vindo(a)!`;
+  });
 
   // ── 7. Páginas internas: botão "MENU" no cabeçalho volta ao índice ─────
   document.querySelectorAll('.gbi-menu-btn').forEach((btn) => {

@@ -69,12 +69,24 @@
   }
   applyFlatSkip();
 
+  // ── 2c. Controlador de energia: foto do botão varia por flat ──────────
+  const ENERGIA_PHOTOS = {
+    '201': 'https://i.ibb.co/h1V9KYLb/201-nova.jpg',
+    '202': 'https://i.ibb.co/1JqdM3kH/202-nova.jpg',
+  };
+  function applyEnergiaPhoto() {
+    const img = document.getElementById('energia-foto');
+    if (img) img.src = ENERGIA_PHOTOS[selectedFlat] || 'foto-economizador-301.jpg';
+  }
+  applyEnergiaPhoto();
+
   // Flat selection buttons (flat-pick-btn on slide-select)
   document.querySelectorAll('[data-select-flat]').forEach((btn) => {
     btn.addEventListener('click', () => {
       selectedFlat = btn.getAttribute('data-select-flat');
       localStorage.setItem('dimare-flat', selectedFlat);
       applyFlatSkip();
+      applyEnergiaPhoto();
       jumpTo(FLAT_TOCS[selectedFlat]);
     });
   });

@@ -37,7 +37,7 @@
 
     // índice
     'Bem-vindo(a)': { en: 'Welcome', es: 'Bienvenido(a)' },
-    'Sua estadia': { en: 'Your stay', es: 'Tu estancia' },
+    'Sua estadia - Tudo o que você precisa, em um só lugar.': { en: 'Your stay - Everything you need, all in one place.', es: 'Tu estancia - Todo lo que necesitas, en un solo lugar.' },
     'Bom dia, seja bem-vindo(a)': { en: 'Good morning, welcome', es: 'Buenos días, sé bienvenido(a)' },
     'Boa tarde, seja bem-vindo(a)': { en: 'Good afternoon, welcome', es: 'Buenas tardes, sé bienvenido(a)' },
     'Boa noite, seja bem-vindo(a)': { en: 'Good evening, welcome', es: 'Buenas noches, sé bienvenido(a)' },

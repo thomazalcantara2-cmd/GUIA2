@@ -1000,6 +1000,10 @@ section[id^="slide-toc"] .gbv-section-intro {
   font-family: 'Manrope', sans-serif; font-size: calc(27px * var(--text-scale, 1)); line-height: 1.4;
   font-weight: 500 !important; color: rgba(21,52,52,0.7);
 }
+section[id^="slide-toc"] .gbv-sheet-intro {
+  font-family: 'Manrope', sans-serif; font-size: calc(19px * var(--text-scale, 1)); line-height: 1.55;
+  font-weight: 500 !important; color: rgba(21,52,52,0.62); margin: 0 0 34px;
+}
 
 section[id^="slide-toc"] .gbv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 8px; }
 

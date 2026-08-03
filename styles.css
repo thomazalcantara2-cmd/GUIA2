@@ -1467,8 +1467,13 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* Variante do botão de rodapé para o texto mais longo do WhatsApp:
    ocupa o espaço restante da linha e permite quebrar em duas linhas. */
-.gbi-footer-menu-btn--wpp { flex: 1 1 auto; justify-content: center; }
-.gbi-footer-menu-btn--wpp span { white-space: normal; text-align: left; line-height: 1.25; }
+.gbi-footer-menu-btn--wpp {
+  flex: 1 1 auto; justify-content: center;
+  background: rgba(37,211,102,0.1); border-color: rgba(37,211,102,0.35);
+  color: #1a9f4c;
+}
+.gbi-footer-menu-btn--wpp span { white-space: normal; text-align: left; line-height: 1.25; color: #1a9f4c; }
+.gbi-footer-menu-btn--wpp:hover { background: rgba(37,211,102,0.18); }
 
 /* ── Página "Obrigado" (encerramento) ───────────────────────────── */
 .gbi-thanks { text-align: center; padding: 15px 0 0; }

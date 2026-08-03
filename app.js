@@ -375,8 +375,8 @@
     el.textContent = `${greeting}, seja muito bem-vindo(a)!`;
   });
 
-  // ── 7. Páginas internas: botão "MENU" no cabeçalho volta ao índice ─────
-  document.querySelectorAll('.gbi-menu-btn').forEach((btn) => {
+  // ── 7. Páginas internas: botão "MENU" (cabeçalho e rodapé) volta ao índice ─
+  document.querySelectorAll('.gbi-menu-btn, .gbi-footer-menu-btn:not(.gbi-footer-menu-btn--wpp)').forEach((btn) => {
     btn.addEventListener('click', (e) => { e.preventDefault(); jumpTo(getTocIndex()); });
   });
 

@@ -45,7 +45,7 @@
     'Boa tarde, seja muito bem-vindo(a)!': { en: 'Good afternoon, a very warm welcome!', es: '¡Buenas tardes, sé muy bienvenido(a)!' },
     'Boa noite, seja muito bem-vindo(a)!': { en: 'Good evening, a very warm welcome!', es: '¡Buenas noches, sé muy bienvenido(a)!' },
     'Tudo o que você precisa, em um só lugar.': { en: 'Everything you need, all in one place.', es: 'Todo lo que necesitas, en un solo lugar.' },
-    'Aqui você encontrará informações sobre o apartamento, o condomínio, entretenimentos, restaurantes, passeios e diversas dicas para aproveitar ao máximo sua estadia.': { en: 'Here you’ll find information about the apartment, the condominium, entertainment, restaurants, tours and lots of tips to make the most of your stay.', es: 'Aquí encontrarás información sobre el apartamento, el condominio, entretenimiento, restaurantes, paseos y varios consejos para aprovechar al máximo tu estancia.' },
+    'Tudo o que você precisa sobre: O flat, condomínio, passeios, restaurantes, dicas e muito mais. É só explorar e aproveitar!': { en: 'Everything you need to know: the flat, the condominium, tours, restaurants, tips and much more. Just explore and enjoy!', es: 'Todo lo que necesitas saber: el flat, el condominio, paseos, restaurantes, consejos y mucho más. ¡Solo explora y disfruta!' },
     'Como ter energia no flat': { en: 'How to get power in the flat', es: 'Cómo activar la energía en el flat' },
     'Acione a luz em 30 segundos': { en: 'Turn the lights on in 30 seconds', es: 'Activa la luz en 30 segundos' },
     'Check-in · Confira Tudo': { en: 'Check-in · Check Everything', es: 'Check-in · Revisa Todo' },

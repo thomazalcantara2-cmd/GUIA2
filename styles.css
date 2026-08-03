@@ -1440,6 +1440,22 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 .gbi-contact-btn:hover { transform: translateY(-3px); }
 .gbi-contact-btn:active { transform: translateY(0) scale(0.97); }
 
+/* ── Voltar ao menu (rodapé das páginas de conteúdo) ────────────── */
+.gbi-footer-menu { display: flex; justify-content: flex-start; margin-top: 22px; }
+.gbi-footer-menu-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(0,53,127,0.07); border: 1px solid rgba(0,53,127,0.18);
+  padding: 13px 24px; border-radius: 9999px; text-decoration: none; cursor: pointer;
+  transition: background .15s;
+}
+.gbi-footer-menu-btn svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.gbi-footer-menu-btn span {
+  font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700 !important;
+  letter-spacing: 0.04em; color: var(--c-primary); white-space: nowrap;
+}
+.gbi-footer-menu-btn:hover { background: rgba(0,53,127,0.12); }
+.gbi-footer-menu-btn:active { transform: scale(0.96); }
+
 /* ── Página "Obrigado" (encerramento) ───────────────────────────── */
 .gbi-thanks { text-align: center; padding: 15px 0 0; }
 .gbi-thanks-kicker {

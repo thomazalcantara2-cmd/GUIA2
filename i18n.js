@@ -18,7 +18,7 @@
     '1º Andar': { en: '1st Floor', es: '1er Piso' },
     'Vista Mar': { en: 'Ocean View', es: 'Vista al Mar' },
     '2º Andar': { en: '2nd Floor', es: '2º Piso' },
-    'Toque no card para abrir o guia do seu flat': { en: 'Tap a card to open your flat’s guide', es: 'Toca la tarjeta para abrir la guía de tu flat' },
+    'Toque no card do seu flat reservado e confira todas as informações da sua estadia.': { en: 'Tap the card of your reserved flat and check all the information for your stay.', es: 'Toca la tarjeta de tu flat reservado y consulta toda la información de tu estancia.' },
     'bem-vindo(a)': { en: 'welcome', es: 'bienvenido(a)' },
     'Olá! 😊': { en: 'Hello! 😊', es: '¡Hola! 😊' },
     'É um prazer recebê-lo(a) em nossa acomodação, e espero que sua estadia seja maravilhosa desde o primeiro instante!': { en: 'It’s a pleasure to welcome you to our place, and I hope your stay is wonderful from the very first moment!', es: '¡Es un placer recibirte en nuestro alojamiento, y espero que tu estancia sea maravillosa desde el primer instante!' },

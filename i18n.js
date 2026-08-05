@@ -51,6 +51,8 @@
     'Check-in · Confira Tudo': { en: 'Check-in · Check Everything', es: 'Check-in · Revisa Todo' },
     'Enxoval e amenidades': { en: 'Linens and amenities', es: 'Ropa de cama y amenidades' },
     'Como chegar no Di Maré Residence?': { en: 'How to get to Di Maré Residence?', es: '¿Cómo llegar al Di Maré Residence?' },
+    'Como chegar no': { en: 'How to get to', es: 'Cómo llegar al' },
+    'Di Maré Residence?': { en: 'Di Maré Residence?', es: 'Di Maré Residence?' },
     'Endereço e rota': { en: 'Address and route', es: 'Dirección y ruta' },
     'Wi-Fi': { en: 'Wi-Fi', es: 'Wi-Fi' },
     'Rede e senha': { en: 'Network and password', es: 'Red y contraseña' },
@@ -100,7 +102,7 @@
 
     // controlador de energia
     'Como ter': { en: 'How to get', es: 'Cómo tener' },
-    'energia no Flat?': { en: 'power in the Flat?', es: 'energía en el Flat?' },
+    'energia no flat': { en: 'power in the flat', es: 'energía en el flat' },
     'Nosso flat possui um ⚡ Controlador de Energia, mas não se preocupe: é bem simples! 😉': { en: 'Our flat has a ⚡ Power Controller, but don’t worry — it’s super simple! 😉', es: 'Nuestro flat tiene un ⚡ Controlador de Energía, pero no te preocupes: ¡es bien sencillo! 😉' },
     'Como ligar a energia?': { en: 'How do I turn on the power?', es: '¿Cómo enciendo la energía?' },
     'Basta apertar o botão indicado pela seta abaixo, próximo ao interruptor na entrada.': { en: 'Just press the button shown by the arrow below, next to the switch at the entrance.', es: 'Basta con presionar el botón indicado por la flecha de abajo, junto al interruptor de la entrada.' },
@@ -113,6 +115,8 @@
 
     // check-in
     'Check-in': { en: 'Check-in', es: 'Check-in' },
+    'Check-in ·': { en: 'Check-in ·', es: 'Check-in ·' },
+    'Confira Tudo': { en: 'Check Everything', es: 'Revisa Todo' },
     'confira tudo': { en: 'check everything', es: 'revisa todo' },
     'Tudo certo por aí? 😊': { en: 'Everything OK over there? 😊', es: '¿Todo bien por ahí? 😊' },
     'Em até 2 horas após o check-in, confira se todos os itens do apartamento estão disponíveis. Se notar qualquer ausência, avise-nos para que possamos resolver o mais rápido possível.': { en: 'Within 2 hours of check-in, check that all the apartment’s items are available. If you notice anything missing, let us know so we can resolve it as quickly as possible.', es: 'En un plazo de 2 horas tras el check-in, verifica que todos los artículos del apartamento estén disponibles. Si notas alguna ausencia, avísanos para que podamos resolverlo lo más rápido posible.' },
@@ -163,6 +167,7 @@
     // coleta de lixo
     'Coleta': { en: 'Trash', es: 'Recolección' },
     'de lixo': { en: 'collection', es: 'de basura' },
+    'de Lixo': { en: 'Collection', es: 'de Basura' },
     'A área externa deve permanecer livre de sacos de lixo, contribuindo para a limpeza, a organização e o bem-estar de todos.': { en: 'The outdoor area must stay free of trash bags, helping keep things clean, organized and pleasant for everyone.', es: 'El área externa debe permanecer libre de bolsas de basura, contribuyendo a la limpieza, el orden y el bienestar de todos.' },
     '♻️ Como funciona a coleta?': { en: '♻️ How does collection work?', es: '♻️ ¿Cómo funciona la recolección?' },
     'A zeladoria realiza a retirada diariamente, das': { en: 'The building staff collects it daily, from', es: 'El personal de mantenimiento retira la basura diariamente, de' },
@@ -181,6 +186,7 @@
     // ventilador
     'Ventilador': { en: 'Ceiling', es: 'Ventilador' },
     'de teto': { en: 'fan', es: 'de techo' },
+    'de Teto': { en: 'Fan', es: 'de Techo' },
     '🌀 Como usar o controle do ventilador?': { en: '🌀 How do I use the fan control?', es: '🌀 ¿Cómo uso el control del ventilador?' },
     'Botão 1': { en: 'Button 1', es: 'Botón 1' },
     '— Liga e desliga a luz principal.': { en: '— Turns the main light on and off.', es: '— Enciende y apaga la luz principal.' },
@@ -194,6 +200,7 @@
     // troca de enxoval
     'Troca': { en: 'Linen', es: 'Cambio' },
     'de enxoval': { en: 'change', es: 'de ropa de cama' },
+    'de Enxoval': { en: 'Change', es: 'de Ropa de Cama' },
     'Posso solicitar a troca de enxoval?': { en: 'Can I request a linen change?', es: '¿Puedo solicitar el cambio de ropa de cama?' },
     'Sim! O serviço está disponível para estadias': { en: 'Yes! This service is available for stays', es: '¡Sí! El servicio está disponible para estancias' },
     'superiores a 5 noites': { en: 'longer than 5 nights', es: 'superiores a 5 noches' },
@@ -208,6 +215,7 @@
 
     // fechadura eletrônica
     '🔐 A fechadura eletrônica': { en: '🔐 The electronic lock', es: '🔐 La cerradura electrónica' },
+    'A fechadura eletrônica': { en: 'The electronic lock', es: 'La cerradura electrónica' },
     'não funcionou?': { en: 'didn’t work?', es: '¿no funcionó?' },
     '😅 Calma, temos um plano B! Há um cofre Pado ao lado da porta do apartamento.': { en: '😅 No worries, we have a plan B! There’s a Pado safe next to the apartment door.', es: '😅 Tranquilo(a), ¡tenemos un plan B! Hay una caja fuerte Pado junto a la puerta del apartamento.' },
     'Localize o cofre Pado fixado na parede, próximo à entrada do flat.': { en: 'Find the Pado safe mounted on the wall, near the flat’s entrance.', es: 'Localiza la caja fuerte Pado fijada en la pared, cerca de la entrada del flat.' },
@@ -226,6 +234,7 @@
     // regras da casa
     'Regras': { en: 'House', es: 'Normas' },
     'da casa': { en: 'rules', es: 'de la casa' },
+    'da Casa': { en: 'Rules', es: 'de la Casa' },
     'Regrinhas importantes para o bem-estar de todos. ♡': { en: 'A few important rules for everyone’s well-being. ♡', es: 'Normitas importantes para el bienestar de todos. ♡' },
     '🐶 Pets são permitidos?': { en: '🐶 Are pets allowed?', es: '🐶 ¿Se permiten mascotas?' },
     'Este apartamento foi preparado para ser um ambiente livre de pets. Agradecemos a sua compreensão.': { en: 'This apartment has been set up as a pet-free environment. Thank you for your understanding.', es: 'Este apartamento fue preparado para ser un ambiente libre de mascotas. Agradecemos tu comprensión.' },
@@ -281,6 +290,7 @@
     // o que fazer
     'O que': { en: 'What to', es: 'Qué' },
     'fazer': { en: 'do', es: 'hacer' },
+    'Fazer': { en: 'Do', es: 'Hacer' },
     '⭐ IMPERDÍVEL': { en: '⭐ MUST-DO', es: '⭐ IMPERDIBLE' },
     '🛶 Passeio de Jangada': { en: '🛶 Jangada Boat Trip', es: '🛶 Paseo en Jangada' },
     'Água mansa, morna e cristalina, peixinhos coloridos e corais. Cenário de cartão-postal.': { en: 'Calm, warm, crystal-clear water, colorful little fish and coral. A postcard-perfect setting.', es: 'Agua mansa, tibia y cristalina, peces de colores y corales. Un escenario de postal.' },
@@ -299,6 +309,7 @@
     // onde comer
     'Onde': { en: 'Where to', es: 'Dónde' },
     'comer': { en: 'eat', es: 'comer' },
+    'Comer': { en: 'Eat', es: 'Comer' },
     'Domingos Restaurante': { en: 'Domingos Restaurante', es: 'Domingos Restaurante' },
     'Truta, salmão e lagosta, drinques e carta de vinhos.': { en: 'Trout, salmon and lobster, drinks and a wine list.', es: 'Trucha, salmón y langosta, bebidas y carta de vinos.' },
     'GIROSKKA-BAR': { en: 'GIROSKKA-BAR', es: 'GIROSKKA-BAR' },

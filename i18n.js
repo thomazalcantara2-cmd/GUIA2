@@ -99,8 +99,8 @@
     'após ser acionado.': { en: 'after being triggered.', es: 'después de accionarse.' },
 
     // controlador de energia
-    'Controlador': { en: 'Power', es: 'Controlador' },
-    'de energia': { en: 'controller', es: 'de energía' },
+    'Como ter': { en: 'How to get', es: 'Cómo tener' },
+    'energia no Flat?': { en: 'power in the Flat?', es: 'energía en el Flat?' },
     'Nosso flat possui um ⚡ Controlador de Energia, mas não se preocupe: é bem simples! 😉': { en: 'Our flat has a ⚡ Power Controller, but don’t worry — it’s super simple! 😉', es: 'Nuestro flat tiene un ⚡ Controlador de Energía, pero no te preocupes: ¡es bien sencillo! 😉' },
     'Como ligar a energia?': { en: 'How do I turn on the power?', es: '¿Cómo enciendo la energía?' },
     'Basta apertar o botão indicado pela seta abaixo, próximo ao interruptor na entrada.': { en: 'Just press the button shown by the arrow below, next to the switch at the entrance.', es: 'Basta con presionar el botón indicado por la flecha de abajo, junto al interruptor de la entrada.' },

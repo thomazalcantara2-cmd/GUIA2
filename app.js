@@ -398,4 +398,16 @@
       cb.closest('.gbi-check-item').classList.toggle('is-checked', cb.checked);
     });
   });
+
+  // ── 9. Cartões de restaurantes (Onde Comer): vira para mostrar o mapa ──
+  document.querySelectorAll('.gbi-dine-card').forEach((card) => {
+    const toggle = () => {
+      const flipped = card.classList.toggle('is-flipped');
+      card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+    };
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
 })();

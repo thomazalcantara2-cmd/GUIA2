@@ -46,7 +46,7 @@
     'Boa noite, seja muito bem-vindo(a)!': { en: 'Good evening, a very warm welcome!', es: '¡Buenas noches, sé muy bienvenido(a)!' },
     'Tudo o que você precisa, em um só lugar.': { en: 'Everything you need, all in one place.', es: 'Todo lo que necesitas, en un solo lugar.' },
     'O flat, condomínio, passeios, restaurantes, dicas e muito mais. É só explorar e aproveitar!': { en: 'The flat, the condominium, tours, restaurants, tips and much more. Just explore and enjoy!', es: 'El flat, el condominio, paseos, restaurantes, consejos y mucho más. ¡Solo explora y disfruta!' },
-    'Como ter energia no flat': { en: 'How to get power in the flat', es: 'Cómo activar la energía en el flat' },
+    'Como ter energia no flat?': { en: 'How to get power in the flat?', es: '¿Cómo activar la energía en el flat?' },
     'Acione a luz em 30 segundos': { en: 'Turn the lights on in 30 seconds', es: 'Activa la luz en 30 segundos' },
     'Check-in · Confira Tudo': { en: 'Check-in · Check Everything', es: 'Check-in · Revisa Todo' },
     'Enxoval e amenidades': { en: 'Linens and amenities', es: 'Ropa de cama y amenidades' },
@@ -72,9 +72,9 @@
     'Até às 11h': { en: 'Until 11 AM', es: 'Hasta las 11h' },
     'Ao redor': { en: 'Nearby', es: 'Alrededores' },
     'Descubra as belezas de Porto de Galinhas.': { en: 'Discover the beauty of Porto de Galinhas.', es: 'Descubre las bellezas de Porto de Galinhas.' },
-    'O que Fazer': { en: 'What to Do', es: 'Qué Hacer' },
+    'O que Fazer?': { en: 'What to Do?', es: '¿Qué Hacer?' },
     'Passeios e experiências': { en: 'Tours and experiences', es: 'Paseos y experiencias' },
-    'Onde Comer': { en: 'Where to Eat', es: 'Dónde Comer' },
+    'Onde Comer?': { en: 'Where to Eat?', es: '¿Dónde Comer?' },
     'Restaurantes favoritos': { en: 'Favorite restaurants', es: 'Restaurantes favoritos' },
     'Localização': { en: 'Location', es: 'Ubicación' },
     '"Sinta-se em casa, à beira do mar."': { en: '"Feel at home, by the sea."', es: '"Siéntete en casa, junto al mar."' },
@@ -103,7 +103,7 @@
 
     // controlador de energia
     'Como ter': { en: 'How to get', es: 'Cómo tener' },
-    'energia no flat': { en: 'power in the flat', es: 'energía en el flat' },
+    'energia no flat?': { en: 'power in the flat?', es: 'energía en el flat?' },
     'Nosso flat possui um ⚡ Controlador de Energia, mas não se preocupe: é bem simples! 😉': { en: 'Our flat has a ⚡ Power Controller, but don’t worry — it’s super simple! 😉', es: 'Nuestro flat tiene un ⚡ Controlador de Energía, pero no te preocupes: ¡es bien sencillo! 😉' },
     'Como ligar a energia?': { en: 'How do I turn on the power?', es: '¿Cómo enciendo la energía?' },
     'Basta apertar o botão indicado pela seta abaixo, próximo ao interruptor na entrada.': { en: 'Just press the button shown by the arrow below, next to the switch at the entrance.', es: 'Basta con presionar el botón indicado por la flecha de abajo, junto al interruptor de la entrada.' },
@@ -291,7 +291,7 @@
     // o que fazer
     'O que': { en: 'What to', es: 'Qué' },
     'fazer': { en: 'do', es: 'hacer' },
-    'Fazer': { en: 'Do', es: 'Hacer' },
+    'Fazer?': { en: 'Do?', es: 'Hacer?' },
     '⭐ IMPERDÍVEL': { en: '⭐ MUST-DO', es: '⭐ IMPERDIBLE' },
     '🛶 Passeio de Jangada': { en: '🛶 Jangada Boat Trip', es: '🛶 Paseo en Jangada' },
     'Água mansa, morna e cristalina, peixinhos coloridos e corais. Cenário de cartão-postal.': { en: 'Calm, warm, crystal-clear water, colorful little fish and coral. A postcard-perfect setting.', es: 'Agua mansa, tibia y cristalina, peces de colores y corales. Un escenario de postal.' },
@@ -310,7 +310,8 @@
     // onde comer
     'Onde': { en: 'Where to', es: 'Dónde' },
     'comer': { en: 'eat', es: 'comer' },
-    'Comer': { en: 'Eat', es: 'Comer' },
+    'Comer?': { en: 'Eat?', es: 'Comer?' },
+    'Clique nos cards abaixo e veja sua rota a pé': { en: 'Tap the cards below to see your walking route', es: 'Toca las tarjetas de abajo para ver tu ruta a pie' },
     'Domingos Restaurante': { en: 'Domingos Restaurante', es: 'Domingos Restaurante' },
     'Truta, salmão e lagosta, drinques e carta de vinhos.': { en: 'Trout, salmon and lobster, drinks and a wine list.', es: 'Trucha, salmón y langosta, bebidas y carta de vinos.' },
     'GIROSKKA-BAR': { en: 'GIROSKKA-BAR', es: 'GIROSKKA-BAR' },
@@ -331,6 +332,7 @@
     'Frutas tropicais, sucos, omeletes e tapiocas.': { en: 'Tropical fruit, juices, omelets and tapiocas.', es: 'Frutas tropicales, jugos, tortillas y tapiocas.' },
     'Restaurante Beijupirá': { en: 'Restaurante Beijupirá', es: 'Restaurante Beijupirá' },
     'Pescados, camarão com mel de engenho e arroz com maracujá.': { en: 'Fish dishes, shrimp with cane honey and passion-fruit rice.', es: 'Pescados, camarón con miel de caña y arroz con maracuyá.' },
+    'O Peixe na Telha é um tradicional restaurante à beira-mar em Porto de Galinhas, em funcionamento desde 1991.': { en: 'Peixe na Telha is a traditional seaside restaurant in Porto de Galinhas, open since 1991.', es: 'Peixe na Telha es un tradicional restaurante junto al mar en Porto de Galinhas, en funcionamiento desde 1991.' },
     'Estas são apenas algumas sugestões do anfitrião, escolhidas como uma cortesia e baseadas em boas experiências.': { en: 'These are just a few suggestions from the host, offered as a courtesy and based on good experiences.', es: 'Estas son solo algunas sugerencias del anfitrión, ofrecidas como cortesía y basadas en buenas experiencias.' },
     'Mas fique tranquilo(a): no centrinho da Vila você encontrará dezenas de restaurantes, bares e cafeterias para todos os gostos e bolsos. Afinal, em Porto de Galinhas é bem mais difícil escolher onde comer do que encontrar um bom lugar!': { en: 'But don’t worry: in the village center you’ll find dozens of restaurants, bars and cafés for every taste and budget. After all, in Porto de Galinhas it’s much harder to choose where to eat than to find a good place!', es: 'Pero quédate tranquilo(a): en el centrito del pueblo encontrarás decenas de restaurantes, bares y cafeterías para todos los gustos y bolsillos. Al final, en Porto de Galinhas es mucho más difícil elegir dónde comer que encontrar un buen lugar.' },
 

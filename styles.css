@@ -989,6 +989,10 @@ section[id^="slide-toc"] .gbv-sheet {
   background: var(--c-surface2); border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
   padding: 48px 37px 22px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
 }
+/* Mesmo colchão extra de rodapé do .gbi-body, para o índice. */
+@media (hover: none), (pointer: coarse) {
+  section[id^="slide-toc"] .gbv-sheet { padding-bottom: calc(22px + 260px); }
+}
 section[id^="slide-toc"] .gbv-section-head { margin-bottom: 26px; }
 section[id^="slide-toc"] .gbv-section-label {
   font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700 !important;
@@ -1195,6 +1199,14 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   position: relative; z-index: 3; margin-top: -48px;
   background: var(--c-surface2); border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
   padding: 63px 37px 56px; box-shadow: 0 -26px 48px rgba(10,60,64,0.08);
+}
+/* Colchão extra no rodapé em celulares: alguns navegadores (ex.: Android
+   dentro de páginas que incorporam o guia num iframe, como Google Sites)
+   cortam a rolagem antes do fim real do conteúdo. Esse espaço em branco
+   a mais garante que o rodapé real fique visível mesmo quando isso
+   acontece. */
+@media (hover: none), (pointer: coarse) {
+  .gbi-body { padding-bottom: calc(56px + 260px); }
 }
 .gbi-content { position: relative; z-index: 1; }
 

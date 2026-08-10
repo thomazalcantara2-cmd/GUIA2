@@ -1453,6 +1453,10 @@ section[id^="slide-toc"] .ftr { display: none !important; }
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 10px rgba(0,0,0,.25);
 }
+/* No verso, o próprio iframe do mapa engole cliques (outro documento),
+   então o botão de voltar precisa ficar por cima dele com z-index maior. */
+.gbi-dine-flip-hint--back { z-index: 2; background: rgba(21,52,52,0.85); }
+.gbi-dine-flip-hint--back svg { transform: scaleX(-1); }
 .gbi-dine-addr {
   font-family: 'Manrope', sans-serif; font-size: calc(14px * var(--text-scale, 1)); line-height: 1.35;
   font-weight: 500 !important; color: rgba(0,0,0,0.6); margin-top: 8px;

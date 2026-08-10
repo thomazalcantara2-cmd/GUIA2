@@ -65,7 +65,7 @@
     'Regras da Casa': { en: 'House Rules', es: 'Normas de la Casa' },
     'Boa convivência': { en: 'Good neighborly living', es: 'Buena convivencia' },
     'Estacionamento': { en: 'Parking', es: 'Estacionamiento' },
-    'Onde estacionar': { en: 'Where to park', es: 'Dónde estacionar' },
+    'Onde estacionar?': { en: 'Where to park?', es: '¿Dónde estacionar?' },
     'Coleta de Lixo': { en: 'Trash Collection', es: 'Recolección de Basura' },
     'Dias e horários': { en: 'Days and times', es: 'Días y horarios' },
     'Check-out': { en: 'Check-out', es: 'Check-out' },

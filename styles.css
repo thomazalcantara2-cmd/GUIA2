@@ -122,6 +122,9 @@ a, button { touch-action: manipulation; }
   overflow-x: hidden;
   overscroll-behavior: contain;
 }
+/* Capa: página fixa, sem rolagem (nem o "bounce" do iOS, que revelava
+   uma faixa branca no topo ao puxar para baixo). */
+#slide-0.page-scrollable { overflow: hidden; }
 /* Allow the flex column to grow beyond the fixed page height so the
    footer actually appears after the content instead of being covered by it. */
 .page-scrollable .page-pad {

@@ -583,7 +583,15 @@ p.lead {
 /* ══ Capa v3 · modelo Stitch (hero + bento de flats + rodapé) ═════════
    Fundo dividido (superfície do mar em cima → submerso → azul profundo),
    hero centrado, 3 cards glassmorphic e rodapé. Escopo em #slide-0.    */
-#slide-0 .cv3 { position: relative; width: 100%; min-height: 100%; background: #0047AB; }
+/* Faixa/borda no início da página: empurra todo o conteúdo (bandeiras,
+   logo, cards e o fundo/foto, já que tudo isso vive dentro de .cv3)
+   para baixo como um bloco só, sem alterar o enquadramento interno
+   da foto de fundo. */
+/* flex-shrink:0 nos dois: .page é flex-column de altura fixa, então
+   sem isso o item maior (.cv3, com min-height:100%) espremeria a
+   borda até sumir (mesmo padrão já usado em .page-scrollable .page-pad). */
+#slide-0 .cv3-top-border { height: 96px; flex: 0 0 auto; background: #0047AB; }
+#slide-0 .cv3 { position: relative; width: 100%; min-height: 100%; flex-shrink: 0; background: #0047AB; }
 
 /* Fundo: foto de capa cobrindo a página inteira (mesma altura do
    quadro/seção onde entra), com a textura marinha por cima se

@@ -594,14 +594,13 @@ p.lead {
   position: absolute; inset: 0;
   background: url('fundo-mar.png') top center / 100% auto repeat-y, #0047AB;
 }
-#slide-0 .cv3-bg-under {
-  /* Foto APÓS os cards (grid agora empurrado mais para baixo, ver
-     .cv3-grid margin-top): entra logo abaixo, em tamanho natural (sem
-     ampliar), fundindo com a textura nas bordas. */
-  position: absolute; top: 910px; left: 0; right: 0; height: 470px;
-  background: url('https://i.ibb.co/bM263CYf/Gemini-Generated-Image-ibw37pibw37pibw3-1.png') center top / 100% auto no-repeat;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
+/* Foto final da capa: imagem normal no fluxo, sempre depois dos cards,
+   em vez de camada de fundo com posição absoluta (mais frágil quando o
+   espaçamento acima muda). */
+#slide-0 .cv3-end-photo {
+  display: block; width: 100%; height: auto;
+  margin-top: 40px; border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0,10,40,.35);
 }
 #slide-0 .cv3-bg-tint {
   position: absolute; inset: 0;

@@ -639,7 +639,7 @@ p.lead {
      viewport-fit=cover; em aba normal do Safari fica 0 e não altera a
      altura do conteúdo (evita empurrar a página para baixo do fold e
      disparar rolagem/"bounce" desnecessários). */
-  padding: calc(150px + env(safe-area-inset-top, 0px)) 56px 0;
+  padding: calc(190px + env(safe-area-inset-top, 0px)) 56px 0;
 }
 #slide-0 .cv3-eyebrow {
   font-family: 'Montserrat', sans-serif;

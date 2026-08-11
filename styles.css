@@ -632,9 +632,11 @@ p.lead {
 /* Hero */
 /* Bandeiras de idioma, canto superior direito da capa */
 #slide-0 .cover-top {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+  /* top negativo: sobe as bandeiras/botões para dentro da faixa azul
+     (margin-top de 96px em .cv3), em vez de ficarem logo abaixo dela. */
+  position: absolute; top: -76px; left: 0; right: 0; z-index: 5;
   display: flex; justify-content: flex-end;
-  padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 0;
+  padding: calc(4px + env(safe-area-inset-top, 0px)) 16px 0;
 }
 #slide-0 .cover-top-right { display: flex; align-items: center; }
 #slide-0 .cover-top .lang-flags { display: flex !important; align-items: center; gap: 17px; }

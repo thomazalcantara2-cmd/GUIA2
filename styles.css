@@ -592,7 +592,11 @@ p.lead {
 #slide-0 .cv3-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #0047AB; }
 #slide-0 .cv3-bg-photo {
   position: absolute; inset: 0;
-  background: url('https://i.ibb.co/bM263CYf/Gemini-Generated-Image-ibw37pibw37pibw3-1.png') center center / cover no-repeat, #0047AB;
+  /* Tamanho natural (sem cortar) em vez de "cover": assim a linha
+     d'água da foto cai numa altura previsível — logo abaixo dos
+     cards — em vez de ficar centralizada num quadro bem mais alto
+     que a própria foto. */
+  background: url('https://i.ibb.co/bM263CYf/Gemini-Generated-Image-ibw37pibw37pibw3-1.png') center 300px / 100% auto no-repeat, #0047AB;
 }
 /* Textura marinha por cima da foto, esmaecendo (degradê) até sumir perto
    da metade da página, revelando a foto por baixo. */

@@ -599,7 +599,7 @@ p.lead {
      .cv3-grid margin-top): entra logo abaixo, em tamanho natural (sem
      ampliar), fundindo com a textura nas bordas. */
   position: absolute; top: 910px; left: 0; right: 0; height: 470px;
-  background: url('foto-capa-recife.jpg') center top / 100% auto no-repeat;
+  background: url('https://i.ibb.co/bM263CYf/Gemini-Generated-Image-ibw37pibw37pibw3-1.png') center top / 100% auto no-repeat;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
           mask-image: linear-gradient(to bottom, transparent 0, #000 90px, #000 380px, transparent 460px);
 }

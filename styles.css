@@ -625,7 +625,7 @@ p.lead {
 #slide-0 .cover-top {
   position: absolute; top: 0; left: 0; right: 0; z-index: 5;
   display: flex; justify-content: flex-end;
-  padding: calc(78px + env(safe-area-inset-top, 0px)) 33px 0;
+  padding: calc(28px + env(safe-area-inset-top, 0px)) 33px 0;
 }
 #slide-0 .cover-top-right { display: flex; align-items: center; }
 #slide-0 .cover-top .lang-flags { display: flex !important; align-items: center; gap: 17px; }

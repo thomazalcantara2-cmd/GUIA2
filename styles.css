@@ -585,22 +585,22 @@ p.lead {
    hero centrado, 3 cards glassmorphic e rodapé. Escopo em #slide-0.    */
 #slide-0 .cv3 { position: relative; width: 100%; min-height: 100%; background: #0047AB; }
 
-/* Fundo dividido: textura marinha (fundo-mar.png) EM CIMA, foto do recife
-   (foto-capa-recife.jpg) EM BAIXO, atrás dos cards. */
+/* Fundo: foto de capa cobrindo a página inteira (mesma altura do
+   quadro/seção onde entra), com a textura marinha por cima se
+   dissolvendo do topo para baixo — degradê de transição entre o
+   fundo (textura) e a foto. */
 #slide-0 .cv3-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #0047AB; }
-/* Textura marinha cobre TODA a página (ladrilhada), então onde não há a
-   foto o fundo é a textura — nunca azul chapado. */
+#slide-0 .cv3-bg-photo {
+  position: absolute; inset: 0;
+  background: url('https://i.ibb.co/bM263CYf/Gemini-Generated-Image-ibw37pibw37pibw3-1.png') center center / cover no-repeat, #0047AB;
+}
+/* Textura marinha por cima da foto, esmaecendo (degradê) até sumir perto
+   da metade da página, revelando a foto por baixo. */
 #slide-0 .cv3-bg-top {
   position: absolute; inset: 0;
   background: url('fundo-mar.png') top center / 100% auto repeat-y, #0047AB;
-}
-/* Foto final da capa: imagem normal no fluxo, sempre depois dos cards,
-   em vez de camada de fundo com posição absoluta (mais frágil quando o
-   espaçamento acima muda). */
-#slide-0 .cv3-end-photo {
-  display: block; width: 100%; height: auto;
-  margin-top: 40px; border-radius: 28px;
-  box-shadow: 0 20px 50px rgba(0,10,40,.35);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 20%, transparent 65%);
+          mask-image: linear-gradient(to bottom, #000 0, #000 20%, transparent 65%);
 }
 #slide-0 .cv3-bg-tint {
   position: absolute; inset: 0;
@@ -617,7 +617,7 @@ p.lead {
 #slide-0 .cover-top {
   position: absolute; top: 0; left: 0; right: 0; z-index: 5;
   display: flex; justify-content: flex-end;
-  padding: calc(33px + env(safe-area-inset-top, 0px)) 33px 0;
+  padding: calc(78px + env(safe-area-inset-top, 0px)) 33px 0;
 }
 #slide-0 .cover-top-right { display: flex; align-items: center; }
 #slide-0 .cover-top .lang-flags { display: flex !important; align-items: center; gap: 17px; }
@@ -639,7 +639,7 @@ p.lead {
      viewport-fit=cover; em aba normal do Safari fica 0 e não altera a
      altura do conteúdo (evita empurrar a página para baixo do fold e
      disparar rolagem/"bounce" desnecessários). */
-  padding: calc(96px + env(safe-area-inset-top, 0px)) 56px 0;
+  padding: calc(150px + env(safe-area-inset-top, 0px)) 56px 0;
 }
 #slide-0 .cv3-eyebrow {
   font-family: 'Montserrat', sans-serif;

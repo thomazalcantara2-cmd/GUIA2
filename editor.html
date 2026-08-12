@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Editor — Guia Di Maré</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root { color-scheme: light; }
+  html, body { margin:0; padding:0; height:100%; font-family: -apple-system, "Plus Jakarta Sans", Arial, sans-serif; background:#eef2f5; }
+  #toolbar {
+    position: sticky; top:0; z-index: 20;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:10px 16px; background:#0f2540; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,.2);
+  }
+  #toolbar h1 { font-size:15px; font-weight:600; margin:0; margin-right:8px; white-space:nowrap; }
+  .lang-btns { display:flex; gap:6px; }
+  .lang-btns button {
+    padding:6px 12px; border-radius:6px; border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.08); color:#fff; cursor:pointer; font-size:13px;
+  }
+  .lang-btns button.active { background:#EE6C4D; border-color:#EE6C4D; font-weight:600; }
+  #toolbar input[type=password] {
+    padding:6px 10px; border-radius:6px; border:1px solid #ccc; font-size:13px; width:160px;
+  }
+  #saveBtn {
+    padding:7px 16px; border-radius:6px; border:none; background:#2E9E5B; color:#fff;
+    font-weight:600; cursor:pointer; font-size:13px;
+  }
+  #saveBtn:disabled { background:#5a6b78; cursor:not-allowed; }
+  #status { font-size:13px; opacity:.9; min-width:160px; }
+  #status.err { color:#ffb4b4; }
+  #status.ok { color:#b7ffcf; }
+  .spacer { flex:1; }
+  #hint {
+    font-size:12px; opacity:.75; max-width:260px;
+  }
+  #stage { position:relative; }
+  iframe#guide {
+    width:100%; height:calc(100vh - 54px); border:0; display:block; background:#1a1a1a;
+  }
+</style>
+</head>
+<body>
+
+<div id="toolbar">
+  <h1>✏️ Editor do Guia</h1>
+  <div class="lang-btns" id="langBtns">
+    <button data-lang="pt" class="active">PT</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="es">ES</button>
+  </div>
+  <input type="password" id="pw" placeholder="Senha do editor" autocomplete="current-password" />
+  <button id="saveBtn">Salvar alterações</button>
+  <span id="status"></span>
+  <div class="spacer"></div>
+  <div id="hint">Clique em qualquer texto na página para editar. Troque o idioma acima para editar EN/ES. Depois clique em "Salvar".</div>
+</div>
+
+<div id="stage">
+  <iframe id="guide" src="guia-3-flats.html?editor=1"></iframe>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const iframe = document.getElementById('guide');
+  const statusEl = document.getElementById('status');
+  const saveBtn = document.getElementById('saveBtn');
+  const pwInput = document.getElementById('pw');
+  const langBtns = document.getElementById('langBtns');
+
+  let currentLang = 'pt';
+  let dirty = false;
+
+  try { pwInput.value = sessionStorage.getItem('editorPw') || ''; } catch (e) {}
+
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg;
+    statusEl.className = kind || '';
+  }
+
+  function markDirty() {
+    dirty = true;
+    setStatus('Alterações não salvas', '');
+  }
+
+  function getApi() {
+    const w = iframe.contentWindow;
+    return w && w.__guiaI18n ? w.__guiaI18n : null;
+  }
+
+  function enableEditing() {
+    const doc = iframe.contentDocument;
+    if (!doc) return;
+
+    // Inject editing affordance styles into the iframe.
+    if (!doc.getElementById('editor-affordance-style')) {
+      const style = doc.createElement('style');
+      style.id = 'editor-affordance-style';
+      style.textContent = `
+        [data-eid] { outline-offset: 2px; cursor: text; }
+        [data-eid]:hover { outline: 1.5px dashed #EE6C4D; background: rgba(238,108,77,.08); }
+        [data-eid]:focus { outline: 2px solid #2E9E5B; background: rgba(46,158,91,.12); }
+      `;
+      doc.head.appendChild(style);
+    }
+
+    doc.querySelectorAll('[data-eid]').forEach((el) => {
+      el.setAttribute('contenteditable', 'plaintext-only');
+      el.setAttribute('spellcheck', 'false');
+    });
+
+    // Prevent navigation while editing (links/buttons wrapping editable spans).
+    if (!doc.__editorClickGuard) {
+      doc.__editorClickGuard = true;
+      doc.addEventListener('click', (e) => {
+        const link = e.target.closest('a,button');
+        if (link) e.preventDefault();
+      }, true);
+    }
+
+    // Capture edits.
+    if (!doc.__editorInputGuard) {
+      doc.__editorInputGuard = true;
+      doc.addEventListener('input', (e) => {
+        const el = e.target.closest('[data-eid]');
+        if (!el) return;
+        const api = getApi();
+        if (!api) return;
+        const content = api.getContent();
+        const eid = el.dataset.eid;
+        if (!content[eid]) content[eid] = { pt: '', en: '', es: '' };
+        content[eid][currentLang] = el.textContent;
+        markDirty();
+      }, true);
+    }
+  }
+
+  function switchLang(lang) {
+    currentLang = lang;
+    [...langBtns.children].forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+    const api = getApi();
+    if (api) api.apply(lang);
+    enableEditing();
+  }
+
+  langBtns.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-lang]');
+    if (!btn) return;
+    switchLang(btn.dataset.lang);
+  });
+
+  iframe.addEventListener('load', () => {
+    // Wait a tick for i18n.js's own DOMContentLoaded init to finish.
+    const wait = () => {
+      if (getApi()) {
+        switchLang(currentLang);
+        setStatus('Pronto. Clique em um texto para editar.', 'ok');
+      } else {
+        setTimeout(wait, 60);
+      }
+    };
+    wait();
+  });
+
+  saveBtn.addEventListener('click', async () => {
+    const api = getApi();
+    if (!api) { setStatus('Página ainda carregando…', 'err'); return; }
+    const pw = pwInput.value.trim();
+    if (!pw) { setStatus('Informe a senha do editor.', 'err'); pwInput.focus(); return; }
+    try { sessionStorage.setItem('editorPw', pw); } catch (e) {}
+
+    saveBtn.disabled = true;
+    setStatus('Salvando…', '');
+    try {
+      const content = api.getContent();
+      const res = await fetch('/api/save-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw, content }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus('Erro: ' + (data.error || res.status), 'err');
+      } else {
+        dirty = false;
+        setStatus('Salvo! O site vai atualizar em instantes.', 'ok');
+      }
+    } catch (e) {
+      setStatus('Falha de rede ao salvar.', 'err');
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
+
+  window.addEventListener('beforeunload', (e) => {
+    if (dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -399,29 +399,7 @@
     });
   });
 
-  // ── 9. Cartões de restaurantes (Onde Comer): vira para mostrar o mapa ──
-  // O iframe do mapa só é criado no primeiro flip (em vez de já vir no HTML),
-  // para não carregar até 9 mapas do Google de uma vez ao abrir a página.
-  document.querySelectorAll('.gbi-dine-card').forEach((card) => {
-    const mapEl = card.querySelector('.gbi-dine-map');
-    const loadMap = () => {
-      if (!mapEl || mapEl.querySelector('iframe')) return;
-      const src = mapEl.getAttribute('data-map-src');
-      if (!src) return;
-      const iframe = document.createElement('iframe');
-      iframe.src = src;
-      iframe.loading = 'lazy';
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      mapEl.appendChild(iframe);
-    };
-    const toggle = () => {
-      const flipped = card.classList.toggle('is-flipped');
-      card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
-      if (flipped) loadMap();
-    };
-    card.addEventListener('click', toggle);
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
-  });
+  // Cartões de restaurantes (Onde Comer) agora são montados por dine.js a
+  // partir de restaurants.json — a lógica de virar o card e carregar o mapa
+  // sob demanda mora lá, junto com a criação dos próprios cartões.
 })();

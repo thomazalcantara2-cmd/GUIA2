@@ -39,6 +39,53 @@
   iframe#guide {
     width:100%; height:calc(100vh - 54px); border:0; display:block; background:#1a1a1a;
   }
+  #dineBtn {
+    padding:7px 14px; border-radius:6px; border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.08); color:#fff; cursor:pointer; font-size:13px; white-space:nowrap;
+  }
+  .dine-overlay {
+    position:fixed; inset:0; z-index:50; background:rgba(10,20,30,.55);
+    display:flex; justify-content:flex-end;
+  }
+  .dine-overlay[hidden] { display:none; }
+  .dine-panel {
+    width:min(440px, 100%); height:100%; background:#fff; overflow-y:auto;
+    box-shadow:-8px 0 24px rgba(0,0,0,.25); display:flex; flex-direction:column;
+  }
+  .dine-panel-head {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 18px; background:#0f2540; color:#fff; position:sticky; top:0; z-index:1;
+  }
+  .dine-panel-head h2 { font-size:16px; margin:0; }
+  .dine-x { background:none; border:0; color:#fff; font-size:18px; cursor:pointer; line-height:1; }
+  .dine-body { padding:16px 18px 28px; }
+  .dine-list { display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
+  .dine-empty { color:#667; font-size:13px; }
+  .dine-row {
+    display:flex; align-items:center; gap:10px; border:1px solid #e2e6ea; border-radius:8px; padding:8px 10px;
+  }
+  .dine-row img { width:44px; height:44px; border-radius:6px; object-fit:cover; background:#eee; flex-shrink:0; }
+  .dine-row-name { flex:1; font-size:13px; font-weight:600; color:#222; }
+  .dine-row button {
+    border:0; border-radius:5px; padding:5px 9px; font-size:12px; cursor:pointer;
+  }
+  .dine-edit-btn { background:#EEF2F5; color:#333; }
+  .dine-del-btn { background:#FDE9E7; color:#B3261E; }
+  .dine-form h3 { font-size:14px; margin:0 0 10px; }
+  .dine-form label {
+    display:block; font-size:12px; font-weight:600; color:#445; margin:0 0 12px;
+  }
+  .dine-form input, .dine-form textarea {
+    display:block; width:100%; margin-top:5px; padding:8px 10px; font-size:13px;
+    border:1px solid #ccd3da; border-radius:6px; box-sizing:border-box; font-family:inherit;
+  }
+  .dine-form textarea { min-height:64px; resize:vertical; }
+  .dine-form-actions { display:flex; gap:8px; align-items:center; }
+  #dineSubmitBtn { padding:8px 16px; border-radius:6px; border:none; background:#2E9E5B; color:#fff; font-weight:600; cursor:pointer; font-size:13px; }
+  #dineCancelEditBtn { padding:8px 14px; border-radius:6px; border:1px solid #ccd3da; background:#fff; color:#445; cursor:pointer; font-size:13px; }
+  #dineStatus { font-size:12px; margin-top:10px; min-height:16px; }
+  #dineStatus.err { color:#B3261E; }
+  #dineStatus.ok { color:#1b7a41; }
 </style>
 </head>
 <body>
@@ -52,6 +99,7 @@
   </div>
   <input type="password" id="pw" placeholder="Senha do editor" autocomplete="current-password" />
   <button id="saveBtn">Salvar alterações</button>
+  <button id="dineBtn" type="button">🍽️ Restaurantes</button>
   <span id="status"></span>
   <div class="spacer"></div>
   <div id="hint">Clique em qualquer texto na página para editar. Troque o idioma acima para editar EN/ES. Depois clique em "Salvar".</div>
@@ -59,6 +107,44 @@
 
 <div id="stage">
   <iframe id="guide" src="guia-3-flats.html?editor=1"></iframe>
+</div>
+
+<div id="dineOverlay" class="dine-overlay" hidden>
+  <div class="dine-panel">
+    <div class="dine-panel-head">
+      <h2>🍽️ Restaurantes — Onde Comer?</h2>
+      <button id="dineCloseBtn" class="dine-x" type="button">✕</button>
+    </div>
+    <div class="dine-body">
+      <div id="dineList" class="dine-list"></div>
+      <form id="dineForm" class="dine-form">
+        <h3 id="dineFormTitle">Adicionar novo restaurante</h3>
+        <label>Nome
+          <input name="name" required />
+        </label>
+        <label>Descrição (uma frase curta)
+          <input name="desc" />
+        </label>
+        <label>Endereço
+          <input name="addr" placeholder="📍 Rua, número - Bairro, Cidade - UF, CEP" />
+        </label>
+        <label>Selo opcional (ex.: "desde 1994")
+          <input name="since" />
+        </label>
+        <label>URL da foto
+          <input name="img" required placeholder="https://..." />
+        </label>
+        <label>Mapa em satélite — cole o &lt;iframe&gt; do Google Maps (Compartilhar → Incorporar mapa) ou só o link
+          <textarea name="map" required></textarea>
+        </label>
+        <div class="dine-form-actions">
+          <button id="dineSubmitBtn" type="submit">+ Adicionar restaurante</button>
+          <button id="dineCancelEditBtn" type="button" hidden>Cancelar edição</button>
+        </div>
+        <div id="dineStatus"></div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -197,6 +283,245 @@
   window.addEventListener('beforeunload', (e) => {
     if (dirty) { e.preventDefault(); e.returnValue = ''; }
   });
+
+  // ── Restaurantes (Onde Comer?) ──────────────────────────────────────
+  // Cards are data-driven (dine.js reads restaurants.json + content.json),
+  // so adding/editing/removing one here never touches guia-3-flats.html.
+  (() => {
+    const dineBtn = document.getElementById('dineBtn');
+    const dineOverlay = document.getElementById('dineOverlay');
+    const dineCloseBtn = document.getElementById('dineCloseBtn');
+    const dineList = document.getElementById('dineList');
+    const dineForm = document.getElementById('dineForm');
+    const dineFormTitle = document.getElementById('dineFormTitle');
+    const dineSubmitBtn = document.getElementById('dineSubmitBtn');
+    const dineCancelEditBtn = document.getElementById('dineCancelEditBtn');
+    const dineStatusEl = document.getElementById('dineStatus');
+
+    let editingIndex = null; // null = adding a new restaurant
+
+    function getDineApi() {
+      const w = iframe.contentWindow;
+      return w && w.__guiaDine ? w.__guiaDine : null;
+    }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
+        { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+      ));
+    }
+
+    function setDineStatus(msg, kind) {
+      dineStatusEl.textContent = msg;
+      dineStatusEl.className = kind || '';
+    }
+
+    function extractMapSrc(raw) {
+      const m = raw.match(/src=["']([^"']+)["']/);
+      return (m ? m[1] : raw).trim();
+    }
+
+    function textOf(content, eid) {
+      const entry = eid && content[eid];
+      if (!entry) return '';
+      return entry.pt || '';
+    }
+
+    // Finds the highest "eNNNN" key already in content.json and returns
+    // `count` fresh, unused ones right after it.
+    function allocateEids(content, count) {
+      let max = 0;
+      Object.keys(content).forEach((k) => {
+        const m = /^e(\d+)$/.exec(k);
+        if (m) max = Math.max(max, parseInt(m[1], 10));
+      });
+      const ids = [];
+      for (let i = 0; i < count; i++) {
+        max += 1;
+        ids.push('e' + String(max).padStart(4, '0'));
+      }
+      return ids;
+    }
+
+    function slugify(s) {
+      return String(s).toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'restaurante';
+    }
+
+    function renderDineList() {
+      const dineApi = getDineApi();
+      const api = getApi();
+      if (!dineApi || !api) { dineList.innerHTML = '<p class="dine-empty">Página ainda carregando…</p>'; return; }
+      const restaurants = dineApi.getRestaurants();
+      const content = api.getContent();
+      if (!restaurants.length) {
+        dineList.innerHTML = '<p class="dine-empty">Nenhum restaurante cadastrado ainda.</p>';
+        return;
+      }
+      dineList.innerHTML = restaurants.map((r, idx) => (
+        '<div class="dine-row">'
+        + '<img src="' + escapeHtml(r.img) + '" alt="">'
+        + '<span class="dine-row-name">' + escapeHtml(textOf(content, r.nameEid) || '(sem nome)') + '</span>'
+        + '<button type="button" class="dine-edit-btn" data-idx="' + idx + '">Editar</button>'
+        + '<button type="button" class="dine-del-btn" data-idx="' + idx + '">Excluir</button>'
+        + '</div>'
+      )).join('');
+    }
+
+    function resetForm() {
+      editingIndex = null;
+      dineForm.reset();
+      dineFormTitle.textContent = 'Adicionar novo restaurante';
+      dineSubmitBtn.textContent = '+ Adicionar restaurante';
+      dineCancelEditBtn.hidden = true;
+    }
+
+    function startEdit(idx) {
+      const dineApi = getDineApi();
+      const api = getApi();
+      if (!dineApi || !api) return;
+      const r = dineApi.getRestaurants()[idx];
+      if (!r) return;
+      const content = api.getContent();
+      editingIndex = idx;
+      dineForm.name.value = textOf(content, r.nameEid);
+      dineForm.desc.value = textOf(content, r.descEid);
+      dineForm.addr.value = textOf(content, r.addrEid);
+      dineForm.since.value = r.sinceEid ? textOf(content, r.sinceEid) : '';
+      dineForm.img.value = r.img;
+      dineForm.map.value = r.mapSrc;
+      dineFormTitle.textContent = 'Editando: ' + (textOf(content, r.nameEid) || '');
+      dineSubmitBtn.textContent = 'Salvar alterações';
+      dineCancelEditBtn.hidden = false;
+      dineForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    async function persist(restaurants, content) {
+      const pw = pwInput.value.trim();
+      if (!pw) { setDineStatus('Informe a senha do editor no topo da página.', 'err'); return false; }
+      try { sessionStorage.setItem('editorPw', pw); } catch (e) {}
+      setDineStatus('Salvando…', '');
+      try {
+        const res = await fetch('/api/save-restaurants', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw, restaurants, content }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) { setDineStatus('Erro: ' + (data.error || res.status), 'err'); return false; }
+        setDineStatus('Salvo!', 'ok');
+        return true;
+      } catch (e) {
+        setDineStatus('Falha de rede ao salvar.', 'err');
+        return false;
+      }
+    }
+
+    async function applyAndPersist(restaurants, content) {
+      const ok = await persist(restaurants, content);
+      if (!ok) return false;
+      // Optimistic local refresh — the real files are already committed on
+      // GitHub, but the page redeploy takes a minute, so update the live
+      // preview immediately from what we just saved.
+      const dineApi = getDineApi();
+      const api = getApi();
+      if (dineApi) dineApi.setRestaurants(restaurants);
+      if (api) { api.setContent(content); api.apply(currentLang); }
+      renderDineList();
+      return true;
+    }
+
+    dineBtn.addEventListener('click', () => {
+      dineOverlay.hidden = false;
+      resetForm();
+      setDineStatus('', '');
+      renderDineList();
+    });
+    dineCloseBtn.addEventListener('click', () => { dineOverlay.hidden = true; });
+    dineCancelEditBtn.addEventListener('click', () => { resetForm(); setDineStatus('', ''); });
+
+    dineList.addEventListener('click', async (e) => {
+      const editBtn = e.target.closest('.dine-edit-btn');
+      const delBtn = e.target.closest('.dine-del-btn');
+      if (editBtn) { startEdit(parseInt(editBtn.dataset.idx, 10)); return; }
+      if (delBtn) {
+        const idx = parseInt(delBtn.dataset.idx, 10);
+        const dineApi = getDineApi();
+        const api = getApi();
+        if (!dineApi || !api) return;
+        const restaurants = dineApi.getRestaurants();
+        const name = textOf(api.getContent(), restaurants[idx] && restaurants[idx].nameEid);
+        if (!confirm('Excluir "' + (name || 'este restaurante') + '"? Essa ação não pode ser desfeita.')) return;
+        const newRestaurants = restaurants.slice();
+        newRestaurants.splice(idx, 1);
+        await applyAndPersist(newRestaurants, api.getContent());
+        if (editingIndex === idx) resetForm();
+      }
+    });
+
+    dineForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const api = getApi();
+      const dineApi = getDineApi();
+      if (!api || !dineApi) { setDineStatus('Página ainda carregando…', 'err'); return; }
+
+      const name = dineForm.name.value.trim();
+      const desc = dineForm.desc.value.trim();
+      const addr = dineForm.addr.value.trim();
+      const since = dineForm.since.value.trim();
+      const img = dineForm.img.value.trim();
+      const mapSrc = extractMapSrc(dineForm.map.value.trim());
+      if (!name || !img || !mapSrc) {
+        setDineStatus('Preencha ao menos nome, foto e mapa.', 'err');
+        return;
+      }
+
+      const content = { ...api.getContent() };
+      const restaurants = dineApi.getRestaurants().slice();
+
+      dineSubmitBtn.disabled = true;
+      try {
+        if (editingIndex !== null) {
+          const r = { ...restaurants[editingIndex] };
+          content[r.nameEid] = { ...content[r.nameEid], pt: name };
+          content[r.descEid] = { ...content[r.descEid], pt: desc };
+          content[r.addrEid] = { ...content[r.addrEid], pt: addr };
+          if (since && !r.sinceEid) {
+            const [sinceEid] = allocateEids(content, 1);
+            content[sinceEid] = { pt: since, en: since, es: since };
+            r.sinceEid = sinceEid;
+          } else if (since && r.sinceEid) {
+            content[r.sinceEid] = { ...content[r.sinceEid], pt: since };
+          } else if (!since) {
+            r.sinceEid = null;
+          }
+          r.img = img;
+          r.mapSrc = mapSrc;
+          restaurants[editingIndex] = r;
+        } else {
+          const needed = since ? 4 : 3;
+          const ids = allocateEids(content, needed);
+          const [nameEid, descEid, addrEid, sinceEid] = ids;
+          content[nameEid] = { pt: name, en: name, es: name };
+          content[descEid] = { pt: desc, en: desc, es: desc };
+          content[addrEid] = { pt: addr, en: addr, es: addr };
+          if (since) content[sinceEid] = { pt: since, en: since, es: since };
+          restaurants.push({
+            id: slugify(name) + '-' + Date.now().toString(36).slice(-4),
+            img, mapSrc,
+            nameEid, descEid, addrEid,
+            sinceEid: since ? sinceEid : null,
+          });
+        }
+
+        const ok = await applyAndPersist(restaurants, content);
+        if (ok) resetForm();
+      } finally {
+        dineSubmitBtn.disabled = false;
+      }
+    });
+  })();
 })();
 </script>
 

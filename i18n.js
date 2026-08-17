@@ -25,6 +25,10 @@
       b.style.display = isActive ? 'none' : '';
     });
     try { localStorage.setItem('guia-lang', lang); } catch (e) {}
+    // Lets independently-rendered widgets (e.g. dine.js's restaurant cards,
+    // built from restaurants.json instead of static HTML) react to language
+    // switches without i18n.js needing to know they exist.
+    document.dispatchEvent(new CustomEvent('guia-lang-changed', { detail: { lang } }));
   }
 
   const META = [

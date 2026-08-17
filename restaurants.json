@@ -1,0 +1,92 @@
+[
+  {
+    "id": "domingos-restaurante",
+    "img": "https://i.ibb.co/W4MG7VzB/2024-09-17.webp",
+    "nameEid": "e0439",
+    "sinceEid": null,
+    "descEid": "e0440",
+    "addrEid": "e0441",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.3168750347513!2d-35.00359111122358!3d-8.507830645188646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa92284e441479%3A0x72cff9b4e92c9142!2sDomingos%20Restaurante%2C%20R.%20Beijupir%C3%A1%2C%20128%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055595-102!3m2!1d-8.5063781!2d-35.0034637!5e1!3m2!1spt-BR!2sbr!4v1786385631189!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "giroskka-bar",
+    "img": "https://i.ibb.co/RknbWSWd/lindo-ambiente-cerca.jpg",
+    "nameEid": "e0442",
+    "sinceEid": "e0443",
+    "descEid": "e0444",
+    "addrEid": "e0445",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.317754287748!2d-35.002306911223464!3d-8.507686745187655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa922981ccd0b7%3A0x8a7aec16c7b2f3bd!2sGIROSKKA-BAR%2C%20R.%20das%20Piscinas%20Naturais%2C%20S%2FN%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5061327!2d-35.0005299!5e1!3m2!1spt-BR!2sbr!4v1786385614366!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "cafe-da-moeda",
+    "img": "https://i.ibb.co/xSnXGY5g/cafe-da-moeda-porto-de-galinhas-o-local.jpg",
+    "nameEid": "e0446",
+    "sinceEid": null,
+    "descEid": "e0447",
+    "addrEid": "e0448",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.3183341344943!2d-35.00240896122354!3d-8.507591845187061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa92298e667121%3A0xc5ad22726f478791!2sCaf%C3%A9%20da%20Moeda%20-Porto%20de%20Galinhas%2C%20R.%20Esperan%C3%A7a%2C%20458%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5060001!2d-35.000918899999995!5e1!3m2!1spt-BR!2sbr!4v1786385595742!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "farol-cafe",
+    "img": "https://i.ibb.co/m5S83cjb/img-20190419-160510861.jpg",
+    "nameEid": "e0449",
+    "sinceEid": null,
+    "descEid": "e0450",
+    "addrEid": "e0451",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.3145888467743!2d-35.00249611126141!3d-8.50820479519105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa93b6bda46c81%3A0xbb75cfdc0bc24310!2sFarol%20Caf%C3%A9%20-%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5071329!2d-35.0009083!5e1!3m2!1spt-BR!2sbr!4v1786385572901!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "ristorante-mamma-mia",
+    "img": "https://i.ibb.co/fd6cbHxJ/ristorante-pizzeria-mammamia.jpg",
+    "nameEid": "e0452",
+    "sinceEid": null,
+    "descEid": "e0453",
+    "addrEid": "e0454",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.3145845694344!2d-35.00253226126139!3d-8.508205495191048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa91875953e57b%3A0x5881a568e644347b!2sRistorante%20Mamma%20Mia%2C%20R.%20das%20Piscinas%20Naturais%2C%20200%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5071278!2d-35.0010225!5e1!3m2!1spt-BR!2sbr!4v1786385553318!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "caldinho-do-nenen",
+    "img": "https://i.ibb.co/C3t7LMbT/caldinho-do-nenen.jpg",
+    "nameEid": "e0455",
+    "sinceEid": null,
+    "descEid": "e0456",
+    "addrEid": "e0457",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.3175489874657!2d-35.00229266122349!3d-8.5077203451879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa93bf8598fb09%3A0x6cefed04a7b0d84a!2sCaldinho%20do%20Nenen%20-%20Porto%20de%20Galinhas%2C%20Galeria%20verde%20mar%20lj%209%2C%20R.%20das%20Piscinas%20Naturais%2C%20S%2FN%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.506208599999999!2d-35.0005014!5e1!3m2!1spt-BR!2sbr!4v1786385534430!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "mardioca",
+    "img": "https://i.ibb.co/W4BCh420/madrioca.jpg",
+    "nameEid": "e0458",
+    "sinceEid": null,
+    "descEid": "e0459",
+    "addrEid": "e0460",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.320101436!2d-35.003453861223626!3d-8.507302595185097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa9229022a81d7%3A0xf6aa984cceec7665!2sMardioca%2C%20R.%20Beijupir%C3%A1%2C%201-87%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5054828!2d-35.0026852!5e1!3m2!1spt-BR!2sbr!4v1786385519494!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "pousada-maihai",
+    "img": "https://i.ibb.co/MDsmbSz3/cafe-da-manha.jpg",
+    "nameEid": "e0461",
+    "sinceEid": "e0462",
+    "descEid": "e0463",
+    "addrEid": "e0464",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.312916074852!2d-35.00259751126142!3d-8.50847854519289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa933e4c0baddd%3A0x69c1be6ef8eed524!2sMaihai%20Porto%2C%20R.%20das%20Piscinas%20Naturais%2C%20202%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5076773!2d-35.0011933!5e1!3m2!1spt-BR!2sbr!4v1786385456982!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "restaurante-beijupira",
+    "img": "https://i.ibb.co/7dLp8btp/20171229-131147-1.jpg",
+    "nameEid": "e0465",
+    "sinceEid": null,
+    "descEid": "e0466",
+    "addrEid": "e0467",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.318230569081!2d-35.00359111122358!3d-8.507608795187155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa9228f785ab5d%3A0xb46ed0e62adbea38!2sRestaurante%20Beijupir%C3%A1%2C%20R.%20Beijupir%C3%A1%2C%2090%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5059344!2d-35.0031637!5e1!3m2!1spt-BR!2sbr!4v1786385390909!5m2!1spt-BR!2sbr"
+  },
+  {
+    "id": "restaurante-peixe-na-telha",
+    "img": "https://i.ibb.co/xqqPgDC9/peixenatelha.jpg",
+    "nameEid": "e0468",
+    "sinceEid": null,
+    "descEid": "e0469",
+    "addrEid": "e0470",
+    "mapSrc": "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2340.3162160271268!2d-35.00222446141024!3d-8.50793849788349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x7aa9170fb1d784f%3A0x57f6c89e1f414dfc!2sDi%20Mar%C3%A9%20Porto%20de%20Galinhas%2C%20R.%20das%20Piscinas%20Naturais%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055590-000!3m2!1d-8.5092787!2d-35.001509!4m5!1s0x7aa9229892d855b%3A0x18ff589a6a4162bb!2sRestaurante%20Peixe%20na%20Telha%2C%20https%3A%2F%2Fmaps.app.goo.gl%2F8v7KFYSQxeaAqiTa7%3Fg_st%3Dawb%20-%20R.%20das%20Piscinas%20Naturais%2C%20103%20-%20Porto%20de%20Galinhas%2C%20Ipojuca%20-%20PE%2C%2055595-001!3m2!1d-8.506744!2d-35.000364999999995!5e1!3m2!1spt-BR!2sbr!4v1786385305948!5m2!1spt-BR!2sbr"
+  }
+]

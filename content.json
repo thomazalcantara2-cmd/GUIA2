@@ -2024,14 +2024,34 @@
     "en": "Still have questions? Message the host",
     "es": "¿Aún tienes dudas? Habla con el anfitrión"
   },
-  "e0488": {
-    "pt": "1️⃣ Acesso ao condomínio: pela recepção, com porteiro presencial ou por senha de acesso.",
-    "en": "1️⃣ Access to the condominium: through reception, with an on-site doorman or an access code.",
-    "es": "1️⃣ Acceso al condominio: por la recepción, con portero presencial o con clave de acceso."
+  "e0490": {
+    "pt": "1️⃣",
+    "en": "1️⃣",
+    "es": "1️⃣"
   },
-  "e0489": {
-    "pt": "2️⃣ Acesso ao apartamento: realizado por fechadura eletrônica, utilizando uma senha exclusiva para a sua estadia, que será enviada pela plataforma no dia do seu check-in.",
-    "en": "2️⃣ Access to the apartment: via an electronic lock, using a unique code for your stay, which will be sent through the platform on the day of your check-in.",
-    "es": "2️⃣ Acceso al apartamento: mediante cerradura electrónica, utilizando una clave exclusiva para tu estadía, que será enviada por la plataforma el día de tu check-in."
+  "e0491": {
+    "pt": "Acesso ao condomínio",
+    "en": "Access to the condominium",
+    "es": "Acceso al condominio"
+  },
+  "e0492": {
+    "pt": "Pela recepção, com porteiro presencial ou por senha de acesso.",
+    "en": "Through reception, with an on-site doorman or an access code.",
+    "es": "Por la recepción, con portero presencial o con clave de acceso."
+  },
+  "e0493": {
+    "pt": "2️⃣",
+    "en": "2️⃣",
+    "es": "2️⃣"
+  },
+  "e0494": {
+    "pt": "Acesso ao apartamento",
+    "en": "Access to the apartment",
+    "es": "Acceso al apartamento"
+  },
+  "e0495": {
+    "pt": "Realizado por fechadura eletrônica, utilizando uma senha exclusiva para a sua estadia, que será enviada pela plataforma no dia do seu check-in.",
+    "en": "Via an electronic lock, using a unique code for your stay, which will be sent through the platform on the day of your check-in.",
+    "es": "Mediante cerradura electrónica, utilizando una clave exclusiva para tu estadía, que será enviada por la plataforma el día de tu check-in."
   }
 }

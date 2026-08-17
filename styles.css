@@ -1272,20 +1272,6 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 .gbi-list-ul li { margin-bottom: 4px; }
 .gbi-list-ul li:last-child { margin-bottom: 0; }
 
-/* Check-in · Confira Tudo: letra maior que o padrão das outras páginas */
-#slide-checkin .gbi-lead,
-#slide-checkin-202 .gbi-lead,
-#slide-checkin .gbi-list-text,
-#slide-checkin-202 .gbi-list-text,
-#slide-checkin .gbi-alert-text,
-#slide-checkin-202 .gbi-alert-text {
-  font-size: calc(29px * var(--text-scale, 1));
-}
-#slide-checkin .gbi-list-text b,
-#slide-checkin-202 .gbi-list-text b {
-  font-size: calc(30px * var(--text-scale, 1));
-}
-
 /* ── Cartão Wi-Fi ───────────────────────────────────────────────── */
 .gbi-wifi {
   background: #fff;

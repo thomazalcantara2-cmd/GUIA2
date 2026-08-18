@@ -15,7 +15,11 @@
   // getComputedStyle rather than duplicated here, so it can never drift out
   // of sync with the page's real design.
   const STYLE_REF_SELECTORS = {
-    title: '.gbi-page-title, .cv3-title, .gbv-flat-title',
+    // The bold sub-heading inside a content box, e.g. "Como ligar a
+    // energia?" or "E quando a porta for aberta ou fechada?" — not the big
+    // page header (that one's just called by its own name if it's ever
+    // needed: .gbi-page-title).
+    title: '.gbi-list-text b, .gbi-alert-text b',
     text: '.gbi-lead, .gbi-list-text, .cv3-select-sub',
   };
   function findStyleRef(kind, el) {

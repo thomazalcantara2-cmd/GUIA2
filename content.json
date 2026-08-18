@@ -737,7 +737,8 @@
   "e0212": {
     "pt": "Tudo certo por aí? 😊",
     "en": "Everything OK over there? 😊",
-    "es": "¿Todo bien por ahí? 😊"
+    "es": "¿Todo bien por ahí? 😊",
+    "style": "title"
   },
   "e0213": {
     "pt": "Em até 2 horas após o check-in, confira se todos os itens do apartamento estão disponíveis. Se notar qualquer ausência, avise-nos para que possamos resolver o mais rápido possível.",

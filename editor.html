@@ -274,6 +274,60 @@
       .replace(/<(?!\/?b>)[^>]*>/gi, '');
   }
 
+  // ── Automatic PT → EN/ES translation (DeepL, via /api/translate) ────
+  // Fires a bit after typing stops (not on every keystroke) so editing a
+  // whole sentence in Portuguese doesn't spam the translation API — each
+  // new edit to the same span resets its own timer.
+  const AUTO_TRANSLATE_DEBOUNCE_MS = 1200;
+  const translateTimers = new Map();
+
+  function scheduleAutoTranslate(eid) {
+    if (translateTimers.has(eid)) clearTimeout(translateTimers.get(eid));
+    translateTimers.set(eid, setTimeout(() => runAutoTranslate(eid), AUTO_TRANSLATE_DEBOUNCE_MS));
+  }
+
+  async function callTranslateAPI(text, targetLang) {
+    const res = await fetch('/api/translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, target: targetLang, source: 'PT' }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || String(res.status));
+    return data.text || '';
+  }
+
+  async function runAutoTranslate(eid) {
+    translateTimers.delete(eid);
+    const api = getApi();
+    if (!api) return;
+    const content = api.getContent();
+    const entry = content[eid];
+    const ptText = entry && entry.pt;
+    if (!ptText || !ptText.trim()) return;
+
+    setStatus('Traduzindo automaticamente…', '');
+    try {
+      const [en, es] = await Promise.all([
+        callTranslateAPI(ptText, 'EN-US'),
+        callTranslateAPI(ptText, 'ES'),
+      ]);
+      // The PT text may have changed again while these requests were in
+      // flight (or content may have been reloaded/restored) — only apply
+      // the result if it's still the translation of the CURRENT text.
+      const freshContent = api.getContent();
+      const freshEntry = freshContent[eid];
+      if (!freshEntry || freshEntry.pt !== ptText) return;
+      freshEntry.en = en;
+      freshEntry.es = es;
+      markDirty();
+      if (currentLang !== 'pt') api.apply(currentLang);
+      setStatus('Tradução automática pronta. Clique em "Salvar alterações" para publicar.', 'ok');
+    } catch (err) {
+      setStatus('Falha na tradução automática: ' + err.message, 'err');
+    }
+  }
+
   function enableEditing() {
     const doc = iframe.contentDocument;
     if (!doc) return;
@@ -345,6 +399,7 @@
         if (!content[eid]) content[eid] = { pt: '', en: '', es: '' };
         content[eid][currentLang] = sanitizeInlineHTML(el.innerHTML);
         markDirty();
+        if (currentLang === 'pt') scheduleAutoTranslate(eid);
       }, true);
     }
 

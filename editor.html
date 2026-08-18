@@ -44,7 +44,10 @@
     background:rgba(255,255,255,.08); color:#fff; cursor:pointer; font-size:13px; white-space:nowrap;
   }
   .dine-overlay {
-    position:fixed; inset:0; z-index:50; background:rgba(10,20,30,.55);
+    /* Starts below the toolbar (not inset:0) so the password field and the
+       rest of the toolbar stay clickable while this panel is open — the
+       backdrop used to sit on top of them and swallow every click there. */
+    position:fixed; top:54px; left:0; right:0; bottom:0; z-index:50; background:rgba(10,20,30,.55);
     display:flex; justify-content:flex-end;
   }
   .dine-overlay[hidden] { display:none; }
@@ -134,8 +137,8 @@
         <label>URL da foto
           <input name="img" required placeholder="https://..." />
         </label>
-        <label>Mapa em satélite — cole o &lt;iframe&gt; do Google Maps (Compartilhar → Incorporar mapa) ou só o link
-          <textarea name="map" required></textarea>
+        <label>Mapa em satélite — no Google Maps, clique em <b>Compartilhar → Incorporar um mapa</b> e cole aqui o código &lt;iframe&gt; inteiro que aparece (não use o link comum de "Compartilhar local" — esse não funciona aqui e mostra erro no mapa)
+          <textarea name="map" required placeholder="&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=...&quot; ...&gt;&lt;/iframe&gt;"></textarea>
         </label>
         <div class="dine-form-actions">
           <button id="dineSubmitBtn" type="submit">+ Adicionar restaurante</button>
@@ -317,8 +320,12 @@
     }
 
     function extractMapSrc(raw) {
-      const m = raw.match(/src=["']([^"']+)["']/);
-      return (m ? m[1] : raw).trim();
+      // Backreference \1 forces the closing quote to match the opening one,
+      // so an apostrophe *inside* the URL (e.g. a place name like "Varanda's
+      // Restaurante" embedded in the pb= value) doesn't get mistaken for the
+      // closing delimiter of a double-quoted src="..." and truncate it.
+      const m = raw.match(/src=(["'])([\s\S]*?)\1/);
+      return (m ? m[2] : raw).trim();
     }
 
     function textOf(content, eid) {
@@ -474,6 +481,14 @@
       const mapSrc = extractMapSrc(dineForm.map.value.trim());
       if (!name || !img || !mapSrc) {
         setDineStatus('Preencha ao menos nome, foto e mapa.', 'err');
+        return;
+      }
+      // A normal "share location" link (maps.google.com/place/... ou
+      // maps.app.goo.gl/...) não tem o parâmetro pb= e o Google recusa
+      // exibi-lo dentro de um <iframe>, mostrando "Invalid 'pb' parameter."
+      // Só o código de Compartilhar → Incorporar um mapa serve aqui.
+      if (!/google\.com\/maps\/embed\?pb=/.test(mapSrc)) {
+        setDineStatus('Esse link não é um mapa incorporável — no Google Maps use Compartilhar → "Incorporar um mapa" e cole o <iframe> inteiro, não o link comum de local.', 'err');
         return;
       }
 

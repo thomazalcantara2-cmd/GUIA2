@@ -200,19 +200,22 @@
       el.setAttribute('spellcheck', 'false');
     });
 
-    // Prevent navigation/interaction while editing (links, buttons, and
-    // custom clickable widgets like the "Onde Comer?" flip-cards, which
-    // are <div role="button"> rather than a real <button>, all wrap
-    // editable spans). preventDefault() alone only stops a real <a href>
-    // navigation — it does NOT stop the page's own JS click handlers (e.g.
-    // app.js's deck-stage jumpTo(), or dine.js's card-flip toggle) from
-    // still running, so this also needs stopPropagation() to keep those
-    // capturing-phase handlers from ever reaching the element.
+    // Editable spans often sit inside a link/button/card (índice buttons,
+    // restaurant flip-cards…), so a click meant to place the caret and
+    // edit the text would otherwise also trigger that wrapper's own
+    // behavior (deck-stage jumpTo(), dine.js's flip). preventDefault()
+    // alone doesn't stop that — it only cancels a real <a href>
+    // navigation, not the page's own JS click handlers — so this also
+    // needs stopPropagation() at the capture phase.
+    // Only suppress it when the click actually landed on the editable
+    // text itself, though: clicking elsewhere on the same card (its icon,
+    // arrow, empty padding) should still navigate normally, so editors can
+    // click through into a page to edit what's on it.
     if (!doc.__editorClickGuard) {
       doc.__editorClickGuard = true;
       doc.addEventListener('click', (e) => {
-        const link = e.target.closest('a,button,[role="button"],[data-jump]');
-        if (link) { e.preventDefault(); e.stopPropagation(); }
+        const onText = e.target.closest('[data-eid]');
+        if (onText) { e.preventDefault(); e.stopPropagation(); }
       }, true);
     }
 

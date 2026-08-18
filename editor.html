@@ -119,6 +119,24 @@
   }
   .tt-emoji-btn:hover { background:#EEF2F5; border-color:#dde3e8; }
   .tt-hint { font-size:13px; color:#8a95a1; line-height:1.5; margin:0 0 16px; }
+
+  .restore-panel {
+    position:fixed; top:64px; left:16px; z-index:40; width:260px;
+    background:#fff; border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,.2);
+    padding:20px; font-family:-apple-system,"Plus Jakarta Sans",Arial,sans-serif;
+  }
+  .restore-panel .tt-label { margin-bottom:8px; }
+  #restoreLoadedAt { font-size:13px; color:#445; margin:0 0 14px; line-height:1.4; }
+  .restore-btn {
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    border:1px solid #ccd3da; background:#fff; color:#B3261E; border-radius:8px;
+    padding:10px 14px; font-size:14px; font-weight:600; cursor:pointer;
+  }
+  .restore-btn:hover { background:#FDE9E7; border-color:#f3b8b3; }
+  .restore-btn:disabled { opacity:.5; cursor:not-allowed; }
+  #restoreStatus { font-size:12px; margin-top:10px; min-height:16px; }
+  #restoreStatus.err { color:#B3261E; }
+  #restoreStatus.ok { color:#1b7a41; }
 </style>
 </head>
 <body>
@@ -140,6 +158,14 @@
 
 <div id="stage">
   <iframe id="guide" src="guia-3-flats.html?editor=1"></iframe>
+</div>
+
+<div id="restorePanel" class="restore-panel">
+  <span class="tt-label">Segurança</span>
+  <p id="restoreLoadedAt">Carregando versão atual…</p>
+  <button type="button" id="restoreBtn" class="restore-btn" disabled>↩️ Restaurar versão anterior</button>
+  <p class="tt-hint" style="margin-top:14px">Desfaz todas as edições feitas nesta sessão (textos, restaurantes) e publica de volta exatamente a versão que estava no ar quando esta página do editor foi aberta.</p>
+  <div id="restoreStatus"></div>
 </div>
 
 <div id="textToolbar" class="text-toolbar" hidden>
@@ -550,17 +576,99 @@
     switchLang(btn.dataset.lang);
   });
 
+  function getDineApiForRestore() {
+    const w = iframe.contentWindow;
+    return w && w.__guiaDine ? w.__guiaDine : null;
+  }
+
   iframe.addEventListener('load', () => {
-    // Wait a tick for i18n.js's own DOMContentLoaded init to finish.
+    // Wait a tick for i18n.js's and dine.js's own DOMContentLoaded init
+    // (both fetch their JSON asynchronously) to finish.
     const wait = () => {
-      if (getApi()) {
+      if (getApi() && getDineApiForRestore()) {
         switchLang(currentLang);
         setStatus('Pronto. Clique em um texto para editar.', 'ok');
+        captureSnapshotIfNeeded();
       } else {
         setTimeout(wait, 60);
       }
     };
     wait();
+  });
+
+  // ── Restore panel (left side) ────────────────────────────────────────
+  // Snapshots content.json + restaurants.json exactly as they were when
+  // this editor page was opened — i.e. whatever is live right now, before
+  // any edits made in this session — so a mistake can be undone with one
+  // click instead of trying to manually remember/retype what was there.
+  const restoreBtn = document.getElementById('restoreBtn');
+  const restoreLoadedAt = document.getElementById('restoreLoadedAt');
+  const restoreStatusEl = document.getElementById('restoreStatus');
+  let originalContentSnapshot = null;
+  let originalRestaurantsSnapshot = null;
+
+  function setRestoreStatus(msg, kind) {
+    restoreStatusEl.textContent = msg;
+    restoreStatusEl.className = kind || '';
+  }
+
+  function captureSnapshotIfNeeded() {
+    if (originalContentSnapshot) return; // only the very first load counts
+    const api = getApi();
+    const dineApi = getDineApiForRestore();
+    if (!api || !dineApi) return;
+    originalContentSnapshot = JSON.parse(JSON.stringify(api.getContent()));
+    originalRestaurantsSnapshot = JSON.parse(JSON.stringify(dineApi.getRestaurants()));
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    restoreLoadedAt.textContent = 'Versão carregada às ' + hh + ':' + mm + '.';
+    restoreBtn.disabled = false;
+  }
+
+  restoreBtn.addEventListener('click', async () => {
+    if (!originalContentSnapshot) return;
+    const ok = confirm(
+      'Restaurar tudo para a versão que estava no ar quando você abriu este editor?\n\n' +
+      'Isso desfaz todas as edições feitas nesta sessão (textos e restaurantes) e publica ' +
+      'a versão anterior de volta no site. Não pode ser desfeito.'
+    );
+    if (!ok) return;
+
+    const pw = pwInput.value.trim();
+    if (!pw) { setRestoreStatus('Informe a senha do editor no topo da página.', 'err'); pwInput.focus(); return; }
+    try { sessionStorage.setItem('editorPw', pw); } catch (e) {}
+
+    restoreBtn.disabled = true;
+    setRestoreStatus('Restaurando…', '');
+    try {
+      const restoredContent = JSON.parse(JSON.stringify(originalContentSnapshot));
+      const restoredRestaurants = JSON.parse(JSON.stringify(originalRestaurantsSnapshot));
+      const res = await fetch('/api/save-restaurants', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw, restaurants: restoredRestaurants, content: restoredContent }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setRestoreStatus('Erro: ' + (data.error || res.status), 'err');
+        return;
+      }
+      // Reflect the restore in the live preview immediately — the commit
+      // above already made it real on GitHub, but the redeploy takes a
+      // minute to catch up.
+      const api = getApi();
+      const dineApi = getDineApiForRestore();
+      if (api) { api.setContent(restoredContent); api.apply(currentLang); }
+      if (dineApi) dineApi.setRestaurants(restoredRestaurants);
+      hideTextToolbar();
+      dirty = false;
+      setRestoreStatus('Restaurado!', 'ok');
+    } catch (e) {
+      setRestoreStatus('Falha de rede ao restaurar.', 'err');
+    } finally {
+      restoreBtn.disabled = false;
+    }
   });
 
   saveBtn.addEventListener('click', async () => {

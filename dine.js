@@ -16,6 +16,14 @@
     ));
   }
 
+  // Name/desc/addr text may contain the editor's Bold <b> tag — sanitized
+  // there before ever reaching content.json, so trusted here the same way
+  // i18n.js trusts it. Plain-text attributes (alt, aria-label) still need
+  // the tags stripped out first.
+  function stripTags(s) {
+    return String(s == null ? '' : s).replace(/<[^>]*>/g, '');
+  }
+
   function flipHint(extraClass) {
     return '<div class="gbi-dine-flip-hint' + (extraClass ? ' ' + extraClass : '') + '" aria-hidden="true">'
       + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M17 2.1l4 4-4 4M3 12.6v-2a4 4 0 0 1 4-4h14M7 21.9l-4-4 4-4M21 11.4v2a4 4 0 0 1-4 4H3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
@@ -33,15 +41,15 @@
     const desc = textFor(content, r.descEid, lang);
     const addr = textFor(content, r.addrEid, lang);
     return (
-      '<div class="gbi-dine-card" tabindex="0" role="button" aria-pressed="false" data-rid="' + escapeHtml(r.id) + '" aria-label="Ver endereço e mapa de ' + escapeHtml(name) + '">'
+      '<div class="gbi-dine-card" tabindex="0" role="button" aria-pressed="false" data-rid="' + escapeHtml(r.id) + '" aria-label="Ver endereço e mapa de ' + escapeHtml(stripTags(name)) + '">'
       + '<div class="gbi-dine-flip">'
       + '<div class="gbi-dine-face gbi-dine-front">'
-      + '<img class="gbi-dine-img" src="' + escapeHtml(r.img) + '" alt="' + escapeHtml(name) + '" loading="lazy" decoding="async">'
-      + '<div class="gbi-dine-name"><span data-eid="' + escapeHtml(r.nameEid) + '">' + escapeHtml(name) + '</span>'
-      + (r.sinceEid ? '<span class="gbi-dine-since"><span data-eid="' + escapeHtml(r.sinceEid) + '">' + escapeHtml(since) + '</span></span>' : '')
+      + '<img class="gbi-dine-img" src="' + escapeHtml(r.img) + '" alt="' + escapeHtml(stripTags(name)) + '" loading="lazy" decoding="async">'
+      + '<div class="gbi-dine-name"><span data-eid="' + escapeHtml(r.nameEid) + '">' + name + '</span>'
+      + (r.sinceEid ? '<span class="gbi-dine-since"><span data-eid="' + escapeHtml(r.sinceEid) + '">' + since + '</span></span>' : '')
       + '</div>'
-      + '<div class="gbi-dine-desc"><span data-eid="' + escapeHtml(r.descEid) + '">' + escapeHtml(desc) + '</span></div>'
-      + '<div class="gbi-dine-addr"><span data-eid="' + escapeHtml(r.addrEid) + '">' + escapeHtml(addr) + '</span></div>'
+      + '<div class="gbi-dine-desc"><span data-eid="' + escapeHtml(r.descEid) + '">' + desc + '</span></div>'
+      + '<div class="gbi-dine-addr"><span data-eid="' + escapeHtml(r.addrEid) + '">' + addr + '</span></div>'
       + flipHint()
       + '</div>'
       + '<div class="gbi-dine-face gbi-dine-back">'

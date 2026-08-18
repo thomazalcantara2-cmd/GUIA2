@@ -89,6 +89,35 @@
   #dineStatus { font-size:12px; margin-top:10px; min-height:16px; }
   #dineStatus.err { color:#B3261E; }
   #dineStatus.ok { color:#1b7a41; }
+
+  .text-toolbar {
+    position:fixed; top:64px; right:12px; z-index:40; width:186px;
+    max-height:calc(100vh - 80px); overflow-y:auto;
+    background:#fff; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.18);
+    padding:12px; font-family:-apple-system,"Plus Jakarta Sans",Arial,sans-serif;
+  }
+  .text-toolbar[hidden] { display:none; }
+  .tt-section { margin-bottom:14px; }
+  .tt-section:last-child { margin-bottom:0; }
+  .tt-label {
+    display:block; font-size:10px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.05em; color:#8a95a1; margin-bottom:6px;
+  }
+  .tt-row { display:flex; flex-wrap:wrap; gap:6px; }
+  .tt-style-btn, .tt-bold-btn {
+    border:1px solid #ccd3da; background:#fff; color:#333; border-radius:6px;
+    padding:6px 10px; font-size:12px; cursor:pointer;
+  }
+  .tt-style-btn.active { background:#0f2540; border-color:#0f2540; color:#fff; }
+  .tt-bold-btn { display:flex; align-items:center; gap:6px; width:100%; justify-content:center; }
+  .tt-bold-btn.active { background:#EE6C4D; border-color:#EE6C4D; color:#fff; }
+  .tt-emoji-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:4px; }
+  .tt-emoji-btn {
+    border:1px solid transparent; background:none; border-radius:6px; font-size:17px;
+    line-height:1; padding:5px 0; cursor:pointer;
+  }
+  .tt-emoji-btn:hover { background:#EEF2F5; border-color:#dde3e8; }
+  .tt-hint { font-size:11px; color:#8a95a1; line-height:1.4; margin:0 0 10px; }
 </style>
 </head>
 <body>
@@ -110,6 +139,26 @@
 
 <div id="stage">
   <iframe id="guide" src="guia-3-flats.html?editor=1"></iframe>
+</div>
+
+<div id="textToolbar" class="text-toolbar" hidden>
+  <p class="tt-hint">Clique num texto na página para editá-lo. Selecione uma palavra e use Negrito, ou toque num emoji para inserir onde estiver o cursor.</p>
+  <div class="tt-section">
+    <span class="tt-label">Estilo do texto</span>
+    <div class="tt-row">
+      <button type="button" class="tt-style-btn" data-style="title">Título</button>
+      <button type="button" class="tt-style-btn" data-style="text">Texto</button>
+      <button type="button" class="tt-style-btn" data-style="">Padrão</button>
+    </div>
+  </div>
+  <div class="tt-section">
+    <span class="tt-label">Formatação</span>
+    <button type="button" id="ttBoldBtn" class="tt-bold-btn"><b>N</b> Negrito (selecione o texto)</button>
+  </div>
+  <div class="tt-section">
+    <span class="tt-label">Emoji</span>
+    <div class="tt-emoji-grid" id="ttEmojiGrid"></div>
+  </div>
 </div>
 
 <div id="dineOverlay" class="dine-overlay" hidden>
@@ -179,6 +228,17 @@
     return w && w.__guiaI18n ? w.__guiaI18n : null;
   }
 
+  // Only <b> survives here — sanitized before it ever reaches content.json,
+  // since i18n.js and dine.js both trust that string enough to drop it
+  // straight into innerHTML. <strong> from a screen reader-ish paste (or
+  // any other tag/attribute) gets normalized away rather than kept as-is.
+  function sanitizeInlineHTML(html) {
+    return String(html)
+      .replace(/<\/(b|strong)>/gi, '</b>')
+      .replace(/<(b|strong)(\s[^>]*)?>/gi, '<b>')
+      .replace(/<(?!\/?b>)[^>]*>/gi, '');
+  }
+
   function enableEditing() {
     const doc = iframe.contentDocument;
     if (!doc) return;
@@ -196,7 +256,9 @@
     }
 
     doc.querySelectorAll('[data-eid]').forEach((el) => {
-      el.setAttribute('contenteditable', 'plaintext-only');
+      // "true" (not "plaintext-only") so the Bold button's <b> wrapping
+      // actually survives inside the element instead of being stripped.
+      el.setAttribute('contenteditable', 'true');
       el.setAttribute('spellcheck', 'false');
     });
 
@@ -219,6 +281,22 @@
       }, true);
     }
 
+    // Force every paste to come in as plain text — a contenteditable="true"
+    // element would otherwise happily accept whatever rich formatting the
+    // clipboard carries (fonts, colors, divs…), which sanitizeInlineHTML
+    // would then just strip back out anyway, but not before it visually
+    // flashes and can leave stray line breaks behind.
+    if (!doc.__editorPasteGuard) {
+      doc.__editorPasteGuard = true;
+      doc.addEventListener('paste', (e) => {
+        const el = e.target.closest('[data-eid]');
+        if (!el) return;
+        e.preventDefault();
+        const text = (e.clipboardData || doc.defaultView.clipboardData).getData('text/plain');
+        doc.execCommand('insertText', false, text);
+      }, true);
+    }
+
     // Capture edits.
     if (!doc.__editorInputGuard) {
       doc.__editorInputGuard = true;
@@ -230,11 +308,183 @@
         const content = api.getContent();
         const eid = el.dataset.eid;
         if (!content[eid]) content[eid] = { pt: '', en: '', es: '' };
-        content[eid][currentLang] = el.textContent;
+        content[eid][currentLang] = sanitizeInlineHTML(el.innerHTML);
         markDirty();
       }, true);
     }
+
+    // Track which text is focused so the side toolbar (style/bold/emoji)
+    // knows what to act on, and shows/hides itself accordingly.
+    if (!doc.__editorFocusGuard) {
+      doc.__editorFocusGuard = true;
+      doc.addEventListener('focusin', (e) => {
+        const el = e.target.closest('[data-eid]');
+        if (el) showTextToolbar(doc, el);
+      }, true);
+      doc.addEventListener('focusout', () => {
+        // Toolbar buttons preventDefault() their own mousedown precisely so
+        // this never fires while using them — focus genuinely left the
+        // text, so hide it.
+        hideTextToolbar();
+      }, true);
+    }
   }
+
+  // ── Text-formatting sidebar (style presets, bold, emoji) ────────────
+  const textToolbar = document.getElementById('textToolbar');
+  const ttEmojiGrid = document.getElementById('ttEmojiGrid');
+  const ttBoldBtn = document.getElementById('ttBoldBtn');
+  const EMOJIS = [
+    '😊', '😉', '🙂', '😍', '🥳', '👍', '✅', '⚠️', '❗', '📍',
+    '🏖️', '🌊', '☀️', '🌴', '🏠', '🔑', '🛏️', '🚪', '📶', '🍽️',
+    '☕', '🚗', '🅿️', '♻️', '🗑️', '📞', '💬', '⏰', '✨', '❤️',
+    '🐠', '🐚', '🚿', '🧴', '🧺', '1️⃣', '2️⃣', '3️⃣',
+  ];
+  ttEmojiGrid.innerHTML = EMOJIS.map((em) => (
+    '<button type="button" class="tt-emoji-btn" data-emoji="' + em + '">' + em + '</button>'
+  )).join('');
+
+  let ttDoc = null;
+  let ttEl = null;
+
+  function refreshToolbarState() {
+    if (!ttEl) return;
+    const api = getApi();
+    const content = api ? api.getContent() : {};
+    const entry = content[ttEl.dataset.eid] || {};
+    const activeStyle = entry.style || '';
+    textToolbar.querySelectorAll('.tt-style-btn').forEach((b) => {
+      b.classList.toggle('active', b.dataset.style === activeStyle);
+    });
+  }
+
+  function showTextToolbar(doc, el) {
+    ttDoc = doc;
+    ttEl = el;
+    textToolbar.hidden = false;
+    refreshToolbarState();
+  }
+
+  function hideTextToolbar() {
+    textToolbar.hidden = true;
+    ttDoc = null;
+    ttEl = null;
+  }
+
+  // Every toolbar control must keep the iframe's contenteditable focused
+  // (and its Selection/Range intact) through the click — an ordinary click
+  // would blur it first, losing the selection Bold/Emoji need to act on.
+  // preventDefault() on mousedown stops that focus change from happening.
+  textToolbar.addEventListener('mousedown', (e) => {
+    if (e.target.closest('button')) e.preventDefault();
+  });
+
+  textToolbar.querySelectorAll('.tt-style-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!ttEl) return;
+      const api = getApi();
+      if (!api) return;
+      const content = api.getContent();
+      const eid = ttEl.dataset.eid;
+      if (!content[eid]) content[eid] = { pt: '', en: '', es: '' };
+      const kind = btn.dataset.style;
+      if (kind) content[eid].style = kind; else delete content[eid].style;
+      markDirty();
+      api.applyStyle(ttEl, kind || null);
+      refreshToolbarState();
+    });
+  });
+
+  function toggleBold(doc, el) {
+    const sel = doc.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
+      setStatus('Selecione um trecho do texto antes de clicar em Negrito.', 'err');
+      return;
+    }
+    const range = sel.getRangeAt(0);
+    if (!el.contains(range.commonAncestorContainer)) return;
+
+    // The selected <b>, if any — checked two ways, since which one applies
+    // depends on how the selection landed:
+    //  (a) selecting *inside* bolded text: commonAncestorContainer is a
+    //      descendant of the <b>, so walking up with closest('b') finds it.
+    //  (b) selecting the *whole* bolded span as one unit (e.g. after
+    //      selectNodeContents() on its parent): commonAncestorContainer is
+    //      that parent, with the <b> as one of its selected child nodes —
+    //      closest('b') finds nothing there since the <b> is a descendant,
+    //      not an ancestor, so this looks at the selected children instead.
+    function selectedWholeB() {
+      if (range.startContainer !== range.endContainer) return null;
+      const c = range.startContainer;
+      if (c.nodeType !== 1) return null;
+      const kids = Array.from(c.childNodes).slice(range.startOffset, range.endOffset);
+      return (kids.length === 1 && kids[0].nodeType === 1 && kids[0].tagName === 'B') ? kids[0] : null;
+    }
+    // Some cards (e.g. índice titles) already sit inside a <b> the page's
+    // own template put there for styling, *outside* el — closest('b') from
+    // inside el would climb right past el and find that one too. It must
+    // be discarded (el.contains() is false for an ancestor), and — since
+    // it was found via ||, short-circuiting before selectedWholeB() ever
+    // ran — checked *before* falling back, not as an equal alternative,
+    // or every click would re-wrap instead of toggling off.
+    const ancestorEl = range.commonAncestorContainer.nodeType === 1
+      ? range.commonAncestorContainer
+      : range.commonAncestorContainer.parentElement;
+    const closestB = ancestorEl && ancestorEl.closest('b');
+    const validClosestB = (closestB && el.contains(closestB)) ? closestB : null;
+    const existingB = validClosestB || selectedWholeB();
+
+    if (existingB && el.contains(existingB) && existingB.textContent === range.toString()) {
+      // Selection exactly matches an existing <b> — unwrap it (toggle off).
+      const parent = existingB.parentNode;
+      while (existingB.firstChild) parent.insertBefore(existingB.firstChild, existingB);
+      parent.removeChild(existingB);
+    } else {
+      const b = doc.createElement('b');
+      try {
+        range.surroundContents(b);
+      } catch (err) {
+        // surroundContents() throws if the range's boundaries split a node
+        // awkwardly (e.g. spans across the <b>/plain-text edge) — extract
+        // and re-wrap instead, which handles any selection shape.
+        const frag = range.extractContents();
+        b.appendChild(frag);
+        range.insertNode(b);
+      }
+    }
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  ttBoldBtn.addEventListener('click', () => {
+    if (!ttDoc || !ttEl) return;
+    toggleBold(ttDoc, ttEl);
+  });
+
+  function insertAtCursor(doc, el, text) {
+    const sel = doc.getSelection();
+    let range;
+    if (sel && sel.rangeCount > 0 && el.contains(sel.getRangeAt(0).commonAncestorContainer)) {
+      range = sel.getRangeAt(0);
+    } else {
+      range = doc.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+    }
+    range.deleteContents();
+    const node = doc.createTextNode(text);
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.setEndAfter(node);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  ttEmojiGrid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tt-emoji-btn');
+    if (!btn || !ttDoc || !ttEl) return;
+    insertAtCursor(ttDoc, ttEl, btn.dataset.emoji);
+  });
 
   function switchLang(lang) {
     currentLang = lang;

@@ -9,12 +9,43 @@
   const CONTENT_URL = 'content.json';
   let CONTENT = {};
 
+  // Style presets the editor's sidebar can apply to an editable span
+  // ("Título" / "Texto"), matching whatever the real title/body text looks
+  // like on the page the span is actually on — read live via
+  // getComputedStyle rather than duplicated here, so it can never drift out
+  // of sync with the page's real design.
+  const STYLE_REF_SELECTORS = {
+    title: '.gbi-page-title, .cv3-title, .gbv-flat-title',
+    text: '.gbi-lead, .gbi-list-text, .cv3-select-sub',
+  };
+  function findStyleRef(kind, el) {
+    const scope = el.closest('[data-document-role="page"]') || document;
+    return scope.querySelector(STYLE_REF_SELECTORS[kind]) || document.querySelector(STYLE_REF_SELECTORS[kind]);
+  }
+  function applyTextStyle(el, kind) {
+    if (!kind) { el.removeAttribute('style'); return; }
+    const ref = findStyleRef(kind, el);
+    if (!ref || ref === el) return;
+    const cs = getComputedStyle(ref);
+    el.style.fontFamily = cs.fontFamily;
+    el.style.fontWeight = cs.fontWeight;
+    el.style.fontStyle = cs.fontStyle;
+    el.style.color = cs.color;
+    el.style.letterSpacing = cs.letterSpacing;
+    el.style.fontSize = cs.fontSize;
+  }
+
   function apply(lang) {
     document.querySelectorAll('[data-eid]').forEach((el) => {
       const entry = CONTENT[el.dataset.eid];
       if (!entry) return;
       const text = entry[lang] || entry.pt || '';
-      el.textContent = text;
+      // Text may contain a handful of safe inline tags (currently just <b>)
+      // added via the editor's Bold button — sanitized there before ever
+      // reaching content.json, so it's trusted here the same way the rest
+      // of this page's own markup is.
+      el.innerHTML = text;
+      applyTextStyle(el, entry.style);
     });
     document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : lang);
     document.querySelectorAll('.lang-flag').forEach((b) => {
@@ -133,5 +164,8 @@
 
   // Exposed so the editor (editor.html) can re-apply the current language
   // immediately after saving, without a full page reload.
-  window.__guiaI18n = { apply, getContent: () => CONTENT, setContent: (c) => { CONTENT = c; } };
+  window.__guiaI18n = {
+    apply, getContent: () => CONTENT, setContent: (c) => { CONTENT = c; },
+    applyStyle: applyTextStyle,
+  };
 })();

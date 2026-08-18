@@ -1362,7 +1362,8 @@
   "e0355": {
     "pt": "🐶 Pets são permitidos?",
     "en": "🐶 Are pets allowed?",
-    "es": "🐶 ¿Se permiten mascotas?"
+    "es": "🐶 ¿Se permiten mascotas?",
+    "style": "title"
   },
   "e0356": {
     "pt": "Este apartamento foi preparado para ser um ambiente livre de pets. Agradecemos a sua compreensão.",
@@ -1372,7 +1373,8 @@
   "e0357": {
     "pt": "🔊 Posso colocar som alto?",
     "en": "🔊 Can I play loud music?",
-    "es": "🔊 ¿Puedo poner música alta?"
+    "es": "🔊 ¿Puedo poner música alta?",
+    "style": "title"
   },
   "e0358": {
     "pt": "Mantenha o volume em nível baixo no apartamento e nas áreas comuns, respeitando o conforto e o descanso de todos.",
@@ -1382,7 +1384,8 @@
   "e0359": {
     "pt": "🥂 Copos de vidro no rooftop?",
     "en": "🥂 Glass cups on the rooftop?",
-    "es": "🥂 ¿Vasos de vidrio en el rooftop?"
+    "es": "🥂 ¿Vasos de vidrio en el rooftop?",
+    "style": "title"
   },
   "e0360": {
     "pt": "Prefira copos de plástico disponível no interior do apartamento.",
@@ -1392,7 +1395,8 @@
   "e0361": {
     "pt": "🎉 Visitas ou festas?",
     "en": "🎉 Visitors or parties?",
-    "es": "🎉 ¿Visitas o fiestas?"
+    "es": "🎉 ¿Visitas o fiestas?",
+    "style": "title"
   },
   "e0362": {
     "pt": "Este apartamento foi preparado exclusivamente para receber os hóspedes da reserva. Agradecemos por respeitar essa regra de convivência.",
@@ -1402,7 +1406,8 @@
   "e0363": {
     "pt": "🏊 Horário da piscina?",
     "en": "🏊 Pool hours?",
-    "es": "🏊 ¿Horario de la piscina?"
+    "es": "🏊 ¿Horario de la piscina?",
+    "style": "title"
   },
   "e0364": {
     "pt": "Das 8h às 21h.",
@@ -1412,7 +1417,8 @@
   "e0365": {
     "pt": "🔥 Posso usar a churrasqueira?",
     "en": "🔥 Can I use the barbecue?",
-    "es": "🔥 ¿Puedo usar la parrilla?"
+    "es": "🔥 ¿Puedo usar la parrilla?",
+    "style": "title"
   },
   "e0366": {
     "pt": "Sim! Basta fazer o agendamento na recepção.",
@@ -1422,7 +1428,8 @@
   "e0367": {
     "pt": "🪑 Mesas do rooftop à noite?",
     "en": "🪑 Rooftop tables at night?",
-    "es": "🪑 ¿Mesas del rooftop por la noche?"
+    "es": "🪑 ¿Mesas del rooftop por la noche?",
+    "style": "title"
   },
   "e0368": {
     "pt": "Sim, inclusive após as 21h, sempre respeitando o silêncio.",
@@ -1432,7 +1439,8 @@
   "e0369": {
     "pt": "🚬 Onde é permitido fumar?",
     "en": "🚬 Where can I smoke?",
-    "es": "🚬 ¿Dónde se permite fumar?"
+    "es": "🚬 ¿Dónde se permite fumar?",
+    "style": "title"
   },
   "e0370": {
     "pt": "Apenas na varanda ou próximo às janelas, sempre com respeito aos vizinhos.",

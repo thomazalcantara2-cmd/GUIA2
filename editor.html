@@ -104,13 +104,14 @@
     letter-spacing:.05em; color:#8a95a1; margin-bottom:6px;
   }
   .tt-row { display:flex; flex-wrap:wrap; gap:6px; }
-  .tt-style-btn, .tt-bold-btn {
+  .tt-style-btn, .tt-bold-btn, .tt-size-btn, .tt-size-reset-btn {
     border:1px solid #ccd3da; background:#fff; color:#333; border-radius:6px;
     padding:6px 10px; font-size:12px; cursor:pointer;
   }
   .tt-style-btn.active { background:#0f2540; border-color:#0f2540; color:#fff; }
   .tt-bold-btn { display:flex; align-items:center; gap:6px; width:100%; justify-content:center; }
   .tt-bold-btn.active { background:#EE6C4D; border-color:#EE6C4D; color:#fff; }
+  .tt-size-btn { font-weight:700; min-width:38px; }
   .tt-emoji-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:4px; }
   .tt-emoji-btn {
     border:1px solid transparent; background:none; border-radius:6px; font-size:17px;
@@ -149,6 +150,14 @@
       <button type="button" class="tt-style-btn" data-style="title">Título</button>
       <button type="button" class="tt-style-btn" data-style="text">Texto</button>
       <button type="button" class="tt-style-btn" data-style="">Padrão</button>
+    </div>
+  </div>
+  <div class="tt-section">
+    <span class="tt-label">Tamanho do texto</span>
+    <div class="tt-row">
+      <button type="button" id="ttSizeDecBtn" class="tt-size-btn">A−</button>
+      <button type="button" id="ttSizeIncBtn" class="tt-size-btn">A+</button>
+      <button type="button" id="ttSizeResetBtn" class="tt-size-reset-btn">Padrão</button>
     </div>
   </div>
   <div class="tt-section">
@@ -393,6 +402,47 @@
       api.applyStyle(ttEl, kind || null);
       refreshToolbarState();
     });
+  });
+
+  const ttSizeDecBtn = document.getElementById('ttSizeDecBtn');
+  const ttSizeIncBtn = document.getElementById('ttSizeIncBtn');
+  const ttSizeResetBtn = document.getElementById('ttSizeResetBtn');
+  const TT_SIZE_MIN = 10;
+  const TT_SIZE_MAX = 120;
+  const TT_SIZE_STEP = 2;
+
+  function currentFontSizePx(doc, el) {
+    return parseFloat(doc.defaultView.getComputedStyle(el).fontSize) || 16;
+  }
+
+  function adjustFontSize(step) {
+    if (!ttEl || !ttDoc) return;
+    const api = getApi();
+    if (!api) return;
+    const content = api.getContent();
+    const eid = ttEl.dataset.eid;
+    if (!content[eid]) content[eid] = { pt: '', en: '', es: '' };
+    const current = currentFontSizePx(ttDoc, ttEl);
+    const next = Math.min(TT_SIZE_MAX, Math.max(TT_SIZE_MIN, current + step));
+    const px = Math.round(next * 10) / 10 + 'px';
+    content[eid].fontSize = px;
+    ttEl.style.fontSize = px;
+    markDirty();
+  }
+
+  ttSizeIncBtn.addEventListener('click', () => adjustFontSize(TT_SIZE_STEP));
+  ttSizeDecBtn.addEventListener('click', () => adjustFontSize(-TT_SIZE_STEP));
+  ttSizeResetBtn.addEventListener('click', () => {
+    if (!ttEl) return;
+    const api = getApi();
+    if (!api) return;
+    const content = api.getContent();
+    const eid = ttEl.dataset.eid;
+    if (content[eid]) delete content[eid].fontSize;
+    // Re-apply whatever style preset (Título/Texto/none) is active so the
+    // element falls back to ITS size instead of being left unstyled.
+    api.applyStyle(ttEl, (content[eid] && content[eid].style) || null);
+    markDirty();
   });
 
   function toggleBold(doc, el) {

@@ -50,6 +50,10 @@
       // of this page's own markup is.
       el.innerHTML = text;
       applyTextStyle(el, entry.style);
+      // Manual per-text size override from the editor's A-/A+ buttons —
+      // applied last so it always wins over whatever applyTextStyle() just
+      // set (title/text presets and this override are independent knobs).
+      if (entry.fontSize) el.style.fontSize = entry.fontSize;
     });
     document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : lang);
     document.querySelectorAll('.lang-flag').forEach((b) => {

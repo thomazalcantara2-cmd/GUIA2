@@ -588,7 +588,6 @@
       if (getApi() && getDineApiForRestore()) {
         switchLang(currentLang);
         setStatus('Pronto. Clique em um texto para editar.', 'ok');
-        captureSnapshotIfNeeded();
       } else {
         setTimeout(wait, 60);
       }
@@ -597,41 +596,51 @@
   });
 
   // ── Restore panel (left side) ────────────────────────────────────────
-  // Snapshots content.json + restaurants.json exactly as they were when
-  // this editor page was opened — i.e. whatever is live right now, before
-  // any edits made in this session — so a mistake can be undone with one
-  // click instead of trying to manually remember/retype what was there.
+  // Every /api/save-* call backs up whatever was live right before it into
+  // content.backup.json / restaurants.backup.json (see api/_github.js) —
+  // real files committed to the repo, not just something held in this tab's
+  // memory. So "Restaurar" keeps working even after saving, closing the
+  // editor, and coming back later: it always undoes the most recent save.
   const restoreBtn = document.getElementById('restoreBtn');
   const restoreLoadedAt = document.getElementById('restoreLoadedAt');
   const restoreStatusEl = document.getElementById('restoreStatus');
-  let originalContentSnapshot = null;
-  let originalRestaurantsSnapshot = null;
 
   function setRestoreStatus(msg, kind) {
     restoreStatusEl.textContent = msg;
     restoreStatusEl.className = kind || '';
   }
 
-  function captureSnapshotIfNeeded() {
-    if (originalContentSnapshot) return; // only the very first load counts
-    const api = getApi();
-    const dineApi = getDineApiForRestore();
-    if (!api || !dineApi) return;
-    originalContentSnapshot = JSON.parse(JSON.stringify(api.getContent()));
-    originalRestaurantsSnapshot = JSON.parse(JSON.stringify(dineApi.getRestaurants()));
-    const now = new Date();
-    const hh = String(now.getHours()).padStart(2, '0');
-    const mm = String(now.getMinutes()).padStart(2, '0');
-    restoreLoadedAt.textContent = 'Versão carregada às ' + hh + ':' + mm + '.';
-    restoreBtn.disabled = false;
+  async function fetchBackupFile(path) {
+    try {
+      const res = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
   }
 
+  async function refreshRestoreAvailability() {
+    const [backupContent, backupRestaurants] = await Promise.all([
+      fetchBackupFile('content.backup.json'),
+      fetchBackupFile('restaurants.backup.json'),
+    ]);
+    if (backupContent && backupRestaurants) {
+      restoreLoadedAt.textContent = 'Cópia de segurança disponível, feita automaticamente antes do último salvamento.';
+      restoreBtn.disabled = false;
+    } else {
+      restoreLoadedAt.textContent = 'Ainda não há cópia de segurança — ela é criada automaticamente a partir do próximo salvamento.';
+      restoreBtn.disabled = true;
+    }
+  }
+  refreshRestoreAvailability();
+
   restoreBtn.addEventListener('click', async () => {
-    if (!originalContentSnapshot) return;
     const ok = confirm(
-      'Restaurar tudo para a versão que estava no ar quando você abriu este editor?\n\n' +
-      'Isso desfaz todas as edições feitas nesta sessão (textos e restaurantes) e publica ' +
-      'a versão anterior de volta no site. Não pode ser desfeito.'
+      'Restaurar para a versão anterior ao último salvamento?\n\n' +
+      'Isso substitui o que está no ar agora (textos e restaurantes) pela cópia de ' +
+      'segurança automática. Se você clicou aqui por engano, pode clicar de novo em ' +
+      'seguida para voltar — o próprio restaurar cria uma nova cópia de segurança antes de agir.'
     );
     if (!ok) return;
 
@@ -642,8 +651,14 @@
     restoreBtn.disabled = true;
     setRestoreStatus('Restaurando…', '');
     try {
-      const restoredContent = JSON.parse(JSON.stringify(originalContentSnapshot));
-      const restoredRestaurants = JSON.parse(JSON.stringify(originalRestaurantsSnapshot));
+      const [restoredContent, restoredRestaurants] = await Promise.all([
+        fetchBackupFile('content.backup.json'),
+        fetchBackupFile('restaurants.backup.json'),
+      ]);
+      if (!restoredContent || !restoredRestaurants) {
+        setRestoreStatus('Não há cópia de segurança disponível ainda.', 'err');
+        return;
+      }
       const res = await fetch('/api/save-restaurants', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

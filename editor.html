@@ -83,6 +83,15 @@
     border:1px solid #ccd3da; border-radius:6px; box-sizing:border-box; font-family:inherit;
   }
   .dine-form textarea { min-height:64px; resize:vertical; }
+  .dine-addr-group {
+    display:flex; align-items:center; gap:8px; margin-top:5px;
+    border:1px solid #ccd3da; border-radius:6px; padding:0 10px; box-sizing:border-box;
+  }
+  .dine-addr-group span { flex-shrink:0; font-size:15px; }
+  .dine-addr-group input {
+    margin:0; border:0; padding:8px 0; border-radius:0;
+  }
+  .dine-addr-group input:focus { outline:none; }
   .dine-form-actions { display:flex; gap:8px; align-items:center; }
   #dineSubmitBtn { padding:8px 16px; border-radius:6px; border:none; background:#2E9E5B; color:#fff; font-weight:600; cursor:pointer; font-size:13px; }
   #dineCancelEditBtn { padding:8px 14px; border-radius:6px; border:1px solid #ccd3da; background:#fff; color:#445; cursor:pointer; font-size:13px; }
@@ -213,7 +222,7 @@
           <input name="desc" />
         </label>
         <label>Endereço
-          <input name="addr" placeholder="📍 Rua, número - Bairro, Cidade - UF, CEP" />
+          <span class="dine-addr-group"><span>📍</span><input name="addr" placeholder="Rua, número - Bairro, Cidade - UF, CEP" /></span>
         </label>
         <label>Selo opcional (ex.: "desde 1994")
           <input name="since" />
@@ -425,10 +434,29 @@
   const ttEmojiGrid = document.getElementById('ttEmojiGrid');
   const ttBoldBtn = document.getElementById('ttBoldBtn');
   const EMOJIS = [
-    '😊', '😉', '🙂', '😍', '🥳', '👍', '✅', '⚠️', '❗', '📍',
-    '🏖️', '🌊', '☀️', '🌴', '🏠', '🔑', '🛏️', '🚪', '📶', '🍽️',
-    '☕', '🚗', '🅿️', '♻️', '🗑️', '📞', '💬', '⏰', '✨', '❤️',
-    '🐠', '🐚', '🚿', '🧴', '🧺', '1️⃣', '2️⃣', '3️⃣',
+    // Rostos e reações
+    '😊', '😉', '🙂', '😄', '😁', '🥰', '😍', '🤩', '🥳', '😴',
+    '🙌', '👍', '👏', '🤝', '🙏', '👋', '💪', '👌', '✌️', '🤗',
+    // Avisos e status
+    '✅', '❌', '⚠️', '❗', '❓', 'ℹ️', '🔒', '🔓', '⭐', '✨',
+    '❤️', '💙', '🎉', '🎁', '🏆', '💡', '📌', '📍', '🕐', '⏰',
+    // Praia, natureza e clima
+    '🏖️', '🌊', '☀️', '🌤️', '🌙', '🌴', '🌺', '🌸', '🐠', '🐚',
+    '🐢', '🦀', '⛱️', '🌅', '🏝️', '🌈', '💧', '🔥', '🍃', '🌿',
+    // Casa, quarto e comodidades
+    '🏠', '🏡', '🔑', '🚪', '🛏️', '🛋️', '🚿', '🧴', '🧺', '🧹',
+    '🧼', '🧻', '📶', '📺', '❄️', '💡', '🔌', '🧯', '🪑', '🪟',
+    // Comida e bebida
+    '🍽️', '☕', '🍹', '🍷', '🍺', '🥂', '🍤', '🐟', '🍕', '🍰',
+    '🥗', '🍳', '🥐', '🍴', '🧊',
+    // Transporte e passeios
+    '🚗', '🚕', '🚐', '🚤', '⛵', '🚲', '🚶', '🅿️', '🛣️', '🗺️',
+    '🧭', '🎫', '🛂', '🧳', '📷', '🤿', '🏄', '🚁',
+    // Comunicação e diversos
+    '📞', '📱', '💬', '📧', '📄', '📋', '♻️', '🗑️', '🚭', '🔇',
+    '👶', '🐶', '🐾', '🚫',
+    // Números
+    '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣',
   ];
   ttEmojiGrid.innerHTML = EMOJIS.map((em) => (
     '<button type="button" class="tt-emoji-btn" data-emoji="' + em + '">' + em + '</button>'
@@ -822,6 +850,15 @@
       return entry.pt || '';
     }
 
+    // "📍" is fixed/implicit in the Endereço field (shown as a static
+    // prefix, not something typed) — strip it when loading a saved address
+    // back into the field so it doesn't show up twice, and strip it again
+    // defensively before saving in case someone pastes an address that
+    // already starts with it.
+    function stripPin(s) {
+      return String(s || '').replace(/^\s*📍\s*/, '');
+    }
+
     // Finds the highest "eNNNN" key already in content.json and returns
     // `count` fresh, unused ones right after it.
     function allocateEids(content, count) {
@@ -882,7 +919,7 @@
       editingIndex = idx;
       dineForm.name.value = textOf(content, r.nameEid);
       dineForm.desc.value = textOf(content, r.descEid);
-      dineForm.addr.value = textOf(content, r.addrEid);
+      dineForm.addr.value = stripPin(textOf(content, r.addrEid));
       dineForm.since.value = r.sinceEid ? textOf(content, r.sinceEid) : '';
       dineForm.img.value = r.img;
       dineForm.map.value = r.mapSrc;
@@ -963,7 +1000,8 @@
 
       const name = dineForm.name.value.trim();
       const desc = dineForm.desc.value.trim();
-      const addr = dineForm.addr.value.trim();
+      const addrRaw = stripPin(dineForm.addr.value.trim());
+      const addr = addrRaw ? '📍 ' + addrRaw : '';
       const since = dineForm.since.value.trim();
       const img = dineForm.img.value.trim();
       const mapSrc = extractMapSrc(dineForm.map.value.trim());

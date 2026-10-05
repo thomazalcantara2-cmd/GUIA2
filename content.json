@@ -2085,13 +2085,33 @@
     "es": "Acceso al condominio - sin portero"
   },
   "e0500": {
-    "pt": "No display do porteiro eletrônico, com a mão na maçaneta da porta, aperte a tecla \"SENHA\" e digite os números 27691, depois aperte a tecla SENHA novamente. Um sinal luminoso verde vai acender — assim que ele acender, puxe imediatamente a maçaneta para abrir a porta. A abertura deve ser rápida, pois o sistema é programado por poucos segundos por segurança. Esse mesmo procedimento também pode ser feito pela Praça 5.",
-    "en": "On the electronic doorman display, with your hand on the door handle, press the \"SENHA\" (PASSWORD) key and enter the numbers 27691, then press the SENHA key again. A green light will turn on — as soon as it lights up, immediately pull the handle to open the door. Opening must be quick, since the system is set for just a few seconds for security. This same procedure can also be done at Praça 5.",
-    "es": "En la pantalla del portero electrónico, con la mano en la manija de la puerta, presiona la tecla \"SENHA\" (CONTRASEÑA) e introduce los números 27691, luego presiona la tecla SENHA de nuevo. Se encenderá una luz verde — en cuanto se encienda, tira de inmediato de la manija para abrir la puerta. La apertura debe ser rápida, ya que el sistema está programado por pocos segundos por seguridad. Este mismo procedimiento también se puede realizar por la Praça 5."
+    "pt": "No display do porteiro eletrônico, com a mão na maçaneta da porta, aperte a tecla \"SENHA\".",
+    "en": "On the electronic doorman display, with your hand on the door handle, press the \"SENHA\" (PASSWORD) key.",
+    "es": "En la pantalla del portero electrónico, con la mano en la manija de la puerta, presiona la tecla \"SENHA\" (CONTRASEÑA)."
   },
   "e0501": {
     "pt": "2️⃣",
     "en": "2️⃣",
     "es": "2️⃣"
+  },
+  "e0502": {
+    "pt": "Digite os números 27691 e aperte a tecla SENHA novamente.",
+    "en": "Enter the numbers 27691 and press the SENHA key again.",
+    "es": "Introduce los números 27691 y presiona la tecla SENHA de nuevo."
+  },
+  "e0503": {
+    "pt": "Um sinal luminoso verde vai acender — assim que ele acender, puxe imediatamente a maçaneta para abrir a porta.",
+    "en": "A green light will turn on — as soon as it lights up, immediately pull the handle to open the door.",
+    "es": "Se encenderá una luz verde — en cuanto se encienda, tira de inmediato de la manija para abrir la puerta."
+  },
+  "e0504": {
+    "pt": "A abertura deve ser rápida, pois o sistema é programado por poucos segundos por segurança.",
+    "en": "Opening must be quick, since the system is set for just a few seconds for security.",
+    "es": "La apertura debe ser rápida, ya que el sistema está programado por pocos segundos por seguridad."
+  },
+  "e0505": {
+    "pt": "Esse mesmo procedimento também pode ser feito pela Praça 5.",
+    "en": "This same procedure can also be done at Praça 5.",
+    "es": "Este mismo procedimiento también se puede realizar por la Praça 5."
   }
 }

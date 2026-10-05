@@ -2123,5 +2123,10 @@
     "pt": "Caso o porteiro não esteja presente no momento, proceda da forma abaixo:",
     "en": "If the doorman is not present at the time, proceed as follows:",
     "es": "Si el portero no está presente en ese momento, procede de la siguiente manera:"
+  },
+  "e0508": {
+    "pt": "e aperte a tecla SENHA novamente.",
+    "en": "and press the SENHA key again.",
+    "es": "y presiona la tecla SENHA de nuevo."
   }
 }

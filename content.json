@@ -2085,9 +2085,9 @@
     "es": "Acceso al condominio - sin portero"
   },
   "e0500": {
-    "pt": "No display do porteiro eletrônico, com a mão na maçaneta da porta, aperte a tecla \"SENHA\".",
-    "en": "On the electronic doorman display, with your hand on the door handle, press the \"SENHA\" (PASSWORD) key.",
-    "es": "En la pantalla del portero electrónico, con la mano en la manija de la puerta, presiona la tecla \"SENHA\" (CONTRASEÑA)."
+    "pt": "No display do porteiro eletrônico, com a mão já posicionada na maçaneta da porta, pressione a tecla \"SENHA\".",
+    "en": "On the electronic doorman display, with your hand already on the door handle, press the \"SENHA\" (PASSWORD) key.",
+    "es": "En la pantalla del portero electrónico, con la mano ya en la manija de la puerta, presiona la tecla \"SENHA\" (CONTRASEÑA)."
   },
   "e0501": {
     "pt": "2️⃣",
@@ -2095,23 +2095,28 @@
     "es": "2️⃣"
   },
   "e0502": {
-    "pt": "Digite os números 27691 e aperte a tecla SENHA novamente.",
-    "en": "Enter the numbers 27691 and press the SENHA key again.",
-    "es": "Introduce los números 27691 y presiona la tecla SENHA de nuevo."
+    "pt": "Em seguida, digite o código:",
+    "en": "Then enter the code:",
+    "es": "A continuación, introduce el código:"
   },
   "e0503": {
-    "pt": "Um sinal luminoso verde vai acender — assim que ele acender, puxe imediatamente a maçaneta para abrir a porta.",
-    "en": "A green light will turn on — as soon as it lights up, immediately pull the handle to open the door.",
-    "es": "Se encenderá una luz verde — en cuanto se encienda, tira de inmediato de la manija para abrir la puerta."
+    "pt": "Um sinal luminoso verde acenderá.",
+    "en": "A green light will turn on.",
+    "es": "Se encenderá una luz verde."
   },
   "e0504": {
-    "pt": "A abertura deve ser rápida, pois o sistema é programado por poucos segundos por segurança.",
-    "en": "Opening must be quick, since the system is set for just a few seconds for security.",
-    "es": "La apertura debe ser rápida, ya que el sistema está programado por pocos segundos por seguridad."
+    "pt": "Assim que a luz verde acender, puxe imediatamente a maçaneta para abrir a porta.",
+    "en": "As soon as the green light turns on, immediately pull the handle to open the door.",
+    "es": "En cuanto se encienda la luz verde, tira de inmediato de la manija para abrir la puerta."
   },
   "e0505": {
-    "pt": "Esse mesmo procedimento também pode ser feito pela Praça 5.",
-    "en": "This same procedure can also be done at Praça 5.",
-    "es": "Este mismo procedimiento también se puede realizar por la Praça 5."
+    "pt": "O sistema de segurança é programado para fechar automaticamente em poucos segundos. Por isso, a ação de abrir a porta deve ser rápida após o sinal verde. Este mesmo procedimento de acesso também pode ser utilizado pela Praça 5.",
+    "en": "The security system is set to close automatically within a few seconds. Because of this, opening the door must be done quickly after the green light. This same access procedure can also be used at Praça 5.",
+    "es": "El sistema de seguridad está programado para cerrarse automáticamente en pocos segundos. Por eso, la acción de abrir la puerta debe ser rápida después de la señal verde. Este mismo procedimiento de acceso también puede utilizarse por la Praça 5."
+  },
+  "e0506": {
+    "pt": "Importante:",
+    "en": "Important:",
+    "es": "Importante:"
   }
 }

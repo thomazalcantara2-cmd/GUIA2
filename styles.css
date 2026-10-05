@@ -1288,7 +1288,7 @@ section[id^="slide-toc"] .ftr { display: none !important; }
 
 /* Foto única dentro de um passo (ex.: display do porteiro eletrônico) */
 .gbi-photo-wrap {
-  margin-top: 16px; border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-card);
+  margin: 16px auto 0; max-width: 240px; border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-card);
 }
 .gbi-photo-wrap img { display: block; width: 100%; height: auto; }
 

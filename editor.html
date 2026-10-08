@@ -121,6 +121,15 @@
   .tt-bold-btn { display:flex; align-items:center; gap:8px; width:100%; justify-content:center; }
   .tt-bold-btn.active { background:#EE6C4D; border-color:#EE6C4D; color:#fff; }
   .tt-size-btn { font-weight:700; min-width:48px; }
+  .tt-color-swatch {
+    width:28px; height:28px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px #ccd3da;
+    cursor:pointer; padding:0;
+  }
+  .tt-color-swatch.active { box-shadow:0 0 0 2px #0f2540; }
+  .tt-color-custom { display:flex; align-items:center; gap:10px; margin-top:10px; }
+  .tt-color-custom input[type=color] {
+    width:34px; height:34px; padding:0; border:1px solid #ccd3da; border-radius:8px; cursor:pointer; background:none;
+  }
   .tt-emoji-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:6px; }
   .tt-emoji-btn {
     border:1px solid transparent; background:none; border-radius:8px; font-size:22px;
@@ -200,6 +209,14 @@
     <button type="button" id="ttBoldBtn" class="tt-bold-btn"><b>N</b> Negrito (selecione o texto)</button>
   </div>
   <div class="tt-section">
+    <span class="tt-label">Cor do texto</span>
+    <div class="tt-row" id="ttColorSwatches"></div>
+    <div class="tt-color-custom">
+      <input type="color" id="ttColorPicker" value="#1f2d3d" title="Escolher outra cor">
+      <button type="button" id="ttColorClearBtn" class="tt-size-reset-btn">Padrão</button>
+    </div>
+  </div>
+  <div class="tt-section">
     <span class="tt-label">Emoji</span>
     <div class="tt-emoji-grid" id="ttEmojiGrid"></div>
   </div>
@@ -277,10 +294,40 @@
   // straight into innerHTML. <strong> from a screen reader-ish paste (or
   // any other tag/attribute) gets normalized away rather than kept as-is.
   function sanitizeInlineHTML(html) {
-    return String(html)
+    function toHex(n) {
+      return Math.max(0, Math.min(255, parseInt(n, 10) || 0)).toString(16).padStart(2, '0');
+    }
+    let out = String(html)
       .replace(/<\/(b|strong)>/gi, '</b>')
-      .replace(/<(b|strong)(\s[^>]*)?>/gi, '<b>')
-      .replace(/<(?!\/?b>)[^>]*>/gi, '');
+      .replace(/<(b|strong)(\s[^>]*)?>/gi, '<b>');
+    // Normalize any span that carries a color — however it's quoted/spaced,
+    // and whatever else is in its style attribute — down to one exact
+    // 6-digit-hex canonical form. Browsers themselves always serialize
+    // `el.style.color = '#xxxxxx'` back out as rgb(...), so both that and a
+    // literal hex (e.g. from a saved file) need to be accepted here; this
+    // also means anything that ISN'T a real color (a CSS injection attempt,
+    // "expression(...)", "url(...)", etc.) never survives, since only the
+    // three parsed channel values get carried through.
+    out = out.replace(
+      /<span\b[^>]*\bstyle\s*=\s*(["'])(?:(?!\1).)*?color\s*:\s*([^;"']+?)\s*(?:;|(?=\1))[^>]*>/gi,
+      (m, _q, colorRaw) => {
+        const color = colorRaw.trim();
+        const hexMatch = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.exec(color);
+        const rgbMatch = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*[\d.]+)?\s*\)$/.exec(color);
+        let hex = null;
+        if (hexMatch) {
+          hex = '#' + (hexMatch[1].length === 3
+            ? hexMatch[1].split('').map((c) => c + c).join('')
+            : hexMatch[1]);
+        } else if (rgbMatch) {
+          hex = '#' + toHex(rgbMatch[1]) + toHex(rgbMatch[2]) + toHex(rgbMatch[3]);
+        }
+        return hex ? '<span style="color:' + hex.toLowerCase() + '">' : '';
+      }
+    );
+    // Strip every tag that isn't exactly <b>, </b>, </span>, or one of the
+    // canonical color spans just produced above.
+    return out.replace(/<(?!\/?b>|\/span>|span style="color:#[0-9a-f]{6}">)[^>]*>/gi, '');
   }
 
   // ── Automatic PT → EN/ES translation (DeepL, via /api/translate) ────
@@ -617,6 +664,81 @@
   ttBoldBtn.addEventListener('click', () => {
     if (!ttDoc || !ttEl) return;
     toggleBold(ttDoc, ttEl);
+  });
+
+  // ── Cor do texto ──────────────────────────────────────────────────
+  // Same site palette already used elsewhere in the guide, so a colored
+  // word here never introduces a shade that looks out of place.
+  const TEXT_COLORS = [
+    ['#1F2D3D', 'Preto (padrão)'],
+    ['#00357F', 'Azul'],
+    ['#EE6C4D', 'Coral'],
+    ['#4FA85F', 'Verde'],
+    ['#B3261E', 'Vermelho'],
+    ['#F4C430', 'Amarelo'],
+  ];
+  const ttColorSwatches = document.getElementById('ttColorSwatches');
+  const ttColorPicker = document.getElementById('ttColorPicker');
+  const ttColorClearBtn = document.getElementById('ttColorClearBtn');
+  ttColorSwatches.innerHTML = TEXT_COLORS.map(([hex, label]) => (
+    '<button type="button" class="tt-color-swatch" data-color="' + hex + '" title="' + label + '" style="background:' + hex + '"></button>'
+  )).join('');
+
+  function applyTextColor(doc, el, hexColor) {
+    const sel = doc.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
+      setStatus('Selecione um trecho do texto antes de escolher uma cor.', 'err');
+      return;
+    }
+    const range = sel.getRangeAt(0);
+    if (!el.contains(range.commonAncestorContainer)) return;
+    const span = doc.createElement('span');
+    span.style.color = hexColor;
+    try {
+      range.surroundContents(span);
+    } catch (err) {
+      // Same fallback as Bold: the range's boundaries split a node in a
+      // way surroundContents() can't wrap directly (e.g. it crosses into
+      // an existing <b> partially) — extract and re-wrap instead.
+      const frag = range.extractContents();
+      span.appendChild(frag);
+      range.insertNode(span);
+    }
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  function clearTextColor(doc, el) {
+    const sel = doc.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
+      setStatus('Selecione um trecho do texto para remover a cor.', 'err');
+      return;
+    }
+    const range = sel.getRangeAt(0);
+    if (!el.contains(range.commonAncestorContainer)) return;
+    // Unwrap every colored <span> the selection touches, even partially —
+    // simpler and more forgiving than requiring an exact match like Bold's
+    // toggle does, and there's nothing else a color span could mean.
+    el.querySelectorAll('span[style*="color"]').forEach((span) => {
+      if (!range.intersectsNode(span)) return;
+      const parent = span.parentNode;
+      while (span.firstChild) parent.insertBefore(span.firstChild, span);
+      parent.removeChild(span);
+    });
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  ttColorSwatches.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tt-color-swatch');
+    if (!btn || !ttDoc || !ttEl) return;
+    applyTextColor(ttDoc, ttEl, btn.dataset.color);
+  });
+  ttColorPicker.addEventListener('input', () => {
+    if (!ttDoc || !ttEl) return;
+    applyTextColor(ttDoc, ttEl, ttColorPicker.value);
+  });
+  ttColorClearBtn.addEventListener('click', () => {
+    if (!ttDoc || !ttEl) return;
+    clearTextColor(ttDoc, ttEl);
   });
 
   function insertAtCursor(doc, el, text) {

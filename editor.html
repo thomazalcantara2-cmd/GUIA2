@@ -130,10 +130,18 @@
   .tt-color-custom input[type=color] {
     width:34px; height:34px; padding:0; border:1px solid #ccd3da; border-radius:8px; cursor:pointer; background:none;
   }
-  .tt-emoji-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:6px; }
+  .tt-collapse-toggle {
+    display:flex; align-items:center; justify-content:space-between; width:100%;
+    background:none; border:0; padding:0; margin-bottom:9px; cursor:pointer;
+  }
+  .tt-collapse-toggle .tt-label { margin-bottom:0; }
+  .tt-collapse-arrow { transition:transform .15s; flex-shrink:0; }
+  .tt-collapse-toggle[aria-expanded="true"] .tt-collapse-arrow { transform:rotate(90deg); }
+  .tt-emoji-grid { display:grid; grid-template-columns:repeat(8, 1fr); gap:3px; }
+  .tt-emoji-grid[hidden] { display:none; }
   .tt-emoji-btn {
-    border:1px solid transparent; background:none; border-radius:8px; font-size:22px;
-    line-height:1; padding:8px 0; cursor:pointer;
+    border:1px solid transparent; background:none; border-radius:6px; font-size:16px;
+    line-height:1; padding:4px 0; cursor:pointer;
   }
   .tt-emoji-btn:hover { background:#EEF2F5; border-color:#dde3e8; }
   .tt-hint { font-size:13px; color:#8a95a1; line-height:1.5; margin:0 0 16px; }
@@ -217,8 +225,11 @@
     </div>
   </div>
   <div class="tt-section">
-    <span class="tt-label">Emoji</span>
-    <div class="tt-emoji-grid" id="ttEmojiGrid"></div>
+    <button type="button" class="tt-collapse-toggle" id="ttEmojiToggle" aria-expanded="false">
+      <span class="tt-label">Emoji</span>
+      <svg class="tt-collapse-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"><path d="M9 5l7 7-7 7" stroke="#8a95a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="tt-emoji-grid" id="ttEmojiGrid" hidden></div>
   </div>
 </div>
 
@@ -508,6 +519,13 @@
   ttEmojiGrid.innerHTML = EMOJIS.map((em) => (
     '<button type="button" class="tt-emoji-btn" data-emoji="' + em + '">' + em + '</button>'
   )).join('');
+
+  const ttEmojiToggle = document.getElementById('ttEmojiToggle');
+  ttEmojiToggle.addEventListener('click', () => {
+    const open = ttEmojiToggle.getAttribute('aria-expanded') === 'true';
+    ttEmojiToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+    ttEmojiGrid.hidden = open;
+  });
 
   let ttDoc = null;
   let ttEl = null;
